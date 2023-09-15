@@ -1,0 +1,294 @@
+/* TRADELOG MAIN PAGE */
+
+.tradelog {
+    font-size: 0.75rem;
+    color: var(--color-grey-300);
+    width: 80%;
+    height: calc(100vh - 6.5rem);
+    place-self: center;
+    bottom: 0;
+    overflow: hidden;
+    display: grid;
+    grid-template-rows: 15fr 7fr 8fr 70fr;
+}
+
+.tradelog h2 {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+}
+
+.tradelog-filter {
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.tradelog-filter select {
+    width: 100%;
+    background-color: transparent;
+    color: var(--color-grey-200);
+    height: 1.2rem;
+    cursor: pointer;
+}
+
+.tradelog-filter div {
+    width: 30%;
+    height: 1.2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.tradelog-filter button {
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    color: var(--color-grey-200);
+    border: 0.5px solid var(--color-grey-500);
+    cursor: pointer;
+}
+
+button.tradelog-filter-removebtn {
+    color: var(--color-trade-red);
+    border-color: var(--color-trade-red);
+    cursor: pointer;
+}
+
+.tradelog-filter button:hover {
+    opacity: 0.5;
+}
+
+.tradelog-trades-header {
+    display: grid;
+    grid-template-columns: 2fr repeat(5, 1fr);
+    place-items: center;
+    color: var(--color-grey-500);
+    position: relative;
+}
+
+.tradelog-trades {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 100%;
+}
+
+.tradelog-trades::-webkit-scrollbar {
+    display: none;
+}
+
+/* TRADE */
+
+.tradelog-trade-container {
+    height: 9%;
+    border-bottom: 1px solid var(--color-grey-300);
+    display: grid;
+    grid-template-columns: 2fr repeat(5, 1fr);
+    place-items: center;
+    padding-top: 1.5%;
+}
+
+.tradelog-trade-container p {
+    display: flex;
+    justify-content: center;
+}
+
+.tradelog-trade-container:last-child {
+    border-bottom: 0;
+}
+
+.tradelog-trade-time {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.tradelog-trade-time p {
+    width: 47%;
+}
+
+.tradelog-trades-header > button {
+    border: none;
+    background-color: transparent;
+    color: var(--color-grey-500);
+    margin-bottom: 1.25rem;
+    height: 100%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin: 0;
+}
+
+.tradelog-trades-header button span {
+    pointer-events: none;
+}
+
+.tradelog-trades-header > button:nth-child(2) {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tradelog-trades-header-icon {
+    width: 50%;
+    place-self: center;
+}
+
+/* FILTERS  */
+
+.tradelog-filters {
+    position: absolute;
+    z-index: 10000;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 250%;
+    background-color: var(--color-grey-300);
+    padding: 0.5rem;
+    display: grid;
+    grid-template-columns: 3fr 2fr 1fr;
+    place-items: center;
+}
+
+.tradelog-filters div {
+    width: 100%;
+}
+
+.tradelog-filters button {
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    border: none;
+    margin-left: auto;
+    color: var(--color-grey-700);
+    padding-right: 0.2rem;
+    font-size: 0.75rem;
+}
+
+.tradelog-filters button:nth-child(3) {
+    width: 30%;
+    height: 60%;
+    font-size: 1rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+button#tradelog-filters-clear {
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.tradelog-filters input,
+select {
+    background-color: var(--color-grey-900);
+    color: var(--color-grey-100);
+    color-scheme: dark;
+    min-height: 1.2rem;
+}
+
+.tradelog-filters input:focus,
+select:focus {
+    outline: none;
+}
+
+.tradelog-filters option {
+    color: var(--color-grey-100);
+}
+
+/* REMOVE MODAL */
+
+.remove-modal {
+    padding: 1rem;
+    height: 70%;
+    width: 70%;
+    background-color: var(--color-grey-100);
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    margin-left: -35%;
+    color: var(--color-grey-900);
+    display: grid;
+    grid-template-rows: 3fr 2fr 1fr 2fr;
+    border-radius: 10px;
+    place-items: center;
+}
+
+.remove-modal > * {
+    width: 100%;
+    height: 100%;
+}
+
+.remove-modal-cross {
+    height: 50%;
+    width: 50%;
+    color: var(--color-trade-red);
+}
+
+.remove-modal div:first-child {
+    height: 90%;
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 5px solid var(--color-trade-red);
+    border-radius: 50%;
+}
+
+.remove-modal h1 {
+    color: var(--color-trade-red);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
+}
+
+.remove-modal p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.remove-modal-btn-container {
+    width: 60%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.remove-modal-btn-container button {
+    height: 33%;
+    width: 40%;
+    color: var(--color-grey-100);
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+}
+
+.remove-modal-btn-container button:first-child {
+    background-color: var(--color-trade-red);
+}
+
+.remove-modal-btn-container button:nth-child(2) {
+    background-color: var(--color-grey-400);
+}
+
+@media screen and (min-width: 900px) {
+    .tradelog-filters {
+        width: 80%;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .tradelog-filters {
+        width: 60%;
+    }
+    .tradelog-filter div {
+        width: 20%;
+    }
+}

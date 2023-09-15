@@ -1,0 +1,169 @@
+/* ADD NOTE */
+.user-notes-addnote {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.user-notes-addnote form {
+    height: 100%;
+    display: grid;
+    grid-template-rows: 1fr 3fr 1fr;
+}
+
+.user-notes-addnote form > * {
+    height: 100%;
+    width: 100%;
+    display: flex;
+}
+
+.user-notes-addnote textarea {
+    height: 90%;
+    width: 95%;
+    padding: 0.5rem;
+    background-color: var(--color-grey-800);
+    color: var(--color-grey-300);
+    border: none;
+    align-self: center;
+    resize: none;
+}
+
+.user-notes-addnote input:focus,
+textarea:focus {
+    outline: none;
+}
+
+.user-notes-addnote form > div:first-child {
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.user-notes-addnote form > div:first-child label {
+    width: 30%;
+}
+
+.user-notes-addnote form > div:last-child {
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.user-notes-addnote button {
+    height: 70%;
+    width: 35%;
+    border-radius: 1.5rem;
+    border: none;
+    font-size: 1rem;
+    background-color: var(--color-grey-300);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* NOTES PAGE */
+.user-notes {
+    display: grid;
+    grid-template-rows: 1fr 4fr 1fr;
+    height: 100%;
+}
+
+.user-notes-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.user-notes-container h2 {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-note {
+    height: 100%;
+    padding: 1%;
+    width: 30%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: var(--color-grey-300);
+    color: var(--color-grey-950);
+}
+
+.user-note p {
+    margin-top: 5%;
+    width: 100%;
+    font-size: 0.75rem;
+}
+
+.user-note div {
+    height: 50%;
+    aspect-ratio: 3/2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-note div img {
+    max-width: 100%;
+    height: auto;
+}
+
+.user-notes > div:last-child {
+    display: flex;
+    align-items: flex-end;
+}
+
+.user-note > div:first-child div {
+    background-color: #fff;
+    height: 100%;
+    width: 100%;
+}
+
+.user-notes > div:last-child a {
+    height: 70%;
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-grey-800);
+    color: var(--color-grey-300);
+    border-radius: 2rem;
+    border: none;
+}
+
+@media screen and (min-width: 900px) {
+    .user-notes > div:last-child a {
+        width: 30%;
+    }
+    .user-notes-addnote form > div:first-child {
+        width: 80%;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .user-notes > div:last-child a {
+        width: 25%;
+    }
+    .user-notes-addnote form > div:first-child {
+        width: 60%;
+    }
+    .user-notes-addnote button {
+        width: 30%;
+    }
+}
+
+@media screen and (min-width: 1500px) {
+    .user-notes > div:last-child a {
+        width: 20%;
+    }
+    .user-notes-addnote form > div:first-child {
+        width: 50%;
+    }
+    .user-notes-addnote button {
+        width: 25%;
+    }
+}

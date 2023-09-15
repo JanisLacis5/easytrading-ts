@@ -1,0 +1,122 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@500&family=Noto+Serif&family=Roboto:ital,wght@1,300&display=swap");
+
+:root {
+    /* COLORS */
+    /* grey */
+    --color-grey-100: #f5f5f5;
+    --color-grey-50: #fafafa;
+    --color-grey-200: #e5e5e5;
+    --color-grey-300: #d4d4d4;
+    --color-grey-400: #a3a3a3;
+    --color-grey-500: #737373;
+    --color-grey-600: #525252;
+    --color-grey-700: #404040;
+    --color-grey-800: #262626;
+    --color-grey-900: #171717;
+    --color-grey-950: #0a0a0a;
+    /* other */
+    --color-background: #121212;
+    --color-trade-green: #50a343;
+    --color-trade-red: #da473a;
+
+    /* PADDING */
+    --default-page-padding: 1.5rem 0 1rem 1rem;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Inter", sans-serif;
+    background: var(--color-background);
+    line-height: 1.5;
+    font-size: 0.875rem;
+}
+
+a {
+    text-decoration: none;
+}
+
+img {
+    display: block;
+}
+
+button,
+input,
+textarea {
+    font-family: inherit;
+}
+
+button:hover,
+a:hover {
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    letter-spacing: var(--spacing);
+    text-transform: capitalize;
+    line-height: 1.25;
+    margin-bottom: 0.75rem;
+}
+
+p {
+    margin-bottom: 1.25rem;
+}
+
+@keyframes spinner {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.loading {
+    width: 6rem;
+    height: 6rem;
+    margin: 0 auto;
+    margin-top: 10rem;
+    border-radius: 50%;
+    border: 4px solid #ccc;
+    border-top-color: #fff;
+    animation: spinner 0.6s linear infinite;
+}
+
+li {
+    list-style: none;
+}
+
+main {
+    display: grid;
+    height: 100vh;
+    grid-template-rows: 1fr 9fr;
+}
+
+.dashboard-page-1 {
+    display: grid;
+    height: 100%;
+    width: 100%;
+    grid-template-columns: 2.5% 97.5%;
+    overflow-x: hidden;
+    padding-right: 1rem;
+}
+
+.card-page {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+    align-items: center;
+}
+
+@media screen and (min-width: 900px) {
+    .dashboard-page-1 {
+        grid-template-columns: 2fr 22fr;
+    }
+}

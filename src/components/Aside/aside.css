@@ -1,0 +1,60 @@
+/* SMALL ASIDE */
+
+.small-aside-big {
+    grid-column: span 2;
+    background-color: var(--color-background);
+    height: 100%;
+}
+
+.small-aside-big {
+    padding-left: 0.5rem;
+}
+
+.small-aside-pages > div:first-child {
+    display: flex;
+    justify-content: space-between;
+}
+
+.small-aside-pages > div:first-child button {
+    background-color: transparent;
+    color: var(--color-grey-300);
+    border: none;
+    margin-right: 0.5rem;
+}
+
+/* GLOBAL */
+
+.dashboard-pages {
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-grey-700);
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboard-page {
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    height: 2.5rem;
+    border-bottom: 1px solid var(--color-background);
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    font-size: 0.85rem;
+    cursor: pointer;
+    color: var(--color-grey-300);
+}
+
+.secondary-link {
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    height: 2.5rem;
+    border-bottom: 1px solid var(--color-background);
+    display: flex;
+    align-items: center;
+    padding-left: 1.5rem;
+    font-size: 0.75rem;
+    color: var(--color-grey-400);
+}

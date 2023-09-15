@@ -1,0 +1,142 @@
+.screener-layout {
+    height: 100%;
+    width: 100%;
+}
+
+.layouts-header {
+    height: 5%;
+    width: 100%;
+    position: relative;
+}
+
+.layout-buttons {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* LAYOUT DASHBOARD */
+.layout-buttons {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 5%;
+}
+
+.layout-buttons > * {
+    height: 100%;
+    width: 25%;
+}
+
+.layout-buttons button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-grey-700);
+    border: none;
+    color: var(--color-grey-300);
+}
+
+.layout-numbers {
+    display: flex;
+}
+
+.layout-numbers button {
+    width: 100%;
+    border-right: 1px solid var(--color-grey-950);
+}
+
+/* NEW LAYOUT */
+#lines {
+    background-image: repeating-linear-gradient(
+            180deg,
+            var(--color-grey-700),
+            var(--color-grey-700) 1px,
+            transparent 1px,
+            transparent 25px
+        ),
+        repeating-linear-gradient(
+            90deg,
+            var(--color-grey-700),
+            var(--color-grey-700) 1px,
+            transparent 1px,
+            transparent 40px
+        );
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+
+.layouts-header p {
+    height: 100%;
+    width: 25%;
+    color: pink;
+    position: absolute;
+    bottom: -170%;
+    background-color: var(--color-grey-300);
+    z-index: 1;
+    color: var(--color-grey-950);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.new-layout-main {
+    height: 95%;
+    width: 100%;
+    position: relative;
+}
+
+.layout {
+    height: 100%;
+    width: 100%;
+}
+
+.new-layout-buttons > button,
+.screener-select-container {
+    background-color: var(--color-grey-700);
+    border: 1px solid var(--color-grey-950);
+    height: 100%;
+    width: 25%;
+    color: white;
+}
+
+.new-layout-buttons > button:last-child {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.screener-select-container select {
+    height: 100%;
+    width: 100%;
+    background-color: transparent;
+    text-align-last: center;
+    border: none;
+}
+
+.new-layout-buttons select:disabled {
+    cursor: not-allowed;
+}
+
+.new-layout-buttons option {
+    zoom: 2;
+    font-size: 0.5rem;
+}
+
+/* BLOCKS */
+
+.hod-block,
+.gap-block {
+    height: 100%;
+    width: 100%;
+}
+
+.hod-block {
+    background-color: grey;
+}
+
+.gap-block {
+    background-color: blue;
+}

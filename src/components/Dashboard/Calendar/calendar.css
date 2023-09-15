@@ -1,0 +1,26 @@
+.calendar-main {
+    padding-left: 1rem;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    max-height: calc(100vh - 6.5rem);
+}
+
+.calendar-container {
+    max-height: calc(100vh - 6.5rem);
+    width: 80%;
+    padding-top: 2%;
+}
+
+/* REACT-BIG-CALENDAR BUILT-IN CLASSES */
+.rbc-toolbar {
+    padding-right: 17%;
+}
+
+.rbc-button-link {
+    cursor: default;
+}
+
+.calendar-container .rbc-day-bg {
+    background-color: var(--color-grey-600);
+}

@@ -1,0 +1,167 @@
+.user-update-form {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.user-update-form-input {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.floating {
+    height: 35%;
+    width: 50%;
+    position: relative;
+}
+
+.user-update-form-input label {
+    position: absolute;
+    height: 50%;
+    top: 15%;
+    left: 0;
+    pointer-events: none;
+    transition: 0.4s ease all;
+    font-size: 0.75rem;
+}
+
+.user-update-form-input input:empty {
+    height: 100%;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid var(--color-grey-300);
+    width: 100%;
+    caret-color: var(--color-grey-300);
+    color: var(--color-grey-300);
+    font-size: 0.75rem;
+}
+
+.user-update-form-input input:focus {
+    outline: none;
+    border-bottom: 1px solid var(--color-grey-300);
+}
+
+.user-update-form-input input:focus ~ label {
+    top: -0.8rem;
+    font-size: 0.65rem;
+}
+
+.user-update-form-input .label-up {
+    top: -0.8rem;
+    font-size: 0.65rem;
+}
+
+.default-class {
+    height: 100%;
+}
+
+.user-update-form-submit {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-update-form-submit button {
+    width: 100%;
+    height: 50%;
+    background-color: var(--color-background);
+    color: var(--color-grey-300);
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    border-radius: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-input {
+    height: 50%;
+    display: flex;
+    justify-content: start;
+}
+
+.image-input p {
+    font-size: 0.75rem;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.image-input-button {
+    height: 100%;
+    width: 50%;
+    display: flex;
+    align-items: center;
+}
+
+.image-input-button input {
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+
+.image-input-button label {
+    cursor: pointer;
+    height: 100%;
+    width: 100%;
+    background-color: var(--color-grey-700);
+    border-radius: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media screen and (min-width: 600px) {
+    .image-input-button label {
+        width: 85%;
+    }
+}
+
+@media screen and (min-width: 900px) {
+    .user-update-form-submit {
+        width: 40%;
+    }
+
+    .image-input-button label {
+        width: 75%;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .user-update-form-submit {
+        width: 30%;
+    }
+
+    .image-input-button label {
+        width: 65%;
+    }
+
+    .user-update-form-input label {
+        font-size: 0.9rem;
+    }
+
+    .user-update-form-input input:focus ~ label {
+        top: -1rem;
+        font-size: 0.8rem;
+    }
+
+    .user-update-form-input .label-up {
+        top: -1rem;
+        font-size: 0.8rem;
+    }
+
+    .user-update-form-input input:empty {
+        font-size: 0.9rem;
+    }
+
+    .image-input p {
+        font-size: 0.9rem;
+    }
+}

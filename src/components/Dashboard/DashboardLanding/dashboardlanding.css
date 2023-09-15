@@ -1,0 +1,164 @@
+/* W/L TRADES */
+
+.default-dashboard-graph {
+    display: flex;
+    flex-direction: column;
+    padding: 0 1rem;
+}
+
+.graph-title {
+    color: var(--color-grey-300);
+    width: 100%;
+    text-align: center;
+}
+
+.pie-garph-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.pie-garph-container div {
+    position: relative;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+}
+
+.pie-garph-container h2 {
+    height: 7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pie-garph-container select {
+    place-self: start;
+    margin-left: 2rem;
+    min-width: 25%;
+    min-height: 1.5rem;
+    background-color: transparent;
+    color: var(--color-grey-300);
+    border: none;
+    border-bottom: 1px solid var(--color-grey-300);
+}
+
+option {
+    color: var(--color-grey-300);
+    background-color: var(--color-grey-950);
+    border: none;
+}
+
+.overall-stats {
+    color: var(--color-grey-300);
+    padding: 2rem 0;
+}
+
+.overall-stats p {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* PROFITABLE STOCKS */
+
+.stock-graph {
+    padding: 0 1rem;
+}
+
+.profitable-stocks {
+    padding: 1rem 0;
+}
+
+@media screen and (min-width: 600px) {
+    /* W/L TRADES */
+
+    .pie-garph-container div {
+        width: 50%;
+    }
+    .pie-garph-container select {
+        margin-left: 7.5%;
+    }
+
+    /* PROFITABLE STOCKS */
+
+    .profitable-stocks {
+        width: 75%;
+        display: flex;
+        justify-content: center;
+        margin: 0 auto 0 auto;
+    }
+}
+
+@media screen and (min-width: 900px) {
+    /* W/L TRADES */
+
+    .default-dashboard-graph {
+        display: grid;
+        grid-template-columns: 3fr 2fr;
+        grid-template-rows: 1fr 9fr;
+        width: 100%;
+    }
+
+    .default-dashboard-graph h2 {
+        grid-column: span 2;
+    }
+
+    .pie-garph-container {
+        justify-content: space-between;
+    }
+
+    .pie-garph-container select {
+        height: fit-content;
+        padding: 0.5%;
+        width: 25%;
+        margin: 0 auto 0 0;
+    }
+
+    .pie-garph-container div {
+        width: 100%;
+        height: 90%;
+    }
+
+    .default-dashboard-graph ul {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+
+    /* PROFITABLE STOCKS */
+
+    .stock-graph {
+        padding-top: 5%;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    /* W/L TRADES */
+
+    .default-dashboard-graph {
+        width: 100%;
+        height: 100%;
+        grid-row: span 2;
+        grid-template-rows: 1fr 6fr 3fr;
+        grid-template-columns: 1fr;
+    }
+
+    .pie-garph-container {
+        grid-column: span 2;
+    }
+
+    .pie-garph-container div {
+        height: 93%;
+    }
+
+    /* PROFITABLE STOCKS */
+
+    .profitable-stocks {
+        width: 100%;
+        height: 100%;
+    }
+
+    .stock-graph {
+        padding: 0;
+    }
+}

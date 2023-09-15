@@ -1,0 +1,46 @@
+.small-links {
+    background-color: var(--color-background);
+    padding-left: 0.5rem;
+}
+
+.small-links .links {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 50%;
+    margin-bottom: 10%;
+}
+
+.small-links .link {
+    width: 100%;
+}
+
+.small-links .login {
+    width: 100%;
+}
+
+.small-links .login button {
+    width: 30%;
+}
+
+.small-nav {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.small-nav button {
+    width: 5%;
+    display: flex;
+    justify-content: flex-end;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+}
+
+.small-nav div:first-child h1 {
+    height: 60%;
+}
+
+.small-nav button svg {
+    color: var(--color-grey-300);
+}

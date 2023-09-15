@@ -1,0 +1,297 @@
+/* LANDING */
+
+.addtrade-landing {
+    width: 100%;
+    height: 50%;
+    place-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.addtrade-landing h2 {
+    color: var(--color-grey-300);
+    align-self: flex-start;
+    margin-left: 16.5%;
+}
+
+.addtrade-landing > div {
+    width: 80%;
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.addtrade-landing > div div {
+    width: 80%;
+    height: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.addtrade-landing > div a {
+    width: 33%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    background-color: var(--color-grey-700);
+    color: var(--color-grey-300);
+    border-radius: 1.5rem;
+}
+
+/* FILE READER */
+
+.addtrade-filereader {
+    color: var(--color-grey-300);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.addtrade-filereader h2 {
+    width: 100%;
+    text-align: center;
+    padding: 1rem 0;
+}
+
+.addtrade-filereader form {
+    color: var(--color-grey-300);
+    width: 90%;
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+}
+
+.addtrade-filereader form > div {
+    width: 100%;
+    height: 27.5%;
+}
+
+.addtrade-filereader form > div select {
+    width: 100%;
+    height: 25%;
+}
+
+.addtrade-filereader form label {
+    display: block;
+    height: 25%;
+}
+
+.addtrade-filereader form > div option {
+    zoom: 1.25;
+}
+
+.addtrade-filereader div:last-child {
+    height: 10%;
+    margin: auto 0;
+}
+
+.addtrade-filereader div:last-child button {
+    height: 100%;
+    width: 40%;
+    background-color: var(--color-grey-700);
+    border: none;
+    color: var(--color-grey-300);
+    font-size: 1rem;
+    border-radius: 1.5rem;
+}
+
+/* FORM */
+
+.addtrade {
+    height: 120vh;
+    display: grid;
+    grid-template-rows: 1fr repeat(2, 3fr) 6fr 3fr 6fr 2fr;
+    place-self: center;
+    width: 90%;
+    color: var(--color-grey-300);
+    overflow: scroll;
+}
+
+.addtrade > * {
+    height: 100%;
+    width: 100%;
+}
+
+.addtrade input {
+    background-color: transparent;
+    color: var(--color-grey-300);
+}
+
+.addtrade input {
+    color-scheme: dark;
+}
+
+.addtrade input::placeholder {
+    border: none;
+    border-radius: 10px;
+    opacity: 0.5;
+}
+
+.addtrade-stock-input {
+    display: flex;
+    align-items: center;
+}
+
+.addtrade-stock-input option {
+    color: var(--color-grey-300);
+}
+
+.addtrade-stock-input select {
+    color: var(--color-grey-600);
+}
+
+.addtrade-stock-input label {
+    padding-right: 3rem;
+    font-size: 1.5rem;
+}
+
+.addtrade-account-input-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.addtrade-account-input {
+    display: flex;
+    align-items: center;
+}
+
+.addtrade-account-input label {
+    padding-right: 3rem;
+    font-size: 1.5rem;
+}
+
+input#pl:focus {
+    outline: none;
+}
+
+.addtrade-daytime-inputs {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.addtrade-daytime-input {
+    display: flex;
+    align-items: center;
+}
+
+.addtrade-daytime-input label {
+    padding-right: 3rem;
+    font-size: 1.5rem;
+}
+
+.addtrade-daytime-input input {
+    height: 50%;
+}
+
+.addtrade-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.addtrade-btn button {
+    width: 30%;
+    height: 50%;
+    background-color: var(--color-grey-500);
+    border: none;
+    border-radius: 1rem;
+    color: var(--color-grey-300);
+}
+
+@media screen and (min-width: 900px) {
+    /* LANDING */
+
+    .addtrade-landing {
+        width: 60%;
+    }
+
+    .addtrade-landing h2 {
+        margin-left: 8.5%;
+    }
+
+    .addtrade-landing > div {
+        width: 100%;
+    }
+
+    .addtrade-landing > div div {
+        width: 100%;
+    }
+
+    /* FILE READER */
+
+    .addtrade-filereader form > div select {
+        width: 50%;
+    }
+
+    .addtrade-filereader div:last-child button {
+        width: 30%;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    /* LANDING */
+    .addtrade-landing h2 {
+        margin-left: 12.5%;
+        font-size: 2rem;
+    }
+
+    .addtrade-landing > div a {
+        width: 25%;
+        border: 2rem;
+    }
+
+    /* FORM */
+
+    .addtrade {
+        grid-template-columns: repeat(2, 4fr);
+        grid-template-rows: 5fr 10fr repeat(2, 25fr) 15fr;
+        height: 100%;
+        width: 80%;
+    }
+
+    .addtrade h2,
+    .addtrade-btn {
+        grid-column: span 2;
+    }
+
+    .addtrade-btn button {
+        height: 40%;
+        width: 25%;
+    }
+
+    /* FILE READER */
+
+    .addtrade-filereader form > div select {
+        width: 40%;
+    }
+    .addtrade-filereader div:last-child button {
+        width: 20%;
+    }
+}
+
+@media screen and (min-width: 1500px) {
+    /* LANDING */
+
+    .addtrade-landing {
+        width: 50%;
+    }
+
+    /* FILE READER */
+
+    .addtrade-filereader form > div select {
+        width: 30%;
+    }
+}
