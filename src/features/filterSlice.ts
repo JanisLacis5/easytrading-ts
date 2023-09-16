@@ -1,6 +1,25 @@
-import {createSlice} from "@reduxjs/toolkit"
+import {createSlice, PayloadAction} from "@reduxjs/toolkit"
+import {IUserSingleTrade} from "../interfaces"
 
-const initialState = {
+interface IInitialState {
+    filters: IFilters
+    isFilters: boolean
+    filteredProducts: object[]
+}
+
+interface IFilters {
+    stock: string
+    action: string
+    date: string
+    PL: string
+}
+
+interface IFilterProducts {
+    name: "stock" | "action" | "date" | "PL"
+    value: string
+}
+
+const initialState: IInitialState = {
     filters: {
         stock: "",
         action: "",
@@ -15,41 +34,58 @@ const filterSlice = createSlice({
     name: "filter",
     initialState,
     reducers: {
-        setFilteredProducts: (state, {payload}) => {
-            state.filteredProducts = payload.trades
+        setFilteredProducts: (
+            state,
+            action: PayloadAction<{trades: IUserSingleTrade[]}>
+        ) => {
+            state.filteredProducts = action.payload.trades
         },
-        updateFilters: (state, {payload}) => {
-            const {name, value} = payload
+        updateFilters: (state, action: PayloadAction<IFilterProducts>) => {
+            const {name, value} = action.payload
             state.filters[name] = value
         },
-        filterProducts: (state, {payload}) => {
+        filterProducts: (
+            state,
+            _action: PayloadAction<{trades: IUserSingleTrade[]}>
+        ) => {
             const {stock, action, date, PL} = state.filters
-            const {trades} = payload
+            const {trades} = _action.payload
             if (trades) {
                 let ansArr = [...trades]
 
                 if (stock) {
-                    ansArr = ansArr.filter((trade) =>
+                    ansArr = ansArr.filter((trade: IUserSingleTrade) =>
                         trade.stock.startsWith(stock.toUpperCase())
                     )
                 }
                 if (action) {
-                    ansArr = trades.filter((trade) => trade.action === action)
+                    ansArr = trades.filter(
+                        (trade: IUserSingleTrade) => trade.action === action
+                    )
                 }
                 if (date) {
-                    ansArr = ansArr.filter((trade) => trade.date === date)
+                    ansArr = ansArr.filter(
+                        (trade: IUserSingleTrade) => trade.date === date
+                    )
                 }
                 if (PL === "positive") {
-                    ansArr = ansArr.filter((trade) => trade.pl > 0)
+                    ansArr = ansArr.filter(
+                        (trade: IUserSingleTrade) => trade.pl > 0
+                    )
                 }
                 if (PL === "negative") {
-                    ansArr = ansArr.filter((trade) => trade.pl < 0)
+                    ansArr = ansArr.filter(
+                        (trade: IUserSingleTrade) => trade.pl < 0
+                    )
                 }
                 state.filteredProducts = ansArr
             }
         },
-        clearFilters: (state, {payload}) => {
-            const {trades} = payload
+        clearFilters: (
+            state,
+            action: PayloadAction<{trades: IUserSingleTrade[]}>
+        ) => {
+            const {trades} = action.payload
             state.filters.stock = ""
             state.filters.action = "default"
             state.filters.date = ""

@@ -1,6 +1,12 @@
 import {createSlice} from "@reduxjs/toolkit"
 
-const initialState = {
+interface IInitialState {
+    showSmallLinks: boolean
+    showSmallAside: boolean
+    showUserAside: boolean
+}
+
+const initialState: IInitialState = {
     showSmallLinks: false,
     showSmallAside: false,
     showUserAside: false,

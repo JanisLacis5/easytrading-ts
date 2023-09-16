@@ -1,6 +1,11 @@
 import {createSlice} from "@reduxjs/toolkit"
 
-const initialState = {
+interface CounterState {
+    tradingButton: boolean
+    screenersButton: boolean
+}
+
+const initialState: CounterState = {
     tradingButton: false,
     screenersButton: false,
 }

@@ -1,38 +1,77 @@
-import {createAsyncThunk, createSlice} from "@reduxjs/toolkit"
+import {PayloadAction, createAsyncThunk, createSlice} from "@reduxjs/toolkit"
 import customFetch from "../utils"
+import {
+    IUSerSingleNote,
+    IUserInfo,
+    IUserSingleLayout,
+    IUserSingleTrade,
+} from "../interfaces"
 
-const initialState = {
+interface IUser {
+    id: string
+    trades: IUserSingleTrade[]
+    notes: IUSerSingleNote[]
+    info: IUserInfo[]
+    layouts: Record<
+        "screener" & "x" & "y" & "height" & "width",
+        IUserSingleLayout
+    >
+}
+
+interface IInitialState {
+    isLogged: boolean
+    isLoading: boolean
+    user: IUser
+}
+
+interface ILogin {
+    id: string
+    trades?: IUserSingleTrade[]
+    notes?: IUSerSingleNote[]
+    info?: IUserInfo[]
+    layouts?: Record<
+        "screener" & "x" & "y" & "height" & "width",
+        IUserSingleLayout
+    >
+}
+
+const initialState: IInitialState = {
     isLogged: localStorage.getItem("userId") ? true : false,
     isLoading: false,
     user: {
-        id:
-            typeof localStorage.getItem("userId") !== "undefined"
-                ? JSON.parse(localStorage.getItem("userId"))
-                : "",
-        trades: JSON.parse(localStorage.getItem("userTrades" || [])),
-        info:
-            typeof localStorage.getItem("userInfo") !== "undefined"
-                ? JSON.parse(localStorage.getItem("userInfo"))
-                : "",
-        notes: JSON.parse(localStorage.getItem("userNotes")),
-        layouts: JSON.parse(localStorage.getItem("layouts")),
+        id: JSON.parse(localStorage.getItem("userId") || ""),
+
+        trades: JSON.parse(
+            localStorage.getItem("userTrades") || JSON.stringify([])
+        ),
+        info: JSON.parse(localStorage.getItem("userInfo") || ""),
+        notes: JSON.parse(
+            localStorage.getItem("userNotes") || JSON.stringify([])
+        ),
+        layouts: JSON.parse(
+            localStorage.getItem("layouts") || JSON.stringify([])
+        ),
     },
 }
 
 export const clearTrades = createAsyncThunk("user/clearTrades", async () => {
-    const id = localStorage.getItem("userId")
-    try {
-        const {data} = await customFetch.delete(
-            `/deleteTrades/${JSON.parse(id)}`,
-            {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem("token")}`,
-                },
-            }
-        )
-        return data
-    } catch (error) {
-        console.log(error)
+    const id = localStorage.getItem("userId") || ""
+    if (id) {
+        try {
+            const {data} = await customFetch.delete(
+                `/deleteTrades/${JSON.parse(id)}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem(
+                            "token"
+                        )}`,
+                    },
+                }
+            )
+            return data
+        } catch (error) {
+            console.log(error)
+        }
     }
 })
 
@@ -46,13 +85,16 @@ const userSlice = createSlice({
         setIsNotLoading: (state) => {
             state.isLoading = false
         },
-        login: (state, {payload}) => {
-            const trades = payload.trades || []
-            const notes = payload.notes || []
-            const layouts = payload.layouts || []
-            localStorage.setItem("userId", JSON.stringify(payload.id))
+        login: (state, action: PayloadAction<>) => {
+            const trades = action.payload.trades || []
+            const notes = action.payload.notes || []
+            const layouts = action.payload.layouts || []
+            localStorage.setItem("userId", JSON.stringify(action.payload.id))
             localStorage.setItem("userTrades", JSON.stringify(trades))
-            localStorage.setItem("userInfo", JSON.stringify(payload.info))
+            localStorage.setItem(
+                "userInfo",
+                JSON.stringify(action.payload.info)
+            )
             localStorage.setItem("userNotes", JSON.stringify(notes))
             localStorage.setItem("layouts", JSON.stringify(layouts))
 
@@ -67,9 +109,9 @@ const userSlice = createSlice({
                 isLoading: false,
                 user: {
                     ...state.user,
-                    id: payload.id,
+                    id: action.payload.id,
                     trades: reverseTrades,
-                    info: payload.info,
+                    info: action.payload.info,
                     notes: notes,
                     layouts: layouts,
                 },

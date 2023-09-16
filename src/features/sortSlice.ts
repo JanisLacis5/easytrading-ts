@@ -1,9 +1,23 @@
-import {createSlice} from "@reduxjs/toolkit"
+import {PayloadAction, createSlice} from "@reduxjs/toolkit"
+import {IUserSingleTrade} from "../interfaces"
 
 // true = (A-Z)
 // false = (Z-A)
 
-const initialState = {
+interface IInitialState {
+    option:
+        | "date"
+        | "action"
+        | "stock"
+        | "time"
+        | "accBefore"
+        | "accAfter"
+        | "pl"
+    value: boolean | null
+    sortedTrades: IUserSingleTrade[]
+}
+
+const initialState: IInitialState = {
     option: "date",
     value: null,
     sortedTrades: [],
@@ -13,34 +27,52 @@ const sortSlice = createSlice({
     name: "sort",
     initialState,
     reducers: {
-        setSortedTrades: (state, {payload}) => {
-            state.sortedTrades = payload.trades
+        setSortedTrades: (
+            state,
+            action: PayloadAction<{trades: IUserSingleTrade[]}>
+        ) => {
+            state.sortedTrades = action.payload.trades
         },
 
-        updateSort: (state, {payload}) => {
-            if (payload.name === "date" && state.value === null) {
+        updateSort: (
+            state,
+            action: PayloadAction<{
+                name:
+                    | "date"
+                    | "action"
+                    | "stock"
+                    | "time"
+                    | "accBefore"
+                    | "accAfter"
+                    | "pl"
+            }>
+        ) => {
+            if (action.payload.name === "date" && state.value === null) {
                 state.value = false
                 return
             }
-            if (payload.name === state.option) {
+            if (action.payload.name === state.option) {
                 state.value = !state.value
             } else if (
-                payload.name === "accAfter" ||
-                payload.name === "accBefore" ||
-                payload.name === "pl" ||
-                payload.name === "stock"
+                action.payload.name === "accAfter" ||
+                action.payload.name === "accBefore" ||
+                action.payload.name === "pl" ||
+                action.payload.name === "stock"
             ) {
                 state.value = true
-                state.option = payload.name
+                state.option = action.payload.name
             } else {
                 state.value = false
-                state.option = payload.name
+                state.option = action.payload.name
             }
         },
 
-        sortTrades: (state, {payload}) => {
+        sortTrades: (
+            state,
+            action: PayloadAction<{trades: IUserSingleTrade[]}>
+        ) => {
             const {option, value} = state
-            let ansArr = [...payload.trades]
+            let ansArr = [...action.payload.trades]
             if (option === "date") {
                 if (value) {
                     state.sortedTrades = ansArr.sort((a, b) => {
