@@ -1,24 +1,22 @@
 import "./layouts.css"
-import {AiOutlinePlus} from "react-icons/ai"
 import {useState} from "react"
 import ScreenerBlock from "./ScreenerBlock"
-import {useGlobalContext} from "../../../context/globalContext"
 import customFetch from "../../../utils"
-import {useDispatch, useSelector} from "react-redux"
-import {useNavigate} from "react-router-dom"
+import {setIsAddingScreener, setIsDone} from "../../../features/layoutSlice"
 import {login} from "../../../features/userSlice"
 import {toast} from "react-toastify"
+import {useAppSelector, useAppDispatch} from "../../../store/storeHooks"
 
 const NewLayout = () => {
-    const [userLayout, setUserLayout] = useState([])
+    const [userLayout, setUserLayout] = useState<string[]>([])
     const [notAllowedHover, setNotAllowedHover] = useState(false)
 
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
+    const dispatch = useAppDispatch()
 
-    const {setIsDone, isAddingScreener, setIsAddingScreener, layoutParams} =
-        useGlobalContext()
-    const {user} = useSelector((store) => store.user)
+    const {isAddingScreener, layoutParams} = useAppSelector(
+        (store) => store.layout
+    )
+    const {user} = useAppSelector((store) => store.user)
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -47,7 +45,7 @@ const NewLayout = () => {
                             name="addScreener"
                             onChange={(e) => {
                                 setUserLayout([...userLayout, e.target.value])
-                                setIsAddingScreener(true)
+                                dispatch(setIsAddingScreener(true))
                             }}
                             disabled={isAddingScreener ? true : false}>
                             <option value="">Add Screener</option>
@@ -67,7 +65,7 @@ const NewLayout = () => {
                                       pointerEvents: "none",
                                   }
                         }
-                        onClick={() => setIsDone(true)}>
+                        onClick={() => dispatch(setIsDone(true))}>
                         Done
                     </button>
 

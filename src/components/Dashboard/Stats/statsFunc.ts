@@ -1,3 +1,5 @@
+import {IUserSingleTrade} from "../../../interfaces"
+
 export const maxPl = (trades) => {
     return Math.max(...trades.map((trade) => trade.pl))
 }
@@ -6,12 +8,12 @@ export const minPl = (trades) => {
     return Math.min(...trades.map((trade) => trade.pl))
 }
 
-export const wonPl = (trades) => {
-    let a = [...trades]
-    if (!a.length) {
+export const wonPl = (trades: IUserSingleTrade[] | null) => {
+    if (!trades) {
         return {averageWonDayPl: 0, maxWonDayPl: 0, biggestWin: 0, wonDays: 0}
     }
-    let sortedTrades = a.sort((a, b) => {
+    let tradesCopy = [...trades]
+    let sortedTrades = tradesCopy.sort((a, b) => {
         const date1 = Number(a.date.replaceAll("-", ""))
         const date2 = Number(b.date.replaceAll("-", ""))
         return date1 - date2
@@ -44,7 +46,7 @@ export const wonPl = (trades) => {
                 : wonTradeDays.reduce((acc, val) => acc + val, 0) /
                   wonTradeDays.length,
         maxWonDayPl: Math.max(...wonTradeDays),
-        biggestWin: Math.max(...a.map((o) => o.pl)),
+        biggestWin: Math.max(...tradesCopy.map((o) => o.pl)),
         wonDays: wonTradeDays.length,
     }
 }

@@ -1,23 +1,32 @@
 import {useEffect, useState} from "react"
 import customFetch from "../../../utils"
 import "./addtrade.css"
-import Papa from "papaparse"
-import {useDispatch, useSelector} from "react-redux"
+import {useAppDispatch, useAppSelector} from "../../../store/storeHooks"
 import {login} from "../../../features/userSlice"
 import {useNavigate} from "react-router-dom"
 
+interface ITradeData {
+    stock: string
+    accAfter: number
+    accBefore: number
+    pl: number
+    date: string
+    time: string
+    action: string
+}
+
 const AddTradeFileReader = () => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const navigate = useNavigate()
 
-    const [file, setFile] = useState("")
+    const [file, setFile] = useState<File>()
     const [platform, setPlatform] = useState("")
     const [extention, setExtention] = useState("")
-    const [tradeData, setTradeData] = useState([])
+    const [tradeData, setTradeData] = useState<ITradeData[]>([])
 
-    const {user} = useSelector((store) => store.user)
+    const {user} = useAppSelector((store) => store.user)
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         try {
             const {data} = await customFetch.post("/tradesfile", {
@@ -28,10 +37,10 @@ const AddTradeFileReader = () => {
         } catch (error) {
             console.log(error)
         }
-        setFile("")
+        setFile(undefined)
         setPlatform("")
         setExtention("")
-        setTradeData("")
+        setTradeData([])
         navigate("/dashboard")
     }
 
@@ -40,9 +49,10 @@ const AddTradeFileReader = () => {
             const reader = new FileReader()
 
             reader.onload = (e) => {
-                const content = e.target.result
+                if (!e.target) return
+                const content: string = String(e.target.result)
                 const lines = content.split("\n")
-                let tempArr = []
+                let tempArr: ITradeData[] = []
 
                 for (let i = 1; i < lines.length - 1; i++) {
                     const LINE = lines[i].split(",")
@@ -83,7 +93,10 @@ const AddTradeFileReader = () => {
                         type="file"
                         name="file"
                         id="file"
-                        onChange={(e) => setFile(e.target.files[0])}
+                        onChange={(e) => {
+                            if (!e.target.files) return
+                            setFile(e.target.files[0])
+                        }}
                     />
                 </div>
                 <div>

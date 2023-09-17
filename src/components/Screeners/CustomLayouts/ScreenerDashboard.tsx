@@ -1,5 +1,5 @@
 import {AiOutlinePlus} from "react-icons/ai"
-import {useSelector} from "react-redux"
+import {useAppSelector} from "../../../store/storeHooks"
 import "../screeners.css"
 import {useState} from "react"
 import HodBlock from "./ScreenerBlocks/HodBlock"
@@ -7,7 +7,7 @@ import GapBlock from "./ScreenerBlocks/GapBlock"
 
 const ScreenerDashboard = () => {
     const [activeLayout, setActiveLayout] = useState(null)
-    const {user} = useSelector((store) => store.user)
+    const {user} = useAppSelector((store) => store.user)
 
     return (
         <section className="screener-layout">

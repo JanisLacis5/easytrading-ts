@@ -1,13 +1,13 @@
 import {Outlet} from "react-router-dom"
 import Aside from "../Aside/Aside"
-import {useSelector} from "react-redux"
+import {useAppSelector} from "../../store/storeHooks"
 import "./dashboard.css"
 import {useGlobalContext} from "../../context/globalContext"
 import SmallAside from "../Aside/SmallAside"
 
 const DashboardLayout = () => {
-    const {isLoading} = useSelector((store) => store.user)
-    const {showSmallAside} = useSelector((store) => store.small)
+    const {isLoading} = useAppSelector((store) => store.user)
+    const {showSmallAside} = useAppSelector((store) => store.small)
     const {screenWidth} = useGlobalContext()
 
     if (isLoading) {

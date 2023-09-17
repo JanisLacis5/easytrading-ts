@@ -8,10 +8,10 @@ export interface IUserSingleTrade {
     action: string
 }
 
-export interface IUSerSingleNote {
+export interface IUserSingleNote {
     pinned: boolean
     image: string
-    test: string
+    text: string
     id: string
 }
 

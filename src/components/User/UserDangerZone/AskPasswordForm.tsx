@@ -1,4 +1,4 @@
-import {useDispatch, useSelector} from "react-redux"
+import {useAppSelector, useAppDispatch} from "../../../store/storeHooks"
 import {useGlobalContext} from "../../../context/globalContext"
 import customFetch from "../../../utils"
 import {useState} from "react"
@@ -8,10 +8,10 @@ import {useNavigate} from "react-router-dom"
 import {toast} from "react-toastify"
 
 const AskPasswordForm = () => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const navigate = useNavigate()
     const {setIsDelete, setAskPassword} = useGlobalContext()
-    const {user} = useSelector((store) => store.user)
+    const {user} = useAppSelector((store) => store.user)
 
     const [password, setPassword] = useState("")
 

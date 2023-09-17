@@ -1,26 +1,25 @@
 import "./dashboardnotes.css"
-import {useSelector} from "react-redux"
+import {useAppSelector} from "../../../store/storeHooks"
 import DashboardNote from "./DashboardNote"
+import {useEffect, useState} from "react"
+import {IUserSingleNote} from "../../../interfaces"
 
 const DashboardNotes = () => {
-    const {user} = useSelector((store) => store.user)
+    const [notes, setNotes] = useState<IUserSingleNote[]>([])
+
+    const {user} = useAppSelector((store) => store.user)
+
+    useEffect(() => {
+        setNotes(user.notes)
+    }, [user])
 
     return (
         <section className="dashboard-notes">
             <h1>Notes</h1>
             <div className="dashboard-notes-container">
-                {user.notes.length ? (
-                    user.notes.map((note, index) => {
-                        const {image, text, pinned} = note
-                        return (
-                            <DashboardNote
-                                key={index}
-                                text={text}
-                                image={image}
-                                pinned={pinned}
-                                index={index}
-                            />
-                        )
+                {notes.length ? (
+                    notes.map((note, index) => {
+                        return <DashboardNote index={index} {...note} />
                     })
                 ) : (
                     <div className="no-notes">

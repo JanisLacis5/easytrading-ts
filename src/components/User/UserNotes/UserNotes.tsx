@@ -1,9 +1,9 @@
 import {Link} from "react-router-dom"
 import "./usernotes.css"
-import {useSelector} from "react-redux"
+import {useAppSelector} from "../../../store/storeHooks"
 
 const UserNotes = () => {
-    const {user} = useSelector((store) => store.user)
+    const {user} = useAppSelector((store) => store.user)
     const pinnedNotes = user.notes.filter((note) => note.pinned)
 
     return (

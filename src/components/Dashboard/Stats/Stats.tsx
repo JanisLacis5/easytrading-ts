@@ -1,15 +1,28 @@
-import {useSelector} from "react-redux"
+import {useAppSelector} from "../../../store/storeHooks"
 import "../dashboard.css"
 import "./stats.css"
 import {useEffect, useState} from "react"
 import {lostPl, wonPl} from "./statsFunc"
 import {countStats} from "../../../functions"
 
+interface IWonPl {
+    averageWonDayPl: number
+    maxWonDayPl: number
+    biggestWin: number
+    wonDays: number
+}
+
+interface ICountStats {
+    wonTrades: number
+    lostTrades: number
+    totalProfit: number
+}
+
 const Stats = () => {
-    const [wonPlState, setWonPlState] = useState({})
+    const [wonPlState, setWonPlState] = useState<IWonPl | null>()
     const [lostPlState, setLostPlState] = useState({})
-    const [countSt, setCountSt] = useState({})
-    const {user} = useSelector((store) => store.user)
+    const [countSt, setCountSt] = useState<ICountStats | null>()
+    const {user} = useAppSelector((store) => store.user)
 
     useEffect(() => {
         setLostPlState(lostPl(user.trades))
@@ -34,14 +47,15 @@ const Stats = () => {
                     <span
                         style={{
                             color:
-                                countSt.totalProfit === 0
+                                countSt?.totalProfit === 0
                                     ? "var(--color-grey-300)"
                                     : countSt.totalProfit > 0
                                     ? "var(--color-trade-green)"
                                     : "var(--color-trade-red)",
                         }}>
                         {(
-                            (countSt.totalProfit / user.info.startingAccount) *
+                            (countSt.totalProfit /
+                                Number(user.info.startingAccount)) *
                             100
                         ).toFixed(0)}
                         %

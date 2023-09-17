@@ -1,12 +1,12 @@
 import {Link} from "react-router-dom"
 import "./navbar.css"
-import {useSelector} from "react-redux"
+import {useAppSelector} from "../../store/storeHooks"
 import UserButton from "../User/UserButton"
 import SmallNavbar from "./SmallNavbar"
 import {useGlobalContext} from "../../context/globalContext"
 
 const Navbar = () => {
-    const {isLogged} = useSelector((store) => store.user)
+    const {isLogged} = useAppSelector((store) => store.user)
 
     const {screenWidth} = useGlobalContext()
 

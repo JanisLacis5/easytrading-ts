@@ -4,16 +4,16 @@ import {useGlobalContext} from "../../context/globalContext"
 import {toast} from "react-toastify"
 import customFetch from "../../utils"
 import {login, setIsLoading, setIsNotLoading} from "../../features/userSlice"
-import {useDispatch, useSelector} from "react-redux"
+import {useAppDispatch, useAppSelector} from "../../store/storeHooks"
 import md5 from "md5"
 import userIcon from "../../assets/user-icon.svg"
 import {useEffect, useState} from "react"
 
 const Pricing = () => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const navigate = useNavigate()
 
-    const {user} = useSelector((store) => store.user)
+    const {user} = useAppSelector((store) => store.user)
 
     const {
         choosePricing,

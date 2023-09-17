@@ -1,5 +1,5 @@
 import {useState} from "react"
-import {useSelector} from "react-redux"
+import {useAppSelector} from "../../store/storeHooks"
 import customFetch from "../../utils"
 import {toast} from "react-toastify"
 
@@ -7,9 +7,9 @@ const ContactForm = () => {
     const [question, setQuestion] = useState("")
     const [message, setMessage] = useState("")
 
-    const {user} = useSelector((store) => store.user)
+    const {user} = useAppSelector((store) => store.user)
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         const {data} = await customFetch.post("/message", {
             id: user.id,
@@ -45,8 +45,8 @@ const ContactForm = () => {
                     <textarea
                         name="mainMessage"
                         id="mainMessage"
-                        cols="30"
-                        rows="10"
+                        cols={30}
+                        rows={10}
                         placeholder="Enter your message"
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}

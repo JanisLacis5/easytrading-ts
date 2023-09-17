@@ -1,4 +1,4 @@
-import {useSelector} from "react-redux"
+import {useAppSelector} from "../../store/storeHooks"
 import "./user.css"
 import {useNavigate} from "react-router-dom"
 import {useEffect, useState} from "react"
@@ -8,7 +8,7 @@ const UserButton = () => {
 
     const [info, setInfo] = useState({})
 
-    const {user} = useSelector((store) => store.user)
+    const {user} = useAppSelector((store) => store.user)
 
     useEffect(() => {
         setInfo(user.info)

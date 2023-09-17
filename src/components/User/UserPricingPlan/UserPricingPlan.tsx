@@ -1,4 +1,4 @@
-import {useSelector} from "react-redux"
+import {useAppSelector} from "../../../store/storeHooks"
 import "./userpricingplan.css"
 import {Link, useNavigate} from "react-router-dom"
 import {useGlobalContext} from "../../../context/globalContext"
@@ -6,7 +6,7 @@ import {useEffect} from "react"
 
 const UserPricingPlan = () => {
     const navigate = useNavigate()
-    const {user} = useSelector((store) => store.user)
+    const {user} = useAppSelector((store) => store.user)
     const {changePlan, setChangePlan, setChoosePricing} = useGlobalContext()
 
     useEffect(() => {

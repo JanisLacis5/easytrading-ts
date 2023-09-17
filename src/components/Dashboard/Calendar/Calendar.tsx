@@ -4,8 +4,8 @@ import "react-big-calendar/lib/css/react-big-calendar.css"
 import "./calendar.css"
 import {useState} from "react"
 import {useEffect} from "react"
-import events from "./events"
-import {useSelector} from "react-redux"
+import events, {IAnsArr} from "./events"
+import {useAppSelector} from "../../../store/storeHooks"
 
 moment.locale("ko", {
     week: {
@@ -17,17 +17,17 @@ const localizer = momentLocalizer(moment)
 
 const MyCalendar = () => {
     const [date, setDate] = useState(new Date())
-    const [profitDates, setProfitDates] = useState([])
+    const [profitDates, setProfitDates] = useState<IAnsArr[] | null>([])
 
-    const {user} = useSelector((store) => store.user)
+    const {user} = useAppSelector((store) => store.user)
 
     useEffect(() => {
         setProfitDates(events(user.trades))
     }, [user.trades])
 
-    const eventStyleGetter = (event) => {
+    const eventStyleGetter = (event: IAnsArr) => {
         const backgroundColor =
-            event.temp > 0
+            event.profit > 0
                 ? "var(--color-trade-green)"
                 : "var(--color-trade-red)"
         return {style: {backgroundColor}}
@@ -49,7 +49,7 @@ const MyCalendar = () => {
                     views={["month"]}
                     defaultDate={date}
                     selectable
-                    onNavigate={(newDate) => setDate(newDate)}
+                    onNavigate={(newDate: Date) => setDate(newDate)}
                     eventPropGetter={eventStyleGetter}
                 />
             </div>

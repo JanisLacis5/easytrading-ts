@@ -1,14 +1,14 @@
 import "./dashboardlanding.css"
 import {Pie} from "react-chartjs-2"
 import "chart.js/auto"
-import {useSelector} from "react-redux"
+import {useAppSelector} from "../../../store/storeHooks"
 import {filterChart, countStats} from "../../../functions"
 import {useState} from "react"
 
 const WinLossGraph = () => {
     const [filter, setFilter] = useState("all-time")
 
-    const {user} = useSelector((store) => store.user)
+    const {user} = useAppSelector((store) => store.user)
     const trades =
         filter === "all-time" ? user.trades : filterChart(user.trades, filter)
     const {wonTrades, lostTrades, totalProfit} = countStats(trades)
@@ -23,7 +23,7 @@ const WinLossGraph = () => {
             },
         ],
     }
-    const options = {
+    const options: any = {
         animation: false,
         showLine: false,
         responsive: true,

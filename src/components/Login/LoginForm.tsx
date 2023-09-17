@@ -4,7 +4,7 @@ import passwordIcon from "../../assets/password-icon.svg"
 import customFetch from "../../utils"
 import {useState} from "react"
 import md5 from "md5"
-import {useDispatch, useSelector} from "react-redux"
+import {useAppDispatch, useAppSelector} from "../../store/storeHooks"
 import {toast} from "react-toastify"
 import {login, setIsLoading, setIsNotLoading} from "../../features/userSlice"
 import {useNavigate} from "react-router-dom"
@@ -13,10 +13,10 @@ const LoginForm = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const navigate = useNavigate()
 
-    const {isLoading} = useSelector((store) => store.user)
+    const {isLoading} = useAppSelector((store) => store.user)
 
     const handleSubmit = async (e) => {
         e.preventDefault()

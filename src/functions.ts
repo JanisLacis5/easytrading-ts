@@ -1,16 +1,17 @@
 import dayjs from "dayjs"
+import {IUserSingleTrade} from "./interfaces"
 import("dayjs/locale/en")
 
 dayjs.locale("en", {
     weekStart: 1,
 })
 
-export const filterChart = (trades, filter) => {
+export const filterChart = (trades: IUserSingleTrade[], filter) => {
     const res = trades?.filter((trade) => dayjs().isSame(trade.date, filter))
     return res
 }
 
-export const countStats = (trades) => {
+export const countStats = (trades: IUserSingleTrade[] | null) => {
     let wonTrades = 0
     let lostTrades = 0
     let totalProfit = 0
@@ -42,54 +43,48 @@ export const passwordRequirements = (password) => {
     return true
 }
 
-export const profitableStocks = (trades) => {
-    let tempTrades = [...trades]
-    if (!trades.length) {
+export const profitableStocks = (trades: IUserSingleTrade[] | null) => {
+    if (!trades) {
         return {profits: 0, stocks: 0}
     }
-    const tempTradesSet = new Set()
-    let ansArr = Array(tempTrades?.length).fill(0)
+    let tempTrades = [...trades]
+    const tempTradesSet: Set<string> = new Set()
+    let ansArr: number[] = Array(tempTrades.length).fill(0)
 
     let j = 0
 
-    tempTrades = tempTrades?.sort((a, b) => a.stock.localeCompare(b?.stock))
-    ansArr[0] += tempTrades[0]?.pl
-    tempTradesSet.add(tempTrades[0]?.stock)
+    tempTrades = tempTrades.sort((a, b) => a.stock.localeCompare(b?.stock))
+    ansArr[0] += tempTrades[0].pl
+    tempTradesSet.add(tempTrades[0].stock)
 
-    for (let i = 1; i < tempTrades?.length; i++) {
-        tempTradesSet.add(tempTrades[i]?.stock)
-        if (tempTrades[i]?.stock !== tempTrades[i - 1]?.stock) {
+    for (let i = 1; i < tempTrades.length; i++) {
+        tempTradesSet.add(tempTrades[i].stock)
+        if (tempTrades[i].stock !== tempTrades[i - 1].stock) {
             j++
         }
-        ansArr[j] += tempTrades[i]?.pl
+        ansArr[j] += tempTrades[i].pl
     }
 
     ansArr = ansArr.slice(0, tempTradesSet.size)
-    let profits = ansArr.slice(0, tempTradesSet.size)
-    let returnProfits = []
-    let returnStocks = []
+    let returnObj: {[key: string]: number} = {}
     let stocks = Array(...tempTradesSet)
 
     for (let i = 0; i < 5; i++) {
-        const maxElement = Math.max(...profits)
-        const indexMain = ansArr.indexOf(maxElement)
-        const indexTemp = profits.indexOf(maxElement)
-        returnProfits.push(maxElement)
-        returnStocks.push(stocks[indexMain])
-        profits.splice(indexTemp, 1)
+        const maxElement = Math.max(...ansArr)
+        const elementIndex = ansArr.indexOf(maxElement)
+        const stock = stocks[elementIndex]
+        returnObj[stock] = maxElement
+        ansArr.splice(elementIndex, 1)
     }
 
-    return {
-        profits: returnProfits,
-        stocks: returnStocks,
-    }
+    return returnObj
 }
 
-export const profitsPerDate = (trades) => {
-    let temp = [...trades]
-    if (!temp.length) {
+export const profitsPerDate = (trades: IUserSingleTrade[] | null) => {
+    if (!trades) {
         return 0
     }
+    let temp = [...trades]
     const sortedArr = temp.sort((a, b) => {
         const date1 = Number(a.date.replaceAll("-", ""))
         const date2 = Number(b.date.replaceAll("-", ""))

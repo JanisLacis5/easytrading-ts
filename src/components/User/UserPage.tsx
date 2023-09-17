@@ -1,20 +1,18 @@
-import {useDispatch, useSelector} from "react-redux"
+import {useAppDispatch, useAppSelector} from "../../store/storeHooks"
 import {Link, Outlet, useNavigate} from "react-router-dom"
 import {useGlobalContext} from "../../context/globalContext"
 import DeleteProfileModal from "../../components/User/UserDangerZone/DeleteProfileModal"
 import {logout} from "../../features/userSlice"
 import {RxHamburgerMenu} from "react-icons/rx"
-import {useEffect, useState} from "react"
-import {IoMdOpen} from "react-icons/io"
 import UserMenu from "./UserMenu"
-import {resetUserAside, toggleUserAside} from "../../features/smallSlice"
+import {toggleUserAside} from "../../features/smallSlice"
 
 const UserPage = () => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const navigate = useNavigate()
 
-    const {user} = useSelector((store) => store.user)
-    const {showUserAside} = useSelector((store) => store.small)
+    const {user} = useAppSelector((store) => store.user)
+    const {showUserAside} = useAppSelector((store) => store.small)
     const {isDelete, screenWidth} = useGlobalContext()
     const info = user.info
 

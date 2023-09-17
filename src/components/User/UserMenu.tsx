@@ -1,4 +1,4 @@
-import {useDispatch} from "react-redux"
+import {useAppDispatch} from "../../store/storeHooks"
 import {useNavigate} from "react-router-dom"
 import "./user.css"
 import {RxCross1} from "react-icons/rx"
@@ -6,7 +6,7 @@ import {Link} from "react-router-dom"
 import {resetUserAside} from "../../features/smallSlice"
 
 const UserMenu = () => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const navigate = useNavigate()
 
     const logoutFunc = () => {

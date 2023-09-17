@@ -1,26 +1,29 @@
 import {profitsPerDate} from "../../../functions"
+import {IUserSingleTrade} from "../../../interfaces"
 
-const events = (trades) => {
-    if (!trades || !trades.length) {
+export interface IAnsArr {
+    title: string
+    start: string
+    end: string
+    profit: number
+}
+
+const events = (trades: IUserSingleTrade[] | null) => {
+    if (!trades) {
         return null
     }
     const dateProfits = profitsPerDate(trades)
-    let ansArr = []
-    let eventNr = 1
+    let ansArr: IAnsArr[] = []
     for (const [key, value] of Object.entries(dateProfits)) {
-        let newValue = value
-        if (value < 0) {
-            newValue = `-$${(value * -1).toFixed(2)}`
-        } else {
-            newValue = `$${value.toFixed(2)}`
-        }
+        let newValue =
+            value < 0 ? `-$${(value * -1).toFixed(2)}` : `$${value.toFixed(2)}`
+
         ansArr.push({
             title: newValue,
             start: key,
             end: key,
-            temp: value,
+            profit: value,
         })
-        eventNr++
     }
     return ansArr
 }

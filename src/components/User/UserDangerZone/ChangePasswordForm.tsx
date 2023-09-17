@@ -4,7 +4,7 @@ import "../../Signup/signup.css"
 import {useGlobalContext} from "../../../context/globalContext"
 import {toast} from "react-toastify"
 import customFetch from "../../../utils"
-import {useDispatch, useSelector} from "react-redux"
+import {useAppSelector, useAppDispatch} from "../../../store/storeHooks"
 import md5 from "md5"
 import {FiInfo} from "react-icons/fi"
 import {passwordRequirements} from "../../../functions"
@@ -17,12 +17,12 @@ import {
 import {useNavigate} from "react-router-dom"
 
 const ChangePasswordForm = () => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const navigate = useNavigate()
 
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
-    const {isLoading} = useSelector((store) => store.user)
+    const {isLoading} = useAppSelector((store) => store.user)
 
     const {
         setChangePassword,
@@ -31,7 +31,7 @@ const ChangePasswordForm = () => {
         setIsRequirements,
         isRequirements,
     } = useGlobalContext()
-    const {user} = useSelector((store) => store.user)
+    const {user} = useAppSelector((store) => store.user)
 
     const handleSubmit = async (e) => {
         e.preventDefault()

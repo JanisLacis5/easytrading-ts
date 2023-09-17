@@ -3,9 +3,8 @@ import ChangePasswordForm from "./ChangePasswordForm"
 import "./userdangerzone.css"
 
 const UserDangerZone = () => {
-    const {changePassword, setChangePassword} = useGlobalContext()
-
-    const {isDelete, setIsDelete} = useGlobalContext()
+    const {changePassword, setChangePassword, isDelete, setIsDelete} =
+        useGlobalContext()
 
     if (changePassword) {
         return <ChangePasswordForm />

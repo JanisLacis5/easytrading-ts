@@ -3,11 +3,11 @@ import backImage from "../../photos/candlestick-chart.jpg"
 import "./landingpage.css"
 import {useEffect} from "react"
 import {setIsNotLoading} from "../../features/userSlice"
-import {useDispatch, useSelector} from "react-redux"
+import {useAppDispatch, useAppSelector} from "../../store/storeHooks"
 
 const LandingPage = () => {
-    const dispatch = useDispatch()
-    const {isLoading} = useSelector((store) => store.user)
+    const dispatch = useAppDispatch()
+    const {isLoading} = useAppSelector((store) => store.user)
 
     useEffect(() => {
         dispatch(setIsNotLoading())

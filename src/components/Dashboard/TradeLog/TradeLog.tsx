@@ -1,5 +1,5 @@
 import "./tradelog.css"
-import {useDispatch, useSelector} from "react-redux"
+import {useAppDispatch, useAppSelector} from "../../../store/storeHooks"
 import Filters from "./Filters"
 import Trades from "./Trades"
 import {
@@ -15,13 +15,13 @@ import {useGlobalContext} from "../../../context/globalContext"
 import Modal from "./Modal"
 
 const TradeLog = () => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     const [filter, setFilter] = useState("")
 
-    const {sortedTrades, option, value} = useSelector((store) => store.sort)
-    const {isFilters} = useSelector((store) => store.filter)
-    const {user} = useSelector((store) => store.user)
+    const {sortedTrades, option, value} = useAppSelector((store) => store.sort)
+    const {isFilters} = useAppSelector((store) => store.filter)
+    const {user} = useAppSelector((store) => store.user)
     const {showModal, setShowModal} = useGlobalContext()
 
     useEffect(() => {

@@ -11,7 +11,7 @@ interface IUser {
     id: string
     trades: IUserSingleTrade[]
     notes: IUSerSingleNote[]
-    info: IUserInfo[]
+    info: IUserInfo
     layouts: Record<
         "screener" & "x" & "y" & "height" & "width",
         IUserSingleLayout
@@ -28,7 +28,7 @@ interface ILogin {
     id: string
     trades?: IUserSingleTrade[]
     notes?: IUSerSingleNote[]
-    info?: IUserInfo[]
+    info?: IUserInfo
     layouts?: Record<
         "screener" & "x" & "y" & "height" & "width",
         IUserSingleLayout
@@ -40,7 +40,6 @@ const initialState: IInitialState = {
     isLoading: false,
     user: {
         id: JSON.parse(localStorage.getItem("userId") || ""),
-
         trades: JSON.parse(
             localStorage.getItem("userTrades") || JSON.stringify([])
         ),
@@ -85,16 +84,14 @@ const userSlice = createSlice({
         setIsNotLoading: (state) => {
             state.isLoading = false
         },
-        login: (state, action: PayloadAction<>) => {
+        login: (state, action: PayloadAction<ILogin>) => {
             const trades = action.payload.trades || []
             const notes = action.payload.notes || []
             const layouts = action.payload.layouts || []
+            const info = action.payload.info || state.user.info
             localStorage.setItem("userId", JSON.stringify(action.payload.id))
             localStorage.setItem("userTrades", JSON.stringify(trades))
-            localStorage.setItem(
-                "userInfo",
-                JSON.stringify(action.payload.info)
-            )
+            localStorage.setItem("userInfo", JSON.stringify(info))
             localStorage.setItem("userNotes", JSON.stringify(notes))
             localStorage.setItem("layouts", JSON.stringify(layouts))
 
@@ -111,15 +108,35 @@ const userSlice = createSlice({
                     ...state.user,
                     id: action.payload.id,
                     trades: reverseTrades,
-                    info: action.payload.info,
+                    info: info,
                     notes: notes,
                     layouts: layouts,
                 },
             }
         },
-        logout: (state) => {
+        logout: (state): IInitialState => {
             localStorage.clear()
-            return {...state, isLoading: false, isLogged: false, user: {}}
+            return {
+                ...state,
+                isLoading: false,
+                isLogged: false,
+                user: {
+                    id: "",
+                    trades: [],
+                    info: {
+                        email: "",
+                        firstName: "",
+                        lastName: "",
+                        username: "",
+                        startingAccount: "",
+                        account: "",
+                        image: "",
+                        pricing: "",
+                    },
+                    notes: [],
+                    layouts: [],
+                },
+            }
         },
     },
     extraReducers: (builder) => {
@@ -127,7 +144,7 @@ const userSlice = createSlice({
             .addCase(clearTrades.pending, (state) => {
                 state.isLoading = true
             })
-            .addCase(clearTrades.fulfilled, (state, {payload}) => {
+            .addCase(clearTrades.fulfilled, (state) => {
                 state.user.trades = []
                 localStorage.setItem("userTrades", JSON.stringify([]))
                 state.isLoading = false

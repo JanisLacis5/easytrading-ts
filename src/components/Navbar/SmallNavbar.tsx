@@ -1,11 +1,11 @@
-import {useDispatch, useSelector} from "react-redux"
+import {useAppDispatch, useAppSelector} from "../../store/storeHooks"
 import "./smalllink.css"
 import {RxHamburgerMenu, RxCross1} from "react-icons/rx"
 import {toggleSmallLinks} from "../../features/smallSlice"
 
 const SmallNavbar = () => {
-    const dispatch = useDispatch()
-    const {showSmallLinks} = useSelector((store) => store.small)
+    const dispatch = useAppDispatch()
+    const {showSmallLinks} = useAppSelector((store) => store.small)
 
     return (
         <nav className="small-nav">

@@ -1,10 +1,10 @@
 import {RxCross1} from "react-icons/rx"
 import {useGlobalContext} from "../../../context/globalContext"
-import {useDispatch} from "react-redux"
+import {useAppDispatch} from "../../../store/storeHooks"
 import {clearTrades} from "../../../features/userSlice"
 
 const Modal = () => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const {setShowModal} = useGlobalContext()
 
     return (

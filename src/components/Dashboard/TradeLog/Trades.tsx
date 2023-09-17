@@ -1,4 +1,4 @@
-import {useDispatch, useSelector} from "react-redux"
+import {useAppDispatch, useAppSelector} from "../../../store/storeHooks"
 import "./tradelog.css"
 import {useEffect} from "react"
 import {setSortedTrades} from "../../../features/sortSlice"
@@ -9,11 +9,11 @@ import {
 import {useGlobalContext} from "../../../context/globalContext"
 
 const Trades = ({trades}) => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
-    const {sortedTrades} = useSelector((store) => store.sort)
-    const {user} = useSelector((store) => store.user)
-    const {filters, filteredProducts} = useSelector((store) => store.filter)
+    const {sortedTrades} = useAppSelector((store) => store.sort)
+    const {user} = useAppSelector((store) => store.user)
+    const {filters, filteredProducts} = useAppSelector((store) => store.filter)
     const {screenWidth} = useGlobalContext()
 
     useEffect(() => {

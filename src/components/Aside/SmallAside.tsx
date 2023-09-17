@@ -1,12 +1,12 @@
-import {useDispatch, useSelector} from "react-redux"
+import {useAppDispatch, useAppSelector} from "../../store/storeHooks"
 import "./aside.css"
 import {IoMdOpen} from "react-icons/io"
 import {toggleSmallAside} from "../../features/smallSlice"
 import AsidePages from "./AsidePages"
 
 const SmallAside = () => {
-    const dispatch = useDispatch()
-    const {showSmallAside} = useSelector((store) => store.small)
+    const dispatch = useAppDispatch()
+    const {showSmallAside} = useAppSelector((store) => store.small)
 
     return (
         <aside

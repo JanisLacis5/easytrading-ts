@@ -1,11 +1,13 @@
-import {useDispatch, useSelector} from "react-redux"
+import {useAppDispatch, useAppSelector} from "../../store/storeHooks"
 import "./aside.css"
 import {toggleTrading, toggleScreeners} from "../../features/asideSlice"
 import {Link} from "react-router-dom"
 
 const Aside = () => {
-    const dispatch = useDispatch()
-    const {tradingButton, screenersButton} = useSelector((store) => store.aside)
+    const dispatch = useAppDispatch()
+    const {tradingButton, screenersButton} = useAppSelector(
+        (store) => store.aside
+    )
 
     return (
         <aside className="dashboard-pages">

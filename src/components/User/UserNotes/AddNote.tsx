@@ -2,19 +2,19 @@ import {useState} from "react"
 import "./usernotes.css"
 import customFetch from "../../../utils"
 import {toast} from "react-toastify"
-import {blankWhite} from "../../../photos/links"
-import {useDispatch, useSelector} from "react-redux"
+import {blankWhite} from "../../../photos/blank-white-image.jpg"
+import {useAppDispatch, useAppSelector} from "../../../store/storeHooks"
 import {login} from "../../../features/userSlice"
 import {useNavigate} from "react-router-dom"
 
 const AddNote = () => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const navigate = useNavigate()
 
     const [image, setImage] = useState("")
     const [text, setText] = useState("")
 
-    const {user} = useSelector((store) => store.user)
+    const {user} = useAppSelector((store) => store.user)
 
     const convertImage = (e) => {
         const tgt = e.target

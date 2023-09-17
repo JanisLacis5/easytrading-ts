@@ -3,15 +3,14 @@ import "./addtrade.css"
 import {useGlobalContext} from "../../../context/globalContext"
 import customFetch from "../../../utils"
 import {useNavigate} from "react-router-dom"
-import {useDispatch, useSelector} from "react-redux"
+import {useAppDispatch, useAppSelector} from "../../../store/storeHooks"
 import {login} from "../../../features/userSlice"
 import {toast} from "react-toastify"
-import {useEffect} from "react"
 
 const AddTrade = () => {
     const navigate = useNavigate()
-    const dispatch = useDispatch()
-    const {user} = useSelector((store) => store.user)
+    const dispatch = useAppDispatch()
+    const {user} = useAppSelector((store) => store.user)
     const {
         stock,
         setStock,

@@ -4,6 +4,7 @@ import asideReducer from "../features/asideSlice"
 import filterReducer from "../features/filterSlice"
 import sortReducer from "../features/sortSlice"
 import smallReducer from "../features/smallSlice"
+import layoutReducer from "../features/layoutSlice"
 
 export const store = configureStore({
     reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
         filter: filterReducer,
         sort: sortReducer,
         small: smallReducer,
+        layout: layoutReducer,
     },
 })
 

@@ -1,25 +1,23 @@
 import {useEffect, useState} from "react"
-import {useSelector} from "react-redux"
+import {useAppSelector} from "../../../store/storeHooks"
 import {profitableStocks} from "../../../functions"
 import {Bar} from "react-chartjs-2"
 
 const ProfitableStocks = () => {
-    const [profits, setProfits] = useState([])
-    const [stocks, setStocks] = useState([])
+    const [profits, setProfits] = useState<{[key: string]: number}>({})
 
-    const {user} = useSelector((store) => store.user)
+    const {user} = useAppSelector((store) => store.user)
 
     useEffect(() => {
-        const tempTrades = user.trades || []
-        setProfits(profitableStocks(tempTrades).profits)
-        setStocks(profitableStocks(tempTrades).stocks)
+        setProfits(profitableStocks(user.trades))
     }, [user.trades])
+
     const data = {
-        labels: stocks,
+        labels: Object.keys(profits),
         datasets: [
             {
                 label: "$",
-                data: profits,
+                data: Object.values(profits),
                 backgroundColor: ["rgba(42, 1, 229, 0.981)"],
                 borderColor: ["rgba(47, 0, 255, 0.981)"],
                 borderWidth: 1,
@@ -27,7 +25,7 @@ const ProfitableStocks = () => {
         ],
     }
 
-    const options = {
+    const options: any = {
         plugins: {
             legend: {
                 display: false,
@@ -36,7 +34,7 @@ const ProfitableStocks = () => {
         scales: {
             y: {
                 ticks: {
-                    callback: function (value, index, ticks) {
+                    callback: function (value: string) {
                         return "$ " + value
                     },
                 },

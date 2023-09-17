@@ -7,11 +7,14 @@ import customFetch from "../../utils"
 import {toast} from "react-toastify"
 import {useGlobalContext} from "../../context/globalContext"
 import {useNavigate} from "react-router-dom"
-import {useDispatch, useSelector} from "react-redux"
+import {useAppSelector, useAppDispatch} from "../../store/storeHooks"
 import {setIsLoading, setIsNotLoading} from "../../features/userSlice"
 import {passwordRequirements} from "../../functions"
 
 const SignupForm = () => {
+    const navigate = useNavigate()
+    const dispatch = useAppDispatch()
+
     const {
         email,
         setEmail,
@@ -23,10 +26,7 @@ const SignupForm = () => {
 
     const {isRequirements, setIsRequirements, isMetReq, setIsMetReq} =
         useGlobalContext()
-    const {isLoading} = useSelector((store) => store.user)
-
-    const navigate = useNavigate()
-    const dispatch = useDispatch()
+    const {isLoading} = useAppSelector((store) => store.user)
 
     const handleSubmit = async (e) => {
         e.preventDefault()

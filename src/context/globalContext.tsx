@@ -1,5 +1,6 @@
 import {useContext, createContext, useState} from "react"
 import userIcon from "../assets/user-icon.svg"
+import {IUserSingleLayout} from "../interfaces"
 
 const GlobalContext = createContext()
 export const useGlobalContext = () => useContext(GlobalContext)
@@ -51,10 +52,6 @@ const AppContext = ({children}) => {
     const [askPassword, setAskPassword] = useState(false)
 
     // CUSTOM LAYOUT
-    const [layoutParams, setLayoutParams] = useState({})
-    const [isDone, setIsDone] = useState(false)
-    const [isAddingScreener, setIsAddingScreener] = useState(false)
-    const [activeBlock, setActiveBlock] = useState(null)
 
     return (
         <GlobalContext.Provider
@@ -117,14 +114,6 @@ const AppContext = ({children}) => {
                 setChangePlan,
                 screenWidth,
                 setScreenWidth,
-                layoutParams,
-                setLayoutParams,
-                isDone,
-                setIsDone,
-                isAddingScreener,
-                setIsAddingScreener,
-                activeBlock,
-                setActiveBlock,
             }}>
             {children}
         </GlobalContext.Provider>

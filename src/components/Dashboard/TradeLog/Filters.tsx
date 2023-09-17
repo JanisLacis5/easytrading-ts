@@ -1,4 +1,4 @@
-import {useDispatch, useSelector} from "react-redux"
+import {useAppDispatch, useAppSelector} from "../../../store/storeHooks"
 import "./tradelog.css"
 import {
     updateFilters,
@@ -7,13 +7,12 @@ import {
     closeFilters,
 } from "../../../features/filterSlice"
 import {RxCross1} from "react-icons/rx"
-import {useGlobalContext} from "../../../context/globalContext"
 
 const Filters = () => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
-    const {user} = useSelector((store) => store.user)
-    const {filters} = useSelector((store) => store.filter)
+    const {user} = useAppSelector((store) => store.user)
+    const {filters} = useAppSelector((store) => store.filter)
     const {stock, date, action, PL} = filters
 
     const handleChange = (e) => {

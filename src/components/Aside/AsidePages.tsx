@@ -1,4 +1,4 @@
-import {useDispatch, useSelector} from "react-redux"
+import {useAppDispatch, useAppSelector} from "../../store/storeHooks"
 import "./aside.css"
 import {toggleTrading} from "../../features/asideSlice"
 import {Link} from "react-router-dom"
@@ -6,8 +6,8 @@ import {resetAside} from "../../features/smallSlice"
 import {RxCross1} from "react-icons/rx"
 
 const AsidePages = () => {
-    const dispatch = useDispatch()
-    const {tradingButton} = useSelector((store) => store.aside)
+    const dispatch = useAppDispatch()
+    const {tradingButton} = useAppSelector((store) => store.aside)
     return (
         <div className="small-aside-pages">
             <div>

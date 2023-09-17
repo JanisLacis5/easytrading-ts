@@ -1,15 +1,15 @@
 import userIcon from "../../../assets/user-icon.svg"
 import "./signupinfoform.css"
-import {useDispatch} from "react-redux"
 import {login, setIsLoading, setIsNotLoading} from "../../../features/userSlice"
 import customFetch from "../../../utils"
 import {useNavigate} from "react-router-dom"
 import {toast} from "react-toastify"
 import {useGlobalContext} from "../../../context/globalContext"
 import md5 from "md5"
+import {useAppDispatch} from "../../../store/storeHooks"
 
 const SignupInfoForm = () => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const navigate = useNavigate()
 
     const {
