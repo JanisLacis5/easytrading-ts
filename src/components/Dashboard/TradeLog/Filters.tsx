@@ -15,9 +15,15 @@ const Filters = () => {
     const {filters} = useAppSelector((store) => store.filter)
     const {stock, date, action, PL} = filters
 
-    const handleChange = (e) => {
-        const name = e.target.name
-        const value = e.target.value
+    const handleChange = (
+        e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    ) => {
+        const name = (e.target as HTMLInputElement).name as
+            | "stock"
+            | "date"
+            | "action"
+            | "PL"
+        const value = (e.target as HTMLInputElement).value
         dispatch(updateFilters({name: name, value: value}))
     }
 

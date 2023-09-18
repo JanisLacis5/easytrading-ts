@@ -1,7 +1,7 @@
 import {PayloadAction, createAsyncThunk, createSlice} from "@reduxjs/toolkit"
 import customFetch from "../utils"
 import {
-    IUSerSingleNote,
+    IUserSingleNote,
     IUserInfo,
     IUserSingleLayout,
     IUserSingleTrade,
@@ -10,7 +10,7 @@ import {
 interface IUser {
     id: string
     trades: IUserSingleTrade[]
-    notes: IUSerSingleNote[]
+    notes: IUserSingleNote[]
     info: IUserInfo
     layouts: Record<
         "screener" & "x" & "y" & "height" & "width",
@@ -27,7 +27,7 @@ interface IInitialState {
 interface ILogin {
     id: string
     trades?: IUserSingleTrade[]
-    notes?: IUSerSingleNote[]
+    notes?: IUserSingleNote[]
     info?: IUserInfo
     layouts?: Record<
         "screener" & "x" & "y" & "height" & "width",

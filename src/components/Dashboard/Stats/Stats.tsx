@@ -12,6 +12,13 @@ interface IWonPl {
     wonDays: number
 }
 
+interface ILostPl {
+    averageLostDayPl: number
+    biggestLostDayPl: number
+    biggestLoss: number
+    lostDays: number
+}
+
 interface ICountStats {
     wonTrades: number
     lostTrades: number
@@ -19,15 +26,31 @@ interface ICountStats {
 }
 
 const Stats = () => {
-    const [wonPlState, setWonPlState] = useState<IWonPl | null>()
-    const [lostPlState, setLostPlState] = useState({})
-    const [countSt, setCountSt] = useState<ICountStats | null>()
+    const [wonPlState, setWonPlState] = useState<IWonPl>({
+        averageWonDayPl: 0,
+        maxWonDayPl: 0,
+        biggestWin: 0,
+        wonDays: 0,
+    })
+    const [lostPlState, setLostPlState] = useState<ILostPl>({
+        averageLostDayPl: 0,
+        biggestLostDayPl: 0,
+        biggestLoss: 0,
+        lostDays: 0,
+    })
+    const [countSt, setCountSt] = useState<ICountStats>({
+        wonTrades: 0,
+        lostTrades: 0,
+        totalProfit: 0,
+    })
     const {user} = useAppSelector((store) => store.user)
 
     useEffect(() => {
-        setLostPlState(lostPl(user.trades))
-        setWonPlState(wonPl(user.trades))
-        setCountSt(countStats(user.trades))
+        if (user.trades) {
+            setLostPlState(lostPl(user.trades))
+            setWonPlState(wonPl(user.trades))
+            setCountSt(countStats(user.trades))
+        }
     }, [user.trades])
 
     return (

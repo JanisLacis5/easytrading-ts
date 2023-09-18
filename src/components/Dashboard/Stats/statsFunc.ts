@@ -1,11 +1,11 @@
 import {IUserSingleTrade} from "../../../interfaces"
 
-export const maxPl = (trades) => {
-    return Math.max(...trades.map((trade) => trade.pl))
+export const maxPl = (trades: IUserSingleTrade[]) => {
+    return Math.max(...trades.map((trade: IUserSingleTrade) => trade.pl))
 }
 
-export const minPl = (trades) => {
-    return Math.min(...trades.map((trade) => trade.pl))
+export const minPl = (trades: IUserSingleTrade[]) => {
+    return Math.min(...trades.map((trade: IUserSingleTrade) => trade.pl))
 }
 
 export const wonPl = (trades: IUserSingleTrade[] | null) => {
@@ -51,10 +51,8 @@ export const wonPl = (trades: IUserSingleTrade[] | null) => {
     }
 }
 
-export const lostPl = (trades) => {
-    let a = [...trades]
-
-    if (!a.length) {
+export const lostPl = (trades: IUserSingleTrade[] | null) => {
+    if (!trades) {
         return {
             averageLostDayPl: 0,
             biggestLostDayPl: 0,
@@ -62,7 +60,8 @@ export const lostPl = (trades) => {
             lostDays: 0,
         }
     }
-    let sortedTrades = a.sort((a, b) => {
+    let tradesCopy = [...trades]
+    let sortedTrades = tradesCopy.sort((a, b) => {
         const date1 = Number(a.date.replaceAll("-", ""))
         const date2 = Number(b.date.replaceAll("-", ""))
         return date1 - date2
@@ -97,7 +96,9 @@ export const lostPl = (trades) => {
         biggestLostDayPl:
             lostTradeDays.length === 0 ? 0 : Math.min(...lostTradeDays),
         biggestLoss:
-            lostTradeDays.length === 0 ? 0 : Math.min(...a.map((o) => o.pl)),
+            lostTradeDays.length === 0
+                ? 0
+                : Math.min(...tradesCopy.map((o) => o.pl)),
         lostDays: lostTradeDays.length,
     }
 }

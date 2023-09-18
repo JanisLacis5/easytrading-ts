@@ -6,7 +6,7 @@ import HodBlock from "./ScreenerBlocks/HodBlock"
 import GapBlock from "./ScreenerBlocks/GapBlock"
 
 const ScreenerDashboard = () => {
-    const [activeLayout, setActiveLayout] = useState(null)
+    const [activeLayout, setActiveLayout] = useState<number>(0)
     const {user} = useAppSelector((store) => store.user)
 
     return (
@@ -14,7 +14,7 @@ const ScreenerDashboard = () => {
             <div className="layouts-header">
                 <div className="layout-buttons">
                     <div className="layout-numbers">
-                        {user.layouts?.map((_, index) => {
+                        {Object.keys(user.layouts).map((_, index) => {
                             return (
                                 <button
                                     type="button"
@@ -33,7 +33,7 @@ const ScreenerDashboard = () => {
                 </div>
             </div>
             <div className="layouts-main">
-                {user.layouts?.map((layout, index) => {
+                {Object.values(user.layouts).map((layout, index) => {
                     if (layout.screener === "hod") {
                         return <HodBlock key={index} />
                     }

@@ -18,7 +18,7 @@ const LoginForm = () => {
 
     const {isLoading} = useAppSelector((store) => store.user)
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         dispatch(setIsLoading())
         try {

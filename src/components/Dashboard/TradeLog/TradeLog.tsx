@@ -29,8 +29,21 @@ const TradeLog = () => {
         profitsPerDate(user.trades)
     }, [user.trades])
 
-    const handleChange = (e) => {
-        dispatch(updateSort({name: e.target.name}))
+    const handleChange = (
+        e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    ) => {
+        dispatch(
+            updateSort({
+                name: (e.target as HTMLButtonElement).name as
+                    | "stock"
+                    | "accBefore"
+                    | "accAfter"
+                    | "pl"
+                    | "date"
+                    | "time"
+                    | "action",
+            })
+        )
         dispatch(sortTrades({trades: sortedTrades}))
     }
 

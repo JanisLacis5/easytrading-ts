@@ -143,7 +143,9 @@ const Pricing = () => {
                             className="price-button"
                             value="free"
                             onClick={(e) => {
-                                setPricingPlan(e.target.value)
+                                setPricingPlan(
+                                    (e.target as HTMLButtonElement).value
+                                )
                             }}>
                             Start free
                         </button>
@@ -161,7 +163,9 @@ const Pricing = () => {
                             type="button"
                             className="price-button"
                             value="basic"
-                            onClick={(e) => setPricingPlan(e.target.value)}>
+                            onClick={(e) =>
+                                (e.target as HTMLButtonElement).value
+                            }>
                             10.00 $/month
                         </button>
                     </div>
@@ -180,7 +184,11 @@ const Pricing = () => {
                             type="button"
                             className="price-button"
                             value="pro"
-                            onClick={(e) => setPricingPlan(e.target.value)}>
+                            onClick={(e) =>
+                                setPricingPlan(
+                                    (e.target as HTMLButtonElement).value
+                                )
+                            }>
                             35.00 $/month
                         </button>
                     </div>

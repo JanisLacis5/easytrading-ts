@@ -18,7 +18,9 @@ const NewLayout = () => {
     )
     const {user} = useAppSelector((store) => store.user)
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (
+        e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    ) => {
         e.preventDefault()
         const {data} = await customFetch.post("/new-layout", {
             layout: layoutParams,
