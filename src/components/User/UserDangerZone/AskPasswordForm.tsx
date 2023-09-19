@@ -1,16 +1,16 @@
 import {useAppSelector, useAppDispatch} from "../../../store/storeHooks"
-import {useGlobalContext} from "../../../context/globalContext"
 import customFetch from "../../../utils"
 import {useState} from "react"
 import md5 from "md5"
 import {logout} from "../../../features/userSlice"
 import {useNavigate} from "react-router-dom"
 import {toast} from "react-toastify"
+import {setAskPassword, setIsDelete} from "../../../features/dangerZoneSlice"
+import {setString} from "../../../features/userInfoFormSlice"
 
 const AskPasswordForm = () => {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
-    const {setIsDelete, setAskPassword} = useGlobalContext()
     const {user} = useAppSelector((store) => store.user)
 
     const [password, setPassword] = useState("")
@@ -24,7 +24,6 @@ const AskPasswordForm = () => {
         if (data.message === "success") {
             setPassword("")
             setAskPassword(false)
-            setIsDelete(false)
             dispatch(logout())
             navigate("/landing")
         } else {
@@ -44,7 +43,9 @@ const AskPasswordForm = () => {
                     name="password"
                     id="password"
                     value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    onChange={(e) =>
+                        setString({prop: "password", value: e.target.value})
+                    }
                 />
                 <div className="ask-password-button-container">
                     <div>

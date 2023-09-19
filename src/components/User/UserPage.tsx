@@ -1,6 +1,5 @@
 import {useAppDispatch, useAppSelector} from "../../store/storeHooks"
 import {Link, Outlet, useNavigate} from "react-router-dom"
-import {useGlobalContext} from "../../context/globalContext"
 import DeleteProfileModal from "../../components/User/UserDangerZone/DeleteProfileModal"
 import {logout} from "../../features/userSlice"
 import {RxHamburgerMenu} from "react-icons/rx"
@@ -13,7 +12,8 @@ const UserPage = () => {
 
     const {user} = useAppSelector((store) => store.user)
     const {showUserAside} = useAppSelector((store) => store.small)
-    const {isDelete, screenWidth} = useGlobalContext()
+    const {isDelete} = useAppSelector((store) => store.dangerZone)
+
     const info = user.info
 
     const logoutFunc = () => {

@@ -1,9 +1,10 @@
 import {RxCross1} from "react-icons/rx"
-import {useGlobalContext} from "../../../context/globalContext"
+import {setAskPassword, setIsDelete} from "../../../features/dangerZoneSlice"
 import AskPasswordForm from "./AskPasswordForm"
+import {useAppSelector} from "../../../store/storeHooks"
 
 const DeleteProfileModal = () => {
-    const {setIsDelete, askPassword, setAskPassword} = useGlobalContext()
+    const {askPassword} = useAppSelector((store) => store.dangerZone)
 
     return (
         <div className="delete-profile-modal">

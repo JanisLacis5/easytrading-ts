@@ -1,10 +1,10 @@
-import {useGlobalContext} from "../../../context/globalContext"
+import {useAppSelector} from "../../../store/storeHooks"
 import ChangePasswordForm from "./ChangePasswordForm"
 import "./userdangerzone.css"
+import {setChangePassword, setIsDelete} from "../../../features/dangerZoneSlice"
 
 const UserDangerZone = () => {
-    const {changePassword, setChangePassword, isDelete, setIsDelete} =
-        useGlobalContext()
+    const {changePassword} = useAppSelector((store) => store.dangerZone)
 
     if (changePassword) {
         return <ChangePasswordForm />
@@ -18,7 +18,7 @@ const UserDangerZone = () => {
                     <p>
                         Wen you choose to change your passsword, this change is
                         inreverasble and unless there is a problem with your
-                        existing password this change is not recomended
+                        existing password this change is not reccomended
                     </p>
                 </div>
                 <div>

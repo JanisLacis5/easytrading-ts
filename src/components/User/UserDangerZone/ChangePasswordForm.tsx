@@ -1,13 +1,11 @@
 import {useState} from "react"
 import "./userdangerzone.css"
 import "../../Signup/signup.css"
-import {useGlobalContext} from "../../../context/globalContext"
 import {toast} from "react-toastify"
 import customFetch from "../../../utils"
 import {useAppSelector, useAppDispatch} from "../../../store/storeHooks"
 import md5 from "md5"
 import {FiInfo} from "react-icons/fi"
-import {passwordRequirements} from "../../../functions"
 import Requirements from "../../Signup/Requirements"
 import {
     logout,
@@ -15,6 +13,7 @@ import {
     setIsNotLoading,
 } from "../../../features/userSlice"
 import {useNavigate} from "react-router-dom"
+import {setBool, setString} from "../../../features/userInfoFormSlice"
 
 const ChangePasswordForm = () => {
     const dispatch = useAppDispatch()
@@ -22,15 +21,17 @@ const ChangePasswordForm = () => {
 
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
+
     const {isLoading} = useAppSelector((store) => store.user)
 
-    const {
-        setChangePassword,
-        setIsMetReq,
-        isMetReq,
-        setIsRequirements,
-        isRequirements,
-    } = useGlobalContext()
+    // const {
+    //     setChangePassword,
+    //     setIsMetReq,
+    //     isMetReq,
+    //     setIsRequirements,
+    //     isRequirements,
+    // } = useGlobalContext()
+
     const {user} = useAppSelector((store) => store.user)
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -116,7 +117,12 @@ const ChangePasswordForm = () => {
                             name="confirmPassword"
                             id="confirmPassword"
                             value={confirmPassword}
-                            onChange={(e) => setConfirmPassword(e.target.value)}
+                            onChange={(e) =>
+                                setString({
+                                    prop: "confirmPassword",
+                                    value: e.target.value,
+                                })
+                            }
                         />
                         <label
                             htmlFor="confirmPassword"
@@ -129,7 +135,9 @@ const ChangePasswordForm = () => {
                     <div>
                         <button
                             type="button"
-                            onClick={() => setChangePassword(false)}>
+                            onClick={() =>
+                                setBool({prop: "changePassword", value: false})
+                            }>
                             Cancel
                         </button>
                         <button type="submit">Finish</button>

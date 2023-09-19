@@ -1,23 +1,19 @@
 import {toast} from "react-toastify"
-import {useGlobalContext} from "../../../context/globalContext"
 import "./userupdateform.css"
 import customFetch from "../../../utils"
 import {useAppDispatch, useAppSelector} from "../../../store/storeHooks"
 import {login, setIsLoading, setIsNotLoading} from "../../../features/userSlice"
+import {setAccountUpdateState} from "../../../features/accuntUpdateSlice"
 
 const UserUpdateForm = () => {
     const dispatch = useAppDispatch()
 
     const {
         updatedUsername,
-        setUpdatedUsername,
         updatedEmail,
-        setUpdatedEmail,
         updatedAccountBalance,
-        setUpdatedAccountBalance,
         updatedProfilePicture,
-        setUpdatedProfilePicture,
-    } = useGlobalContext()
+    } = useAppSelector((store) => store.accountUpdate)
 
     const {user} = useAppSelector((store) => store.user)
 
@@ -28,7 +24,10 @@ const UserUpdateForm = () => {
         if (FileReader && files && files.length) {
             const fr = new FileReader()
             fr.onload = function () {
-                setUpdatedProfilePicture(fr.result)
+                setAccountUpdateState({
+                    prop: "updatedProfilePicture",
+                    value: fr.result as string,
+                })
             }
             fr.readAsDataURL(files[0])
         }
@@ -54,10 +53,11 @@ const UserUpdateForm = () => {
             balance: updatedAccountBalance,
             image: updatedProfilePicture,
         })
-        setUpdatedUsername("")
-        setUpdatedEmail("")
-        setUpdatedAccountBalance("")
-        setUpdatedProfilePicture("")
+
+        setAccountUpdateState({prop: "updatedUsername", value: ""})
+        setAccountUpdateState({prop: "updatedEmail", value: ""})
+        setAccountUpdateState({prop: "updatedAccountBalance", value: ""})
+        setAccountUpdateState({prop: "updatedProfilePicture", value: ""})
         dispatch(
             login({
                 id: user.id,
@@ -77,7 +77,12 @@ const UserUpdateForm = () => {
                         name="username"
                         id="username"
                         value={updatedUsername}
-                        onChange={(e) => setUpdatedUsername(e.target.value)}
+                        onChange={(e) =>
+                            setAccountUpdateState({
+                                prop: "updatedUsername",
+                                value: e.target.value,
+                            })
+                        }
                     />
                     <label
                         htmlFor="username"
@@ -93,7 +98,12 @@ const UserUpdateForm = () => {
                         name="email"
                         id="email"
                         value={updatedEmail}
-                        onChange={(e) => setUpdatedEmail(e.target.value)}
+                        onChange={(e) =>
+                            setAccountUpdateState({
+                                prop: "updatedEmail",
+                                value: e.target.value,
+                            })
+                        }
                     />
                     <label
                         htmlFor="email"
@@ -110,7 +120,10 @@ const UserUpdateForm = () => {
                         id="account"
                         value={updatedAccountBalance}
                         onChange={(e) =>
-                            setUpdatedAccountBalance(e.target.value)
+                            setAccountUpdateState({
+                                prop: "updatedAccountBalance",
+                                value: e.target.value,
+                            })
                         }
                     />
                     <label

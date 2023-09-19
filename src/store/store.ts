@@ -5,6 +5,9 @@ import filterReducer from "../features/filterSlice"
 import sortReducer from "../features/sortSlice"
 import smallReducer from "../features/smallSlice"
 import layoutReducer from "../features/layoutSlice"
+import dangerZoneReducer from "../features/dangerZoneSlice"
+import addTradeFormReducer from "../features/addTradeFormSlice"
+import accountUpdateReducer from "../features/accuntUpdateSlice"
 
 export const store = configureStore({
     reducer: {
@@ -14,6 +17,9 @@ export const store = configureStore({
         sort: sortReducer,
         small: smallReducer,
         layout: layoutReducer,
+        dangerZone: dangerZoneReducer,
+        addTrade: addTradeFormReducer,
+        accountUpdate: accountUpdateReducer,
     },
 })
 
