@@ -33,7 +33,7 @@ const ChangePasswordForm = () => {
     } = useGlobalContext()
     const {user} = useAppSelector((store) => store.user)
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         if (password !== confirmPassword) {
             toast.error("Passwords do not match")

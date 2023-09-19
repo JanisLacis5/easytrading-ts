@@ -4,6 +4,7 @@ import "../screeners.css"
 import {useState} from "react"
 import HodBlock from "./ScreenerBlocks/HodBlock"
 import GapBlock from "./ScreenerBlocks/GapBlock"
+import {IParams} from "./ScreenerBlock"
 
 const ScreenerDashboard = () => {
     const [activeLayout, setActiveLayout] = useState<number>(0)
@@ -33,14 +34,16 @@ const ScreenerDashboard = () => {
                 </div>
             </div>
             <div className="layouts-main">
-                {Object.values(user.layouts).map((layout, index) => {
-                    if (layout.screener === "hod") {
-                        return <HodBlock key={index} />
+                {Object.values(user.layouts).map(
+                    (layout: object | unknown, index: number) => {
+                        if ((layout as IParams).screener === "hod") {
+                            return <HodBlock key={index} />
+                        }
+                        if ((layout as IParams).screener == "gap") {
+                            return <GapBlock key={index} />
+                        }
                     }
-                    if (layout.screener == "gap") {
-                        return <GapBlock key={index} />
-                    }
-                })}
+                )}
             </div>
         </section>
     )

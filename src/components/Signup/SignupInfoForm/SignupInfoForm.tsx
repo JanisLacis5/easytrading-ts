@@ -33,7 +33,7 @@ const SignupInfoForm = () => {
         pricingPlan,
     } = useGlobalContext()
 
-    const temp = (e) => {
+    const temp = (e: React.ChangeEvent<HTMLInputElement>) => {
         const tgt = e.target
         const files = tgt.files
 
@@ -46,7 +46,7 @@ const SignupInfoForm = () => {
         }
     }
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         dispatch(setIsLoading())
         if (!choosePricing) {

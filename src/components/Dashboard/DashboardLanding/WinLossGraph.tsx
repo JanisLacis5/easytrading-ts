@@ -4,13 +4,16 @@ import "chart.js/auto"
 import {useAppSelector} from "../../../store/storeHooks"
 import {filterChart, countStats} from "../../../functions"
 import {useState} from "react"
+import {OpUnitType} from "dayjs"
 
 const WinLossGraph = () => {
-    const [filter, setFilter] = useState("all-time")
+    const [filter, setFilter] = useState<OpUnitType>("all-time" as OpUnitType)
 
     const {user} = useAppSelector((store) => store.user)
     const trades =
-        filter === "all-time" ? user.trades : filterChart(user.trades, filter)
+        filter === ("all-time" as OpUnitType)
+            ? user.trades
+            : filterChart(user.trades, filter as OpUnitType)
     const {wonTrades, lostTrades, totalProfit} = countStats(trades)
 
     const data = {
@@ -46,7 +49,9 @@ const WinLossGraph = () => {
             <div className="pie-garph-container">
                 <select
                     onChange={(e) => {
-                        setFilter(e.target.value)
+                        setFilter(
+                            (e.target as HTMLSelectElement).value as OpUnitType
+                        )
                     }}>
                     <option value="all-time">All time</option>
                     <option value="day">Today</option>

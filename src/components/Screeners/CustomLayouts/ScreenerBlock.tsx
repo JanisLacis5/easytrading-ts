@@ -5,9 +5,23 @@ import HodBlock from "./ScreenerBlocks/HodBlock"
 import GapBlock from "./ScreenerBlocks/GapBlock"
 import {useGlobalContext} from "../../../context/globalContext"
 
-const ScreenerBlock = ({layout, index}) => {
-    const [params, setParams] = useState({
-        screener: null,
+interface IProps {
+    index: number
+    layout: string
+}
+
+export interface IParams {
+    screener: string
+    x: number
+    y: number
+    height: number
+    width: number
+}
+
+const ScreenerBlock = (props: IProps) => {
+    const {layout, index} = props
+    const [params, setParams] = useState<IParams>({
+        screener: "",
         x: 0,
         y: 0,
         height: 240,
@@ -41,8 +55,11 @@ const ScreenerBlock = ({layout, index}) => {
         return (
             <Rnd
                 style={
-                    activeBlock !== index &&
-                    activeBlock !== null && {pointerEvents: "none"}
+                    activeBlock !== index
+                        ? activeBlock !== null
+                            ? {pointerEvents: "none"}
+                            : {}
+                        : {}
                 }
                 default={{
                     x: 0,
@@ -80,8 +97,11 @@ const ScreenerBlock = ({layout, index}) => {
         return (
             <Rnd
                 style={
-                    activeBlock !== index &&
-                    activeBlock !== null && {pointerEvents: "none"}
+                    activeBlock !== index
+                        ? activeBlock !== null
+                            ? {pointerEvents: "none"}
+                            : {}
+                        : {}
                 }
                 default={{
                     x: 0,
@@ -97,7 +117,7 @@ const ScreenerBlock = ({layout, index}) => {
                     setIsDone(false)
                     setIsAddingScreener(true)
                 }}
-                onResizeStart={(e, direction, ref, delta, position) => {
+                onResizeStart={() => {
                     setIsDone(false)
                     setIsAddingScreener(true)
                     setActiveBlock(index)

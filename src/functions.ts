@@ -1,12 +1,12 @@
-import dayjs from "dayjs"
-import {IUserSingleTrade} from "./interfaces"
+import dayjs, {OpUnitType} from "dayjs"
+import {IUserSingleNote, IUserSingleTrade} from "./interfaces"
 import("dayjs/locale/en")
 
 dayjs.locale("en", {
     weekStart: 1,
 })
 
-export const filterChart = (trades: IUserSingleTrade[], filter) => {
+export const filterChart = (trades: IUserSingleTrade[], filter: OpUnitType) => {
     const res = trades?.filter((trade) => dayjs().isSame(trade.date, filter))
     return res
 }
@@ -31,7 +31,7 @@ export const countStats = (trades: IUserSingleTrade[] | null) => {
     return {wonTrades, lostTrades, totalProfit}
 }
 
-export const passwordRequirements = (password) => {
+export const passwordRequirements = (password: string) => {
     if (
         password.length < 8 ||
         !/[A-Z]/.test(password) ||
@@ -108,7 +108,7 @@ export const profitsPerDate = (trades: IUserSingleTrade[] | null) => {
     return profits
 }
 
-export const countPinnedNotes = (notes) => {
+export const countPinnedNotes = (notes: IUserSingleNote[]) => {
     let count = 0
     notes.map((note) => {
         if (note.pinned) {

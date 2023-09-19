@@ -2,11 +2,11 @@ import {toast} from "react-toastify"
 import {useGlobalContext} from "../../../context/globalContext"
 import "./userupdateform.css"
 import customFetch from "../../../utils"
-import {useDispatch, useSelector} from "react-redux"
+import {useAppDispatch, useAppSelector} from "../../../store/storeHooks"
 import {login, setIsLoading, setIsNotLoading} from "../../../features/userSlice"
 
 const UserUpdateForm = () => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     const {
         updatedUsername,
@@ -19,9 +19,9 @@ const UserUpdateForm = () => {
         setUpdatedProfilePicture,
     } = useGlobalContext()
 
-    const {user} = useSelector((store) => store.user)
+    const {user} = useAppSelector((store) => store.user)
 
-    const getImage = (e) => {
+    const getImage = (e: React.ChangeEvent<HTMLInputElement>) => {
         const tgt = e.target
         const files = tgt.files
 
@@ -34,7 +34,7 @@ const UserUpdateForm = () => {
         }
     }
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         if (
             !updatedUsername &&

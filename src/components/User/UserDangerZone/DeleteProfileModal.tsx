@@ -5,8 +5,6 @@ import AskPasswordForm from "./AskPasswordForm"
 const DeleteProfileModal = () => {
     const {setIsDelete, askPassword, setAskPassword} = useGlobalContext()
 
-    const deleteFunc = async () => {}
-
     return (
         <div className="delete-profile-modal">
             {askPassword ? (

@@ -15,7 +15,7 @@ const AskPasswordForm = () => {
 
     const [password, setPassword] = useState("")
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         const {data} = await customFetch.patch("/deleteuser", {
             id: user.id,

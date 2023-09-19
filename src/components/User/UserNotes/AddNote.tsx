@@ -2,7 +2,7 @@ import {useState} from "react"
 import "./usernotes.css"
 import customFetch from "../../../utils"
 import {toast} from "react-toastify"
-import {blankWhite} from "../../../photos/blank-white-image.jpg"
+import blankWhite from "../../../photos/blank-white-image.jpg"
 import {useAppDispatch, useAppSelector} from "../../../store/storeHooks"
 import {login} from "../../../features/userSlice"
 import {useNavigate} from "react-router-dom"
@@ -11,12 +11,12 @@ const AddNote = () => {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
 
-    const [image, setImage] = useState("")
+    const [image, setImage] = useState<string | ArrayBuffer | null>()
     const [text, setText] = useState("")
 
     const {user} = useAppSelector((store) => store.user)
 
-    const convertImage = (e) => {
+    const convertImage = (e: React.ChangeEvent<HTMLInputElement>) => {
         const tgt = e.target
         const files = tgt.files
 
@@ -29,7 +29,7 @@ const AddNote = () => {
         }
     }
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         if (image === blankWhite && !text) {
             toast.error("Fill at least one field")
@@ -72,8 +72,8 @@ const AddNote = () => {
                     <textarea
                         name="note"
                         id="note"
-                        cols="30"
-                        rows="10"
+                        cols={30}
+                        rows={10}
                         placeholder="Text"
                         value={text}
                         onChange={(e) => setText(e.target.value)}

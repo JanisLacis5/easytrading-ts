@@ -4,6 +4,7 @@ import "./user.css"
 import {RxCross1} from "react-icons/rx"
 import {Link} from "react-router-dom"
 import {resetUserAside} from "../../features/smallSlice"
+import {logout} from "../../features/userSlice"
 
 const UserMenu = () => {
     const dispatch = useAppDispatch()
