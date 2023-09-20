@@ -1,38 +1,68 @@
-import {useContext, createContext, useState} from "react"
+import {useContext, useReducer, createContext} from "react"
+import reducer from "./reducers/globalReducer"
+import {
+    SET_IS_MET_REQ,
+    SET_IS_REQUIREMENTS,
+    SET_SHOW_MODAL,
+    SET_WIDTH,
+} from "./actions"
 
-const GlobalContext = createContext()
-export const useGlobalContext = () => useContext(GlobalContext)
+export interface IInitialState {
+    screenWidth: number
+    isRequirements: boolean
+    isMetReq: boolean
+    isFilters: boolean
+    showModal: boolean
+}
 
-const AppContext = ({children}) => {
-    const [isRequirements, setIsRequirements] = useState(false)
+const initialState: IInitialState = {
+    screenWidth: window.innerWidth,
+    isRequirements: false,
+    isMetReq: true,
+    isFilters: false,
+    showModal: false,
+}
 
-    const [screenWidth, setScreenWidth] = useState(window.screen.width)
+const Context = createContext<IInitialState | undefined>(undefined)
 
-    // REQUIREMENTS
-    const [isMetReq, setIsMetReq] = useState(true)
+const AppContext = ({children}: {children: React.ReactNode}) => {
+    const [state, dispatch] = useReducer(reducer, initialState)
 
-    // FILTERS
-    const [isFilters, setIsFilters] = useState(false)
+    const setScreenWidth = (width: number) => {
+        dispatch({type: SET_WIDTH, payload: width})
+    }
 
-    // MODAL
-    const [showModal, setShowModal] = useState(false)
+    const setIsRequirements = (isReq: boolean) => {
+        dispatch({type: SET_IS_REQUIREMENTS, payload: isReq})
+    }
+
+    const setIsMetReq = (isReq: boolean) => {
+        dispatch({type: SET_IS_MET_REQ, payload: isReq})
+    }
+
+    const setShowModal = (isShow: boolean) => {
+        dispatch({type: SET_SHOW_MODAL, payload: isShow})
+    }
 
     return (
-        <GlobalContext.Provider
+        <Context.Provider
             value={{
-                isRequirements,
-                setIsRequirements,
-                isFilters,
-                setIsFilters,
-                isMetReq,
-                setIsMetReq,
-                showModal,
-                setShowModal,
-                screenWidth,
+                ...state,
                 setScreenWidth,
+                setIsRequirements,
+                setIsMetReq,
+                setShowModal,
             }}>
             {children}
-        </GlobalContext.Provider>
+        </Context.Provider>
     )
+}
+
+export const useGlobalContext = () => {
+    const context = useContext(Context)
+    if (context !== undefined) {
+        return context
+    }
+    throw new Error("context is undefined")
 }
 export default AppContext
