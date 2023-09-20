@@ -1,21 +1,22 @@
 import {Link, Outlet, useNavigate} from "react-router-dom"
 import Navbar from "./components/Navbar/Navbar"
 import {useEffect} from "react"
-import {useDispatch, useSelector} from "react-redux"
-import {useGlobalContext} from "./context/globalContext"
+import {useAppDispatch} from "./store/storeHooks"
 import {resetLinks} from "./features/smallSlice"
 import "./components/Navbar/smalllink.css"
 import UserButton from "./components/User/UserButton"
+import {useAppSelector} from "./store/storeHooks"
+import {setWidth} from "./features/defaultSlice"
 
 const SiteLayout = () => {
     const navigate = useNavigate()
-    const dispatch = useDispatch()
-    const {isLogged} = useSelector((store) => store.user)
-    const {showSmallLinks} = useSelector((store) => store.small)
-    const {screenWidth, setScreenWidth} = useGlobalContext()
+    const dispatch = useAppDispatch()
+    const {isLogged} = useAppSelector((store) => store.user)
+    const {showSmallLinks} = useAppSelector((store) => store.small)
+    const {screenWidth} = useAppSelector((store) => store.default)
 
     useEffect(() => {
-        window.onresize = () => setScreenWidth(window.innerWidth)
+        window.onresize = () => dispatch(setWidth(window.innerWidth))
     }, [])
 
     useEffect(() => {

@@ -6,15 +6,15 @@ import {
     filterProducts,
     setFilteredProducts,
 } from "../../../features/filterSlice"
-import {useGlobalContext} from "../../../context/globalContext"
+import {IUserSingleTrade} from "../../../interfaces"
 
-const Trades = ({trades}) => {
+const Trades = ({trades}: {trades: IUserSingleTrade[]}) => {
     const dispatch = useAppDispatch()
 
     const {sortedTrades} = useAppSelector((store) => store.sort)
     const {user} = useAppSelector((store) => store.user)
     const {filters, filteredProducts} = useAppSelector((store) => store.filter)
-    const {screenWidth} = useGlobalContext()
+    const {screenWidth} = useAppSelector((store) => store.default)
 
     useEffect(() => {
         dispatch(filterProducts({trades: sortedTrades}))

@@ -24,10 +24,12 @@ const UserUpdateForm = () => {
         if (FileReader && files && files.length) {
             const fr = new FileReader()
             fr.onload = function () {
-                setAccountUpdateState({
-                    prop: "updatedProfilePicture",
-                    value: fr.result as string,
-                })
+                dispatch(
+                    setAccountUpdateState({
+                        prop: "updatedProfilePicture",
+                        value: fr.result as string,
+                    })
+                )
             }
             fr.readAsDataURL(files[0])
         }
@@ -35,6 +37,8 @@ const UserUpdateForm = () => {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
+        console.log(updatedUsername)
+
         if (
             !updatedUsername &&
             !updatedEmail &&
@@ -54,10 +58,14 @@ const UserUpdateForm = () => {
             image: updatedProfilePicture,
         })
 
-        setAccountUpdateState({prop: "updatedUsername", value: ""})
-        setAccountUpdateState({prop: "updatedEmail", value: ""})
-        setAccountUpdateState({prop: "updatedAccountBalance", value: ""})
-        setAccountUpdateState({prop: "updatedProfilePicture", value: ""})
+        dispatch(setAccountUpdateState({prop: "updatedUsername", value: ""}))
+        dispatch(setAccountUpdateState({prop: "updatedEmail", value: ""}))
+        dispatch(
+            setAccountUpdateState({prop: "updatedAccountBalance", value: ""})
+        )
+        dispatch(
+            setAccountUpdateState({prop: "updatedProfilePicture", value: ""})
+        )
         dispatch(
             login({
                 id: user.id,
@@ -78,10 +86,12 @@ const UserUpdateForm = () => {
                         id="username"
                         value={updatedUsername}
                         onChange={(e) =>
-                            setAccountUpdateState({
-                                prop: "updatedUsername",
-                                value: e.target.value,
-                            })
+                            dispatch(
+                                setAccountUpdateState({
+                                    prop: "updatedUsername",
+                                    value: e.target.value,
+                                })
+                            )
                         }
                     />
                     <label
@@ -99,10 +109,12 @@ const UserUpdateForm = () => {
                         id="email"
                         value={updatedEmail}
                         onChange={(e) =>
-                            setAccountUpdateState({
-                                prop: "updatedEmail",
-                                value: e.target.value,
-                            })
+                            dispatch(
+                                setAccountUpdateState({
+                                    prop: "updatedEmail",
+                                    value: e.target.value,
+                                })
+                            )
                         }
                     />
                     <label
@@ -120,10 +132,12 @@ const UserUpdateForm = () => {
                         id="account"
                         value={updatedAccountBalance}
                         onChange={(e) =>
-                            setAccountUpdateState({
-                                prop: "updatedAccountBalance",
-                                value: e.target.value,
-                            })
+                            dispatch(
+                                setAccountUpdateState({
+                                    prop: "updatedAccountBalance",
+                                    value: e.target.value,
+                                })
+                            )
                         }
                     />
                     <label

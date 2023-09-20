@@ -2,11 +2,11 @@ import "../Login/login.css"
 import SignupForm from "./SignupForm"
 import "./signup.css"
 import {SlSocialGoogle, SlSocialFacebook} from "react-icons/sl"
-import {useGlobalContext} from "../../context/globalContext"
 import Requirements from "./Requirements"
+import {useAppSelector} from "../../store/storeHooks"
 
 const Signup = () => {
-    const {isRequirements} = useGlobalContext()
+    const {isRequirements} = useAppSelector((store) => store.default)
 
     return (
         <section className="card-page">

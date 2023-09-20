@@ -1,10 +1,19 @@
 import {useState} from "react"
 import "./hod.css"
 
+interface IHodData {
+    time: string
+    stock: string
+    price: number
+    float: number
+    volume: number
+    relVolume: number
+}
+
 const HodScreener = () => {
     // GET DATA FROM SERVER
     const socket = new WebSocket("ws://localhost:3001")
-    const [data, setData] = useState([])
+    const [data, setData] = useState<IHodData[]>([])
     socket.onopen = (event) => {
         console.log("Connected to WebSocket server")
     }
@@ -17,7 +26,7 @@ const HodScreener = () => {
     }
 
     // FORMAT LARGE NUMBERS
-    const formatFloat = (flt) => {
+    const formatFloat = (flt: number) => {
         if (flt > 1_000_000_000) {
             return String((flt / 1_000_000_000).toFixed(2)) + "B"
         }
@@ -55,7 +64,7 @@ const HodScreener = () => {
             </div>
             <div className="screener-main">
                 {data.length &&
-                    data.toReversed().map((stockObj, index) => {
+                    data.reverse().map((stockObj, index) => {
                         const {stock, time, price, float, volume, relVolume} =
                             stockObj
                         return (

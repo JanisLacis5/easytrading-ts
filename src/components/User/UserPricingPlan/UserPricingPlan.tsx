@@ -1,13 +1,15 @@
-import {useAppSelector} from "../../../store/storeHooks"
+import {useAppDispatch, useAppSelector} from "../../../store/storeHooks"
 import "./userpricingplan.css"
 import {Link, useNavigate} from "react-router-dom"
-import {useGlobalContext} from "../../../context/globalContext"
 import {useEffect} from "react"
+import {setUserInfoBool} from "../../../features/userInfoFormSlice"
 
 const UserPricingPlan = () => {
     const navigate = useNavigate()
+    const dispatch = useAppDispatch()
+
     const {user} = useAppSelector((store) => store.user)
-    const {changePlan, setChangePlan, setChoosePricing} = useGlobalContext()
+    const {changePlan} = useAppSelector((store) => store.userInfo)
 
     useEffect(() => {
         if (changePlan) {
@@ -25,8 +27,15 @@ const UserPricingPlan = () => {
                     to="/pricing"
                     className={user.info.pricing === "pro" ? "pricing-pro" : ""}
                     onClick={() => {
-                        setChangePlan(true)
-                        setChoosePricing(true)
+                        dispatch(
+                            setUserInfoBool({prop: "changePlan", value: true})
+                        )
+                        dispatch(
+                            setUserInfoBool({
+                                prop: "choosePricing",
+                                value: true,
+                            })
+                        )
                     }}>
                     {user.info.pricing === "pro" ? "Change" : "Upgrade"}
                 </Link>

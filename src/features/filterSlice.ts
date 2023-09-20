@@ -1,12 +1,6 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit"
 import {IUserSingleTrade} from "../interfaces"
 
-interface IInitialState {
-    filters: IFilters
-    isFilters: boolean
-    filteredProducts: object[]
-}
-
 interface IFilters {
     stock: string
     action: string
@@ -17,6 +11,12 @@ interface IFilters {
 interface IFilterProducts {
     name: "stock" | "action" | "date" | "PL"
     value: string
+}
+
+interface IInitialState {
+    filters: IFilters
+    isFilters: boolean
+    filteredProducts: IUserSingleTrade[]
 }
 
 const initialState: IInitialState = {

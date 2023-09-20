@@ -4,9 +4,12 @@ import {login, setIsLoading, setIsNotLoading} from "../../../features/userSlice"
 import customFetch from "../../../utils"
 import {useNavigate} from "react-router-dom"
 import {toast} from "react-toastify"
-import {useGlobalContext} from "../../../context/globalContext"
 import md5 from "md5"
-import {useAppDispatch} from "../../../store/storeHooks"
+import {useAppDispatch, useAppSelector} from "../../../store/storeHooks"
+import {
+    setUserInfoBool,
+    setUserInfoString,
+} from "../../../features/userInfoFormSlice"
 
 const SignupInfoForm = () => {
     const dispatch = useAppDispatch()
@@ -14,24 +17,15 @@ const SignupInfoForm = () => {
 
     const {
         email,
-        setEmail,
         password,
-        setPassword,
-        setConfirmPassword,
         choosePricing,
-        setChoosePricing,
         firstName,
-        setFirstName,
         lastName,
-        setLastName,
         username,
-        setUsername,
         account,
-        setAccount,
         image,
-        setImage,
         pricingPlan,
-    } = useGlobalContext()
+    } = useAppSelector((store) => store.userInfo)
 
     const temp = (e: React.ChangeEvent<HTMLInputElement>) => {
         const tgt = e.target
@@ -40,7 +34,7 @@ const SignupInfoForm = () => {
         if (FileReader && files && files.length) {
             const fr = new FileReader()
             fr.onload = function () {
-                setImage(fr.result)
+                setUserInfoString({prop: "image", value: fr.result as string})
             }
             fr.readAsDataURL(files[0])
         }
@@ -50,7 +44,7 @@ const SignupInfoForm = () => {
         e.preventDefault()
         dispatch(setIsLoading())
         if (!choosePricing) {
-            setChoosePricing(true)
+            dispatch(setUserInfoBool({prop: "choosePricing", value: true}))
             navigate("/pricing")
             dispatch(setIsNotLoading())
             return
@@ -77,15 +71,17 @@ const SignupInfoForm = () => {
             return
         }
         localStorage.setItem("token", data.token)
-        setEmail("")
-        setPassword("")
-        setConfirmPassword("")
-        setFirstName("")
-        setLastName("")
-        setUsername("")
-        setAccount("")
-        setImage(userIcon)
-        setChoosePricing(false)
+
+        dispatch(setUserInfoString({prop: "email", value: ""}))
+        dispatch(setUserInfoString({prop: "password", value: ""}))
+        dispatch(setUserInfoString({prop: "confirmPassword", value: ""}))
+        dispatch(setUserInfoString({prop: "firstName", value: ""}))
+        dispatch(setUserInfoString({prop: "lastName", value: ""}))
+        dispatch(setUserInfoString({prop: "username", value: ""}))
+        dispatch(setUserInfoString({prop: "account", value: ""}))
+        dispatch(setUserInfoString({prop: "image", value: userIcon}))
+        dispatch(setUserInfoBool({prop: "choosePricing", value: false}))
+
         dispatch(login({id: data.id, info: data.info}))
         toast.success("success")
         dispatch(setIsNotLoading())
@@ -124,7 +120,14 @@ const SignupInfoForm = () => {
                         <div className="floating">
                             <input
                                 value={firstName}
-                                onChange={(e) => setFirstName(e.target.value)}
+                                onChange={(e) =>
+                                    dispatch(
+                                        setUserInfoString({
+                                            prop: "firstName",
+                                            value: e.target.value,
+                                        })
+                                    )
+                                }
                                 type="text"
                                 name="firstName"
                                 id="firstName"
@@ -143,7 +146,14 @@ const SignupInfoForm = () => {
                                 name="lastName"
                                 id="lastName"
                                 value={lastName}
-                                onChange={(e) => setLastName(e.target.value)}
+                                onChange={(e) =>
+                                    dispatch(
+                                        setUserInfoString({
+                                            prop: "lastName",
+                                            value: e.target.value,
+                                        })
+                                    )
+                                }
                             />
                             <label
                                 className={lastName ? "label-up" : ""}
@@ -159,7 +169,14 @@ const SignupInfoForm = () => {
                                 name="username"
                                 id="username"
                                 value={username}
-                                onChange={(e) => setUsername(e.target.value)}
+                                onChange={(e) =>
+                                    dispatch(
+                                        setUserInfoString({
+                                            prop: "username",
+                                            value: e.target.value,
+                                        })
+                                    )
+                                }
                             />
                             <label
                                 className={username ? "label-up" : ""}
@@ -175,7 +192,14 @@ const SignupInfoForm = () => {
                                 name="account"
                                 id="account"
                                 value={account}
-                                onChange={(e) => setAccount(e.target.value)}
+                                onChange={(e) =>
+                                    dispatch(
+                                        setUserInfoString({
+                                            prop: "account",
+                                            value: e.target.value,
+                                        })
+                                    )
+                                }
                             />
                             <label
                                 className={account ? "label-up" : ""}

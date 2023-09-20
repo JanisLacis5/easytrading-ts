@@ -13,26 +13,21 @@ import {
     setIsNotLoading,
 } from "../../../features/userSlice"
 import {useNavigate} from "react-router-dom"
-import {setBool, setString} from "../../../features/userInfoFormSlice"
+import {
+    setUserInfoBool,
+    setUserInfoString,
+} from "../../../features/userInfoFormSlice"
+import {setDefaultStateBool} from "../../../features/defaultSlice"
 
 const ChangePasswordForm = () => {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
 
-    const [password, setPassword] = useState("")
-    const [confirmPassword, setConfirmPassword] = useState("")
+    const [password, setPassword] = useState<string>("")
+    const [confirmPassword, setConfirmPassword] = useState<string>("")
 
-    const {isLoading} = useAppSelector((store) => store.user)
-
-    // const {
-    //     setChangePassword,
-    //     setIsMetReq,
-    //     isMetReq,
-    //     setIsRequirements,
-    //     isRequirements,
-    // } = useGlobalContext()
-
-    const {user} = useAppSelector((store) => store.user)
+    const {isLoading, user} = useAppSelector((store) => store.user)
+    const {isMetReq, isRequirements} = useAppSelector((store) => store.default)
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -83,7 +78,12 @@ const ChangePasswordForm = () => {
                             value={password}
                             onChange={(e) => {
                                 setPassword(e.target.value)
-                                setIsMetReq(true)
+                                dispatch(
+                                    setDefaultStateBool({
+                                        prop: "isMetReq",
+                                        value: true,
+                                    })
+                                )
                             }}
                         />
                         <label
@@ -93,7 +93,14 @@ const ChangePasswordForm = () => {
                         </label>
                         <button
                             type="button"
-                            onClick={() => setIsRequirements(!isRequirements)}>
+                            onClick={() =>
+                                dispatch(
+                                    setDefaultStateBool({
+                                        prop: "isRequirements",
+                                        value: !isRequirements,
+                                    })
+                                )
+                            }>
                             <FiInfo color="var(--color-grey-300)" />
                         </button>
                         <h6 className={isMetReq ? "hide" : ""}>
@@ -118,10 +125,12 @@ const ChangePasswordForm = () => {
                             id="confirmPassword"
                             value={confirmPassword}
                             onChange={(e) =>
-                                setString({
-                                    prop: "confirmPassword",
-                                    value: e.target.value,
-                                })
+                                dispatch(
+                                    setUserInfoString({
+                                        prop: "confirmPassword",
+                                        value: e.target.value,
+                                    })
+                                )
                             }
                         />
                         <label
@@ -136,7 +145,12 @@ const ChangePasswordForm = () => {
                         <button
                             type="button"
                             onClick={() =>
-                                setBool({prop: "changePassword", value: false})
+                                dispatch(
+                                    setUserInfoBool({
+                                        prop: "changePassword",
+                                        value: false,
+                                    })
+                                )
                             }>
                             Cancel
                         </button>

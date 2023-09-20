@@ -1,9 +1,10 @@
 import {RxCross1} from "react-icons/rx"
 import {setAskPassword, setIsDelete} from "../../../features/dangerZoneSlice"
 import AskPasswordForm from "./AskPasswordForm"
-import {useAppSelector} from "../../../store/storeHooks"
+import {useAppDispatch, useAppSelector} from "../../../store/storeHooks"
 
 const DeleteProfileModal = () => {
+    const dispatch = useAppDispatch()
     const {askPassword} = useAppSelector((store) => store.dangerZone)
 
     return (
@@ -26,12 +27,12 @@ const DeleteProfileModal = () => {
                         <div className="delete-modal-button-container">
                             <button
                                 type="button"
-                                onClick={() => setAskPassword(true)}>
+                                onClick={() => dispatch(setAskPassword(true))}>
                                 Yes
                             </button>
                             <button
                                 type="button"
-                                onClick={() => setIsDelete(false)}>
+                                onClick={() => dispatch(setIsDelete(false))}>
                                 No
                             </button>
                         </div>

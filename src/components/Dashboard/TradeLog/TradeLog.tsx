@@ -11,18 +11,19 @@ import {toggleFilters} from "../../../features/filterSlice"
 import {filterChart, profitsPerDate} from "../../../functions"
 import {useEffect, useState} from "react"
 import {BiSolidDownArrow, BiSolidUpArrow} from "react-icons/bi"
-import {useGlobalContext} from "../../../context/globalContext"
 import Modal from "./Modal"
+import {setDefaultStateBool} from "../../../features/defaultSlice"
+import {OpUnitType} from "dayjs"
 
 const TradeLog = () => {
     const dispatch = useAppDispatch()
 
-    const [filter, setFilter] = useState("")
+    const [filter, setFilter] = useState<OpUnitType>()
 
     const {sortedTrades, option, value} = useAppSelector((store) => store.sort)
     const {isFilters} = useAppSelector((store) => store.filter)
     const {user} = useAppSelector((store) => store.user)
-    const {showModal, setShowModal} = useGlobalContext()
+    const {showModal} = useAppSelector((store) => store.default)
 
     useEffect(() => {
         dispatch(setSortedTrades({trades: user.trades}))
@@ -56,7 +57,7 @@ const TradeLog = () => {
                 <div>
                     <select
                         onChange={(e) => {
-                            setFilter(e.target.value)
+                            setFilter(e.target.value as OpUnitType)
                         }}>
                         <option value="">All time</option>
                         <option value="day">Today</option>
@@ -70,7 +71,12 @@ const TradeLog = () => {
                         type="button"
                         className="tradelog-filter-removebtn"
                         onClick={() => {
-                            setShowModal(true)
+                            dispatch(
+                                setDefaultStateBool({
+                                    prop: "showModal",
+                                    value: true,
+                                })
+                            )
                         }}>
                         Remove all trades
                     </button>

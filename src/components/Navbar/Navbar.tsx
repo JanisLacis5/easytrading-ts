@@ -3,12 +3,11 @@ import "./navbar.css"
 import {useAppSelector} from "../../store/storeHooks"
 import UserButton from "../User/UserButton"
 import SmallNavbar from "./SmallNavbar"
-import {useGlobalContext} from "../../context/globalContext"
 
 const Navbar = () => {
     const {isLogged} = useAppSelector((store) => store.user)
 
-    const {screenWidth} = useGlobalContext()
+    const {screenWidth} = useAppSelector((store) => store.default)
 
     if (screenWidth < 900) {
         return <SmallNavbar />

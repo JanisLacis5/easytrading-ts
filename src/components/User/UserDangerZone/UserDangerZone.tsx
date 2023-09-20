@@ -1,9 +1,10 @@
-import {useAppSelector} from "../../../store/storeHooks"
+import {useAppDispatch, useAppSelector} from "../../../store/storeHooks"
 import ChangePasswordForm from "./ChangePasswordForm"
 import "./userdangerzone.css"
 import {setChangePassword, setIsDelete} from "../../../features/dangerZoneSlice"
 
 const UserDangerZone = () => {
+    const dispatch = useAppDispatch()
     const {changePassword} = useAppSelector((store) => store.dangerZone)
 
     if (changePassword) {
@@ -24,7 +25,7 @@ const UserDangerZone = () => {
                 <div>
                     <button
                         type="button"
-                        onClick={() => setChangePassword(true)}>
+                        onClick={() => dispatch(setChangePassword(true))}>
                         Change Password
                     </button>
                 </div>
@@ -38,7 +39,9 @@ const UserDangerZone = () => {
                     </p>
                 </div>
                 <div>
-                    <button type="button" onClick={() => setIsDelete(true)}>
+                    <button
+                        type="button"
+                        onClick={() => dispatch(setIsDelete(true))}>
                         Delete Profile
                     </button>
                 </div>

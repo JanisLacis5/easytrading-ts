@@ -1,11 +1,10 @@
 import {RxCross1} from "react-icons/rx"
-import {useGlobalContext} from "../../../context/globalContext"
 import {useAppDispatch} from "../../../store/storeHooks"
 import {clearTrades} from "../../../features/userSlice"
+import {setDefaultStateBool} from "../../../features/defaultSlice"
 
 const Modal = () => {
     const dispatch = useAppDispatch()
-    const {setShowModal} = useGlobalContext()
 
     return (
         <div className="remove-modal">
@@ -19,14 +18,24 @@ const Modal = () => {
                     type="button"
                     onClick={() => {
                         dispatch(clearTrades())
-                        setShowModal(false)
+                        dispatch(
+                            setDefaultStateBool({
+                                prop: "showModal",
+                                value: false,
+                            })
+                        )
                     }}>
                     YES
                 </button>
                 <button
                     type="button"
                     onClick={() => {
-                        setShowModal(false)
+                        dispatch(
+                            setDefaultStateBool({
+                                prop: "showModal",
+                                value: false,
+                            })
+                        )
                     }}>
                     NO
                 </button>

@@ -1,5 +1,0 @@
-export const SET_WIDTH = "SET_WIDTH"
-export const SET_IS_REQUIREMENTS = "SET_IS_REQUIREMENTS"
-export const SET_IS_MET_REQ = "SET_IS_MET_REQ"
-export const SET_IS_FILETRS = "SET_IS_FILETRS"
-export const SET_SHOW_MODAL = "SET_SHOW_MODAL"

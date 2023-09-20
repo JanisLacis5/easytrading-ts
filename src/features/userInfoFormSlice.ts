@@ -37,14 +37,14 @@ const userInfoFormSlice = createSlice({
     name: "userInfo",
     initialState,
     reducers: {
-        setString: (
+        setUserInfoString: (
             state,
             action: PayloadAction<{prop: string; value: string}>
         ) => {
             const {prop, value} = action.payload
             state[prop] = value
         },
-        setBool: (
+        setUserInfoBool: (
             state,
             action: PayloadAction<{prop: string; value: boolean}>
         ) => {
@@ -54,5 +54,5 @@ const userInfoFormSlice = createSlice({
     },
 })
 
-export const {setString, setBool} = userInfoFormSlice.actions
+export const {setUserInfoString, setUserInfoBool} = userInfoFormSlice.actions
 export default userInfoFormSlice.reducer

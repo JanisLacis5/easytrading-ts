@@ -6,6 +6,7 @@ import {useAppDispatch, useAppSelector} from "../../../store/storeHooks"
 import {login} from "../../../features/userSlice"
 import {toast} from "react-toastify"
 import {setState} from "../../../features/addTradeFormSlice"
+import {useEffect} from "react"
 
 const AddTrade = () => {
     const navigate = useNavigate()
@@ -15,6 +16,10 @@ const AddTrade = () => {
     const {stock, accBefore, accAfter, date, time, action} = useAppSelector(
         (store) => store.addTrade
     )
+
+    useEffect(() => {
+        console.log(stock)
+    }, [stock])
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -46,12 +51,12 @@ const AddTrade = () => {
         } else {
             toast.error("There was an error")
         }
-        setState({prop: "stock", value: ""})
-        setState({prop: "accBefore", value: ""})
-        setState({prop: "accAfter", value: ""})
-        setState({prop: "date", value: ""})
-        setState({prop: "time", value: ""})
-        setState({prop: "action", value: ""})
+        dispatch(setState({prop: "stock", value: ""}))
+        dispatch(setState({prop: "accBefore", value: ""}))
+        dispatch(setState({prop: "accAfter", value: ""}))
+        dispatch(setState({prop: "date", value: ""}))
+        dispatch(setState({prop: "time", value: ""}))
+        dispatch(setState({prop: "action", value: ""}))
     }
 
     return (
@@ -66,7 +71,11 @@ const AddTrade = () => {
                     placeholder="AAPL"
                     value={stock}
                     onChange={(e) =>
-                        setState({prop: "stock", value: e.target.value})
+                        dispatch(
+                            dispatch(
+                                setState({prop: "stock", value: e.target.value})
+                            )
+                        )
                     }
                     required
                 />
@@ -76,7 +85,9 @@ const AddTrade = () => {
                 <select
                     name="action"
                     onChange={(e) =>
-                        setState({prop: "action", value: e.target.value})
+                        dispatch(
+                            setState({prop: "action", value: e.target.value})
+                        )
                     }
                     value={action}
                     required>
@@ -95,10 +106,12 @@ const AddTrade = () => {
                         placeholder="1000.00"
                         value={accBefore}
                         onChange={(e) =>
-                            setState({
-                                prop: "accBefore",
-                                value: e.target.value,
-                            })
+                            dispatch(
+                                setState({
+                                    prop: "accBefore",
+                                    value: e.target.value,
+                                })
+                            )
                         }
                         required
                     />
@@ -112,7 +125,12 @@ const AddTrade = () => {
                         placeholder="10000.00"
                         value={accAfter}
                         onChange={(e) =>
-                            setState({prop: "accAfter", value: e.target.value})
+                            dispatch(
+                                setState({
+                                    prop: "accAfter",
+                                    value: e.target.value,
+                                })
+                            )
                         }
                         required
                     />
@@ -141,7 +159,12 @@ const AddTrade = () => {
                             id="date"
                             value={date}
                             onChange={(e) =>
-                                setState({prop: "date", value: e.target.value})
+                                dispatch(
+                                    setState({
+                                        prop: "date",
+                                        value: e.target.value,
+                                    })
+                                )
                             }
                             required
                         />
@@ -154,7 +177,12 @@ const AddTrade = () => {
                             id="time"
                             value={time}
                             onChange={(e) =>
-                                setState({prop: "time", value: e.target.value})
+                                dispatch(
+                                    setState({
+                                        prop: "time",
+                                        value: e.target.value,
+                                    })
+                                )
                             }
                             required
                         />

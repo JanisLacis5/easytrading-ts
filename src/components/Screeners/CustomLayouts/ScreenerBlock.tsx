@@ -3,7 +3,13 @@ import "./layouts.css"
 import {Rnd} from "react-rnd"
 import HodBlock from "./ScreenerBlocks/HodBlock"
 import GapBlock from "./ScreenerBlocks/GapBlock"
-import {useGlobalContext} from "../../../context/globalContext"
+import {useAppDispatch, useAppSelector} from "../../../store/storeHooks"
+import {
+    newLayout,
+    setActiveBlock,
+    setIsAddingScreener,
+    setIsDone,
+} from "../../../features/layoutSlice"
 
 interface IProps {
     index: number
@@ -19,6 +25,7 @@ export interface IParams {
 }
 
 const ScreenerBlock = (props: IProps) => {
+    const dispatch = useAppDispatch()
     const {layout, index} = props
     const [params, setParams] = useState<IParams>({
         screener: "",
@@ -28,18 +35,10 @@ const ScreenerBlock = (props: IProps) => {
         width: 400,
     })
 
-    const {
-        isDone,
-        setIsDone,
-        layoutParams,
-        setLayoutParams,
-        setIsAddingScreener,
-        activeBlock,
-        setActiveBlock,
-    } = useGlobalContext()
+    const {isDone, activeBlock} = useAppSelector((store) => store.layout)
 
     const done = () => {
-        setLayoutParams({...layoutParams, [index]: params})
+        newLayout({index, layout: params})
         setIsDone(false)
         setIsAddingScreener(false)
         setActiveBlock(null)
@@ -71,14 +70,14 @@ const ScreenerBlock = (props: IProps) => {
                 resizeGrid={[40, 25]}
                 bounds={"parent"}
                 onDragStart={() => {
-                    setIsDone(false)
-                    setIsAddingScreener(true)
-                    setActiveBlock(index)
+                    dispatch(setIsDone(false))
+                    dispatch(setIsAddingScreener(true))
+                    dispatch(setActiveBlock(index))
                 }}
                 onResizeStart={() => {
-                    setIsDone(false)
-                    setIsAddingScreener(true)
-                    setActiveBlock(index)
+                    dispatch(setIsDone(false))
+                    dispatch(setIsAddingScreener(true))
+                    dispatch(setActiveBlock(index))
                 }}
                 onDragStop={(e, d) => {
                     params.x = d.x
@@ -113,14 +112,14 @@ const ScreenerBlock = (props: IProps) => {
                 resizeGrid={[40, 25]}
                 bounds={"parent"}
                 onDragStart={() => {
-                    setActiveBlock(index)
-                    setIsDone(false)
-                    setIsAddingScreener(true)
+                    dispatch(setActiveBlock(index))
+                    dispatch(setIsDone(false))
+                    dispatch(setIsAddingScreener(true))
                 }}
                 onResizeStart={() => {
-                    setIsDone(false)
-                    setIsAddingScreener(true)
-                    setActiveBlock(index)
+                    dispatch(setIsDone(false))
+                    dispatch(setIsAddingScreener(true))
+                    dispatch(setActiveBlock(index))
                 }}
                 onDragStop={(e, d) => {
                     if (activeBlock !== index || activeBlock !== null) {

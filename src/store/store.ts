@@ -8,6 +8,8 @@ import layoutReducer from "../features/layoutSlice"
 import dangerZoneReducer from "../features/dangerZoneSlice"
 import addTradeFormReducer from "../features/addTradeFormSlice"
 import accountUpdateReducer from "../features/accuntUpdateSlice"
+import defaultReducer from "../features/defaultSlice"
+import userInfoFormReducer from "../features/userInfoFormSlice"
 
 export const store = configureStore({
     reducer: {
@@ -20,6 +22,8 @@ export const store = configureStore({
         dangerZone: dangerZoneReducer,
         addTrade: addTradeFormReducer,
         accountUpdate: accountUpdateReducer,
+        default: defaultReducer,
+        userInfo: userInfoFormReducer,
     },
 })
 

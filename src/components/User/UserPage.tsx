@@ -13,6 +13,7 @@ const UserPage = () => {
     const {user} = useAppSelector((store) => store.user)
     const {showUserAside} = useAppSelector((store) => store.small)
     const {isDelete} = useAppSelector((store) => store.dangerZone)
+    const {screenWidth} = useAppSelector((store) => store.default)
 
     const info = user.info
 

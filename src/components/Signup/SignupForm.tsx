@@ -5,30 +5,25 @@ import infoIcon from "../../assets/info-icon.svg"
 import passwordIcon from "../../assets/password-icon.svg"
 import customFetch from "../../utils"
 import {toast} from "react-toastify"
-import {useGlobalContext} from "../../context/globalContext"
 import {useNavigate} from "react-router-dom"
 import {useAppSelector, useAppDispatch} from "../../store/storeHooks"
 import {setIsLoading, setIsNotLoading} from "../../features/userSlice"
 import {passwordRequirements} from "../../functions"
+import {setDefaultStateBool} from "../../features/defaultSlice"
+import {setUserInfoString} from "../../features/userInfoFormSlice"
 
 const SignupForm = () => {
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
 
-    const {
-        email,
-        setEmail,
-        password,
-        setPassword,
-        confirmPassword,
-        setConfirmPassword,
-    } = useGlobalContext()
+    const {email, password, confirmPassword} = useAppSelector(
+        (store) => store.userInfo
+    )
 
-    const {isRequirements, setIsRequirements, isMetReq, setIsMetReq} =
-        useGlobalContext()
+    const {isRequirements, isMetReq} = useAppSelector((store) => store.default)
     const {isLoading} = useAppSelector((store) => store.user)
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         if (password === confirmPassword) {
             dispatch(setIsLoading())
@@ -42,21 +37,33 @@ const SignupForm = () => {
                 //     return
                 // }
                 dispatch(setIsNotLoading())
-                setIsMetReq(true)
+                dispatch(setDefaultStateBool({prop: "isMetReq", value: true}))
                 navigate("/signup/form")
             } else {
                 dispatch(setIsNotLoading())
                 toast.error(data.message)
-                setEmail("")
-                setPassword("")
-                setConfirmPassword("")
+
+                dispatch(setUserInfoString({prop: "email", value: ""}))
+                dispatch(setUserInfoString({prop: "password", value: ""}))
+                dispatch(
+                    setUserInfoString({
+                        prop: "confirmPassword",
+                        value: "",
+                    })
+                )
             }
         } else {
             dispatch(setIsNotLoading())
             toast.error("Passwords do not match")
-            setEmail("")
-            setPassword("")
-            setConfirmPassword("")
+
+            dispatch(setUserInfoString({prop: "email", value: ""}))
+            dispatch(setUserInfoString({prop: "password", value: ""}))
+            dispatch(
+                setUserInfoString({
+                    prop: "confirmPassword",
+                    value: "",
+                })
+            )
         }
     }
 
@@ -77,7 +84,14 @@ const SignupForm = () => {
                     id="email"
                     placeholder="Email"
                     value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={(e) =>
+                        dispatch(
+                            setUserInfoString({
+                                prop: "email",
+                                value: e.target.value,
+                            })
+                        )
+                    }
                     required
                 />
             </div>
@@ -92,14 +106,28 @@ const SignupForm = () => {
                     id="password"
                     placeholder="Password"
                     value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    onChange={(e) =>
+                        dispatch(
+                            setUserInfoString({
+                                prop: "password",
+                                value: e.target.value,
+                            })
+                        )
+                    }
                     required
                 />
                 <img
                     src={infoIcon}
                     alt="info-icon"
                     className="info-icon"
-                    onClick={() => setIsRequirements(!isRequirements)}
+                    onClick={() =>
+                        dispatch(
+                            setDefaultStateBool({
+                                prop: "isRequirements",
+                                value: !isRequirements,
+                            })
+                        )
+                    }
                 />
                 <h6
                     className={
@@ -123,7 +151,14 @@ const SignupForm = () => {
                     id="confirmPassword"
                     placeholder="Confirm Password"
                     value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    onChange={(e) =>
+                        dispatch(
+                            setUserInfoString({
+                                prop: "confirmPassword",
+                                value: e.target.value,
+                            })
+                        )
+                    }
                     required
                 />
             </div>
