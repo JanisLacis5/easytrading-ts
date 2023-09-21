@@ -170,7 +170,7 @@ function App() {
                     element: <ScreenerLayout />,
                     children: [
                         {
-                            path: "layout",
+                            index: true,
                             element: <ScreenerDashboard />,
                         },
                         {

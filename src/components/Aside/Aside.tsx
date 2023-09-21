@@ -49,7 +49,7 @@ const Aside = () => {
             </button>
             {screenersButton && (
                 <div>
-                    <Link className="secondary-link" to="/screeners/layout">
+                    <Link className="secondary-link" to="/screeners">
                         My layout
                     </Link>
                     <Link

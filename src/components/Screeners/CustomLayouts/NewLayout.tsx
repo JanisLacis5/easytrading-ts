@@ -6,12 +6,14 @@ import {setIsAddingScreener, setIsDone} from "../../../features/layoutSlice"
 import {login} from "../../../features/userSlice"
 import {toast} from "react-toastify"
 import {useAppSelector, useAppDispatch} from "../../../store/storeHooks"
+import {useNavigate} from "react-router-dom"
 
 const NewLayout = () => {
     const [userLayout, setUserLayout] = useState<string[]>([])
     const [notAllowedHover, setNotAllowedHover] = useState(false)
 
     const dispatch = useAppDispatch()
+    const navigate = useNavigate()
 
     const {isAddingScreener, layoutParams} = useAppSelector(
         (store) => store.layout
@@ -22,6 +24,10 @@ const NewLayout = () => {
         e: React.MouseEvent<HTMLButtonElement, MouseEvent>
     ) => {
         e.preventDefault()
+        if (!userLayout.length) {
+            toast.error("you must add at least 1 screener")
+            return
+        }
         const {data} = await customFetch.post("/new-layout", {
             layout: layoutParams,
             id: user.id,
@@ -29,6 +35,7 @@ const NewLayout = () => {
         const {id, trades, notes, info} = user
         dispatch(login({id, trades, notes, info, layouts: data.layouts}))
         toast.success("success")
+        navigate("/screeners")
     }
 
     return (
@@ -55,7 +62,6 @@ const NewLayout = () => {
                             <option value="hod">HOD Screener</option>
                         </select>
                     </div>
-
                     <button
                         type="button"
                         style={
@@ -70,7 +76,6 @@ const NewLayout = () => {
                         onClick={() => dispatch(setIsDone(true))}>
                         Done
                     </button>
-
                     <button type="button" onClick={handleSubmit}>
                         Save
                     </button>

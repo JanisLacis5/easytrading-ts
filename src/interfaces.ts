@@ -16,7 +16,7 @@ export interface IUserSingleNote {
 }
 
 export interface IUserSingleLayout {
-    screener: string | null
+    screener: string
     x: number
     y: number
     height: number

@@ -2,14 +2,14 @@ import {PayloadAction, createSlice} from "@reduxjs/toolkit"
 import {IUserSingleLayout} from "../interfaces"
 
 interface CounterState {
-    layoutParams: Record<number, IUserSingleLayout>
+    layoutParams: IUserSingleLayout[]
     isDone: boolean
     isAddingScreener: boolean
     activeBlock: number | null
 }
 
 const initialState: CounterState = {
-    layoutParams: {},
+    layoutParams: [],
     isDone: false,
     isAddingScreener: false,
     activeBlock: null,
@@ -19,12 +19,9 @@ const layoutSlice = createSlice({
     name: "layout",
     initialState,
     reducers: {
-        newLayout: (
-            state,
-            action: PayloadAction<{index: number; layout: IUserSingleLayout}>
-        ) => {
-            const {index, layout} = action.payload
-            state.layoutParams[index] = layout
+        newLayout: (state, action: PayloadAction<IUserSingleLayout>) => {
+            const layout = action.payload
+            state.layoutParams.push(layout)
         },
         setIsDone: (state, action: PayloadAction<boolean>) => {
             state.isDone = action.payload

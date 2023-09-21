@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react"
+import {useEffect} from "react"
 import "./layouts.css"
 import {Rnd} from "react-rnd"
 import HodBlock from "./ScreenerBlocks/HodBlock"
@@ -10,38 +10,32 @@ import {
     setIsAddingScreener,
     setIsDone,
 } from "../../../features/layoutSlice"
+import {IUserSingleLayout} from "../../../interfaces"
 
 interface IProps {
     index: number
     layout: string
 }
 
-export interface IParams {
-    screener: string
-    x: number
-    y: number
-    height: number
-    width: number
-}
-
-const ScreenerBlock = (props: IProps) => {
+const ScreenerBlock = ({layout, index}: IProps) => {
     const dispatch = useAppDispatch()
-    const {layout, index} = props
-    const [params, setParams] = useState<IParams>({
+    let params: IUserSingleLayout = {
         screener: "",
         x: 0,
         y: 0,
         height: 240,
         width: 400,
-    })
+    }
 
-    const {isDone, activeBlock} = useAppSelector((store) => store.layout)
+    const {isDone, activeBlock, isAddingScreener} = useAppSelector(
+        (store) => store.layout
+    )
 
     const done = () => {
-        newLayout({index, layout: params})
-        setIsDone(false)
-        setIsAddingScreener(false)
-        setActiveBlock(null)
+        dispatch(newLayout(params))
+        dispatch(setIsDone(false))
+        dispatch(setIsAddingScreener(false))
+        dispatch(setActiveBlock(null))
         return
     }
 
@@ -49,10 +43,15 @@ const ScreenerBlock = (props: IProps) => {
         if (isDone) done()
     }, [isDone])
 
+    useEffect(() => {
+        console.log(isAddingScreener)
+    }, [isAddingScreener])
+
     if (layout === "hod") {
         params.screener = "hod"
         return (
             <Rnd
+                onClick={() => console.log(index)}
                 style={
                     activeBlock !== index
                         ? activeBlock !== null
@@ -95,6 +94,7 @@ const ScreenerBlock = (props: IProps) => {
         params.screener = "gap"
         return (
             <Rnd
+                onClick={() => console.log(index)}
                 style={
                     activeBlock !== index
                         ? activeBlock !== null
@@ -132,7 +132,9 @@ const ScreenerBlock = (props: IProps) => {
                     if (activeBlock !== index || activeBlock !== null) {
                         return
                     }
+
                     params.width = Number(ref.style.width.slice(0, -2))
+
                     params.height = Number(ref.style.height.slice(0, -2))
                 }}>
                 <GapBlock />

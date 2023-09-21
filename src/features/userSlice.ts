@@ -3,8 +3,8 @@ import customFetch from "../utils"
 import {
     IUserSingleNote,
     IUserInfo,
-    IUserSingleLayout,
     IUserSingleTrade,
+    IUserSingleLayout,
 } from "../interfaces"
 
 interface IUser {
@@ -12,10 +12,7 @@ interface IUser {
     trades: IUserSingleTrade[]
     notes: IUserSingleNote[]
     info: IUserInfo
-    layouts: Record<
-        "screener" & "x" & "y" & "height" & "width",
-        IUserSingleLayout
-    >
+    layouts: Array<IUserSingleLayout[]>
 }
 
 interface IInitialState {
@@ -29,10 +26,7 @@ interface ILogin {
     trades?: IUserSingleTrade[]
     notes?: IUserSingleNote[]
     info?: IUserInfo
-    layouts?: Record<
-        "screener" & "x" & "y" & "height" & "width",
-        IUserSingleLayout
-    >
+    layouts?: Array<IUserSingleLayout[]>
 }
 
 const initialState: IInitialState = {

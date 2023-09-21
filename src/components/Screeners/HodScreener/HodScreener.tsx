@@ -14,7 +14,7 @@ const HodScreener = () => {
     // GET DATA FROM SERVER
     const socket = new WebSocket("ws://localhost:3001")
     const [data, setData] = useState<IHodData[]>([])
-    socket.onopen = (event) => {
+    socket.onopen = () => {
         console.log("Connected to WebSocket server")
     }
     socket.onmessage = (event) => {

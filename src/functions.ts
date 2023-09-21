@@ -17,6 +17,8 @@ export const countStats = (trades: IUserSingleTrade[] | null) => {
     let totalProfit = 0
 
     if (trades && trades.length) {
+        console.log(trades.length)
+
         trades.map((trade) => {
             if (trade.pl > 0) {
                 wonTrades++
@@ -43,8 +45,8 @@ export const passwordRequirements = (password: string) => {
     return true
 }
 
-export const profitableStocks = (trades: IUserSingleTrade[] | null) => {
-    if (!trades) {
+export const profitableStocks = (trades: IUserSingleTrade[]) => {
+    if (!trades.length) {
         return {profits: 0, stocks: 0}
     }
     let tempTrades = [...trades]
@@ -81,7 +83,7 @@ export const profitableStocks = (trades: IUserSingleTrade[] | null) => {
 }
 
 export const profitsPerDate = (trades: IUserSingleTrade[] | null) => {
-    if (!trades) {
+    if (!trades?.length) {
         return 0
     }
     let temp = [...trades]

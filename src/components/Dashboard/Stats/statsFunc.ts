@@ -9,7 +9,7 @@ export const minPl = (trades: IUserSingleTrade[]) => {
 }
 
 export const wonPl = (trades: IUserSingleTrade[] | null) => {
-    if (!trades) {
+    if (!trades?.length) {
         return {averageWonDayPl: 0, maxWonDayPl: 0, biggestWin: 0, wonDays: 0}
     }
     let tradesCopy = [...trades]
@@ -52,7 +52,7 @@ export const wonPl = (trades: IUserSingleTrade[] | null) => {
 }
 
 export const lostPl = (trades: IUserSingleTrade[] | null) => {
-    if (!trades) {
+    if (!trades?.length) {
         return {
             averageLostDayPl: 0,
             biggestLostDayPl: 0,
