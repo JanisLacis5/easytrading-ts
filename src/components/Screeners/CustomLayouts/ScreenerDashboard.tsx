@@ -2,15 +2,16 @@ import {AiOutlinePlus} from "react-icons/ai"
 import {useAppSelector} from "../../../store/storeHooks"
 import "../screeners.css"
 import {useEffect, useState} from "react"
-import HodBlock from "./ScreenerBlocks/HodBlock"
-import GapBlock from "./ScreenerBlocks/GapBlock"
 import {IUserSingleLayout} from "../../../interfaces"
 import {useNavigate} from "react-router-dom"
+import ReturnObject from "./ReturnObject"
 
 const ScreenerDashboard = () => {
     const navigate = useNavigate()
+
     const [activeLayout, setActiveLayout] = useState<number>(0)
     const [layouts, setLayouts] = useState<IUserSingleLayout[][]>()
+    const [mapLayout, setMapLayout] = useState<IUserSingleLayout[]>()
 
     const {user} = useAppSelector((store) => store.user)
 
@@ -18,23 +19,12 @@ const ScreenerDashboard = () => {
         setLayouts(user.layouts)
     }, [user])
 
-    const returnLayout = (layoutIndex: number): JSX.Element => {
-        if (!layouts) {
-            return <></>
+    useEffect(() => {
+        if (layouts) {
+            const layout = layouts[activeLayout]
+            setMapLayout([...layout])
         }
-        const layout = layouts[layoutIndex]
-
-        layout.map((lay) => {
-            const {screener, x, y, height, width} = lay
-            if (screener === "hod") {
-                return <HodBlock height={height} width={width} />
-            }
-            if (screener === "gap") {
-                return <GapBlock height={height} width={width} />
-            }
-        })
-        return <></>
-    }
+    }, [activeLayout, user])
 
     return (
         <section className="screener-layout">
@@ -45,6 +35,7 @@ const ScreenerDashboard = () => {
                             layouts.map((_, index) => {
                                 return (
                                     <button
+                                        key={index}
                                         type="button"
                                         onClick={() => setActiveLayout(index)}>
                                         {index + 1}
@@ -62,7 +53,11 @@ const ScreenerDashboard = () => {
                     </button>
                 </div>
             </div>
-            <div className="layouts-main">{returnLayout(activeLayout)}</div>
+            <div className="layouts-main" style={{display: "flex"}}>
+                {mapLayout?.map((layout, index) => {
+                    return <ReturnObject layout={layout} index={index} />
+                })}
+            </div>
         </section>
     )
 }

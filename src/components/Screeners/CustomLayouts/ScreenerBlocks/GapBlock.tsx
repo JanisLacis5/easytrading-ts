@@ -9,7 +9,11 @@ const GapBlock = ({width, height}: IScreenerBlockProps) => {
             className="gap-block"
             style={
                 width || height
-                    ? {height: `${height}px`, width: `${width}px`}
+                    ? {
+                          height: `${height}px`,
+                          width: `${width}px`,
+                          position: "absolute",
+                      }
                     : {}
             }></div>
     )
