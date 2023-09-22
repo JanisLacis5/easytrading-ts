@@ -21,6 +21,8 @@ const layoutSlice = createSlice({
     reducers: {
         newLayout: (state, action: PayloadAction<IUserSingleLayout>) => {
             const layout = action.payload
+            console.log(`passed to function = ${JSON.stringify(layout)}`)
+
             state.layoutParams.push(layout)
         },
         setIsDone: (state, action: PayloadAction<boolean>) => {

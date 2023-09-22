@@ -1,4 +1,4 @@
-import {useEffect} from "react"
+import {useEffect, useState} from "react"
 import "./layouts.css"
 import {Rnd} from "react-rnd"
 import HodBlock from "./ScreenerBlocks/HodBlock"
@@ -27,11 +27,12 @@ const ScreenerBlock = ({layout, index}: IProps) => {
         width: 400,
     }
 
-    const {isDone, activeBlock, isAddingScreener} = useAppSelector(
+    const {isDone, activeBlock, layoutParams} = useAppSelector(
         (store) => store.layout
     )
 
     const done = () => {
+        console.log(`params = ${JSON.stringify(params)}`)
         dispatch(newLayout(params))
         dispatch(setIsDone(false))
         dispatch(setIsAddingScreener(false))
@@ -44,14 +45,13 @@ const ScreenerBlock = ({layout, index}: IProps) => {
     }, [isDone])
 
     useEffect(() => {
-        console.log(isAddingScreener)
-    }, [isAddingScreener])
+        console.log(layoutParams)
+    }, [layoutParams])
 
     if (layout === "hod") {
         params.screener = "hod"
         return (
             <Rnd
-                onClick={() => console.log(index)}
                 style={
                     activeBlock !== index
                         ? activeBlock !== null
@@ -83,6 +83,8 @@ const ScreenerBlock = ({layout, index}: IProps) => {
                     params.y = d.y
                 }}
                 onResizeStop={(e, direction, ref, delta, position) => {
+                    console.log(Number(ref.style.width.slice(0, -2)))
+
                     params.width = Number(ref.style.width.slice(0, -2))
                     params.height = Number(ref.style.height.slice(0, -2))
                 }}>
@@ -94,7 +96,6 @@ const ScreenerBlock = ({layout, index}: IProps) => {
         params.screener = "gap"
         return (
             <Rnd
-                onClick={() => console.log(index)}
                 style={
                     activeBlock !== index
                         ? activeBlock !== null
@@ -132,9 +133,7 @@ const ScreenerBlock = ({layout, index}: IProps) => {
                     if (activeBlock !== index || activeBlock !== null) {
                         return
                     }
-
                     params.width = Number(ref.style.width.slice(0, -2))
-
                     params.height = Number(ref.style.height.slice(0, -2))
                 }}>
                 <GapBlock />
