@@ -1,11 +1,11 @@
-import "./layouts.css"
+import "../layouts.css"
 import {useState} from "react"
 import ScreenerBlock from "./ScreenerBlock"
-import customFetch from "../../../utils"
-import {setIsAddingScreener, setIsDone} from "../../../features/layoutSlice"
-import {login} from "../../../features/userSlice"
+import customFetch from "../../../../utils"
+import {setIsAddingScreener, setIsDone} from "../../../../features/layoutSlice"
+import {login} from "../../../../features/userSlice"
 import {toast} from "react-toastify"
-import {useAppSelector, useAppDispatch} from "../../../store/storeHooks"
+import {useAppSelector, useAppDispatch} from "../../../../store/storeHooks"
 import {useNavigate} from "react-router-dom"
 
 const NewLayout = () => {

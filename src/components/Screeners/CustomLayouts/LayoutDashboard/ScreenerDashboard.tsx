@@ -1,30 +1,49 @@
 import {AiOutlinePlus} from "react-icons/ai"
-import {useAppSelector} from "../../../store/storeHooks"
-import "../screeners.css"
+import {useAppSelector} from "../../../../store/storeHooks"
+import "../../screeners.css"
 import {useEffect, useState} from "react"
-import {IUserSingleLayout} from "../../../interfaces"
+import {IUserSingleLayout} from "../../../../interfaces"
 import {useNavigate} from "react-router-dom"
 import ReturnObject from "./ReturnObject"
+import {setLayoutsMainParams} from "../../../../features/layoutSlice"
+import {useAppDispatch} from "../../../../store/storeHooks"
 
 const ScreenerDashboard = () => {
     const navigate = useNavigate()
+    const dispatch = useAppDispatch()
 
     const [activeLayout, setActiveLayout] = useState<number>(0)
     const [layouts, setLayouts] = useState<IUserSingleLayout[][]>()
     const [mapLayout, setMapLayout] = useState<IUserSingleLayout[]>()
+    const [layoutsMain, setLayoutsMain] = useState<Element | null>()
 
     const {user} = useAppSelector((store) => store.user)
+
+    useEffect(() => {
+        setLayoutsMain(document.querySelector(".layouts-main"))
+    }, [])
+
+    useEffect(() => {
+        if (layoutsMain) {
+            dispatch(
+                setLayoutsMainParams({
+                    height: (layoutsMain as HTMLElement).offsetHeight,
+                    width: (layoutsMain as HTMLElement).offsetWidth,
+                })
+            )
+        }
+    }, [layoutsMain])
 
     useEffect(() => {
         setLayouts(user.layouts)
     }, [user])
 
     useEffect(() => {
-        if (layouts) {
+        if (layouts && layouts.length) {
             const layout = layouts[activeLayout]
             setMapLayout([...layout])
         }
-    }, [activeLayout, user])
+    }, [activeLayout, layouts])
 
     return (
         <section className="screener-layout">
@@ -36,6 +55,15 @@ const ScreenerDashboard = () => {
                                 return (
                                     <button
                                         key={index}
+                                        style={
+                                            activeLayout === index
+                                                ? {
+                                                      backgroundColor:
+                                                          "var(--color-trade-green)",
+                                                      pointerEvents: "none",
+                                                  }
+                                                : {}
+                                        }
                                         type="button"
                                         onClick={() => setActiveLayout(index)}>
                                         {index + 1}
@@ -53,9 +81,15 @@ const ScreenerDashboard = () => {
                     </button>
                 </div>
             </div>
-            <div className="layouts-main" style={{display: "flex"}}>
+            <div className="layouts-main">
                 {mapLayout?.map((layout, index) => {
-                    return <ReturnObject layout={layout} index={index} />
+                    return (
+                        <ReturnObject
+                            key={index}
+                            layout={layout}
+                            index={index}
+                        />
+                    )
                 })}
             </div>
         </section>

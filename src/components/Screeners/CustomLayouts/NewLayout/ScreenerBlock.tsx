@@ -1,16 +1,16 @@
 import {useEffect, useState} from "react"
-import "./layouts.css"
+import "../layouts.css"
 import {Rnd} from "react-rnd"
-import HodBlock from "./ScreenerBlocks/HodBlock"
-import GapBlock from "./ScreenerBlocks/GapBlock"
-import {useAppDispatch, useAppSelector} from "../../../store/storeHooks"
+import HodBlock from "../ScreenerBlocks/HodBlock"
+import GapBlock from "../ScreenerBlocks/GapBlock"
+import {useAppDispatch, useAppSelector} from "../../../../store/storeHooks"
 import {
     newLayout,
     setActiveBlock,
     setIsAddingScreener,
     setIsDone,
-} from "../../../features/layoutSlice"
-import {IUserSingleLayout} from "../../../interfaces"
+} from "../../../../features/layoutSlice"
+import {IUserSingleLayout} from "../../../../interfaces"
 
 interface IProps {
     index: number
@@ -27,12 +27,15 @@ const ScreenerBlock = ({layout, index}: IProps) => {
         width: 400,
     })
 
-    const {isDone, activeBlock, layoutParams} = useAppSelector(
-        (store) => store.layout
-    )
+    const {
+        isDone,
+        activeBlock,
+        layoutParams,
+        layoutsMainHeight,
+        layoutsMainWidth,
+    } = useAppSelector((store) => store.layout)
 
     const done = () => {
-        console.log(`params = ${JSON.stringify(params)}`)
         dispatch(newLayout(params))
         dispatch(setIsDone(false))
         dispatch(setIsAddingScreener(false))
@@ -46,7 +49,15 @@ const ScreenerBlock = ({layout, index}: IProps) => {
         height: number,
         width: number
     ) => {
-        return {...params, screener: screener, height: height, width: width}
+        const heightInPrecentage = (height / layoutsMainHeight) * 100
+        const widthInPrecentage = (width / layoutsMainWidth) * 100
+        console.log(heightInPrecentage)
+        return {
+            ...params,
+            screener: screener,
+            height: heightInPrecentage,
+            width: widthInPrecentage,
+        }
     }
 
     const drag = (
@@ -55,16 +66,19 @@ const ScreenerBlock = ({layout, index}: IProps) => {
         x: number,
         y: number
     ) => {
-        return {...params, screener: screener, x: x, y: y}
+        const xInPrecentage = (x / layoutsMainHeight) * 100
+        const yInPrecentage = (y / layoutsMainWidth) * 100
+        return {
+            ...params,
+            screener: screener,
+            x: xInPrecentage,
+            y: yInPrecentage,
+        }
     }
 
     useEffect(() => {
         if (isDone) done()
     }, [isDone])
-
-    useEffect(() => {
-        console.log(layoutParams)
-    }, [layoutParams])
 
     if (layout === "hod") {
         return (

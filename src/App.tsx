@@ -33,7 +33,7 @@ import {login} from "./features/userSlice"
 import DashboardLayout from "./components/Dashboard/DashboardLayout"
 import Loading from "./Loading"
 import SiteLayout from "./SiteLayout"
-import NewLayout from "./components/Screeners/CustomLayouts/NewLayout"
+import NewLayout from "./components/Screeners/CustomLayouts/NewLayout/NewLayout"
 
 function App() {
     const dispatch = useDispatch()

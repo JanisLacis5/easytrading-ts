@@ -17,8 +17,6 @@ export const countStats = (trades: IUserSingleTrade[] | null) => {
     let totalProfit = 0
 
     if (trades && trades.length) {
-        console.log(trades.length)
-
         trades.map((trade) => {
             if (trade.pl > 0) {
                 wonTrades++

@@ -17,6 +17,11 @@
 }
 
 /* LAYOUT DASHBOARD */
+.layouts-main {
+    position: relative;
+    height: 100%;
+}
+
 .layout-buttons {
     display: flex;
     justify-content: space-between;
@@ -137,6 +142,7 @@
 .gap-block {
     height: 100%;
     width: 100%;
+    position: absolute;
 }
 
 .hod-block {
