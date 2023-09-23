@@ -19,13 +19,6 @@ interface IProps {
 
 const ScreenerBlock = ({layout, index}: IProps) => {
     const dispatch = useAppDispatch()
-    const [params, setParams] = useState<IUserSingleLayout>({
-        screener: "",
-        x: 0,
-        y: 0,
-        height: 240,
-        width: 400,
-    })
 
     const {
         isDone,
@@ -35,54 +28,54 @@ const ScreenerBlock = ({layout, index}: IProps) => {
         layoutsMainWidth,
     } = useAppSelector((store) => store.layout)
 
+    const [params, setParams] = useState<IUserSingleLayout>({
+        screener: layout,
+        x: 0,
+        y: 0,
+        height: (240 / layoutsMainHeight) * 100,
+        width: (400 / layoutsMainWidth) * 100,
+    })
+
     const done = () => {
         dispatch(newLayout(params))
-        dispatch(setIsDone(false))
         dispatch(setIsAddingScreener(false))
         dispatch(setActiveBlock(null))
         return
     }
 
-    useEffect(() => {
-        console.log(layoutsMainWidth)
-    }, [layoutsMainWidth])
-
     const resize = (
         params: IUserSingleLayout,
-        screener: "gap" | "hod",
         height: number,
         width: number
     ) => {
-        const heightInPrecentage = (height / layoutsMainHeight) * 100
-        const widthInPrecentage = (width / layoutsMainWidth) * 100
-        console.log(layoutsMainHeight)
+        const heightInPercentage = (height / layoutsMainHeight) * 100
+        const widthInPercentage = (width / layoutsMainWidth) * 100
         return {
             ...params,
-            screener: screener,
-            height: heightInPrecentage,
-            width: widthInPrecentage,
+            height: heightInPercentage,
+            width: widthInPercentage,
         }
     }
 
-    const drag = (
-        params: IUserSingleLayout,
-        screener: "gap" | "hod",
-        x: number,
-        y: number
-    ) => {
-        const xInPrecentage = (x / layoutsMainHeight) * 100
-        const yInPrecentage = (y / layoutsMainWidth) * 100
+    const drag = (params: IUserSingleLayout, x: number, y: number) => {
+        const xInPrecentage = (x / layoutsMainWidth) * 100
+        const yInPrecentage = (y / layoutsMainHeight) * 100
         return {
             ...params,
-            screener: screener,
             x: xInPrecentage,
             y: yInPrecentage,
         }
     }
 
     useEffect(() => {
+        console.log(isDone)
+
         if (isDone) done()
     }, [isDone])
+
+    useEffect(() => {
+        console.log(params)
+    }, [params])
 
     if (layout === "hod") {
         return (
@@ -104,12 +97,10 @@ const ScreenerBlock = ({layout, index}: IProps) => {
                 resizeGrid={[40, 25]}
                 bounds={"parent"}
                 onDragStart={() => {
-                    dispatch(setIsDone(false))
                     dispatch(setIsAddingScreener(true))
                     dispatch(setActiveBlock(index))
                 }}
                 onResizeStart={() => {
-                    dispatch(setIsDone(false))
                     dispatch(setIsAddingScreener(true))
                     dispatch(setActiveBlock(index))
                 }}
@@ -119,7 +110,7 @@ const ScreenerBlock = ({layout, index}: IProps) => {
                     }
                     const x = d.x
                     const y = d.y
-                    const tempParams = drag(params, layout, x, y)
+                    const tempParams = drag(params, x, y)
                     setParams({...tempParams})
                 }}
                 onResizeStop={(e, direction, ref, delta, position) => {
@@ -128,7 +119,7 @@ const ScreenerBlock = ({layout, index}: IProps) => {
                     }
                     const width = Number(ref.style.width.slice(0, -2))
                     const height = Number(ref.style.height.slice(0, -2))
-                    const tempParams = resize(params, layout, height, width)
+                    const tempParams = resize(params, height, width)
                     setParams({...tempParams})
                 }}>
                 <HodBlock />
@@ -156,11 +147,9 @@ const ScreenerBlock = ({layout, index}: IProps) => {
                 bounds={"parent"}
                 onDragStart={() => {
                     dispatch(setActiveBlock(index))
-                    dispatch(setIsDone(false))
                     dispatch(setIsAddingScreener(true))
                 }}
                 onResizeStart={() => {
-                    dispatch(setIsDone(false))
                     dispatch(setIsAddingScreener(true))
                     dispatch(setActiveBlock(index))
                 }}
@@ -170,7 +159,7 @@ const ScreenerBlock = ({layout, index}: IProps) => {
                     }
                     const x = d.x
                     const y = d.y
-                    const tempParams = drag(params, layout, x, y)
+                    const tempParams = drag(params, x, y)
                     setParams({...tempParams})
                 }}
                 onResizeStop={(e, direction, ref, delta, position) => {
@@ -179,7 +168,7 @@ const ScreenerBlock = ({layout, index}: IProps) => {
                     }
                     const width = Number(ref.style.width.slice(0, -2))
                     const height = Number(ref.style.height.slice(0, -2))
-                    const tempParams = resize(params, layout, height, width)
+                    const tempParams = resize(params, height, width)
                     setParams({...tempParams})
                 }}>
                 <GapBlock />

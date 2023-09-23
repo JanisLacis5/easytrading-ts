@@ -8,6 +8,7 @@ interface CounterState {
     activeBlock: number | null
     layoutsMainHeight: number
     layoutsMainWidth: number
+    isSaved: boolean
 }
 
 const initialState: CounterState = {
@@ -17,6 +18,7 @@ const initialState: CounterState = {
     activeBlock: null,
     layoutsMainHeight: 0,
     layoutsMainWidth: 0,
+    isSaved: false,
 }
 
 const layoutSlice = createSlice({
@@ -33,6 +35,10 @@ const layoutSlice = createSlice({
                 state.layoutsMainWidth = width
             }
         },
+        resetLayoutParams: (state) => {
+            state.layoutParams = []
+            state.isDone = false
+        },
         newLayout: (state, action: PayloadAction<IUserSingleLayout>) => {
             const layout = action.payload
             console.log(`passed to function = ${JSON.stringify(layout)}`)
@@ -48,6 +54,9 @@ const layoutSlice = createSlice({
         setActiveBlock: (state, action: PayloadAction<number | null>) => {
             state.activeBlock = action.payload
         },
+        setIsSaved: (state, action: PayloadAction<boolean>) => {
+            state.isSaved = action.payload
+        },
     },
 })
 
@@ -57,5 +66,7 @@ export const {
     setIsAddingScreener,
     setActiveBlock,
     setLayoutsMainParams,
+    setIsSaved,
+    resetLayoutParams,
 } = layoutSlice.actions
 export default layoutSlice.reducer

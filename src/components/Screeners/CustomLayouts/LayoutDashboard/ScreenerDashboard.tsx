@@ -1,5 +1,5 @@
 import {AiOutlinePlus} from "react-icons/ai"
-import {useAppSelector} from "../../../../store/storeHooks"
+import {useAppDispatch, useAppSelector} from "../../../../store/storeHooks"
 import "../../screeners.css"
 import {useEffect, useState} from "react"
 import {IUserSingleLayout} from "../../../../interfaces"
@@ -8,6 +8,7 @@ import ReturnObject from "./ReturnObject"
 
 const ScreenerDashboard = () => {
     const navigate = useNavigate()
+    const dispatch = useAppDispatch()
 
     const [activeLayout, setActiveLayout] = useState<number>(0)
     const [layouts, setLayouts] = useState<IUserSingleLayout[][]>()

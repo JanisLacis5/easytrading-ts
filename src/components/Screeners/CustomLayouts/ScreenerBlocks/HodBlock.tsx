@@ -5,10 +5,10 @@ const HodBlock = ({height, width, x, y}: IScreenerBlockProps) => {
         <div
             className="hod-block"
             style={{
-                height: `${height}px`,
-                width: `${width}px`,
-                left: `${x}px`,
-                top: `${y}px`,
+                height: `${height}%`,
+                width: `${width}%`,
+                left: `${x}%`,
+                top: `${y}%`,
             }}></div>
     )
 }
