@@ -1,22 +1,23 @@
 .hod {
-    height: 90%;
-    width: 70%;
+    height: 100%;
+    width: 100%;
     place-self: center;
     display: flex;
     flex-direction: column;
     background-color: var(--color-grey-500);
     color: var(--color-grey-900);
     overflow: hidden;
+    position: absolute;
 }
 
 .screener-header {
     display: flex;
-    height: 17.5%;
-    font-size: 1rem;
+    flex-grow: 1;
+    font-size: 0.75rem;
 }
 
 .screener-main {
-    height: 82.5%;
+    flex-grow: 9;
     overflow: scroll;
 }
 
@@ -41,7 +42,7 @@
 
 .hod-stock p,
 .screener-header p {
-    width: 40%;
-    justify-content: flex-start;
+    width: 100%;
+    text-align: center;
     margin: 0;
 }

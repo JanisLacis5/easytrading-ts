@@ -1,16 +1,15 @@
 import {useEffect, useState} from "react"
 import "../layouts.css"
 import {Rnd} from "react-rnd"
-import HodBlock from "../ScreenerBlocks/HodBlock"
 import GapBlock from "../ScreenerBlocks/GapBlock"
 import {useAppDispatch, useAppSelector} from "../../../../store/storeHooks"
 import {
     newLayout,
     setActiveBlock,
     setIsAddingScreener,
-    setIsDone,
 } from "../../../../features/layoutSlice"
 import {IUserSingleLayout} from "../../../../interfaces"
+import HodScreener from "../../HodScreener/HodScreener"
 
 interface IProps {
     index: number
@@ -68,14 +67,8 @@ const ScreenerBlock = ({layout, index}: IProps) => {
     }
 
     useEffect(() => {
-        console.log(isDone)
-
         if (isDone) done()
     }, [isDone])
-
-    useEffect(() => {
-        console.log(params)
-    }, [params])
 
     if (layout === "hod") {
         return (
@@ -122,7 +115,7 @@ const ScreenerBlock = ({layout, index}: IProps) => {
                     const tempParams = resize(params, height, width)
                     setParams({...tempParams})
                 }}>
-                <HodBlock />
+                <HodScreener />
             </Rnd>
         )
     }

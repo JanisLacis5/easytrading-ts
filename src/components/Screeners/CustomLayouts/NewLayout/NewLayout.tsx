@@ -56,16 +56,12 @@ const NewLayout = () => {
         if (layoutsMain) {
             dispatch(
                 setLayoutsMainParams({
-                    height: (layoutsMain as HTMLElement).offsetHeight,
-                    width: (layoutsMain as HTMLElement).offsetWidth,
+                    height: (layoutsMain as HTMLElement).clientHeight,
+                    width: (layoutsMain as HTMLElement).clientWidth,
                 })
             )
         }
     }, [layoutsMain])
-
-    useEffect(() => {
-        console.log(isDone)
-    }, [isDone])
 
     return (
         <section className="screener-layout">

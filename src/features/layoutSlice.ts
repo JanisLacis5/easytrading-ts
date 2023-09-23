@@ -43,7 +43,7 @@ const layoutSlice = createSlice({
             const layout = action.payload
             console.log(`passed to function = ${JSON.stringify(layout)}`)
 
-            state.layoutParams.push(layout)
+            state.layoutParams
         },
         setIsDone: (state, action: PayloadAction<boolean>) => {
             state.isDone = action.payload

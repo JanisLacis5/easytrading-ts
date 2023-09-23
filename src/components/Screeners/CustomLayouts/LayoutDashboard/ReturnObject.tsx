@@ -1,6 +1,7 @@
 import HodBlock from "../ScreenerBlocks/HodBlock"
 import GapBlock from "../ScreenerBlocks/GapBlock"
 import {IUserSingleLayout} from "../../../../interfaces"
+import HodScreener from "../../HodScreener/HodScreener"
 
 const ReturnObject = ({
     index,
@@ -12,7 +13,13 @@ const ReturnObject = ({
     const {screener, x, y, height, width} = layout
     if (screener === "hod") {
         return (
-            <HodBlock key={index} height={height} width={width} x={x} y={y} />
+            <HodScreener
+                key={index}
+                height={height}
+                width={width}
+                x={x}
+                y={y}
+            />
         )
     }
     if (screener === "gap") {

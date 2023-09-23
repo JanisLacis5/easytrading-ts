@@ -10,19 +10,26 @@ interface IHodData {
     relVolume: number
 }
 
-const HodScreener = () => {
+interface IProps {
+    height?: number
+    width?: number
+    x?: number
+    y?: number
+}
+
+const HodScreener = ({height, width, x, y}: IProps) => {
     // GET DATA FROM SERVER
     const socket = new WebSocket("ws://localhost:3001")
     const [data, setData] = useState<IHodData[]>([])
     socket.onopen = () => {
-        console.log("Connected to WebSocket server")
+        // console.log("Connected to WebSocket server")
     }
     socket.onmessage = (event) => {
         const stockData = event.data
         if (stockData !== "Client connected") {
             setData([...data, JSON.parse(stockData)])
         }
-        console.log(`Received from server: ${stockData}`)
+        // console.log(`Received from server: ${stockData}`)
     }
 
     // FORMAT LARGE NUMBERS
@@ -41,7 +48,15 @@ const HodScreener = () => {
     }
 
     return (
-        <section className="hod">
+        <section
+            className="hod"
+            id="hod"
+            style={{
+                height: `${height}%`,
+                width: `${width}%`,
+                left: `${x}%`,
+                top: `${y}%`,
+            }}>
             <div className="screener-header">
                 <div>
                     <p>Time</p>
@@ -59,11 +74,11 @@ const HodScreener = () => {
                     <p>Volume</p>
                 </div>
                 <div>
-                    <p>Relative volume</p>
+                    <p>Rel. vol.</p>
                 </div>
             </div>
             <div className="screener-main">
-                {data.length &&
+                {data.length ? (
                     data.reverse().map((stockObj, index) => {
                         const {stock, time, price, float, volume, relVolume} =
                             stockObj
@@ -89,7 +104,10 @@ const HodScreener = () => {
                                 </div>
                             </div>
                         )
-                    })}
+                    })
+                ) : (
+                    <></>
+                )}
             </div>
         </section>
     )
