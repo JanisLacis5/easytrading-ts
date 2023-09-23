@@ -43,6 +43,10 @@ const ScreenerBlock = ({layout, index}: IProps) => {
         return
     }
 
+    useEffect(() => {
+        console.log(layoutsMainWidth)
+    }, [layoutsMainWidth])
+
     const resize = (
         params: IUserSingleLayout,
         screener: "gap" | "hod",
@@ -51,7 +55,7 @@ const ScreenerBlock = ({layout, index}: IProps) => {
     ) => {
         const heightInPrecentage = (height / layoutsMainHeight) * 100
         const widthInPrecentage = (width / layoutsMainWidth) * 100
-        console.log(heightInPrecentage)
+        console.log(layoutsMainHeight)
         return {
             ...params,
             screener: screener,

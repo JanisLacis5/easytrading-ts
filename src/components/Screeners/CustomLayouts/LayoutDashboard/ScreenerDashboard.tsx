@@ -5,34 +5,15 @@ import {useEffect, useState} from "react"
 import {IUserSingleLayout} from "../../../../interfaces"
 import {useNavigate} from "react-router-dom"
 import ReturnObject from "./ReturnObject"
-import {setLayoutsMainParams} from "../../../../features/layoutSlice"
-import {useAppDispatch} from "../../../../store/storeHooks"
 
 const ScreenerDashboard = () => {
     const navigate = useNavigate()
-    const dispatch = useAppDispatch()
 
     const [activeLayout, setActiveLayout] = useState<number>(0)
     const [layouts, setLayouts] = useState<IUserSingleLayout[][]>()
     const [mapLayout, setMapLayout] = useState<IUserSingleLayout[]>()
-    const [layoutsMain, setLayoutsMain] = useState<Element | null>()
 
     const {user} = useAppSelector((store) => store.user)
-
-    useEffect(() => {
-        setLayoutsMain(document.querySelector(".layouts-main"))
-    }, [])
-
-    useEffect(() => {
-        if (layoutsMain) {
-            dispatch(
-                setLayoutsMainParams({
-                    height: (layoutsMain as HTMLElement).offsetHeight,
-                    width: (layoutsMain as HTMLElement).offsetWidth,
-                })
-            )
-        }
-    }, [layoutsMain])
 
     useEffect(() => {
         setLayouts(user.layouts)

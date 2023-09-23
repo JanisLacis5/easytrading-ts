@@ -1,8 +1,12 @@
 import "../layouts.css"
-import {useState} from "react"
+import {useEffect, useState} from "react"
 import ScreenerBlock from "./ScreenerBlock"
 import customFetch from "../../../../utils"
-import {setIsAddingScreener, setIsDone} from "../../../../features/layoutSlice"
+import {
+    setIsAddingScreener,
+    setIsDone,
+    setLayoutsMainParams,
+} from "../../../../features/layoutSlice"
 import {login} from "../../../../features/userSlice"
 import {toast} from "react-toastify"
 import {useAppSelector, useAppDispatch} from "../../../../store/storeHooks"
@@ -11,9 +15,25 @@ import {useNavigate} from "react-router-dom"
 const NewLayout = () => {
     const [userLayout, setUserLayout] = useState<string[]>([])
     const [notAllowedHover, setNotAllowedHover] = useState(false)
+    const [layoutsMain, setLayoutsMain] = useState<Element | null>()
 
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
+
+    useEffect(() => {
+        setLayoutsMain(document.querySelector(".new-layout-main"))
+    }, [])
+
+    useEffect(() => {
+        if (layoutsMain) {
+            dispatch(
+                setLayoutsMainParams({
+                    height: (layoutsMain as HTMLElement).offsetHeight,
+                    width: (layoutsMain as HTMLElement).offsetWidth,
+                })
+            )
+        }
+    }, [layoutsMain])
 
     const {isAddingScreener, layoutParams} = useAppSelector(
         (store) => store.layout
