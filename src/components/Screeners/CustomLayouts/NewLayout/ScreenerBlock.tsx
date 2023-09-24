@@ -10,14 +10,23 @@ import {
     setLayoutSize,
 } from "../../../../features/layoutSlice"
 import HodScreener from "../../HodScreener/HodScreener"
+import {IUserSingleLayout} from "../../../../interfaces"
 
 interface IProps {
     index: number
-    layout: string
+    layout: IUserSingleLayout
 }
 
 const ScreenerBlock = ({layout, index}: IProps) => {
     const dispatch = useAppDispatch()
+
+    const {
+        screener,
+        x: positionX,
+        y: positionY,
+        height: positionHeight,
+        width: positionWidth,
+    } = layout
 
     const {isDone, activeBlock, layoutsMainHeight, layoutsMainWidth} =
         useAppSelector((store) => store.layout)
@@ -50,21 +59,21 @@ const ScreenerBlock = ({layout, index}: IProps) => {
         if (isDone) done()
     }, [isDone])
 
-    if (layout === "hod") {
+    if (screener === "hod") {
         return (
             <Rnd
                 style={
                     activeBlock !== index
                         ? activeBlock !== null
-                            ? {pointerEvents: "none"}
-                            : {}
-                        : {}
+                            ? {pointerEvents: "none", position: "absolute"}
+                            : {position: "absolute"}
+                        : {position: "absolute"}
                 }
                 default={{
-                    x: 0,
-                    y: 0,
-                    width: 400,
-                    height: 250,
+                    x: positionX,
+                    y: positionY,
+                    width: positionWidth,
+                    height: positionHeight,
                 }}
                 dragGrid={[40, 25]}
                 resizeGrid={[40, 25]}
@@ -105,7 +114,7 @@ const ScreenerBlock = ({layout, index}: IProps) => {
             </Rnd>
         )
     }
-    if (layout === "gap") {
+    if (screener === "gap") {
         return (
             <Rnd
                 style={

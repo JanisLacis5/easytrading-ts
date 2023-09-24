@@ -18,7 +18,6 @@ import {useNavigate} from "react-router-dom"
 const NewLayout = () => {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
-
     const [notAllowedHover, setNotAllowedHover] = useState(false)
     const [layoutsMain, setLayoutsMain] = useState<Element | null>()
 
@@ -62,10 +61,6 @@ const NewLayout = () => {
             )
         }
     }, [layoutsMain])
-
-    useEffect(() => {
-        console.log(layoutParams)
-    }, [layoutParams])
 
     return (
         <section className="screener-layout">
@@ -123,12 +118,12 @@ const NewLayout = () => {
                 </div>
             </div>
             <div className="new-layout-main">
-                <div id="lines">
+                <div id="lines" style={{position: "relative"}}>
                     {layoutParams.map((layout, index) => {
                         return (
                             <ScreenerBlock
                                 key={index}
-                                layout={layout.screener}
+                                layout={layout}
                                 index={index}
                             />
                         )

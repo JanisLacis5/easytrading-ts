@@ -39,6 +39,12 @@ const layoutSlice = createSlice({
             state.layoutParams = []
             state.isDone = false
         },
+        editExistingLayout: (
+            state,
+            action: PayloadAction<IUserSingleLayout[]>
+        ) => {
+            state.layoutParams = [...action.payload]
+        },
 
         ///////////////////////////////////////////////////////////////////////////////
 
@@ -107,5 +113,6 @@ export const {
     setLayoutsMainParams,
     setIsSaved,
     resetLayoutParams,
+    editExistingLayout,
 } = layoutSlice.actions
 export default layoutSlice.reducer

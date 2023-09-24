@@ -5,6 +5,7 @@ import {useEffect, useState} from "react"
 import {IUserSingleLayout} from "../../../../interfaces"
 import {useNavigate} from "react-router-dom"
 import ReturnObject from "./ReturnObject"
+import {editExistingLayout} from "../../../../features/layoutSlice"
 
 const ScreenerDashboard = () => {
     const navigate = useNavigate()
@@ -15,6 +16,19 @@ const ScreenerDashboard = () => {
     const [mapLayout, setMapLayout] = useState<IUserSingleLayout[]>()
 
     const {user} = useAppSelector((store) => store.user)
+    const {layoutParams} = useAppSelector((store) => store.layout)
+
+    const editLayout = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        e.preventDefault()
+        const tempArr: IUserSingleLayout[] = [...layoutParams]
+        if (!mapLayout) {
+            throw new Error(
+                "editLayout function in ScreenerDashboard didnt find layout to edit"
+            )
+        }
+        dispatch(editExistingLayout(mapLayout))
+        navigate("/screeners/new-layout")
+    }
 
     useEffect(() => {
         setLayouts(user.layouts)
@@ -58,7 +72,7 @@ const ScreenerDashboard = () => {
                             <AiOutlinePlus />
                         </button>
                     </div>
-                    <button type="button">
+                    <button type="button" onClick={editLayout}>
                         Edit layout Nr. {activeLayout + 1}
                     </button>
                 </div>
