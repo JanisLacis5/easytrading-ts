@@ -3,6 +3,7 @@ import {useEffect, useState} from "react"
 import ScreenerBlock from "./ScreenerBlock"
 import customFetch from "../../../../utils"
 import {
+    newLayoutScreener,
     resetLayoutParams,
     setIsAddingScreener,
     setIsDone,
@@ -18,7 +19,6 @@ const NewLayout = () => {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
 
-    const [userLayout, setUserLayout] = useState<string[]>([])
     const [notAllowedHover, setNotAllowedHover] = useState(false)
     const [layoutsMain, setLayoutsMain] = useState<Element | null>()
 
@@ -31,7 +31,7 @@ const NewLayout = () => {
         e: React.MouseEvent<HTMLButtonElement, MouseEvent>
     ) => {
         e.preventDefault()
-        if (!userLayout.length) {
+        if (!layoutParams.length) {
             toast.error("you must add at least 1 screener")
             return
         }
@@ -63,6 +63,10 @@ const NewLayout = () => {
         }
     }, [layoutsMain])
 
+    useEffect(() => {
+        console.log(layoutParams)
+    }, [layoutParams])
+
     return (
         <section className="screener-layout">
             <div className="layouts-header">
@@ -78,7 +82,11 @@ const NewLayout = () => {
                             value={""}
                             name="addScreener"
                             onChange={(e) => {
-                                setUserLayout([...userLayout, e.target.value])
+                                dispatch(
+                                    newLayoutScreener(
+                                        e.target.value as "gap" | "hod"
+                                    )
+                                )
                                 dispatch(setIsAddingScreener(true))
                                 dispatch(setIsDone(false))
                             }}
@@ -116,11 +124,11 @@ const NewLayout = () => {
             </div>
             <div className="new-layout-main">
                 <div id="lines">
-                    {userLayout.map((layout, index) => {
+                    {layoutParams.map((layout, index) => {
                         return (
                             <ScreenerBlock
                                 key={index}
-                                layout={layout}
+                                layout={layout.screener}
                                 index={index}
                             />
                         )

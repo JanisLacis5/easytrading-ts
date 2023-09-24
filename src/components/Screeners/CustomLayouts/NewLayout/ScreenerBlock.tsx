@@ -1,14 +1,14 @@
-import {useEffect, useState} from "react"
+import {useEffect} from "react"
 import "../layouts.css"
 import {Rnd} from "react-rnd"
 import GapBlock from "../ScreenerBlocks/GapBlock"
 import {useAppDispatch, useAppSelector} from "../../../../store/storeHooks"
 import {
-    newLayout,
     setActiveBlock,
     setIsAddingScreener,
+    setLayoutPosition,
+    setLayoutSize,
 } from "../../../../features/layoutSlice"
-import {IUserSingleLayout} from "../../../../interfaces"
 import HodScreener from "../../HodScreener/HodScreener"
 
 interface IProps {
@@ -19,48 +19,28 @@ interface IProps {
 const ScreenerBlock = ({layout, index}: IProps) => {
     const dispatch = useAppDispatch()
 
-    const {
-        isDone,
-        activeBlock,
-        layoutParams,
-        layoutsMainHeight,
-        layoutsMainWidth,
-    } = useAppSelector((store) => store.layout)
-
-    const [params, setParams] = useState<IUserSingleLayout>({
-        screener: layout,
-        x: 0,
-        y: 0,
-        height: (240 / layoutsMainHeight) * 100,
-        width: (400 / layoutsMainWidth) * 100,
-    })
+    const {isDone, activeBlock, layoutsMainHeight, layoutsMainWidth} =
+        useAppSelector((store) => store.layout)
 
     const done = () => {
-        dispatch(newLayout(params))
         dispatch(setIsAddingScreener(false))
         dispatch(setActiveBlock(null))
         return
     }
 
-    const resize = (
-        params: IUserSingleLayout,
-        height: number,
-        width: number
-    ) => {
+    const resize = (height: number, width: number) => {
         const heightInPercentage = (height / layoutsMainHeight) * 100
         const widthInPercentage = (width / layoutsMainWidth) * 100
         return {
-            ...params,
             height: heightInPercentage,
             width: widthInPercentage,
         }
     }
 
-    const drag = (params: IUserSingleLayout, x: number, y: number) => {
+    const drag = (x: number, y: number) => {
         const xInPrecentage = (x / layoutsMainWidth) * 100
         const yInPrecentage = (y / layoutsMainHeight) * 100
         return {
-            ...params,
             x: xInPrecentage,
             y: yInPrecentage,
         }
@@ -101,19 +81,25 @@ const ScreenerBlock = ({layout, index}: IProps) => {
                     if (activeBlock !== index && activeBlock !== null) {
                         return
                     }
-                    const x = d.x
-                    const y = d.y
-                    const tempParams = drag(params, x, y)
-                    setParams({...tempParams})
+                    const tempX = d.x
+                    const tempY = d.y
+                    const {x, y} = drag(tempX, tempY)
+                    dispatch(setLayoutPosition({x: x, y: y, index: index}))
                 }}
                 onResizeStop={(e, direction, ref, delta, position) => {
                     if (activeBlock !== index && activeBlock !== null) {
                         return
                     }
-                    const width = Number(ref.style.width.slice(0, -2))
-                    const height = Number(ref.style.height.slice(0, -2))
-                    const tempParams = resize(params, height, width)
-                    setParams({...tempParams})
+                    const tempWidth = Number(ref.style.width.slice(0, -2))
+                    const tempHeight = Number(ref.style.height.slice(0, -2))
+                    const {height, width} = resize(tempHeight, tempWidth)
+                    dispatch(
+                        setLayoutSize({
+                            height: height,
+                            width: width,
+                            index: index,
+                        })
+                    )
                 }}>
                 <HodScreener />
             </Rnd>
@@ -150,19 +136,25 @@ const ScreenerBlock = ({layout, index}: IProps) => {
                     if (activeBlock !== index && activeBlock !== null) {
                         return
                     }
-                    const x = d.x
-                    const y = d.y
-                    const tempParams = drag(params, x, y)
-                    setParams({...tempParams})
+                    const tempX = d.x
+                    const tempY = d.y
+                    const {x, y} = drag(tempX, tempY)
+                    dispatch(setLayoutPosition({x: x, y: y, index: index}))
                 }}
                 onResizeStop={(e, direction, ref, delta, position) => {
                     if (activeBlock !== index && activeBlock !== null) {
                         return
                     }
-                    const width = Number(ref.style.width.slice(0, -2))
-                    const height = Number(ref.style.height.slice(0, -2))
-                    const tempParams = resize(params, height, width)
-                    setParams({...tempParams})
+                    const tempWidth = Number(ref.style.width.slice(0, -2))
+                    const tempHeight = Number(ref.style.height.slice(0, -2))
+                    const {height, width} = resize(tempHeight, tempWidth)
+                    dispatch(
+                        setLayoutSize({
+                            height: height,
+                            width: width,
+                            index: index,
+                        })
+                    )
                 }}>
                 <GapBlock />
             </Rnd>

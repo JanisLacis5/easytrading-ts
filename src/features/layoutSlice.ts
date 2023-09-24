@@ -39,12 +39,49 @@ const layoutSlice = createSlice({
             state.layoutParams = []
             state.isDone = false
         },
-        newLayout: (state, action: PayloadAction<IUserSingleLayout>) => {
-            const layout = action.payload
-            console.log(`passed to function = ${JSON.stringify(layout)}`)
 
-            state.layoutParams
+        ///////////////////////////////////////////////////////////////////////////////
+
+        newLayoutScreener: (state, action: PayloadAction<"gap" | "hod">) => {
+            state.layoutParams.push({
+                screener: action.payload,
+                x: 0,
+                y: 0,
+                height: (240 / state.layoutsMainHeight) * 100,
+                width: (400 / state.layoutsMainWidth) * 100,
+            })
         },
+        setLayoutSize: (
+            state,
+            action: PayloadAction<{
+                height: number
+                width: number
+                index: number
+            }>
+        ) => {
+            const {height, width, index} = action.payload
+            console.log(
+                `passed to function = ${JSON.stringify([height, width])}`
+            )
+            state.layoutParams[index].height = height
+            state.layoutParams[index].width = width
+        },
+        setLayoutPosition: (
+            state,
+            action: PayloadAction<{
+                x: number
+                y: number
+                index: number
+            }>
+        ) => {
+            const {x, y, index} = action.payload
+            console.log(`passed to function = ${JSON.stringify([x, y])}`)
+            state.layoutParams[index].x = x
+            state.layoutParams[index].y = y
+        },
+
+        //////////////////////////////////////////////////////////////////////////////////
+
         setIsDone: (state, action: PayloadAction<boolean>) => {
             state.isDone = action.payload
         },
@@ -61,7 +98,9 @@ const layoutSlice = createSlice({
 })
 
 export const {
-    newLayout,
+    setLayoutSize,
+    setLayoutPosition,
+    newLayoutScreener,
     setIsDone,
     setIsAddingScreener,
     setActiveBlock,
