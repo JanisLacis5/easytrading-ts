@@ -14,13 +14,12 @@ const ScreenerDashboard = () => {
     const [activeLayout, setActiveLayout] = useState<number>(0)
     const [layouts, setLayouts] = useState<IUserSingleLayout[][]>()
     const [mapLayout, setMapLayout] = useState<IUserSingleLayout[]>()
+    const [layoutsMain, setLayoutsMain] = useState<Element | null>()
 
     const {user} = useAppSelector((store) => store.user)
-    const {layoutParams} = useAppSelector((store) => store.layout)
 
     const editLayout = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()
-        const tempArr: IUserSingleLayout[] = [...layoutParams]
         if (!mapLayout) {
             throw new Error(
                 "editLayout function in ScreenerDashboard didnt find layout to edit"
@@ -40,6 +39,10 @@ const ScreenerDashboard = () => {
             setMapLayout([...layout])
         }
     }, [activeLayout, layouts])
+
+    // useEffect(() => {
+    //     setLayoutsMain(document.querySelector(".new-layout-main"))
+    // }, [])
 
     return (
         <section className="screener-layout">

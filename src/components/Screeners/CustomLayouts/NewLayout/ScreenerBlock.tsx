@@ -70,10 +70,10 @@ const ScreenerBlock = ({layout, index}: IProps) => {
                         : {position: "absolute"}
                 }
                 default={{
-                    x: positionX,
-                    y: positionY,
-                    width: positionWidth,
-                    height: positionHeight,
+                    x: (positionX / 100) * layoutsMainWidth,
+                    y: (positionY / 100) * layoutsMainHeight,
+                    width: (positionWidth / 100) * layoutsMainWidth,
+                    height: (positionHeight / 100) * layoutsMainHeight,
                 }}
                 dragGrid={[40, 25]}
                 resizeGrid={[40, 25]}
@@ -125,10 +125,10 @@ const ScreenerBlock = ({layout, index}: IProps) => {
                         : {}
                 }
                 default={{
-                    x: 0,
-                    y: 0,
-                    width: 400,
-                    height: 250,
+                    x: (positionX / 100) * layoutsMainWidth,
+                    y: (positionY / 100) * layoutsMainHeight,
+                    width: (positionWidth / 100) * layoutsMainWidth,
+                    height: (positionHeight / 100) * layoutsMainHeight,
                 }}
                 dragGrid={[40, 25]}
                 resizeGrid={[40, 25]}

@@ -62,6 +62,10 @@ const NewLayout = () => {
         }
     }, [layoutsMain])
 
+    useEffect(() => {
+        console.log(layoutParams)
+    }, [layoutParams])
+
     return (
         <section className="screener-layout">
             <div className="layouts-header">

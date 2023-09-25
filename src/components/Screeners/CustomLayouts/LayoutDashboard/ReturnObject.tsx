@@ -1,4 +1,3 @@
-import HodBlock from "../ScreenerBlocks/HodBlock"
 import GapBlock from "../ScreenerBlocks/GapBlock"
 import {IUserSingleLayout} from "../../../../interfaces"
 import HodScreener from "../../HodScreener/HodScreener"

@@ -53,7 +53,7 @@ const layoutSlice = createSlice({
                 screener: action.payload,
                 x: 0,
                 y: 0,
-                height: (240 / state.layoutsMainHeight) * 100,
+                height: (250 / state.layoutsMainHeight) * 100,
                 width: (400 / state.layoutsMainWidth) * 100,
             })
         },
