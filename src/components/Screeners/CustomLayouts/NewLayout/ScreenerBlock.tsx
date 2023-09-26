@@ -7,10 +7,10 @@ import {
     setActiveBlock,
     setIsAddingScreener,
     setLayoutPosition,
-    setLayoutSize,
 } from "../../../../features/layoutSlice"
 import HodScreener from "../../HodScreener/HodScreener"
 import {IUserSingleLayout} from "../../../../interfaces"
+import waitForElm from "../../../../waitForDOMElement"
 
 interface IProps {
     index: number
@@ -28,8 +28,13 @@ const ScreenerBlock = ({layout, index}: IProps) => {
         width: positionWidth,
     } = layout
 
-    const {isDone, activeBlock, layoutsMainHeight, layoutsMainWidth} =
-        useAppSelector((store) => store.layout)
+    const {
+        isDone,
+        activeBlock,
+        layoutsMainHeight,
+        layoutsMainWidth,
+        layoutMainPosition,
+    } = useAppSelector((store) => store.layout)
 
     const done = () => {
         dispatch(setIsAddingScreener(false))
@@ -37,21 +42,36 @@ const ScreenerBlock = ({layout, index}: IProps) => {
         return
     }
 
-    const resize = (height: number, width: number) => {
-        const heightInPercentage = (height / layoutsMainHeight) * 100
-        const widthInPercentage = (width / layoutsMainWidth) * 100
+    const move = async () => {
+        const waitResult = await waitForElm(".rnd-block")
+        const rect = (waitResult as HTMLElement).getBoundingClientRect()
+
+        const {
+            x: layoutMainX,
+            y: layoutMainY,
+            height: layoutMainHeight,
+            width: layoutMainWidth,
+        } = layoutMainPosition
+
+        const {
+            height: screenerHeight,
+            width: screenerWidth,
+            x: screenerX,
+            y: screenerY,
+        } = rect
+
+        const xInPercentage =
+            ((screenerX - layoutMainX) / layoutsMainWidth) * 100
+        const yInPercentage =
+            ((screenerY - layoutMainY) / layoutsMainHeight) * 100
+        const heightInPercentage = (screenerHeight / layoutsMainHeight) * 100
+        const widthInPercentage = (screenerWidth / layoutsMainWidth) * 100
+
         return {
             height: heightInPercentage,
             width: widthInPercentage,
-        }
-    }
-
-    const drag = (x: number, y: number) => {
-        const xInPrecentage = (x / layoutsMainWidth) * 100
-        const yInPrecentage = (y / layoutsMainHeight) * 100
-        return {
-            x: xInPrecentage,
-            y: yInPrecentage,
+            x: xInPercentage,
+            y: yInPercentage,
         }
     }
 
@@ -62,6 +82,7 @@ const ScreenerBlock = ({layout, index}: IProps) => {
     if (screener === "hod") {
         return (
             <Rnd
+                className="rnd-block"
                 style={
                     activeBlock !== index
                         ? activeBlock !== null
@@ -86,24 +107,33 @@ const ScreenerBlock = ({layout, index}: IProps) => {
                     dispatch(setIsAddingScreener(true))
                     dispatch(setActiveBlock(index))
                 }}
-                onDragStop={(e, d) => {
+                onDragStop={() => {
                     if (activeBlock !== index && activeBlock !== null) {
                         return
                     }
-                    const tempX = d.x
-                    const tempY = d.y
-                    const {x, y} = drag(tempX, tempY)
-                    dispatch(setLayoutPosition({x: x, y: y, index: index}))
+                    move()
+                        .then(({x, y, height, width}) => {
+                            dispatch(
+                                setLayoutPosition({
+                                    x: x,
+                                    y: y,
+                                    height: height,
+                                    width: width,
+                                    index: index,
+                                })
+                            )
+                        })
+                        .catch((e) => console.log(e))
                 }}
-                onResizeStop={(e, direction, ref, delta, position) => {
+                onResizeStop={async () => {
                     if (activeBlock !== index && activeBlock !== null) {
                         return
                     }
-                    const tempWidth = Number(ref.style.width.slice(0, -2))
-                    const tempHeight = Number(ref.style.height.slice(0, -2))
-                    const {height, width} = resize(tempHeight, tempWidth)
+                    const {height, width, x, y} = await move()
                     dispatch(
-                        setLayoutSize({
+                        setLayoutPosition({
+                            x: x,
+                            y: y,
                             height: height,
                             width: width,
                             index: index,
@@ -117,6 +147,7 @@ const ScreenerBlock = ({layout, index}: IProps) => {
     if (screener === "gap") {
         return (
             <Rnd
+                className="rnd-block"
                 style={
                     activeBlock !== index
                         ? activeBlock !== null
@@ -141,24 +172,33 @@ const ScreenerBlock = ({layout, index}: IProps) => {
                     dispatch(setIsAddingScreener(true))
                     dispatch(setActiveBlock(index))
                 }}
-                onDragStop={(e, d) => {
+                onDragStop={() => {
                     if (activeBlock !== index && activeBlock !== null) {
                         return
                     }
-                    const tempX = d.x
-                    const tempY = d.y
-                    const {x, y} = drag(tempX, tempY)
-                    dispatch(setLayoutPosition({x: x, y: y, index: index}))
+                    move()
+                        .then(({x, y, width, height}) => {
+                            dispatch(
+                                setLayoutPosition({
+                                    x: x,
+                                    y: y,
+                                    height: height,
+                                    width: width,
+                                    index: index,
+                                })
+                            )
+                        })
+                        .catch((e) => console.log(e))
                 }}
-                onResizeStop={(e, direction, ref, delta, position) => {
+                onResizeStop={async () => {
                     if (activeBlock !== index && activeBlock !== null) {
                         return
                     }
-                    const tempWidth = Number(ref.style.width.slice(0, -2))
-                    const tempHeight = Number(ref.style.height.slice(0, -2))
-                    const {height, width} = resize(tempHeight, tempWidth)
+                    const {height, width, x, y} = await move()
                     dispatch(
-                        setLayoutSize({
+                        setLayoutPosition({
+                            x: x,
+                            y: y,
                             height: height,
                             width: width,
                             index: index,

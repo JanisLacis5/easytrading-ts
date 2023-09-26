@@ -1,6 +1,13 @@
 import {PayloadAction, createSlice} from "@reduxjs/toolkit"
 import {IUserSingleLayout} from "../interfaces"
 
+interface ILayoutPosition {
+    x: number
+    y: number
+    height: number
+    width: number
+}
+
 interface CounterState {
     layoutParams: IUserSingleLayout[]
     isDone: boolean
@@ -8,6 +15,7 @@ interface CounterState {
     activeBlock: number | null
     layoutsMainHeight: number
     layoutsMainWidth: number
+    layoutMainPosition: ILayoutPosition
     isSaved: boolean
 }
 
@@ -18,6 +26,12 @@ const initialState: CounterState = {
     activeBlock: null,
     layoutsMainHeight: 0,
     layoutsMainWidth: 0,
+    layoutMainPosition: {
+        x: 0,
+        y: 0,
+        height: 0,
+        width: 0,
+    },
     isSaved: false,
 }
 
@@ -39,6 +53,18 @@ const layoutSlice = createSlice({
             state.layoutParams = []
             state.isDone = false
         },
+        setLayoutMainPosition: (
+            state,
+            action: PayloadAction<ILayoutPosition>
+        ) => {
+            const {x, y, height, width} = action.payload
+            state.layoutMainPosition = {
+                x: x,
+                y: y,
+                height: height,
+                width: width,
+            }
+        },
         editExistingLayout: (
             state,
             action: PayloadAction<IUserSingleLayout[]>
@@ -57,33 +83,29 @@ const layoutSlice = createSlice({
                 width: (400 / state.layoutsMainWidth) * 100,
             })
         },
-        setLayoutSize: (
-            state,
-            action: PayloadAction<{
-                height: number
-                width: number
-                index: number
-            }>
-        ) => {
-            const {height, width, index} = action.payload
-            console.log(
-                `passed to function = ${JSON.stringify([height, width])}`
-            )
-            state.layoutParams[index].height = height
-            state.layoutParams[index].width = width
-        },
         setLayoutPosition: (
             state,
             action: PayloadAction<{
                 x: number
                 y: number
+                height: number
+                width: number
                 index: number
             }>
         ) => {
-            const {x, y, index} = action.payload
-            console.log(`passed to function = ${JSON.stringify([x, y])}`)
+            const {x, y, height, width, index} = action.payload
+            console.log(
+                `passed to function = ${JSON.stringify({
+                    x: x.toFixed(0),
+                    y: y.toFixed(0),
+                    height: height.toFixed(0),
+                    width: width.toFixed(0),
+                })}`
+            )
             state.layoutParams[index].x = x
             state.layoutParams[index].y = y
+            state.layoutParams[index].height = height
+            state.layoutParams[index].width = width
         },
 
         //////////////////////////////////////////////////////////////////////////////////
@@ -104,7 +126,6 @@ const layoutSlice = createSlice({
 })
 
 export const {
-    setLayoutSize,
     setLayoutPosition,
     newLayoutScreener,
     setIsDone,
@@ -112,6 +133,7 @@ export const {
     setActiveBlock,
     setLayoutsMainParams,
     setIsSaved,
+    setLayoutMainPosition,
     resetLayoutParams,
     editExistingLayout,
 } = layoutSlice.actions

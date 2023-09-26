@@ -8,6 +8,7 @@ import {
     setIsAddingScreener,
     setIsDone,
     setIsSaved,
+    setLayoutMainPosition,
     setLayoutsMainParams,
 } from "../../../../features/layoutSlice"
 import {login} from "../../../../features/userSlice"
@@ -53,18 +54,23 @@ const NewLayout = () => {
 
     useEffect(() => {
         if (layoutsMain) {
+            const {x, y, height, width} = layoutsMain.getBoundingClientRect()
             dispatch(
                 setLayoutsMainParams({
                     height: (layoutsMain as HTMLElement).clientHeight,
                     width: (layoutsMain as HTMLElement).clientWidth,
                 })
             )
+            dispatch(
+                setLayoutMainPosition({
+                    x: x,
+                    y: y,
+                    height: height,
+                    width: width,
+                })
+            )
         }
     }, [layoutsMain])
-
-    useEffect(() => {
-        console.log(layoutParams)
-    }, [layoutParams])
 
     return (
         <section className="screener-layout">

@@ -4,21 +4,24 @@ export interface IScreenerBlockProps {
     x?: number
     y?: number
 }
-
+import {useEffect} from "react"
 const GapBlock = ({width, height, x, y}: IScreenerBlockProps) => {
+    useEffect(() => {
+        console.log(
+            `height = ${height?.toFixed(0)}%\n width = ${width?.toFixed(
+                0
+            )}%\n x = ${x?.toFixed(0)}%\n y = ${y?.toFixed(0)}%`
+        )
+    }, [x])
     return (
         <div
             className="gap-block"
-            style={
-                width || height
-                    ? {
-                          height: `${height}%`,
-                          width: `${width}%`,
-                          left: `${x}%`,
-                          top: `${y}%`,
-                      }
-                    : {}
-            }></div>
+            style={{
+                height: `${height}%`,
+                width: `${width}%`,
+                left: `${x}%`,
+                top: `${y}%`,
+            }}></div>
     )
 }
 export default GapBlock
