@@ -5,7 +5,8 @@ import {useEffect, useState} from "react"
 import {IUserSingleLayout} from "../../../../interfaces"
 import {useNavigate} from "react-router-dom"
 import ReturnObject from "./ReturnObject"
-import {editExistingLayout} from "../../../../features/layoutSlice"
+import {editExistingLayout, setEdit} from "../../../../features/layoutSlice"
+import findEditableIndex from "./findEditableLayoutIndex"
 
 const ScreenerDashboard = () => {
     const navigate = useNavigate()
@@ -25,6 +26,7 @@ const ScreenerDashboard = () => {
             )
         }
         dispatch(editExistingLayout(mapLayout))
+        dispatch(setEdit(findEditableIndex(layouts, mapLayout)))
         navigate("/screeners/new-layout")
     }
 

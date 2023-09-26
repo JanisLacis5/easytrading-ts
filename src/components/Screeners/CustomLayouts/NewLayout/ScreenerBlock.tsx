@@ -46,12 +46,7 @@ const ScreenerBlock = ({layout, index}: IProps) => {
         const waitResult = await waitForElm(".rnd-block")
         const rect = (waitResult as HTMLElement).getBoundingClientRect()
 
-        const {
-            x: layoutMainX,
-            y: layoutMainY,
-            height: layoutMainHeight,
-            width: layoutMainWidth,
-        } = layoutMainPosition
+        const {x: layoutMainX, y: layoutMainY} = layoutMainPosition
 
         const {
             height: screenerHeight,

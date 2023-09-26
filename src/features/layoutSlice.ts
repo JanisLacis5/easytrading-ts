@@ -4,8 +4,6 @@ import {IUserSingleLayout} from "../interfaces"
 interface ILayoutPosition {
     x: number
     y: number
-    height: number
-    width: number
 }
 
 interface CounterState {
@@ -16,7 +14,7 @@ interface CounterState {
     layoutsMainHeight: number
     layoutsMainWidth: number
     layoutMainPosition: ILayoutPosition
-    isSaved: boolean
+    edit: number | null
 }
 
 const initialState: CounterState = {
@@ -29,10 +27,8 @@ const initialState: CounterState = {
     layoutMainPosition: {
         x: 0,
         y: 0,
-        height: 0,
-        width: 0,
     },
-    isSaved: false,
+    edit: null,
 }
 
 const layoutSlice = createSlice({
@@ -57,12 +53,10 @@ const layoutSlice = createSlice({
             state,
             action: PayloadAction<ILayoutPosition>
         ) => {
-            const {x, y, height, width} = action.payload
+            const {x, y} = action.payload
             state.layoutMainPosition = {
                 x: x,
                 y: y,
-                height: height,
-                width: width,
             }
         },
         editExistingLayout: (
@@ -94,14 +88,7 @@ const layoutSlice = createSlice({
             }>
         ) => {
             const {x, y, height, width, index} = action.payload
-            console.log(
-                `passed to function = ${JSON.stringify({
-                    x: x.toFixed(0),
-                    y: y.toFixed(0),
-                    height: height.toFixed(0),
-                    width: width.toFixed(0),
-                })}`
-            )
+
             state.layoutParams[index].x = x
             state.layoutParams[index].y = y
             state.layoutParams[index].height = height
@@ -119,8 +106,8 @@ const layoutSlice = createSlice({
         setActiveBlock: (state, action: PayloadAction<number | null>) => {
             state.activeBlock = action.payload
         },
-        setIsSaved: (state, action: PayloadAction<boolean>) => {
-            state.isSaved = action.payload
+        setEdit: (state, action: PayloadAction<number | null>) => {
+            state.edit = action.payload
         },
     },
 })
@@ -132,9 +119,9 @@ export const {
     setIsAddingScreener,
     setActiveBlock,
     setLayoutsMainParams,
-    setIsSaved,
     setLayoutMainPosition,
     resetLayoutParams,
     editExistingLayout,
+    setEdit,
 } = layoutSlice.actions
 export default layoutSlice.reducer

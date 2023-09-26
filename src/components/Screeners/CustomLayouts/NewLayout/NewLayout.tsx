@@ -5,9 +5,9 @@ import customFetch from "../../../../utils"
 import {
     newLayoutScreener,
     resetLayoutParams,
+    setEdit,
     setIsAddingScreener,
     setIsDone,
-    setIsSaved,
     setLayoutMainPosition,
     setLayoutsMainParams,
 } from "../../../../features/layoutSlice"
@@ -22,15 +22,12 @@ const NewLayout = () => {
     const [notAllowedHover, setNotAllowedHover] = useState(false)
     const [layoutsMain, setLayoutsMain] = useState<Element | null>()
 
-    const {isAddingScreener, layoutParams, isDone} = useAppSelector(
+    const {isAddingScreener, layoutParams, isDone, edit} = useAppSelector(
         (store) => store.layout
     )
     const {user} = useAppSelector((store) => store.user)
 
-    const handleSubmit = async (
-        e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-    ) => {
-        e.preventDefault()
+    const newLayout = async () => {
         if (!layoutParams.length) {
             toast.error("you must add at least 1 screener")
             return
@@ -41,20 +38,43 @@ const NewLayout = () => {
         })
         const {id, trades, notes, info} = user
         dispatch(login({id, trades, notes, info, layouts: data.layouts}))
-        dispatch(setIsSaved(true))
         dispatch(resetLayoutParams())
         toast.success("success")
         navigate("/screeners")
     }
 
+    const editLayout = async () => {
+        const {data} = await customFetch.post("/edit-layout", {
+            layoutIndex: edit,
+            layout: layoutParams,
+            id: user.id,
+        })
+        const {id, trades, notes, info} = user
+        dispatch(login({id, trades, notes, info, layouts: data.layouts}))
+        dispatch(resetLayoutParams())
+        dispatch(setEdit(null))
+        toast.success("success")
+        navigate("/screeners")
+    }
+
+    const handleSubmit = (
+        e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    ) => {
+        e.preventDefault()
+        if (edit !== null) {
+            editLayout()
+        } else {
+            newLayout()
+        }
+    }
+
     useEffect(() => {
         setLayoutsMain(document.querySelector(".new-layout-main"))
-        dispatch(setIsSaved(false))
     }, [])
 
     useEffect(() => {
         if (layoutsMain) {
-            const {x, y, height, width} = layoutsMain.getBoundingClientRect()
+            const {x, y} = layoutsMain.getBoundingClientRect()
             dispatch(
                 setLayoutsMainParams({
                     height: (layoutsMain as HTMLElement).clientHeight,
@@ -65,8 +85,6 @@ const NewLayout = () => {
                 setLayoutMainPosition({
                     x: x,
                     y: y,
-                    height: height,
-                    width: width,
                 })
             )
         }
