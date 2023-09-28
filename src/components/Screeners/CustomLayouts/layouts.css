@@ -34,13 +34,23 @@
     width: 25%;
 }
 
-.layout-buttons button {
+.layout-buttons > div:last-child {
+    display: flex;
+}
+
+.layout-buttons > div button {
+    width: 100%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: var(--color-grey-700);
     border: none;
     color: var(--color-grey-300);
+}
+
+#delete-layout-button {
+    background-color: var(--color-trade-red);
 }
 
 .layout-numbers {

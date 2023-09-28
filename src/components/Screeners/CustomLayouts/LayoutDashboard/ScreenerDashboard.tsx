@@ -5,8 +5,15 @@ import {useEffect, useState} from "react"
 import {IUserSingleLayout} from "../../../../interfaces"
 import {useNavigate} from "react-router-dom"
 import ReturnObject from "./ReturnObject"
-import {editExistingLayout, setEdit} from "../../../../features/layoutSlice"
+import {
+    editExistingLayout,
+    resetLayoutParams,
+    setEdit,
+} from "../../../../features/layoutSlice"
 import findEditableIndex from "./findEditableLayoutIndex"
+import customFetch from "../../../../utils"
+import {login} from "../../../../features/userSlice"
+import {toast} from "react-toastify"
 
 const ScreenerDashboard = () => {
     const navigate = useNavigate()
@@ -28,6 +35,21 @@ const ScreenerDashboard = () => {
         dispatch(editExistingLayout(mapLayout))
         dispatch(setEdit(findEditableIndex(layouts, mapLayout)))
         navigate("/screeners/new-layout")
+    }
+
+    const deleteLayout = async (index: number) => {
+        const {data} = await customFetch.put("/delete-layout", {
+            index: index,
+            id: user.id,
+        })
+        const {id, trades, notes, info} = user
+        dispatch(login({id, trades, notes, info, layouts: data.layouts}))
+        setLayouts(data.layouts)
+        dispatch(resetLayoutParams())
+        dispatch(setEdit(null))
+        setActiveLayout(0)
+        setMapLayout([])
+        toast.success("successfully deleted layout")
     }
 
     useEffect(() => {
@@ -72,9 +94,17 @@ const ScreenerDashboard = () => {
                             <AiOutlinePlus />
                         </button>
                     </div>
-                    <button type="button" onClick={editLayout}>
-                        Edit layout Nr. {activeLayout + 1}
-                    </button>
+                    <div className="edit-buttons">
+                        <button type="button" onClick={editLayout}>
+                            Edit layout Nr. {activeLayout + 1}
+                        </button>
+                        <button
+                            type="button"
+                            id="delete-layout-button"
+                            onClick={() => deleteLayout(activeLayout)}>
+                            Delete layout Nr. {activeLayout + 1}
+                        </button>
+                    </div>
                 </div>
             </div>
             <div className="layouts-main">

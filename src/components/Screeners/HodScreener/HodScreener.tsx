@@ -1,4 +1,4 @@
-import {useState} from "react"
+import {useEffect, useState} from "react"
 import "./hod.css"
 
 interface IHodData {
@@ -46,6 +46,16 @@ const HodScreener = ({height, width, x, y}: IProps) => {
             return String((flt / 1_000).toFixed(2)) + "K"
         }
     }
+
+    // useEffect(() => {
+    //     console.log(
+    //         `HODScreener block: \n height ${height?.toFixed(
+    //             0
+    //         )}%\n width = ${width?.toFixed(0)}%\n x = ${x?.toFixed(
+    //             0
+    //         )}%\n y = ${y?.toFixed(0)}%`
+    //     )
+    // }, [x])
 
     return (
         <section

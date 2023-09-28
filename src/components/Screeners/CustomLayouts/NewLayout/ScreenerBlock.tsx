@@ -1,4 +1,3 @@
-import {useEffect} from "react"
 import "../layouts.css"
 import {Rnd} from "react-rnd"
 import GapBlock from "../ScreenerBlocks/GapBlock"
@@ -29,21 +28,14 @@ const ScreenerBlock = ({layout, index}: IProps) => {
     } = layout
 
     const {
-        isDone,
         activeBlock,
         layoutsMainHeight,
         layoutsMainWidth,
         layoutMainPosition,
     } = useAppSelector((store) => store.layout)
 
-    const done = () => {
-        dispatch(setIsAddingScreener(false))
-        dispatch(setActiveBlock(null))
-        return
-    }
-
     const move = async () => {
-        const waitResult = await waitForElm(".rnd-block")
+        const waitResult = await waitForElm(`.elementNr${index}`)
         const rect = (waitResult as HTMLElement).getBoundingClientRect()
 
         const {x: layoutMainX, y: layoutMainY} = layoutMainPosition
@@ -70,14 +62,10 @@ const ScreenerBlock = ({layout, index}: IProps) => {
         }
     }
 
-    useEffect(() => {
-        if (isDone) done()
-    }, [isDone])
-
     if (screener === "hod") {
         return (
             <Rnd
-                className="rnd-block"
+                className={`elementNr${index}`}
                 style={
                     activeBlock !== index
                         ? activeBlock !== null
@@ -142,7 +130,7 @@ const ScreenerBlock = ({layout, index}: IProps) => {
     if (screener === "gap") {
         return (
             <Rnd
-                className="rnd-block"
+                className={`elementNr${index}`}
                 style={
                     activeBlock !== index
                         ? activeBlock !== null

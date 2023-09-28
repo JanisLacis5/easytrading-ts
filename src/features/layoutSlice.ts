@@ -8,7 +8,6 @@ interface ILayoutPosition {
 
 interface CounterState {
     layoutParams: IUserSingleLayout[]
-    isDone: boolean
     isAddingScreener: boolean
     activeBlock: number | null
     layoutsMainHeight: number
@@ -19,7 +18,6 @@ interface CounterState {
 
 const initialState: CounterState = {
     layoutParams: [],
-    isDone: false,
     isAddingScreener: false,
     activeBlock: null,
     layoutsMainHeight: 0,
@@ -47,7 +45,6 @@ const layoutSlice = createSlice({
         },
         resetLayoutParams: (state) => {
             state.layoutParams = []
-            state.isDone = false
         },
         setLayoutMainPosition: (
             state,
@@ -97,9 +94,6 @@ const layoutSlice = createSlice({
 
         //////////////////////////////////////////////////////////////////////////////////
 
-        setIsDone: (state, action: PayloadAction<boolean>) => {
-            state.isDone = action.payload
-        },
         setIsAddingScreener: (state, action: PayloadAction<boolean>) => {
             state.isAddingScreener = action.payload
         },
@@ -115,7 +109,6 @@ const layoutSlice = createSlice({
 export const {
     setLayoutPosition,
     newLayoutScreener,
-    setIsDone,
     setIsAddingScreener,
     setActiveBlock,
     setLayoutsMainParams,

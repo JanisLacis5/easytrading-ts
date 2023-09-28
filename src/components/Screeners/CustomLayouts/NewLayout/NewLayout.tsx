@@ -7,9 +7,9 @@ import {
     resetLayoutParams,
     setEdit,
     setIsAddingScreener,
-    setIsDone,
     setLayoutMainPosition,
     setLayoutsMainParams,
+    setActiveBlock,
 } from "../../../../features/layoutSlice"
 import {login} from "../../../../features/userSlice"
 import {toast} from "react-toastify"
@@ -22,7 +22,7 @@ const NewLayout = () => {
     const [notAllowedHover, setNotAllowedHover] = useState(false)
     const [layoutsMain, setLayoutsMain] = useState<Element | null>()
 
-    const {isAddingScreener, layoutParams, isDone, edit} = useAppSelector(
+    const {isAddingScreener, layoutParams, edit} = useAppSelector(
         (store) => store.layout
     )
     const {user} = useAppSelector((store) => store.user)
@@ -111,7 +111,6 @@ const NewLayout = () => {
                                     )
                                 )
                                 dispatch(setIsAddingScreener(true))
-                                dispatch(setIsDone(false))
                             }}
                             disabled={isAddingScreener ? true : false}>
                             <option value="">Add Screener</option>
@@ -130,14 +129,17 @@ const NewLayout = () => {
                                       pointerEvents: "none",
                                   }
                         }
-                        onClick={() => dispatch(setIsDone(true))}>
+                        onClick={() => {
+                            dispatch(setIsAddingScreener(false))
+                            dispatch(setActiveBlock(null))
+                        }}>
                         Done
                     </button>
                     <button
                         type="button"
                         onClick={handleSubmit}
                         style={
-                            isDone
+                            !isAddingScreener
                                 ? {}
                                 : {pointerEvents: "none", opacity: "0.5"}
                         }>
