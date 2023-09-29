@@ -57,7 +57,7 @@ const SiteLayout = () => {
 
     return (
         <main>
-            <Navbar />
+            {/* <Navbar /> */}
             {showSmallLinks ? (
                 <div className="small-links">
                     <div className="links">

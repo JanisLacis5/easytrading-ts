@@ -24,17 +24,9 @@ const LandingPage = () => {
                 src={backImage}
                 alt="background image"
             />
+            <div className="decorative-landing-div"></div>
             <div className="starter-page">
-                <div className="title">
-                    <h1>EasyTrading</h1>
-                </div>
-                <div className="description">
-                    <h3>Trading trackers, screeners and more</h3>
-                    <div className="buttons">
-                        <Link to="/about">Read more</Link>
-                        <Link to="/pricing">Get Started</Link>
-                    </div>
-                </div>
+                <h1 className="title">EasyTrading</h1>
             </div>
         </section>
     )

@@ -33,11 +33,11 @@ const initialState: IInitialState = {
     isLogged: localStorage.getItem("userId") ? true : false,
     isLoading: false,
     user: {
-        id: JSON.parse(localStorage.getItem("userId") || ""),
+        id: localStorage.getItem("userId") || "",
         trades: JSON.parse(
             localStorage.getItem("userTrades") || JSON.stringify([])
         ),
-        info: JSON.parse(localStorage.getItem("userInfo") || ""),
+        info: localStorage.getItem("userInfo") || "",
         notes: JSON.parse(
             localStorage.getItem("userNotes") || JSON.stringify([])
         ),

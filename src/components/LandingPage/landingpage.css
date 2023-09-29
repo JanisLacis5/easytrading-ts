@@ -1,11 +1,7 @@
 .landing-page {
-    position: absolute;
+    position: relative;
     height: 100vh;
-    top: 0;
     width: 100%;
-    pointer-events: none;
-    display: flex;
-    align-items: center;
 }
 
 .background-image {
@@ -15,11 +11,31 @@
     width: 100%;
 }
 
+.decorative-landing-div {
+    width: 100vh;
+    height: 100vh;
+    display: block;
+    background-color: var(--color-grey-300);
+    margin-left: 110vh;
+}
+
+.decorative-landing-div:after {
+    left: -100vh;
+    border-top: 50vh solid transparent;
+    border-right: 50vh solid var(--color-grey-300);
+    border-bottom: 50vh solid var(--color-grey-300);
+    border-left: 50vh solid transparent;
+    display: block;
+    position: relative;
+    content: "";
+}
+
 .starter-page {
-    display: grid;
-    grid-template-rows: 1fr 1.5fr;
-    width: 100%;
-    margin-top: 8%;
+    position: absolute;
+    height: 100%;
+    width: 50%;
+    right: 0;
+    top: 0;
 }
 
 .title h1 {
