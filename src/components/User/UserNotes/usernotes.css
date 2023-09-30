@@ -31,7 +31,7 @@
 }
 
 .user-notes-addnote input:focus,
-textarea:focus {
+.user-notes-addnote textarea:focus {
     outline: none;
 }
 

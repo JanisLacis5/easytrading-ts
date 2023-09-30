@@ -128,7 +128,7 @@
 }
 
 .user-page-main-info h2,
-h4 {
+.user-page-main-info h4 {
     padding-left: 5%;
 }
 
@@ -271,7 +271,7 @@ h4 {
 
 @media screen and (min-width: 1200px) {
     .user-page-main-info h2,
-    h4 {
+    .user-page-main-info h4 {
         padding-left: 0;
     }
     .user-page-container {

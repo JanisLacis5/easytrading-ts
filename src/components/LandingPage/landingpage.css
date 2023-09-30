@@ -6,17 +6,21 @@
 
 .background-image {
     position: absolute;
-    z-index: -1;
+    top: 0;
+    z-index: -2;
     height: 100%;
     width: 100%;
 }
 
 .decorative-landing-div {
-    width: 100vh;
+    width: 75vh;
     height: 100vh;
     display: block;
-    background-color: var(--color-grey-300);
-    margin-left: 110vh;
+    /* background-color: var(--color-grey-300); */
+    margin-left: 130vh;
+    position: absolute;
+    top: 0;
+    z-index: -1;
 }
 
 .decorative-landing-div:after {
@@ -26,39 +30,27 @@
     border-bottom: 50vh solid var(--color-grey-300);
     border-left: 50vh solid transparent;
     display: block;
-    position: relative;
+    position: absolute;
+    top: 0;
+    z-index: -1;
     content: "";
+    background-color: #fff;
 }
 
 .starter-page {
-    position: absolute;
     height: 100%;
-    width: 50%;
-    right: 0;
-    top: 0;
-}
-
-.title h1 {
-    width: 100%;
-    text-align: center;
-    color: var(--color-grey-100);
-    font-size: 5.5rem;
-    height: 100%;
+    width: 90%;
+    background-color: transparent;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-end;
     justify-content: center;
+    gap: 1.5rem;
 }
 
-.description {
-    display: grid;
-    grid-template-rows: 1fr 5fr;
-}
-
-.description h3 {
-    text-align: center;
-    color: var(--color-grey-100);
-    font-weight: 400;
-    font-size: 25px;
+.title {
+    width: fit-content;
+    height: fit-content;
 }
 
 .buttons {

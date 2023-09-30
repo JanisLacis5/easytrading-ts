@@ -185,7 +185,7 @@ button#tradelog-filters-clear {
 }
 
 .tradelog-filters input,
-select {
+.tradelog-filters select {
     background-color: var(--color-grey-900);
     color: var(--color-grey-100);
     color-scheme: dark;
@@ -193,7 +193,7 @@ select {
 }
 
 .tradelog-filters input:focus,
-select:focus {
+.tradelog-filters select:focus {
     outline: none;
 }
 

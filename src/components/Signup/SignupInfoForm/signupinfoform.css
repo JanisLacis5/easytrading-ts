@@ -11,8 +11,8 @@
 }
 
 .signup-info-form form,
-h1,
-p {
+.signup-info-form h1,
+.signup-info-form p {
     width: 70%;
 }
 
