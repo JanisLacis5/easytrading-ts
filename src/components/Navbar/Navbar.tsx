@@ -1,8 +1,8 @@
-import {Link} from "react-router-dom"
 import "./navbar.css"
 import {useAppSelector} from "../../store/storeHooks"
-import UserButton from "../User/UserButton"
 import SmallNavbar from "./SmallNavbar"
+import logo from "../../assets/logo.png"
+import {Link} from "react-router-dom"
 
 const Navbar = () => {
     const {isLogged} = useAppSelector((store) => store.user)
@@ -15,41 +15,39 @@ const Navbar = () => {
 
     return (
         <nav>
-            <div className="logo">
-                <h1>
-                    <span className="logo-easy">Easy</span>
-                    <span className="logo-trading">Trading</span>
-                </h1>
-            </div>
-            <div className="links">
-                <Link
-                    className="link"
-                    to={isLogged ? "/dashboard" : "/landing"}>
-                    {isLogged ? "Dashboard" : "Landing"}
-                </Link>
-                <Link className="link" to="/about">
-                    About
-                </Link>
-                <Link className="link" to="/pricing">
-                    Pricing
-                </Link>
-                <Link className="link" to="/contact">
-                    Contact
-                </Link>
-            </div>
-            <div className="login">
-                {!isLogged && (
-                    <Link className="signup-btn" to="/signup">
-                        Sign up
+            <div className="nav-content">
+                <div className="logo">
+                    <img src={logo} alt="logo" />
+                </div>
+                <div className="nav-links">
+                    <Link to="/dashboard">
+                        <p>Dashboard</p>
                     </Link>
-                )}
-                {isLogged ? (
-                    <UserButton />
-                ) : (
-                    <Link className="login-btn" to="/login">
-                        Login
+                    <Link to="/dashboard">
+                        <p>Trading</p>
                     </Link>
-                )}
+                    <Link to="/dashboard">
+                        <p>Screeners</p>
+                    </Link>
+                    <Link to="/dashboard">
+                        <p>Chatrooms</p>
+                    </Link>
+                </div>
+                <button type="button" className="user">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={0.75}
+                        stroke="currentColor"
+                        className="w-6 h-6">
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
+                        />
+                    </svg>
+                </button>
             </div>
         </nav>
     )

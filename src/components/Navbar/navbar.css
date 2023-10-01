@@ -1,79 +1,58 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@500&family=Noto+Serif&family=Roboto:ital,wght@1,300&display=swap");
-
 /* NORMAL NAVBAR */
 
 nav {
-    display: grid;
-    grid-template-columns: 2fr 3fr 2fr;
-    padding: 1.5rem;
-    width: 100%;
-    z-index: 1000;
-    background-color: transparent;
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.logo h1 {
-    font-family: "Inter", sans-serif;
-    font-size: 2rem;
-    font-weight: 900;
+.nav-content {
+    width: calc(100% - 8rem);
+    height: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    height: 100%;
+}
+
+.logo > img {
+    height: 100%;
+}
+
+.nav-links {
+    height: 50%;
+    width: 39%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav-links a {
+    height: 100%;
+}
+
+.nav-links p {
+    display: inline-block;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    color: var(--black);
+}
+
+.user {
+    width: 4%;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
-}
-
-.logo-easy {
-    color: var(--color-grey-100);
-}
-
-.logo-trading {
-    color: var(--color-grey-400);
-}
-
-.links {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-}
-
-.link {
-    color: var(--color-grey-200);
-    font-size: 0.85rem;
-    font-weight: 300;
-    cursor: pointer;
-    padding: 1rem;
-}
-
-.link:hover {
-    opacity: 0.5;
-}
-
-.login {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-}
-
-.login-btn,
-.signup-btn {
-    font-size: 25px;
-    font-weight: 800;
-    padding: 0.3rem;
-    width: 7rem;
-    text-align: center;
-    border-radius: 3rem;
-    color: var(--color-grey-300);
     background-color: transparent;
-    cursor: pointer;
     border: none;
+    margin-right: 2rem;
 }
 
-.signup-btn {
-    border: 2px solid var(--color-grey-200);
-}
-
-.login-btn:hover,
-.signup-btn:hover {
-    opacity: 0.5;
+.user > svg {
+    height: 100%;
 }

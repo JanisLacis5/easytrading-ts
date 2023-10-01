@@ -57,7 +57,7 @@ const SiteLayout = () => {
 
     return (
         <main>
-            {/* <Navbar /> */}
+            {window.location.pathname !== "/landing" && <Navbar />}
             {showSmallLinks ? (
                 <div className="small-links">
                     <div className="links">
