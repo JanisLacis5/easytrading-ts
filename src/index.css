@@ -108,6 +108,11 @@ p {
     font-weight: 200;
 }
 
+svg {
+    padding: 0;
+    margin: 0;
+}
+
 @keyframes spinner {
     to {
         transform: rotate(360deg);
