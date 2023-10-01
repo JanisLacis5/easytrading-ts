@@ -1,8 +1,8 @@
 .landing-page {
     position: relative;
-    height: 100vh;
+    height: 400vh;
     width: 100%;
-    /* overflow: hidden; */
+    overflow: hidden;
 }
 
 /* HERO */
@@ -16,24 +16,24 @@
     position: absolute;
     top: 0;
     z-index: -2;
-    height: 100%;
+    height: 100vh;
     width: 100%;
 }
 
 .landing-shadow {
     height: 200vh;
-    width: 200vh;
+    width: 235vh;
     background-color: #fff;
     position: absolute;
     top: 0;
-    margin: 0 0 0 81vh;
+    margin: 12.4vh 0 0 70vh;
     rotate: 45deg;
-    z-index: -1;
-    box-shadow: inset 10px 0 3em var(--black);
+    z-index: 1;
+    box-shadow: inset 10px -10px 3em var(--black);
 }
 
 .starter-page {
-    height: 100%;
+    height: 100vh;
     width: 90%;
     background-color: transparent;
     display: flex;
@@ -41,6 +41,8 @@
     align-items: flex-end;
     justify-content: center;
     gap: 2rem;
+    position: absolute;
+    z-index: 2;
 }
 
 .starter-page > div {
@@ -58,31 +60,154 @@
     height: fit-content;
 }
 
-.starter-page button {
+.starter-page a {
     padding: 1rem 2.5rem;
     border-radius: 6.25rem;
     background: var(--gradient);
     width: 14rem;
     border: none;
+    color: var(--black);
 }
 
-.starter-page button div {
+.starter-page a div {
     display: flex;
     width: 100%;
     height: 3rem;
     justify-content: space-between;
 }
 
-.starter-page button div h6 {
+.starter-page a div h6 {
     display: flex;
     align-items: center;
 }
 
-.starter-page button div svg {
+.starter-page a div svg {
     height: 100%;
 }
 
 /* ABOUT */
 
 .about {
+    height: 100vh;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 15% 5% 5% 5%;
+}
+
+.about-image {
+    width: 50%;
+    height: 100%;
+    background-color: #d9d9d9;
+}
+
+.about-text {
+    right: 0;
+    top: 0;
+    margin: 20vh 10% 0 0;
+    position: absolute;
+    z-index: 2;
+    width: 62%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 3rem;
+}
+
+.about-text h3,
+.about-text h5 {
+    text-align: end;
+}
+
+.about-text h5 {
+    width: 76%;
+}
+
+/* ABOUT ANALYSIS  */
+
+.about-analysis {
+    background-color: var(--black-5);
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    padding: 8% 5% 0 5%;
+    display: flex;
+    gap: 3rem;
+    flex-direction: column;
+}
+
+.about-analysis > div {
+    width: 100%;
+    height: 57%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.about-analysis h3 {
+    width: 39%;
+    height: fit-content;
+    margin-top: 4%;
+}
+
+.analysis-image {
+    width: 55%;
+    height: 100%;
+    background-color: #d9d9d9;
+    top: 0;
+    right: 0;
+}
+
+.about-analysis h5 {
+    width: 60%;
+}
+
+/* ABOUT SCREENERS */
+
+.about-screeners {
+    height: 100vh;
+    background-color: #fff;
+    padding: 4rem;
+}
+
+.about-screeners h3 {
+    text-align: center;
+}
+
+.about-screeners > div {
+    margin-top: 2rem;
+    width: 100%;
+    height: calc(100% - 4rem);
+    display: flex;
+    justify-content: space-between;
+    gap: 3rem;
+}
+
+.about-screeners > div .images {
+    width: 100%;
+    position: relative;
+}
+
+.about-screeners > div h5 {
+    width: 100%;
+    margin-top: 4rem;
+}
+
+.first-image,
+.second-image {
+    width: 60%;
+    aspect-ratio: 1;
+    position: absolute;
+}
+
+.first-image {
+    top: 0;
+    right: 0;
+    background-color: rgb(196, 194, 194);
+}
+
+.second-image {
+    bottom: 0;
+    left: 0;
+    background-color: grey;
 }

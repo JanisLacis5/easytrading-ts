@@ -24,7 +24,7 @@ const LandingPage = () => {
                         <h1 className="title">EasyTrading</h1>
                         <h5>Trading screeners, trackers and more</h5>
                     </div>
-                    <button type="button">
+                    <a href="#about">
                         <div>
                             <h6>Get Started</h6>
                             <svg
@@ -37,11 +37,11 @@ const LandingPage = () => {
                                 <path
                                     stroke-linecap="round"
                                     stroke-linejoin="round"
-                                    d="M8.25 4.5l7.5 7.5-7.5 7.5"
+                                    d="M19.5 8.25l-7.5 7.5-7.5-7.5"
                                 />
                             </svg>
                         </div>
-                    </button>
+                    </a>
                 </div>
                 <img
                     className="background-image"
@@ -50,8 +50,53 @@ const LandingPage = () => {
                 />
                 <div className="landing-shadow"></div>
             </section>
-            <section className="about" id="about"></section>
+            <section className="about" id="about">
+                <div className="about-image"></div>
+                <div className="about-text">
+                    <h3>All the trading tools you need</h3>
+                    <h5>
+                        Welcome to EasyTrading, your go-to platform for in-depth
+                        stock market trade analysis. Our user-friendly tools
+                        empower traders to make informed decisions, track their
+                        portfolio performance, and gain valuable insights into
+                        their investments. Join us on the journey to financial
+                        success today!
+                    </h5>
+                </div>
+            </section>
+            <section className="about-analysis">
+                <div>
+                    <h3>Analyze your past trades</h3>
+                    <div className="analysis-image"></div>
+                </div>
+                <h5>
+                    Explore our intuitive dashboard, where you can effortlessly
+                    monitor key trade metrics such as successful trades, losses,
+                    and your overall profit and loss. Gain a comprehensive view
+                    of your trading performance at a glance, helping you refine
+                    your strategies and achieve your financial goals.
+                </h5>
+            </section>
+            <section className="about-screeners">
+                <h3>Screeners</h3>
+                <div>
+                    <h5>
+                        Maximize your trading potential with our dual-screening
+                        system. Our first screener identifies stocks with the
+                        biggest gap percentage, helping you capitalize on
+                        early-morning volatility. Meanwhile, our second screener
+                        scans for stocks approaching their high of the day,
+                        ensuring you never miss out on momentum plays. Unlock
+                        the power of precision trading with us
+                    </h5>
+                    <div className="images">
+                        <div className="first-image"></div>
+                        <div className="second-image"></div>
+                    </div>
+                </div>
+            </section>
         </section>
     )
 }
+
 export default LandingPage
