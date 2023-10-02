@@ -61,9 +61,6 @@ const LoginForm = () => {
     return (
         <form className="login-form" onSubmit={handleSubmit}>
             <div className="login-input">
-                <div className="login-icon">
-                    <img src={userIcon} alt="icon" className="user-icon" />
-                </div>
                 <input
                     className="login-input-field"
                     type="email"
@@ -75,9 +72,6 @@ const LoginForm = () => {
                 />
             </div>
             <div className="login-input">
-                <div className="login-icon">
-                    <img src={passwordIcon} alt="icon" className="user-icon" />
-                </div>
                 <input
                     className="login-input-field"
                     type="password"

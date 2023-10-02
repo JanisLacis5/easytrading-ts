@@ -7,13 +7,11 @@ const Login = () => {
         <section className="card-page">
             <div className="login-box">
                 <div className="login-title">
-                    <h2>User Login</h2>
+                    <h4>Sign in</h4>
                 </div>
-                <div className="login-main">
-                    <LoginForm />
-                </div>
+                <LoginForm />
                 <div className="social-login">
-                    <p>or login with</p>
+                    <p>or</p>
                     <div className="social-login-buttons">
                         <a
                             href="http://localhost:3000/auth/google"

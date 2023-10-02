@@ -140,24 +140,6 @@ main {
     grid-template-rows: 1fr 9fr;
 }
 
-.dashboard-page-1 {
-    display: grid;
-    height: 100%;
-    width: 100%;
-    grid-template-columns: 2.5% 97.5%;
-    overflow-x: hidden;
-    padding-right: 1rem;
-}
-
-.card-page {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    overflow: scroll;
-    align-items: center;
-}
-
 @media screen and (min-width: 900px) {
     .dashboard-page-1 {
         grid-template-columns: 2fr 22fr;
