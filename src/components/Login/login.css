@@ -1,9 +1,20 @@
+.login-container {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background: var(--gradient-light);
+}
+
 .login-box {
     height: calc(100vh - 8rem);
-    margin-top: 4rem;
-    padding: 3rem 2rem;
+    margin-top: 3rem;
+    padding: 3rem 1.5rem;
     width: 30%;
-    background: #d9d9d9;
+    background: #fff;
+    -moz-box-shadow: 0 0 1rem var(--black);
+    -webkit-box-shadow: 0 0 1rem var(--black);
+    box-shadow: 0 0 1rem var(--black);
 }
 
 .login-title {
@@ -23,10 +34,14 @@
 .login-input {
     display: flex;
     align-items: center;
-    margin-bottom: 2rem;
-    height: 4rem;
+    margin-bottom: 1.5rem;
+    height: 3rem;
     width: 100%;
     position: relative;
+}
+
+.login-input:first-child {
+    margin-bottom: 3rem;
 }
 
 .login-input-field {
@@ -38,43 +53,56 @@
     background-color: transparent;
 }
 
-.login-input-field::placeholder {
+.login-input label {
+    position: absolute;
+    height: 50%;
+    top: 1rem;
+    left: 0;
+    pointer-events: none;
+    transition: 0.4s ease all;
     font-size: 1rem;
     color: var(--black-50);
+}
+
+.login-input input:empty {
+    height: 100%;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid var(--black);
+    width: 100%;
+    caret-color: var(--black-50);
+    color: var(--black);
+    font-size: 1rem;
+}
+
+.login-input input:focus {
+    outline: none;
+    border-bottom: 1px solid var(--black);
+}
+
+.login-input input:focus ~ label {
+    top: -0.5rem;
+    font-size: 0.75rem;
+}
+
+.login-input .label-up {
+    top: -0.5rem;
+    font-size: 0.75rem;
 }
 
 .login-input-field:focus {
     outline: none;
 }
 
-.login-icon {
-    position: absolute;
-    height: 4rem;
-    width: 4rem;
-    background-color: var(--color-grey-300);
-    border-radius: 50%;
-    z-index: 10000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.user-icon {
-    position: absolute;
-    height: 70%;
-    width: 70%;
-}
-
 .login-button {
-    margin: 0 2rem;
-    width: 7rem;
-    height: 2rem;
+    width: 36%;
+    height: 3rem;
     border: none;
-    border-radius: 3rem;
-    font-size: 1.5rem;
-    opacity: 0.8;
+    font-size: 1rem;
     cursor: pointer;
-    background-color: var(--clr-white);
-    color: var(--color-grey-50);
+    background: var(--gradient);
+    color: var(--black);
+    margin-top: 2rem;
 }
 
 .social-login {
@@ -85,8 +113,12 @@
 }
 
 .social-login p {
-    text-align: center;
     color: var(--color-grey-400);
+    margin: 2rem 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .social-login-buttons {
@@ -97,8 +129,8 @@
 }
 
 .social-button {
-    height: 3rem;
-    width: 3rem;
+    height: 1.5rem;
+    width: 1.5rem;
     border: 0;
     border-radius: 50%;
     background-color: var(--clr-grey-10);
@@ -106,4 +138,16 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
+}
+
+.social-button > svg {
+    height: 100%;
+    width: 100%;
+    color: var(--black);
+}
+
+.social-login hr {
+    background-color: var(--black-50);
+    width: 45%;
+    height: 1px;
 }

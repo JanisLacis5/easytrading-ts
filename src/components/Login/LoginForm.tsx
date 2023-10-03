@@ -1,6 +1,4 @@
 import "./login.css"
-import userIcon from "../../assets/user-icon.svg"
-import passwordIcon from "../../assets/password-icon.svg"
 import customFetch from "../../utils"
 import {useState} from "react"
 import md5 from "md5"
@@ -66,10 +64,12 @@ const LoginForm = () => {
                     type="email"
                     name="email"
                     id="email"
-                    placeholder="Email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
+                <label htmlFor="email" className={email ? "label-up" : ""}>
+                    Email
+                </label>
             </div>
             <div className="login-input">
                 <input
@@ -77,10 +77,14 @@ const LoginForm = () => {
                     type="password"
                     name="password"
                     id="password"
-                    placeholder="Password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
+                <label
+                    htmlFor="password"
+                    className={password ? "label-up" : ""}>
+                    Password
+                </label>
             </div>
             <button type="submit" className="login-button">
                 Login

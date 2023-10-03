@@ -26,6 +26,11 @@
     --primary: #00fff4;
     --secondary: #0dff6a;
     --gradient: linear-gradient(315deg, #00fff4, #0dff6a);
+    --gradient-light: linear-gradient(
+        315deg,
+        rgba(0, 255, 244, 0.4),
+        rgba(13, 255, 106, 0.4)
+    );
     --black: rgba(42, 54, 53, 1);
     --black-75: rgba(42, 54, 53, 0.75);
     --black-50: rgba(42, 54, 53, 0.5);
