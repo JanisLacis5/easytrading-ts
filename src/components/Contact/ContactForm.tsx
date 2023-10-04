@@ -9,6 +9,7 @@ const ContactForm = () => {
 
     const {user} = useAppSelector((store) => store.user)
 
+    // SENDING MESSAGE TO DB ON SUBMIT
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         const {data} = await customFetch.post("/message", {
@@ -17,8 +18,8 @@ const ContactForm = () => {
             question,
             message,
         })
-        setQuestion("")
         setMessage("")
+        setQuestion("")
         toast.success(data.message)
     }
 

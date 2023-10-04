@@ -1,15 +1,15 @@
 .calendar-main {
-    padding-left: 1rem;
-    overflow: hidden;
     display: flex;
     justify-content: center;
     max-height: calc(100vh - 6.5rem);
+    overflow: hidden;
+    padding-left: 1rem;
 }
 
 .calendar-container {
     max-height: calc(100vh - 6.5rem);
-    width: 80%;
     padding-top: 2%;
+    width: 80%;
 }
 
 /* REACT-BIG-CALENDAR BUILT-IN CLASSES */

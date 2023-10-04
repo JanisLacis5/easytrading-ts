@@ -1,20 +1,20 @@
 /* CONTACT MAIN */
 
 .contact {
-    display: flex;
     align-items: center;
-    flex-direction: column;
-    width: 90%;
     color: var(--color-grey-300);
+    display: flex;
+    flex-direction: column;
     place-self: center;
+    width: 90%;
 }
 
 .contact-main {
-    width: 100%;
     display: flex;
     flex-direction: column;
-    height: 100%;
     gap: 5%;
+    height: 100%;
+    width: 100%;
 }
 
 .contact h1 {
@@ -25,11 +25,11 @@
 /* CONTACT FORM */
 
 .contact-form {
-    padding: 1% 0;
-    width: 100%;
-    height: 90%;
     display: flex;
     flex-direction: column;
+    height: 90%;
+    padding: 1% 0;
+    width: 100%;
 }
 
 .contact-form-main {
@@ -44,35 +44,35 @@
 }
 
 .contact-form-input-container .floating {
-    position: relative;
     height: 45%;
+    position: relative;
     width: 100%;
 }
 
 .contact-form-input-container label {
-    position: absolute;
+    font-size: 15px;
     height: 50%;
-    top: 25%;
     left: 0;
     pointer-events: none;
+    position: absolute;
+    top: 25%;
     transition: 0.4s ease all;
-    font-size: 15px;
 }
 
 .contact-form-input-container input:empty {
-    height: 100%;
     background-color: transparent;
-    border: none;
     border-bottom: 1px solid var(--color-grey-300);
-    width: 100%;
+    border: none;
     caret-color: var(--color-grey-300);
     color: var(--color-grey-300);
     font-size: 1rem;
+    height: 100%;
+    width: 100%;
 }
 
 .contact-form-input-container input:focus {
-    outline: none;
     border-bottom: 1px solid var(--color-grey-300);
+    outline: none;
 }
 
 .contact-form-input-container input:focus ~ label {
@@ -81,8 +81,8 @@
 }
 
 .contact-form-input-container .label-up {
-    top: -15px;
     font-size: 12px;
+    top: -15px;
 }
 
 .contact-form-main > div {
@@ -95,12 +95,12 @@
 }
 
 .contact-form-main > div:nth-child(2) textarea {
-    width: 100%;
     background-color: var(--color-grey-800);
-    resize: none;
-    padding: 1%;
-    font-family: inherit;
     border: none;
+    font-family: inherit;
+    padding: 1%;
+    resize: none;
+    width: 100%;
 }
 
 .contact-form-main > div:nth-child(2) textarea,
@@ -117,25 +117,25 @@ textarea::placeholder {
 }
 
 .contact-form-main > div:last-child button {
-    height: 35%;
-    width: 30%;
-    display: flex;
     align-items: center;
-    justify-content: center;
     background-color: var(--color-grey-800);
+    border-radius: 2rem;
     border: none;
     color: var(--color-grey-300);
+    display: flex;
     font-size: 100%;
-    border-radius: 2rem;
+    height: 35%;
+    justify-content: center;
+    width: 30%;
 }
 
 /* OTHER */
 
 .contact-other {
-    padding: 1% 0;
-    height: 70%;
     display: grid;
     grid-template-rows: 1fr 5fr;
+    height: 70%;
+    padding: 1% 0;
 }
 .contact-other h2 {
     padding: 1rem 0;
@@ -146,9 +146,9 @@ textarea::placeholder {
 }
 
 .contact-other ul {
-    height: 100%;
     display: grid;
     grid-template-rows: repeat(3, 1fr);
+    height: 100%;
 }
 
 .contact-other ul li:last-child p {
@@ -165,10 +165,10 @@ textarea::placeholder {
     /* OTHER */
 
     .contact-other ul {
-        height: 100%;
         display: grid;
-        grid-template-rows: 1fr;
         grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: 1fr;
+        height: 100%;
     }
 }
 
@@ -176,25 +176,25 @@ textarea::placeholder {
     /* CONTACT MAIN */
 
     .contact-main {
+        color: var(--color-grey-300);
         display: flex;
         flex-direction: row;
-        width: 90%;
-        color: var(--color-grey-300);
         place-self: center;
+        width: 90%;
     }
 
     .contact-form-main {
-        width: 90%;
         align-self: center;
+        width: 90%;
     }
 
     /* OTHER */
 
     .contact-other ul {
-        height: 100%;
         display: grid;
-        grid-template-rows: repeat(3, 1fr);
         grid-template-columns: 1fr;
+        grid-template-rows: repeat(3, 1fr);
+        height: 100%;
     }
 }
 

@@ -7,6 +7,7 @@ import {useEffect} from "react"
 import events, {IAnsArr} from "./events"
 import {useAppSelector} from "../../../store/storeHooks"
 
+// START WEEK FROM MONDAY
 moment.locale("ko", {
     week: {
         dow: 1,
@@ -21,10 +22,12 @@ const MyCalendar = () => {
 
     const {user} = useAppSelector((store) => store.user)
 
+    // SET profitDates WHEN USERS TRADES ARE LOADED
     useEffect(() => {
         setProfitDates(events(user.trades))
     }, [user.trades])
 
+    // DAYS COLOR BASED ON PL OF DAY
     const eventStyleGetter = (event: IAnsArr) => {
         const backgroundColor =
             event.profit > 0

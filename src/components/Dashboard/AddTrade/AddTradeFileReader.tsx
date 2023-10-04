@@ -26,6 +26,7 @@ const AddTradeFileReader = () => {
 
     const {user} = useAppSelector((store) => store.user)
 
+    // SEND DATA TO DB ON SUBMIT
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         try {
@@ -34,16 +35,17 @@ const AddTradeFileReader = () => {
                 id: user.id,
             })
             dispatch(login({id: user.id, trades: data.trades, info: user.info}))
-        } catch (error) {
-            console.log(error)
+        } catch (e) {
+            console.log(e)
         }
+        setExtention("")
         setFile(undefined)
         setPlatform("")
-        setExtention("")
         setTradeData([])
         navigate("/dashboard")
     }
 
+    // READ AND PREPARE FILE FOR SENDING TO DB
     const prepareFile = () => {
         if (file) {
             const reader = new FileReader()
@@ -79,6 +81,7 @@ const AddTradeFileReader = () => {
         }
     }
 
+    // WHEN USER ADDS FILE DO prepareFile() FUNCTION
     useEffect(() => {
         prepareFile()
     }, [file])

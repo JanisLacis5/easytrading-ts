@@ -6,7 +6,6 @@ import {useAppDispatch, useAppSelector} from "../../../store/storeHooks"
 import {login} from "../../../features/userSlice"
 import {toast} from "react-toastify"
 import {setState} from "../../../features/addTradeFormSlice"
-import {useEffect} from "react"
 
 const AddTrade = () => {
     const navigate = useNavigate()
@@ -17,10 +16,7 @@ const AddTrade = () => {
         (store) => store.addTrade
     )
 
-    useEffect(() => {
-        console.log(stock)
-    }, [stock])
-
+    // SEND TRADE DATA TO DB ON SUBMIT
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         const {data} = await customFetch.post("/newtrade", {
@@ -51,12 +47,12 @@ const AddTrade = () => {
         } else {
             toast.error("There was an error")
         }
-        dispatch(setState({prop: "stock", value: ""}))
-        dispatch(setState({prop: "accBefore", value: ""}))
         dispatch(setState({prop: "accAfter", value: ""}))
-        dispatch(setState({prop: "date", value: ""}))
-        dispatch(setState({prop: "time", value: ""}))
+        dispatch(setState({prop: "accBefore", value: ""}))
         dispatch(setState({prop: "action", value: ""}))
+        dispatch(setState({prop: "date", value: ""}))
+        dispatch(setState({prop: "stock", value: ""}))
+        dispatch(setState({prop: "time", value: ""}))
     }
 
     return (
