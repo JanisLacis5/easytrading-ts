@@ -1,14 +1,10 @@
 import "./signup.css"
 import "../Login/login.css"
-import userIcon from "../../assets/user-icon.svg"
-import infoIcon from "../../assets/info-icon.svg"
-import passwordIcon from "../../assets/password-icon.svg"
 import customFetch from "../../utils"
 import {toast} from "react-toastify"
 import {useNavigate} from "react-router-dom"
 import {useAppSelector, useAppDispatch} from "../../store/storeHooks"
 import {setIsLoading, setIsNotLoading} from "../../features/userSlice"
-import {passwordRequirements} from "../../functions"
 import {setDefaultStateBool} from "../../features/defaultSlice"
 import {setUserInfoString} from "../../features/userInfoFormSlice"
 
@@ -20,7 +16,7 @@ const SignupForm = () => {
         (store) => store.userInfo
     )
 
-    const {isRequirements, isMetReq} = useAppSelector((store) => store.default)
+    const {isMetReq} = useAppSelector((store) => store.default)
     const {isLoading} = useAppSelector((store) => store.user)
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -67,6 +63,8 @@ const SignupForm = () => {
         }
     }
 
+    // TODO: make error message if password doesnt meet requirements
+
     if (isLoading) {
         return <div className="loading"></div>
     }
@@ -74,15 +72,10 @@ const SignupForm = () => {
     return (
         <form className="signup-form" onSubmit={handleSubmit}>
             <div className="signup-input">
-                <div className="signup-icon">
-                    <img src={userIcon} alt="icon" className="user-icon" />
-                </div>
                 <input
-                    className="signup-input-field"
                     type="email"
                     name="email"
                     id="email"
-                    placeholder="Email"
                     value={email}
                     onChange={(e) =>
                         dispatch(
@@ -94,17 +87,15 @@ const SignupForm = () => {
                     }
                     required
                 />
+                <label htmlFor="email" className={email ? "label-up" : ""}>
+                    Email
+                </label>
             </div>
             <div className="signup-input">
-                <div className="signup-icon">
-                    <img src={passwordIcon} alt="icon" className="user-icon" />
-                </div>
                 <input
-                    className="signup-input-field"
                     type="password"
                     name="password"
                     id="password"
-                    placeholder="Password"
                     value={password}
                     onChange={(e) =>
                         dispatch(
@@ -116,40 +107,17 @@ const SignupForm = () => {
                     }
                     required
                 />
-                <img
-                    src={infoIcon}
-                    alt="info-icon"
-                    className="info-icon"
-                    onClick={() =>
-                        dispatch(
-                            setDefaultStateBool({
-                                prop: "isRequirements",
-                                value: !isRequirements,
-                            })
-                        )
-                    }
-                />
-                <h6
-                    className={
-                        isMetReq
-                            ? "requirements-not-met"
-                            : "requirements-not-met-show"
-                    }>
-                    Password does not meet the requirements (click on
-                    <span>&#9432;</span>
-                    button)
-                </h6>
+                <label
+                    htmlFor="password"
+                    className={password ? "label-up" : ""}>
+                    Password
+                </label>
             </div>
             <div className="signup-input">
-                <div className="signup-icon">
-                    <img src={passwordIcon} alt="icon" className="user-icon" />
-                </div>
                 <input
-                    className="signup-input-field"
                     type="password"
                     name="confirmPassword"
                     id="confirmPassword"
-                    placeholder="Confirm Password"
                     value={confirmPassword}
                     onChange={(e) =>
                         dispatch(
@@ -161,10 +129,13 @@ const SignupForm = () => {
                     }
                     required
                 />
+                <label
+                    htmlFor="confirmPassword"
+                    className={confirmPassword ? "label-up" : ""}>
+                    Confirm Password
+                </label>
             </div>
-            <button type="submit" className="login-button">
-                Sign Up
-            </button>
+            <button type="submit">Sign Up</button>
         </form>
     )
 }

@@ -6,7 +6,6 @@ import customFetch from "../../../utils"
 import {useAppSelector, useAppDispatch} from "../../../store/storeHooks"
 import md5 from "md5"
 import {FiInfo} from "react-icons/fi"
-import Requirements from "../../Signup/Requirements"
 import {
     logout,
     setIsLoading,
@@ -111,11 +110,6 @@ const ChangePasswordForm = () => {
                             button)
                         </h6>
                     </div>
-                    {isRequirements && (
-                        <div className="change-password-requiements">
-                            <Requirements />
-                        </div>
-                    )}
                 </div>
                 <div className="change-password-input-container">
                     <div className="change-password-form-floating">

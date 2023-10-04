@@ -55,10 +55,13 @@ const SiteLayout = () => {
         }
     }, [])
 
+    const pathsWithoutNavbar = ["/landing", "/login", "/signup"]
+
     return (
         <main>
-            {window.location.pathname !== "/landing" &&
-                window.location.pathname !== "/login" && <Navbar />}
+            {!pathsWithoutNavbar.find(
+                (s) => s === window.location.pathname
+            ) && <Navbar />}
             {showSmallLinks ? (
                 <div className="small-links">
                     <div className="links">

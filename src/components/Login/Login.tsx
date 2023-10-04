@@ -4,7 +4,7 @@ import LoginForm from "./LoginForm"
 
 const Login = () => {
     return (
-        <div className="login-container">
+        <section className="login-container">
             <div className="login-box">
                 <div className="login-title">
                     <h4>Sign in</h4>
@@ -32,7 +32,7 @@ const Login = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     )
 }
 
