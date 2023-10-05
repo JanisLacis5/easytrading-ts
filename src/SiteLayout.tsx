@@ -55,7 +55,7 @@ const SiteLayout = () => {
         }
     }, [])
 
-    const pathsWithoutNavbar = ["/landing", "/login", "/signup"]
+    const pathsWithoutNavbar = ["/landing", "/login", "/signup", "/signup/form"]
 
     return (
         <main>

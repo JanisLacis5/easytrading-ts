@@ -89,12 +89,7 @@ const SignupInfoForm = () => {
     }
 
     return (
-        <div className="signup-info-form">
-            <h1> hello!</h1>
-            <p>
-                We need to collect simple information about the user so you can
-                have better experience on our website.
-            </p>
+        <section className="signup-info-form">
             <form onSubmit={handleSubmit}>
                 <div className="signup-info-form-profile-pic">
                     <h2>Profile picture (optional)</h2>
@@ -213,7 +208,7 @@ const SignupInfoForm = () => {
                     </div>
                 </div>
             </form>
-        </div>
+        </section>
     )
 }
 export default SignupInfoForm

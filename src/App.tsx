@@ -1,7 +1,6 @@
 import {createBrowserRouter, RouterProvider} from "react-router-dom"
 import {
     LandingPage,
-    About,
     Pricing,
     Contact,
     Login,
@@ -126,10 +125,6 @@ function App() {
                             element: <SignupInfoForm />,
                         },
                     ],
-                },
-                {
-                    path: "about",
-                    element: <About />,
                 },
                 {
                     path: "pricing",
