@@ -1,7 +1,7 @@
 const Screener = () => {
     return (
         <>
-            <h2 className="graph-title">Screener</h2>
+            <h3 className="graph-title">Screener</h3>
         </>
     )
 }

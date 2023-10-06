@@ -21,7 +21,7 @@ const WinLossGraph = () => {
         datasets: [
             {
                 data: [wonTrades, lostTrades],
-                backgroundColor: ["rgb(80, 163, 67)", "rgb(218, 71, 58)"],
+                backgroundColor: ["#50a343", "#da473a"],
                 hoverOffset: 4,
             },
         ],
@@ -45,7 +45,7 @@ const WinLossGraph = () => {
 
     return (
         <section className="default-dashboard-graph">
-            <h2 className="graph-title">Won / Lost Trades</h2>
+            <h3 className="graph-title">Won / Lost Trades</h3>
             <div className="pie-garph-container">
                 <select
                     onChange={(e) => {
@@ -63,9 +63,7 @@ const WinLossGraph = () => {
                     {wonTrades || lostTrades ? (
                         <Pie data={data} options={options} />
                     ) : (
-                        <h2 style={{color: "var(--color-grey-300)"}}>
-                            No Data
-                        </h2>
+                        <h4>No Data</h4>
                     )}
                 </div>
             </div>
@@ -104,8 +102,8 @@ const WinLossGraph = () => {
                         <span
                             style={
                                 totalProfit < 0
-                                    ? {color: "var(--color-trade-red)"}
-                                    : {color: "var(--color-trade-green)"}
+                                    ? {color: "var(--red)"}
+                                    : {color: "var(--green)"}
                             }>
                             {totalProfit < 0 ? "-" : "+"}$
                             {totalProfit < 0

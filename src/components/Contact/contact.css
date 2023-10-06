@@ -104,7 +104,7 @@
 }
 
 .contact-form-main > div:nth-child(2) textarea,
-textarea::placeholder {
+.contact-form-main textarea::placeholder {
     color: var(--color-grey-300);
 }
 

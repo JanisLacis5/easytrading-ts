@@ -44,12 +44,12 @@ const ProfitableStocks = () => {
 
     return (
         <section className="stock-graph">
-            <h2 className="graph-title">Your most profitable stocks</h2>
+            <h3 className="graph-title">Your most profitable stocks</h3>
             <div className="profitable-stocks">
                 {profits.length ? (
                     <Bar data={data} options={options} />
                 ) : (
-                    <h2>No Data</h2>
+                    <h4>No Data</h4>
                 )}
             </div>
         </section>

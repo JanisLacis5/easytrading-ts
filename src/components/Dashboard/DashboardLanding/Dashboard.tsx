@@ -5,11 +5,11 @@ import Screener from "./Screener"
 
 const Dashboard = () => {
     return (
-        <div className="dashboard-landing">
+        <section className="dashboard-landing">
             <WinLossGraph />
             <ProfitableStocks />
             <Screener />
-        </div>
+        </section>
     )
 }
 export default Dashboard

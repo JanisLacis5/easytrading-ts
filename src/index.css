@@ -16,8 +16,6 @@
     --color-grey-950: #0a0a0a;
     /* other */
     --color-background: #121212;
-    --color-trade-green: #50a343;
-    --color-trade-red: #da473a;
 
     /* PADDING */
     --default-page-padding: 1.5rem 0 1rem 1rem;
@@ -37,6 +35,8 @@
     --black-25: rgba(42, 54, 53, 0.25);
     --black-10: rgba(42, 54, 53, 0.1);
     --black-5: rgba(42, 54, 53, 0.05);
+    --green: #50a343;
+    --red: #da473a;
 }
 
 *,
@@ -143,10 +143,4 @@ main {
     display: grid;
     height: 100vh;
     grid-template-rows: 1fr 9fr;
-}
-
-@media screen and (min-width: 900px) {
-    .dashboard-page-1 {
-        grid-template-columns: 2fr 22fr;
-    }
 }

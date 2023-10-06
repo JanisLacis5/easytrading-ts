@@ -7,7 +7,7 @@
 }
 
 .graph-title {
-    color: var(--color-grey-300);
+    color: var(--black);
     width: 100%;
     text-align: center;
 }
@@ -25,11 +25,12 @@
     justify-content: center;
 }
 
-.pie-garph-container h2 {
-    height: 7rem;
+.pie-garph-container h4 {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 3rem;
+    color: var(--black-50);
 }
 
 .pie-garph-container select {
@@ -38,20 +39,23 @@
     min-width: 25%;
     min-height: 1.5rem;
     background-color: transparent;
-    color: var(--color-grey-300);
+    color: var(--black);
     border: none;
-    border-bottom: 1px solid var(--color-grey-300);
+    border-bottom: 1px solid var(--black);
 }
 
-option {
-    color: var(--color-grey-300);
-    background-color: var(--color-grey-950);
+.pie-garph-container option {
+    color: var(--black);
+    background-color: #fff;
     border: none;
+}
+
+.pie-garph-container select:focus {
+    outline: none;
 }
 
 .overall-stats {
-    color: var(--color-grey-300);
-    padding: 2rem 0;
+    color: var(--black);
 }
 
 .overall-stats p {
@@ -67,6 +71,15 @@ option {
 
 .profitable-stocks {
     padding: 1rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profitable-stocks h4 {
+    height: fit-content;
+    margin-bottom: 3rem;
+    color: var(--black-50);
 }
 
 @media screen and (min-width: 600px) {
@@ -122,7 +135,8 @@ option {
     .default-dashboard-graph ul {
         display: flex;
         flex-direction: column;
-        justify-content: flex-end;
+        justify-content: center;
+        gap: 1rem;
     }
 
     /* PROFITABLE STOCKS */
