@@ -91,9 +91,10 @@ const SignupInfoForm = () => {
     return (
         <section className="signup-info-form">
             <form onSubmit={handleSubmit}>
+                {/* left  */}
                 <div className="signup-info-form-profile-pic">
-                    <h2>Profile picture (optional)</h2>
-                    <div className="signup-info-form-profile-pic-input">
+                    <h2>Profile picture</h2>
+                    <div>
                         <input
                             onChange={temp}
                             type="file"
@@ -110,101 +111,96 @@ const SignupInfoForm = () => {
                         crop image with aspect ratio of 1:1
                     </p>
                 </div>
+                {/* right */}
                 <div className="signup-info-form-input-container">
-                    <div className="signup-info-form-field">
-                        <div className="floating">
-                            <input
-                                value={firstName}
-                                onChange={(e) =>
-                                    dispatch(
-                                        setUserInfoString({
-                                            prop: "firstName",
-                                            value: e.target.value,
-                                        })
-                                    )
-                                }
-                                type="text"
-                                name="firstName"
-                                id="firstName"
-                            />
-                            <label
-                                className={firstName ? "label-up" : ""}
-                                htmlFor="firstName">
-                                First Name:{" "}
-                            </label>
-                        </div>
+                    <div>
+                        <input
+                            value={firstName}
+                            onChange={(e) =>
+                                dispatch(
+                                    setUserInfoString({
+                                        prop: "firstName",
+                                        value: e.target.value,
+                                    })
+                                )
+                            }
+                            type="text"
+                            name="firstName"
+                            id="firstName"
+                        />
+                        <label
+                            className={firstName ? "label-up" : ""}
+                            htmlFor="firstName">
+                            <h6>First Name: </h6>
+                        </label>
                     </div>
-                    <div className="signup-info-form-field">
-                        <div className="floating">
-                            <input
-                                type="text"
-                                name="lastName"
-                                id="lastName"
-                                value={lastName}
-                                onChange={(e) =>
-                                    dispatch(
-                                        setUserInfoString({
-                                            prop: "lastName",
-                                            value: e.target.value,
-                                        })
-                                    )
-                                }
-                            />
-                            <label
-                                className={lastName ? "label-up" : ""}
-                                htmlFor="lastName">
-                                Last Name:{" "}
-                            </label>
-                        </div>
+                    <div>
+                        <input
+                            type="text"
+                            name="lastName"
+                            id="lastName"
+                            value={lastName}
+                            onChange={(e) =>
+                                dispatch(
+                                    setUserInfoString({
+                                        prop: "lastName",
+                                        value: e.target.value,
+                                    })
+                                )
+                            }
+                        />
+                        <label
+                            className={lastName ? "label-up" : ""}
+                            htmlFor="lastName">
+                            <h6>Last Name: </h6>
+                        </label>
                     </div>
-                    <div className="signup-info-form-field">
-                        <div className="floating">
-                            <input
-                                type="text"
-                                name="username"
-                                id="username"
-                                value={username}
-                                onChange={(e) =>
-                                    dispatch(
-                                        setUserInfoString({
-                                            prop: "username",
-                                            value: e.target.value,
-                                        })
-                                    )
-                                }
-                            />
-                            <label
-                                className={username ? "label-up" : ""}
-                                htmlFor="username">
-                                Create Username:{" "}
-                            </label>
-                        </div>
+                    <div>
+                        <input
+                            type="text"
+                            name="username"
+                            id="username"
+                            value={username}
+                            onChange={(e) =>
+                                dispatch(
+                                    setUserInfoString({
+                                        prop: "username",
+                                        value: e.target.value,
+                                    })
+                                )
+                            }
+                        />
+                        <label
+                            className={username ? "label-up" : ""}
+                            htmlFor="username">
+                            <h6>Create Username: </h6>
+                        </label>
                     </div>
-                    <div className="signup-info-form-field">
-                        <div className="floating">
-                            <input
-                                type="number"
-                                name="account"
-                                id="account"
-                                value={account}
-                                onChange={(e) =>
-                                    dispatch(
-                                        setUserInfoString({
-                                            prop: "account",
-                                            value: e.target.value,
-                                        })
-                                    )
-                                }
-                            />
-                            <label
-                                className={account ? "label-up" : ""}
-                                htmlFor="account">
-                                Your Account Balance ($):{" "}
-                            </label>
-                        </div>
+                    <div>
+                        <input
+                            type="number"
+                            name="account"
+                            id="account"
+                            value={account}
+                            onChange={(e) =>
+                                dispatch(
+                                    setUserInfoString({
+                                        prop: "account",
+                                        value: e.target.value,
+                                    })
+                                )
+                            }
+                        />
+                        <label
+                            className={account ? "label-up" : ""}
+                            htmlFor="account">
+                            Your Account Balance ($):{" "}
+                        </label>
                     </div>
-                    <div className="signup-info-form-field">
-                        <button type="submit">Finish</button>
+                    <div className="signup-form-submit">
+                        <button type="submit">
+                            <h6>Finish</h6>
+                        </button>
                     </div>
                 </div>
             </form>

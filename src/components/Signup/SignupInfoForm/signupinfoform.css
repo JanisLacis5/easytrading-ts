@@ -3,6 +3,8 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
+    color: var(--black);
+    background: var(--gradient);
 }
 
 .signup-info-form form {
@@ -10,15 +12,30 @@
     width: calc(100% - 8rem);
     display: flex;
     justify-content: space-between;
-}
-
-.signup-info-form-profile-pic {
-    height: 100%;
-    width: calc(50% - 4rem);
+    background-color: #fff;
+    padding: 2rem;
+    -moz-box-shadow: 0 0 1rem var(--black);
+    -webkit-box-shadow: 0 0 1rem var(--black);
+    box-shadow: 0 0 1rem var(--black);
 }
 
 .signup-info-form-input-container {
     width: 50%;
+}
+
+.signup-info-form-profile-pic p {
+    color: var(--black-50);
+}
+
+/* PICTURE */
+
+.signup-info-form-profile-pic {
+    height: 100%;
+    width: calc(50% - 4rem);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
 }
 
 .signup-info-form-profile-pic input {
@@ -26,5 +43,98 @@
 }
 
 .signup-info-form-profile-pic img {
-    width: 10%;
+    width: 100%;
+}
+
+.signup-info-form-profile-pic > div {
+    height: 14rem;
+    width: 14rem;
+    padding: 1rem;
+    border-radius: 50%;
+    background-color: var(--black-25);
+}
+
+.signup-info-form-profile-pic > div label {
+    cursor: pointer;
+}
+
+/* FORM */
+
+.signup-info-form-input-container > div {
+    height: 9rem;
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* form inputs */
+.signup-info-form-input-container
+    input[type="number"]::-webkit-outer-spin-button,
+.signup-info-form-input-container
+    input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.signup-info-form-input-container label {
+    position: absolute;
+    top: 4rem;
+    left: 0;
+    pointer-events: none;
+    transition: 0.4s ease all;
+    color: var(--black-50);
+}
+
+.signup-info-form-input-container input:empty {
+    height: calc(100% - 6rem);
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid var(--black);
+    width: 100%;
+    caret-color: var(--black-50);
+    color: var(--black);
+    font-size: 1rem;
+}
+
+.signup-info-form-input-container input:focus {
+    outline: none;
+    border-bottom: 1px solid var(--black);
+}
+
+.signup-info-form-input-container input:focus ~ label {
+    top: 2rem;
+    font-size: 0.75rem;
+}
+
+.signup-info-form-input-container .label-up {
+    top: 2rem;
+    font-size: 0.75rem;
+}
+
+.signup-info-form-input-container-field:focus {
+    outline: none;
+}
+
+/* form button */
+.signup-info-form-input-container > div:last-child {
+    height: fit-content;
+    padding: 4rem 0 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.signup-form-submit button {
+    height: fit-content;
+    width: fit-content;
+    background: var(--gradient);
+    border: none;
+}
+
+.signup-form-submit h6 {
+    height: 100%;
+    width: 100%;
+    padding: 1.5rem 5rem;
 }
