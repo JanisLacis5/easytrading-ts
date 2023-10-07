@@ -1,8 +1,65 @@
 .screener-box {
     width: 25%;
     height: 25%;
-    background-color: var(--black-50);
+    background-color: rgba(var(--primary), 0.5);
     position: absolute;
-    top: 11vh;
-    left: 45%;
+    top: 9.5vh;
+    left: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+}
+
+.top {
+    height: 1rem;
+    width: 100%;
+    position: absolute;
+    top: -1rem;
+    display: flex;
+    align-items: flex-end;
+}
+
+.link-arrow {
+    height: 0;
+    width: 0;
+    border-bottom: 0.5rem solid rgba(var(--primary), 0.5);
+    border-left: 0.5rem solid transparent;
+    border-right: 0.5rem solid transparent;
+    border-top: 0.5rem solid transparent;
+    margin-left: calc(74% - 0.5rem);
+}
+
+.screener-box > div:nth-child(2) {
+    width: calc(100% - 0.5rem);
+    height: calc(100% - 0.5rem);
+    background-color: #fff;
+    border-radius: 1px;
+    padding: 2rem;
+}
+
+.screener-box > div:last-child > div {
+    height: 80%;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.gap-box,
+.hod-box,
+.screener-layout-box {
+    display: flex;
+    gap: 1rem;
+}
+
+.screener-box svg {
+    height: 2rem;
+    width: 2rem;
+    color: var(--black);
+}
+
+.screener-box h5 {
+    display: flex;
+    align-items: center;
 }

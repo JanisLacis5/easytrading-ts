@@ -21,8 +21,8 @@
     --default-page-padding: 1.5rem 0 1rem 1rem;
 
     /* NEW COLORS */
-    --primary: #00fff4;
-    --secondary: #0dff6a;
+    --primary: 0, 255, 244;
+    --secondary: 13, 255, 106;
     --gradient: linear-gradient(315deg, #00fff4, #0dff6a);
     --gradient-light: linear-gradient(
         315deg,

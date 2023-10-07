@@ -5,6 +5,7 @@ import logo from "../../assets/logo.png"
 import {Link} from "react-router-dom"
 import {setScreener} from "../../features/navbarSlice"
 import ScreenersBox from "./LinkBoxes/ScreenersBox"
+import {useEffect} from "react"
 
 const Navbar = () => {
     const dispatch = useAppDispatch()
@@ -15,6 +16,10 @@ const Navbar = () => {
     if (screenWidth < 900) {
         return <SmallNavbar />
     }
+
+    useEffect(() => {
+        console.log(screener)
+    }, [screener])
 
     return (
         <>
