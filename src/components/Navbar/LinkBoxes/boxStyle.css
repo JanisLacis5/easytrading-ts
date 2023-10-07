@@ -1,0 +1,8 @@
+.screener-box {
+    width: 25%;
+    height: 25%;
+    background-color: var(--black-50);
+    position: absolute;
+    top: 11vh;
+    left: 45%;
+}

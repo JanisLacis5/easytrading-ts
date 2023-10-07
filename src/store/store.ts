@@ -10,6 +10,7 @@ import addTradeFormReducer from "../features/addTradeFormSlice"
 import accountUpdateReducer from "../features/accuntUpdateSlice"
 import defaultReducer from "../features/defaultSlice"
 import userInfoFormReducer from "../features/userInfoFormSlice"
+import navbarReducer from "../features/navbarSlice"
 
 export const store = configureStore({
     reducer: {
@@ -24,6 +25,7 @@ export const store = configureStore({
         accountUpdate: accountUpdateReducer,
         default: defaultReducer,
         userInfo: userInfoFormReducer,
+        navbar: navbarReducer,
     },
 })
 

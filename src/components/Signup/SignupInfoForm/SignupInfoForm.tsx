@@ -131,7 +131,7 @@ const SignupInfoForm = () => {
                         <label
                             className={firstName ? "label-up" : ""}
                             htmlFor="firstName">
-                            <h6>First Name: </h6>
+                            <h5>First Name: </h5>
                         </label>
                     </div>
                     <div>
@@ -152,7 +152,7 @@ const SignupInfoForm = () => {
                         <label
                             className={lastName ? "label-up" : ""}
                             htmlFor="lastName">
-                            <h6>Last Name: </h6>
+                            <h5>Last Name: </h5>
                         </label>
                     </div>
                     <div>
@@ -173,7 +173,7 @@ const SignupInfoForm = () => {
                         <label
                             className={username ? "label-up" : ""}
                             htmlFor="username">
-                            <h6>Create Username: </h6>
+                            <h5>Create Username: </h5>
                         </label>
                     </div>
                     <div>
@@ -194,12 +194,12 @@ const SignupInfoForm = () => {
                         <label
                             className={account ? "label-up" : ""}
                             htmlFor="account">
-                            Your Account Balance ($):{" "}
+                            <h5>Your Account Balance ($): </h5>
                         </label>
                     </div>
                     <div className="signup-form-submit">
                         <button type="submit">
-                            <h6>Finish</h6>
+                            <h5>Finish</h5>
                         </button>
                     </div>
                 </div>
