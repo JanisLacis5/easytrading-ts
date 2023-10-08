@@ -1,14 +1,11 @@
-.screener-box {
-    width: 25%;
-    height: 25%;
+.nav-box {
     background-color: rgba(var(--primary), 0.5);
     position: absolute;
     top: 9.5vh;
-    left: 40%;
+    border-radius: 3px;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 3px;
 }
 
 .top {
@@ -16,21 +13,21 @@
     width: 100%;
     position: absolute;
     top: -1rem;
+}
+
+.nav-box svg {
+    height: 1.5rem;
+    width: 1.5rem;
+    color: var(--black);
+}
+
+.nav-box h5 {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
 }
 
-.link-arrow {
-    height: 0;
-    width: 0;
-    border-bottom: 0.5rem solid rgba(var(--primary), 0.5);
-    border-left: 0.5rem solid transparent;
-    border-right: 0.5rem solid transparent;
-    border-top: 0.5rem solid transparent;
-    margin-left: calc(74% - 0.5rem);
-}
-
-.screener-box > div:nth-child(2) {
+.screener-box-main,
+.trading-box-main {
     width: calc(100% - 0.5rem);
     height: calc(100% - 0.5rem);
     background-color: #fff;
@@ -38,8 +35,20 @@
     padding: 2rem;
 }
 
-.screener-box > div:last-child > div {
-    height: 80%;
+.nav-box a {
+    display: flex;
+    gap: 1rem;
+}
+/* SCREENER BOX */
+
+.screener-box {
+    left: 40%;
+    width: 25%;
+    height: 25%;
+}
+
+.screener-box-main > div {
+    height: 90%;
     width: 70%;
     display: flex;
     flex-direction: column;
@@ -47,19 +56,38 @@
 }
 
 .gap-box,
-.hod-box,
-.screener-layout-box {
+.hod-box {
     display: flex;
     gap: 1rem;
 }
 
-.screener-box svg {
-    height: 2rem;
-    width: 2rem;
-    color: var(--black);
+/* TRADING BOX */
+
+.trading-box {
+    left: 31%;
+    width: 40%;
+    height: 35%;
 }
 
-.screener-box h5 {
+.trading-box-main {
     display: flex;
-    align-items: center;
+    justify-content: space-between;
+}
+
+.trading-box-main > div {
+    width: 47.5%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.trading-box-main h4 {
+    height: 15%;
+}
+
+.trading-box-main > div div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }

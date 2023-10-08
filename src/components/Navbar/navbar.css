@@ -29,13 +29,31 @@ nav {
     width: 39%;
     display: flex;
     justify-content: space-between;
+    position: relative;
 }
 
+.link-arrow {
+    height: 0;
+    width: 0;
+    border-bottom: 0.5rem solid rgba(var(--primary), 0.5);
+    border-left: 0.5rem solid transparent;
+    border-right: 0.5rem solid transparent;
+    border-top: 0.5rem solid transparent;
+    position: absolute;
+    bottom: -0.65rem;
+}
+
+.nav-links > div,
 .nav-links a {
+    cursor: pointer;
     height: 100%;
     width: 100%;
     display: flex;
     justify-content: center;
+}
+
+.nav-links > div:hover p {
+    opacity: 0.5;
 }
 
 .nav-links p {

@@ -3,23 +3,19 @@ import {useAppDispatch, useAppSelector} from "../../store/storeHooks"
 import SmallNavbar from "./SmallNavbar"
 import logo from "../../assets/logo.png"
 import {Link} from "react-router-dom"
-import {setScreener} from "../../features/navbarSlice"
+import {setScreener, setTrading} from "../../features/navbarSlice"
 import ScreenersBox from "./LinkBoxes/ScreenersBox"
-import {useEffect} from "react"
+import TradingBox from "./LinkBoxes/TradingBox"
 
 const Navbar = () => {
     const dispatch = useAppDispatch()
 
     const {screenWidth} = useAppSelector((store) => store.default)
-    const {screener} = useAppSelector((store) => store.navbar)
+    const {screener, trading} = useAppSelector((store) => store.navbar)
 
     if (screenWidth < 900) {
         return <SmallNavbar />
     }
-
-    useEffect(() => {
-        console.log(screener)
-    }, [screener])
 
     return (
         <>
@@ -30,13 +26,19 @@ const Navbar = () => {
                     </div>
                     <div className="nav-links">
                         <Link to="/dashboard">
-                            <p>Dashboard</p>
+                            <p>Main</p>
                         </Link>
-                        <Link to="/dashboard">
+                        <div
+                            onMouseEnter={() =>
+                                dispatch(setTrading({value: true}))
+                            }
+                            onMouseLeave={() =>
+                                dispatch(setTrading({value: false}))
+                            }>
                             <p>Trading</p>
-                        </Link>
-                        <Link
-                            to="/dashboard"
+                            {trading && <div className="link-arrow"></div>}
+                        </div>
+                        <div
                             onMouseEnter={() =>
                                 dispatch(setScreener({value: true}))
                             }
@@ -44,10 +46,11 @@ const Navbar = () => {
                                 dispatch(setScreener({value: false}))
                             }>
                             <p>Screeners</p>
-                        </Link>
-                        <Link to="/dashboard">
+                            {screener && <div className="link-arrow"></div>}
+                        </div>
+                        <div>
                             <p>Chatrooms</p>
-                        </Link>
+                        </div>
                     </div>
                     <button type="button" className="user">
                         <svg
@@ -67,6 +70,7 @@ const Navbar = () => {
                 </div>
             </nav>
             {screener && <ScreenersBox />}
+            {trading && <TradingBox />}
         </>
     )
 }
