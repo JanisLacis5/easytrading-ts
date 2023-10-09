@@ -72,7 +72,7 @@
     width: 2rem;
 }
 
-.signup-social-buttons button p {
+.signup-social-buttons button h5 {
     width: 100%;
 }
 
@@ -106,6 +106,21 @@
     height: 3rem;
     width: 100%;
     position: relative;
+}
+
+.signup-input p {
+    position: absolute;
+    height: 2rem;
+    bottom: -2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--red);
+    gap: 0.5rem;
+}
+
+.signup-input p svg {
+    height: 1rem;
 }
 
 .signup-input-field {

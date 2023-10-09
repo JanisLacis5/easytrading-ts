@@ -7,6 +7,7 @@ import {useAppSelector, useAppDispatch} from "../../store/storeHooks"
 import {setIsLoading, setIsNotLoading} from "../../features/userSlice"
 import {setDefaultStateBool} from "../../features/defaultSlice"
 import {setUserInfoString} from "../../features/userInfoFormSlice"
+import {passwordRequirements} from "../../functions"
 
 const SignupForm = () => {
     const navigate = useNavigate()
@@ -25,13 +26,17 @@ const SignupForm = () => {
             dispatch(setIsLoading())
             const {data} = await customFetch.post("/checkuser", {email: email})
             if (data.message === "success") {
-                // if (!passwordRequirements(password)) {
-                //     dispatch(setIsNotLoading())
-                //     setIsMetReq(false)
-                //     setPassword("")
-                //     setConfirmPassword("")
-                //     return
-                // }
+                if (!passwordRequirements(password)) {
+                    dispatch(setIsNotLoading())
+                    dispatch(
+                        setDefaultStateBool({prop: "isMetReq", value: false})
+                    )
+                    dispatch(setUserInfoString({prop: "password", value: ""}))
+                    dispatch(
+                        setUserInfoString({prop: "confirmPassword", value: ""})
+                    )
+                    return
+                }
                 dispatch(setIsNotLoading())
                 dispatch(setDefaultStateBool({prop: "isMetReq", value: true}))
                 navigate("/signup/form")
@@ -62,8 +67,6 @@ const SignupForm = () => {
             )
         }
     }
-
-    // TODO: make error message if password doesnt meet requirements
 
     if (isLoading) {
         return <div className="loading"></div>
@@ -112,6 +115,24 @@ const SignupForm = () => {
                     className={password ? "label-up" : ""}>
                     Password
                 </label>
+                {!isMetReq && (
+                    <p>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={1.5}
+                            stroke="currentColor"
+                            className="w-6 h-6">
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"
+                            />
+                        </svg>
+                        Password doesn't meet the requirements
+                    </p>
+                )}
             </div>
             <div className="signup-input">
                 <input

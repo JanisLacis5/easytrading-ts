@@ -10,11 +10,11 @@ const Signup = () => {
                     <div className="signup-social-buttons">
                         <button type="button">
                             <SlSocialGoogle />
-                            <p>Sign up with google (recommended)</p>
+                            <h5>Sign up with google (recommended)</h5>
                         </button>
                         <button type="button">
                             <SlSocialFacebook />
-                            <p>Sign up with facebook</p>
+                            <h5>Sign up with facebook</h5>
                         </button>
                     </div>
                     <div className="signup-requirements">

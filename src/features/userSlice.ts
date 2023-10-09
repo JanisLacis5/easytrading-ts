@@ -37,7 +37,9 @@ const initialState: IInitialState = {
         trades: JSON.parse(
             localStorage.getItem("userTrades") || JSON.stringify([])
         ),
-        info: localStorage.getItem("userInfo") || "",
+        info: JSON.parse(
+            localStorage.getItem("userInfo") || JSON.stringify({})
+        ),
         notes: JSON.parse(
             localStorage.getItem("userNotes") || JSON.stringify([])
         ),
