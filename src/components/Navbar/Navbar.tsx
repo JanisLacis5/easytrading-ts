@@ -26,7 +26,7 @@ const Navbar = () => {
                     </div>
                     <div className="nav-links">
                         <Link to="/dashboard">
-                            <p>Main</p>
+                            <h6>Main</h6>
                         </Link>
                         <div
                             onMouseEnter={() =>
@@ -35,7 +35,7 @@ const Navbar = () => {
                             onMouseLeave={() =>
                                 dispatch(setTrading({value: false}))
                             }>
-                            <p>Trading</p>
+                            <h6>Trading</h6>
                             {trading && <div className="link-arrow"></div>}
                         </div>
                         <div
@@ -45,11 +45,11 @@ const Navbar = () => {
                             onMouseLeave={() =>
                                 dispatch(setScreener({value: false}))
                             }>
-                            <p>Screeners</p>
+                            <h6>Screeners</h6>
                             {screener && <div className="link-arrow"></div>}
                         </div>
                         <div>
-                            <p>Chatrooms</p>
+                            <h6>Chatrooms</h6>
                         </div>
                     </div>
                     <button type="button" className="user">

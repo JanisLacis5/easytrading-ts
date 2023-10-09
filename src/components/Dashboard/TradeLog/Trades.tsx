@@ -36,29 +36,29 @@ const Trades = ({trades}: {trades: IUserSingleTrade[]}) => {
                     return (
                         <div key={index} className="tradelog-trade-container">
                             <div className="tradelog-trade-time">
-                                <p>
+                                <h6>
                                     {screenWidth < 900 ? date.slice(5) : date}
-                                </p>
-                                <p>{time}</p>
+                                </h6>
+                                <h6>{time}</h6>
                             </div>
-                            <p>{stock.toUpperCase()}</p>
-                            <p>${accBefore}</p>
-                            <p>
+                            <h6>{stock.toUpperCase()}</h6>
+                            <h6>${accBefore}</h6>
+                            <h6>
                                 $
                                 {Number(accAfter) % 1 === 0
                                     ? Number(accAfter)
                                     : Number(accAfter).toFixed(2)}
-                            </p>
-                            <p
+                            </h6>
+                            <h6
                                 style={
                                     trade.pl > 0
-                                        ? {color: "var(--color-trade-green)"}
-                                        : {color: "var(--color-trade-red)"}
+                                        ? {color: "var(--green)"}
+                                        : {color: "var(--red)"}
                                 }>
                                 {trade.pl > 0 ? "+" : "-"}$
                                 {pl % 1 === 0 ? pl : pl.toFixed(2)}
-                            </p>
-                            <p>{action}</p>
+                            </h6>
+                            <h6>{action}</h6>
                         </div>
                     )
                 })

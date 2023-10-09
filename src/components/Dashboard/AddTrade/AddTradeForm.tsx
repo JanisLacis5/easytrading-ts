@@ -5,35 +5,44 @@ import {useNavigate} from "react-router-dom"
 import {useAppDispatch, useAppSelector} from "../../../store/storeHooks"
 import {login} from "../../../features/userSlice"
 import {toast} from "react-toastify"
-import {setState} from "../../../features/addTradeFormSlice"
-import {useState} from "react"
+import {setAcc, setState} from "../../../features/addTradeFormSlice"
+import {setPl} from "../../../features/addTradeFormSlice"
 
 const AddTrade = () => {
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
     const {user} = useAppSelector((store) => store.user)
-    const [pl, setPl] = useState<string>()
 
-    const {stock, accBefore, accAfter, date, time, action} = useAppSelector(
+    const {stock, pl, date, time, action} = useAppSelector(
         (store) => store.addTrade
     )
+
+    const calcAcc = (pl: number) => {
+        return {
+            accBefore: Number(user.info.account),
+            accAfter: Number(user.info.account) + pl,
+        }
+    }
 
     // SEND TRADE DATA TO DB ON SUBMIT
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
+
+        const {accBefore, accAfter} = calcAcc(pl)
+        dispatch(setAcc({accAfter: accAfter, accBefore: accBefore}))
+
         const {data} = await customFetch.post("/newtrade", {
             id: user.id,
             stock: stock.toUpperCase(),
-            accBefore: accBefore,
             accAfter: accAfter,
-            pl: Number(accAfter) - Number(accBefore),
+            accBefore: accBefore,
+            pl: pl,
             date: date,
             time: time,
             action: action,
         })
         const infoUpdate = await customFetch.patch("/updateaccbalance", {
             id: user.id,
-            setAcc: accAfter,
         })
         if (infoUpdate.data.message === "success") {
             dispatch(
@@ -103,13 +112,13 @@ const AddTrade = () => {
                     name="pl"
                     id="pl"
                     value={pl}
-                    onChange={(e) => setPl(e.target.value)}
+                    onChange={(e) => dispatch(setPl(e.target.value))}
                     required
                 />
                 <label
                     htmlFor="pl"
                     id="pl-label"
-                    className={pl?.length ? "label-up" : ""}>
+                    className={pl ? "label-up" : ""}>
                     Trade +/- $ :{" "}
                 </label>
             </div>

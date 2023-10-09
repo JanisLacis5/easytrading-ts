@@ -1,71 +1,58 @@
 /* TRADELOG MAIN PAGE */
 
 .tradelog {
-    font-size: 0.75rem;
-    color: var(--color-grey-300);
     width: 80%;
     height: calc(100vh - 6.5rem);
     place-self: center;
-    bottom: 0;
     overflow: hidden;
-    display: grid;
-    grid-template-rows: 15fr 7fr 8fr 70fr;
+    display: flex;
+    flex-direction: column;
 }
 
-.tradelog h2 {
-    height: 100%;
+.tradelog h3 {
     display: flex;
     justify-content: center;
-    align-items: center;
     padding: 0;
+    height: fit-content;
 }
 
 .tradelog-filter {
-    height: 100%;
     display: flex;
     justify-content: space-around;
-}
-
-.tradelog-filter select {
-    width: 100%;
-    background-color: transparent;
-    color: var(--color-grey-200);
-    height: 1.2rem;
-    cursor: pointer;
-}
-
-.tradelog-filter div {
-    width: 30%;
-    height: 1.2rem;
-    display: flex;
-    justify-content: center;
+    height: 15%;
+    align-items: center;
 }
 
 .tradelog-filter button {
-    width: 100%;
-    height: 100%;
+    width: 20%;
+    height: 33%;
+    border: none;
+    background: var(--gradient);
+    box-shadow: 0 5px 8px var(--black-10);
+}
+
+.tradelog-filter select {
+    width: 20%;
+    font-size: 1rem;
     background-color: transparent;
-    color: var(--color-grey-200);
-    border: 0.5px solid var(--color-grey-500);
+    color: var(--black);
+    background: var(--gradient);
+    border: none;
     cursor: pointer;
+    height: 33%;
+    box-shadow: 0 5px 8px var(--black-10);
 }
 
-button.tradelog-filter-removebtn {
-    color: var(--color-trade-red);
-    border-color: var(--color-trade-red);
-    cursor: pointer;
-}
-
-.tradelog-filter button:hover {
-    opacity: 0.5;
+.tradelog-filter select:focus {
+    outline: none;
 }
 
 .tradelog-trades-header {
     display: grid;
     grid-template-columns: 2fr repeat(5, 1fr);
     place-items: center;
-    color: var(--color-grey-500);
     position: relative;
+    height: 10%;
 }
 
 .tradelog-trades {
@@ -82,14 +69,16 @@ button.tradelog-filter-removebtn {
 
 .tradelog-trade-container {
     height: 9%;
-    border-bottom: 1px solid var(--color-grey-300);
     display: grid;
     grid-template-columns: 2fr repeat(5, 1fr);
     place-items: center;
-    padding-top: 1.5%;
 }
 
-.tradelog-trade-container p {
+.tradelog-trade-container:nth-child(odd) {
+    background-color: var(--black-10);
+}
+
+.tradelog-trade-container h6 {
     display: flex;
     justify-content: center;
 }
@@ -106,14 +95,14 @@ button.tradelog-filter-removebtn {
     align-items: center;
 }
 
-.tradelog-trade-time p {
+.tradelog-trade-time h6 {
     width: 47%;
 }
 
 .tradelog-trades-header > button {
     border: none;
     background-color: transparent;
-    color: var(--color-grey-500);
+    color: var(--black-25);
     margin-bottom: 1.25rem;
     height: 100%;
     cursor: pointer;
@@ -142,20 +131,25 @@ button.tradelog-filter-removebtn {
 
 .tradelog-filters {
     position: absolute;
-    z-index: 10000;
     top: 0;
     right: 0;
     width: 100%;
     height: 250%;
-    background-color: var(--color-grey-300);
+    background: rgb(var(--primary));
     padding: 0.5rem;
     display: grid;
     grid-template-columns: 3fr 2fr 1fr;
     place-items: center;
+    box-shadow: 0 0.25rem 1em var(--black-50);
 }
 
 .tradelog-filters div {
     width: 100%;
+}
+
+.tradelog-filters div label {
+    color: var(--black);
+    margin-right: 1rem;
 }
 
 .tradelog-filters button {
@@ -164,32 +158,37 @@ button.tradelog-filter-removebtn {
     background-color: transparent;
     border: none;
     margin-left: auto;
-    color: var(--color-grey-700);
+    color: var(--black);
     padding-right: 0.2rem;
     font-size: 0.75rem;
 }
 
 .tradelog-filters button:nth-child(3) {
     width: 30%;
-    height: 60%;
+    height: 1.5rem;
     font-size: 1rem;
     display: flex;
-    justify-content: flex-end;
+    justify-content: end;
+    padding-right: 1rem;
 }
 
 button#tradelog-filters-clear {
     background-color: transparent;
+    width: 50%;
     display: flex;
     align-items: center;
     justify-content: end;
+    padding-right: 1rem;
 }
 
 .tradelog-filters input,
 .tradelog-filters select {
-    background-color: var(--color-grey-900);
-    color: var(--color-grey-100);
+    background-color: #fff;
+    color: var(--black);
     color-scheme: dark;
-    min-height: 1.2rem;
+    height: 1.5rem;
+    border: none;
+    padding: 0 0.25rem;
 }
 
 .tradelog-filters input:focus,
@@ -198,21 +197,21 @@ button#tradelog-filters-clear {
 }
 
 .tradelog-filters option {
-    color: var(--color-grey-100);
+    color: var(--black);
 }
 
 /* REMOVE MODAL */
 
 .remove-modal {
     padding: 1rem;
-    height: 70%;
+    height: 80%;
     width: 70%;
-    background-color: var(--color-grey-100);
+    background-color: var(--red);
     position: fixed;
-    top: 20%;
+    top: 10%;
     left: 50%;
     margin-left: -35%;
-    color: var(--color-grey-900);
+    color: var(--black);
     display: grid;
     grid-template-rows: 3fr 2fr 1fr 2fr;
     border-radius: 10px;
@@ -225,33 +224,33 @@ button#tradelog-filters-clear {
 }
 
 .remove-modal-cross {
-    height: 50%;
-    width: 50%;
-    color: var(--color-trade-red);
+    height: 10rem;
+    width: 10rem;
+    color: #fff;
 }
 
 .remove-modal div:first-child {
-    height: 90%;
-    width: 30%;
+    height: 15rem;
+    width: 15rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 5px solid var(--color-trade-red);
+    border: 5px solid #fff;
     border-radius: 50%;
 }
 
 .remove-modal h1 {
-    color: var(--color-trade-red);
+    color: #fff;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 2.5rem;
 }
 
-.remove-modal p {
+.remove-modal h5 {
     display: flex;
     justify-content: center;
     align-items: center;
+    color: #fff;
 }
 
 .remove-modal-btn-container {
@@ -264,18 +263,19 @@ button#tradelog-filters-clear {
 .remove-modal-btn-container button {
     height: 33%;
     width: 40%;
-    color: var(--color-grey-100);
+    color: var(--black);
     font-size: 1rem;
     font-weight: 600;
     border: none;
+    box-shadow: 0 5px 8px var(--black-25);
 }
 
 .remove-modal-btn-container button:first-child {
-    background-color: var(--color-trade-red);
+    background-color: #fff;
 }
 
 .remove-modal-btn-container button:nth-child(2) {
-    background-color: var(--color-grey-400);
+    background: var(--gradient);
 }
 
 @media screen and (min-width: 900px) {

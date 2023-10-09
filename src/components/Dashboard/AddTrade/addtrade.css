@@ -76,6 +76,7 @@
 .addtrade-filereader div:last-child button {
     background-color: transparent;
     border: none;
+    box-shadow: 0 5px 8px var(--black-10);
 }
 
 /* FORM */
@@ -169,6 +170,7 @@
 .add-trade-btn button {
     background-color: transparent;
     border: none;
+    box-shadow: 0 5px 8px var(--black-10);
 }
 
 /* @media screen and (min-width: 900px) {

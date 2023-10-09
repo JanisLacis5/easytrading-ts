@@ -52,11 +52,11 @@ nav {
     justify-content: center;
 }
 
-.nav-links > div:hover p {
+.nav-links > div:hover h6 {
     opacity: 0.5;
 }
 
-.nav-links p {
+.nav-links h6 {
     display: inline-block;
     height: 100%;
     display: flex;

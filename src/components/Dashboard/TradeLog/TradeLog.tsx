@@ -52,47 +52,41 @@ const TradeLog = () => {
 
     return (
         <section className="tradelog">
-            <h2 className="graph-title">Log</h2>
+            <h3>Log</h3>
             <div className="tradelog-filter">
-                <div>
-                    <select
-                        onChange={(e) => {
-                            setFilter(e.target.value as OpUnitType)
-                        }}>
-                        <option value="">All time</option>
-                        <option value="day">Today</option>
-                        <option value="week">This week</option>
-                        <option value="month">This month</option>
-                        <option value="year">This year</option>
-                    </select>
-                </div>
-                <div>
-                    <button
-                        type="button"
-                        className="tradelog-filter-removebtn"
-                        onClick={() => {
-                            dispatch(
-                                setDefaultStateBool({
-                                    prop: "showModal",
-                                    value: true,
-                                })
-                            )
-                        }}>
-                        Remove all trades
-                    </button>
-                </div>
-                <div>
-                    <button
-                        type="button"
-                        onClick={() => dispatch(toggleFilters())}>
-                        Filters
-                    </button>
-                </div>
+                <select
+                    onChange={(e) => {
+                        setFilter(e.target.value as OpUnitType)
+                    }}>
+                    <option value="">All time</option>
+                    <option value="day">Today</option>
+                    <option value="week">This week</option>
+                    <option value="month">This month</option>
+                    <option value="year">This year</option>
+                </select>
+                <button
+                    type="button"
+                    className="tradelog-filter-removebtn"
+                    onClick={() => {
+                        dispatch(
+                            setDefaultStateBool({
+                                prop: "showModal",
+                                value: true,
+                            })
+                        )
+                    }}>
+                    <h5>Remove all trades</h5>
+                </button>
+                <button type="button" onClick={() => dispatch(toggleFilters())}>
+                    <h5>Filters</h5>
+                </button>
             </div>
             <div className="tradelog-trades-header">
                 {isFilters && <Filters />}
                 <button type="button" name="date" onClick={handleChange}>
-                    <span>Time </span>
+                    <span>
+                        <h5>Time</h5>
+                    </span>
                     <span>
                         {option === "date" ? (
                             value === null ? (
@@ -108,7 +102,9 @@ const TradeLog = () => {
                     </span>
                 </button>
                 <button type="button" name="stock" onClick={handleChange}>
-                    <span>Stock</span>
+                    <span>
+                        <h5>Stock</h5>
+                    </span>
                     <span>
                         {option === "stock" ? (
                             value ? (
@@ -122,7 +118,9 @@ const TradeLog = () => {
                     </span>
                 </button>
                 <button type="button" name="accBefore" onClick={handleChange}>
-                    <span>Before $</span>
+                    <span>
+                        <h5>Before $</h5>
+                    </span>
                     <span>
                         {option === "accBefore" ? (
                             !value ? (
@@ -136,7 +134,9 @@ const TradeLog = () => {
                     </span>
                 </button>
                 <button type="button" name="accAfter" onClick={handleChange}>
-                    <span>After $</span>
+                    <span>
+                        <h5>After $</h5>
+                    </span>
                     <span>
                         {option === "accAfter" ? (
                             !value ? (
@@ -150,7 +150,9 @@ const TradeLog = () => {
                     </span>
                 </button>
                 <button type="button" name="pl" onClick={handleChange}>
-                    <span>P/L $</span>
+                    <span>
+                        <h5>P/L $</h5>
+                    </span>
                     <span>
                         {option === "pl" ? (
                             !value ? (
@@ -164,7 +166,9 @@ const TradeLog = () => {
                     </span>
                 </button>
                 <button type="button" name="action" onClick={handleChange}>
-                    <span>Action</span>
+                    <span>
+                        <h5>Action</h5>
+                    </span>
                     <span>
                         {option === "action" ? (
                             value ? (
