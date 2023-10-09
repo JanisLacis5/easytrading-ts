@@ -1,278 +1,237 @@
 /* LANDING */
 
-.addtrade-landing {
-    align-items: center;
+.add-trade-landing {
     display: flex;
-    flex-direction: column;
-    height: 50%;
-    justify-content: center;
-    place-self: center;
+    justify-content: space-between;
+    height: 90vh;
     width: 100%;
-}
-
-.addtrade-landing h2 {
-    align-self: flex-start;
-    color: var(--color-grey-300);
-    margin-left: 16.5%;
-}
-
-.addtrade-landing > div {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    height: 40%;
-    justify-content: space-around;
-    width: 80%;
-}
-
-.addtrade-landing > div div {
-    align-items: center;
-    display: flex;
-    height: 30%;
-    justify-content: space-around;
-    width: 80%;
-}
-
-.addtrade-landing > div a {
-    align-items: center;
-    background-color: var(--color-grey-700);
-    border-radius: 1.5rem;
-    color: var(--color-grey-300);
-    display: flex;
-    font-size: 1rem;
-    height: 100%;
-    justify-content: center;
-    width: 33%;
+    padding: 1rem;
 }
 
 /* FILE READER */
 
 .addtrade-filereader {
-    align-items: center;
-    color: var(--color-grey-300);
-    display: flex;
-    flex-direction: column;
     height: 100%;
-    width: 100%;
-}
-
-.addtrade-filereader h2 {
-    padding: 1rem 0;
-    text-align: center;
-    width: 100%;
-}
-
-.addtrade-filereader form {
-    color: var(--color-grey-300);
+    width: 37.5%;
+    margin-left: 2.5%;
     display: flex;
     flex-direction: column;
-    height: 60%;
-    width: 90%;
 }
 
-.addtrade-filereader form > div {
-    height: 27.5%;
+.addtrade-filereader h3 {
+    height: 10%;
     width: 100%;
+    text-align: center;
 }
 
-.addtrade-filereader form > div select {
-    height: 25%;
+.addtrade-filereader > div {
+    height: 15%;
     width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
 }
 
-.addtrade-filereader form label {
+.addtrade-filereader > div select,
+.addtrade-filereader > div input {
+    border: none;
+}
+
+.addtrade-filereader > div select {
+    border-bottom: 1px solid var(--black);
+    width: 100%;
+    height: 40%;
+    font-size: 1rem;
+}
+
+.addtrade-filereader > div select:focus {
+    outline: none;
+}
+
+.addtrade-filereader label {
     display: block;
     height: 25%;
+    position: absolute;
+    top: 0;
 }
 
-.addtrade-filereader form > div option {
+.addtrade-filereader > div option {
     zoom: 1.25;
+    color: var();
 }
 
 .addtrade-filereader div:last-child {
-    height: 10%;
-    margin: auto 0;
+    height: 15%;
+    margin: auto 0 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.addtrade-filereader div:last-child h5 {
+    padding: 1rem 3rem;
+    background: var(--gradient);
 }
 
 .addtrade-filereader div:last-child button {
-    background-color: var(--color-grey-700);
-    border-radius: 1.5rem;
+    background-color: transparent;
     border: none;
-    color: var(--color-grey-300);
-    font-size: 1rem;
-    height: 100%;
-    width: 40%;
 }
 
 /* FORM */
 
-.addtrade {
-    color: var(--color-grey-300);
-    display: grid;
-    grid-template-rows: 1fr repeat(2, 3fr) 6fr 3fr 6fr 2fr;
-    height: 120vh;
-    overflow: scroll;
-    place-self: center;
-    width: 90%;
-}
-
-.addtrade > * {
-    height: 100%;
-    width: 100%;
-}
-
-.addtrade input {
-    background-color: transparent;
-    color: var(--color-grey-300);
-}
-
-.addtrade input {
-    color-scheme: dark;
-}
-
-.addtrade input::placeholder {
-    border-radius: 10px;
-    border: none;
-    opacity: 0.5;
-}
-
-.addtrade-stock-input {
-    align-items: center;
-    display: flex;
-}
-
-.addtrade-stock-input option {
-    color: var(--color-grey-300);
-}
-
-.addtrade-stock-input select {
-    color: var(--color-grey-600);
-}
-
-.addtrade-stock-input label {
-    font-size: 1.5rem;
-    padding-right: 3rem;
-}
-
-.addtrade-account-input-container {
+.add-trade {
+    color: var(--black);
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    align-items: flex-end;
+    padding-right: 5%;
+    width: 60%;
+    height: 100%;
 }
 
-.addtrade-account-input {
-    align-items: center;
+.add-trade h3 {
+    text-align: center;
+    height: 10%;
+    width: 70%;
+}
+
+.add-trade-input {
+    height: 15%;
+    width: 70%;
     display: flex;
+    align-items: center;
+    position: relative;
 }
 
-.addtrade-account-input label {
-    font-size: 1.5rem;
-    padding-right: 3rem;
+.add-trade-input label {
+    position: absolute;
+    height: 1.5rem;
+    top: calc(50% - 0.75rem);
+    left: 0;
+    pointer-events: none;
+    transition: 0.4s ease all;
+    font-size: 1rem;
+    color: var(--black-50);
 }
 
-input#pl:focus {
+.add-trade-input input[type="date"]:invalid::-webkit-datetime-edit,
+.add-trade-input input[type="time"]:invalid::-webkit-datetime-edit {
+    color: var(--black-50);
+}
+
+.add-trade-input input:empty,
+.add-trade-input select {
+    height: 40%;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid var(--black);
+    width: 100%;
+    caret-color: var(--black-50);
+    color: var(--black);
+    font-size: 1rem;
+}
+
+.add-trade-input input:focus,
+.add-trade-input select:focus {
+    outline: none;
+    border-bottom: 1px solid var(--black);
+}
+
+.add-trade-input input:focus ~ label,
+.add-trade-input select:focus ~ label {
+    top: calc(50% - 2.5rem);
+    font-size: 0.75rem;
+}
+
+.add-trade-input .label-up {
+    top: calc(50% - 2.5rem);
+    font-size: 0.75rem;
+}
+
+.add-trade-input-field:focus {
     outline: none;
 }
 
-.addtrade-daytime-inputs {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    justify-content: space-around;
-}
-
-.addtrade-daytime-input {
-    align-items: center;
-    display: flex;
-}
-
-.addtrade-daytime-input label {
-    font-size: 1.5rem;
-    padding-right: 3rem;
-}
-
-.addtrade-daytime-input input {
-    height: 50%;
-}
-
-.addtrade-btn {
+.add-trade-btn {
     align-items: center;
     display: flex;
     justify-content: center;
+    width: 70%;
+    height: 15%;
+}
+
+.add-trade-btn h5 {
+    padding: 1rem 3rem;
+    background: var(--gradient);
+}
+
+.add-trade-btn button {
+    background-color: transparent;
+    border: none;
+}
+
+/* @media screen and (min-width: 900px) {
+    /* LANDING */
+
+/* .add-trade-landing {
+    width: 60%;
+}
+
+.add-trade-landing h2 {
+    margin-left: 8.5%;
+}
+
+.add-trade-landing > div {
     width: 100%;
 }
 
-.addtrade-btn button {
-    background-color: var(--color-grey-500);
-    border-radius: 1rem;
-    border: none;
-    color: var(--color-grey-300);
-    height: 50%;
+.add-trade-landing > div div {
+    width: 100%;
+}
+
+FILE READER
+
+.add-trade-filereader form > div select {
+    width: 50%;
+}
+
+.add-trade-filereader div:last-child button {
     width: 30%;
-}
+} */
 
-@media screen and (min-width: 900px) {
-    /* LANDING */
-
-    .addtrade-landing {
-        width: 60%;
-    }
-
-    .addtrade-landing h2 {
-        margin-left: 8.5%;
-    }
-
-    .addtrade-landing > div {
-        width: 100%;
-    }
-
-    .addtrade-landing > div div {
-        width: 100%;
-    }
-
-    /* FILE READER */
-
-    .addtrade-filereader form > div select {
-        width: 50%;
-    }
-
-    .addtrade-filereader div:last-child button {
-        width: 30%;
-    }
-}
-
-@media screen and (min-width: 1200px) {
-    /* LANDING */
-    .addtrade-landing h2 {
+/* @media screen and (min-width: 1200px) {
+    LANDING
+    .add-trade-landing h2 {
         font-size: 2rem;
         margin-left: 12.5%;
     }
 
-    .addtrade-landing > div a {
+    .add-trade-landing > div a {
         border: 2rem;
         width: 25%;
     }
 
-    /* FORM */
+    FORM
 
-    .addtrade {
+    .add-trade {
         grid-template-columns: repeat(2, 4fr);
         grid-template-rows: 5fr 10fr repeat(2, 25fr) 15fr;
         height: 100%;
         width: 80%;
     }
 
-    .addtrade h2,
-    .addtrade-btn {
+    .add-trade h2,
+    .add-trade-btn {
         grid-column: span 2;
     }
 
-    .addtrade-btn button {
+    .add-trade-btn button {
         height: 40%;
         width: 25%;
     }
 
-    /* FILE READER */
+    FILE READER
 
     .addtrade-filereader form > div select {
         width: 40%;
@@ -283,15 +242,15 @@ input#pl:focus {
 }
 
 @media screen and (min-width: 1500px) {
-    /* LANDING */
+    LANDING
 
-    .addtrade-landing {
+    .add-trade-landing {
         width: 50%;
     }
 
-    /* FILE READER */
+    FILE READER
 
     .addtrade-filereader form > div select {
         width: 30%;
     }
-}
+}  */

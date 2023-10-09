@@ -21,7 +21,6 @@ const AddTradeFileReader = () => {
 
     const [file, setFile] = useState<File>()
     const [platform, setPlatform] = useState("")
-    const [extention, setExtention] = useState("")
     const [tradeData, setTradeData] = useState<ITradeData[]>([])
 
     const {user} = useAppSelector((store) => store.user)
@@ -38,7 +37,6 @@ const AddTradeFileReader = () => {
         } catch (e) {
             console.log(e)
         }
-        setExtention("")
         setFile(undefined)
         setPlatform("")
         setTradeData([])
@@ -87,50 +85,44 @@ const AddTradeFileReader = () => {
     }, [file])
 
     return (
-        <section className="addtrade-filereader">
-            <h2>File info</h2>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="file">File:</label>
-                    <input
-                        type="file"
-                        name="file"
-                        id="file"
-                        onChange={(e) => {
-                            if (!e.target.files) return
-                            setFile(e.target.files[0])
-                        }}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="platform">
-                        Please provide from where you downloaded your file:
-                    </label>
-                    <select
-                        name="platform"
-                        id="platform"
-                        value={platform}
-                        onChange={(e) => setPlatform(e.target.value)}>
-                        <option value="">Choose platform</option>
-                        <option value="tradingview">Tradingview</option>
-                    </select>
-                </div>
-                <div>
-                    <label htmlFor="ext">File extention:</label>
-                    <select
-                        name="ext"
-                        id="ext"
-                        value={extention}
-                        onChange={(e) => setExtention(e.target.value)}>
-                        <option value="">Choose extention</option>
-                        <option value="csv">.csv</option>
-                    </select>
-                </div>
-                <div>
-                    <button type="submit">Read</button>
-                </div>
-            </form>
-        </section>
+        <form onSubmit={handleSubmit} className="addtrade-filereader">
+            <h3>File info</h3>
+            <div>
+                <label htmlFor="platform">
+                    Please provide from where you downloaded your file:
+                </label>
+                <select
+                    name="platform"
+                    id="platform"
+                    value={platform}
+                    onChange={(e) => setPlatform(e.target.value)}
+                    style={
+                        platform === ""
+                            ? {color: "var(--black-50)"}
+                            : {color: "var(--black)"}
+                    }>
+                    <option value="">Choose platform</option>
+                    <option value="tradingview">Tradingview</option>
+                </select>
+            </div>
+            <div>
+                <label htmlFor="file">File:</label>
+                <input
+                    type="file"
+                    name="file"
+                    id="file"
+                    onChange={(e) => {
+                        if (!e.target.files) return
+                        setFile(e.target.files[0])
+                    }}
+                />
+            </div>
+            <div>
+                <button type="submit">
+                    <h5>Read</h5>
+                </button>
+            </div>
+        </form>
     )
 }
 export default AddTradeFileReader

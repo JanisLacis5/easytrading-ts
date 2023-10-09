@@ -9,10 +9,6 @@ const DashboardLayout = () => {
         return <div className="loading"></div>
     }
 
-    return (
-        <section className="dashboard-page-1">
-            <Outlet />
-        </section>
-    )
+    return <Outlet />
 }
 export default DashboardLayout

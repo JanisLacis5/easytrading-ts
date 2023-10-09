@@ -5,7 +5,6 @@ import {
     Contact,
     Login,
     Signup,
-    AddTrade,
     Dashboard,
     TradeLog,
     BrokerLogin,
@@ -20,11 +19,10 @@ import {
     UserDangerZone,
     AddNote,
     DashboardNotes,
-    AddTradeLanding,
-    AddTradeFileReader,
     ScreenerLayout,
     HodScreener,
     ScreenerDashboard,
+    AddTrade,
 } from "./components"
 import {useDispatch} from "react-redux"
 import {useEffect} from "react"
@@ -71,20 +69,7 @@ function App() {
                         },
                         {
                             path: "addtrade",
-                            children: [
-                                {
-                                    index: true,
-                                    element: <AddTradeLanding />,
-                                },
-                                {
-                                    path: "addtradefile",
-                                    element: <AddTradeFileReader />,
-                                },
-                                {
-                                    path: "addtradeform",
-                                    element: <AddTrade />,
-                                },
-                            ],
+                            element: <AddTrade />,
                         },
                         {
                             path: "calendar",
