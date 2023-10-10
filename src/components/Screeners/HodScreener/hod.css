@@ -4,8 +4,8 @@
     place-self: center;
     display: flex;
     flex-direction: column;
-    background-color: var(--color-grey-500);
-    color: var(--color-grey-900);
+    background-color: var(--black-10);
+    color: var(--black);
     overflow: hidden;
     position: absolute;
 }
@@ -31,11 +31,11 @@
 }
 
 .screener-main > div:nth-child(odd) {
-    background-color: var(--color-grey-400);
+    background-color: var(--black-10);
 }
 
 .hod-stock {
-    color: var(--color-grey-900);
+    color: var(--black);
     display: flex;
     height: 5vh;
 }

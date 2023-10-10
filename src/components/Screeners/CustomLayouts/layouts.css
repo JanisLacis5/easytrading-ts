@@ -44,13 +44,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--color-grey-700);
+    background-color: var(--black-10);
     border: none;
-    color: var(--color-grey-300);
+    color: var(--black);
 }
 
 #delete-layout-button {
-    background-color: var(--color-trade-red);
+    background-color: var(--red);
+    color: #fff;
 }
 
 .layout-numbers {
@@ -59,22 +60,22 @@
 
 .layout-numbers button {
     width: 100%;
-    border-right: 1px solid var(--color-grey-950);
+    border-right: 1px solid var(--black);
 }
 
 /* NEW LAYOUT */
 #lines {
     background-image: repeating-linear-gradient(
             180deg,
-            var(--color-grey-700),
-            var(--color-grey-700) 1px,
+            var(--black-50),
+            var(--black-50) 1px,
             transparent 1px,
             transparent 25px
         ),
         repeating-linear-gradient(
             90deg,
-            var(--color-grey-700),
-            var(--color-grey-700) 1px,
+            var(--black-50),
+            var(--black-50) 1px,
             transparent 1px,
             transparent 40px
         );
@@ -90,9 +91,9 @@
     color: pink;
     position: absolute;
     bottom: -170%;
-    background-color: var(--color-grey-300);
+    background-color: var(--black-10);
     z-index: 1;
-    color: var(--color-grey-950);
+    color: var(--black);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -117,8 +118,8 @@
 
 .new-layout-buttons button,
 .screener-select-container {
-    background-color: var(--color-grey-700);
-    border: 1px solid var(--color-grey-950);
+    background-color: var(--black-10);
+    border: 1px solid var(--black);
     height: 100%;
     width: 25%;
     color: white;

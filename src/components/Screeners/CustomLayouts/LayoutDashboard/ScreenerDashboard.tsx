@@ -77,7 +77,8 @@ const ScreenerDashboard = () => {
                                             activeLayout === index
                                                 ? {
                                                       backgroundColor:
-                                                          "var(--color-trade-green)",
+                                                          "var(--green)",
+                                                      color: "#fff",
                                                       pointerEvents: "none",
                                                   }
                                                 : {}

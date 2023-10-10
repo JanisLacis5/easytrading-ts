@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react"
+import {useState} from "react"
 import "./hod.css"
 
 interface IHodData {
@@ -22,14 +22,14 @@ const HodScreener = ({height, width, x, y}: IProps) => {
     const socket = new WebSocket("ws://localhost:3001")
     const [data, setData] = useState<IHodData[]>([])
     socket.onopen = () => {
-        // console.log("Connected to WebSocket server")
+        console.log("Connected to WebSocket server")
     }
     socket.onmessage = (event) => {
         const stockData = event.data
         if (stockData !== "Client connected") {
             setData([...data, JSON.parse(stockData)])
         }
-        // console.log(`Received from server: ${stockData}`)
+        console.log(`Received from server: ${stockData}`)
     }
 
     // FORMAT LARGE NUMBERS
@@ -46,16 +46,6 @@ const HodScreener = ({height, width, x, y}: IProps) => {
             return String((flt / 1_000).toFixed(2)) + "K"
         }
     }
-
-    // useEffect(() => {
-    //     console.log(
-    //         `HODScreener block: \n height ${height?.toFixed(
-    //             0
-    //         )}%\n width = ${width?.toFixed(0)}%\n x = ${x?.toFixed(
-    //             0
-    //         )}%\n y = ${y?.toFixed(0)}%`
-    //     )
-    // }, [x])
 
     return (
         <section

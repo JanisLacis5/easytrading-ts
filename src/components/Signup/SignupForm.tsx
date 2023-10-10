@@ -7,7 +7,7 @@ import {useAppSelector, useAppDispatch} from "../../store/storeHooks"
 import {setIsLoading, setIsNotLoading} from "../../features/userSlice"
 import {setDefaultStateBool} from "../../features/defaultSlice"
 import {setUserInfoString} from "../../features/userInfoFormSlice"
-import {passwordRequirements} from "../../functions"
+// import {passwordRequirements} from "../../functions"
 
 const SignupForm = () => {
     const navigate = useNavigate()
@@ -26,17 +26,17 @@ const SignupForm = () => {
             dispatch(setIsLoading())
             const {data} = await customFetch.post("/checkuser", {email: email})
             if (data.message === "success") {
-                if (!passwordRequirements(password)) {
-                    dispatch(setIsNotLoading())
-                    dispatch(
-                        setDefaultStateBool({prop: "isMetReq", value: false})
-                    )
-                    dispatch(setUserInfoString({prop: "password", value: ""}))
-                    dispatch(
-                        setUserInfoString({prop: "confirmPassword", value: ""})
-                    )
-                    return
-                }
+                // if (!passwordRequirements(password)) {
+                //     dispatch(setIsNotLoading())
+                //     dispatch(
+                //         setDefaultStateBool({prop: "isMetReq", value: false})
+                //     )
+                //     dispatch(setUserInfoString({prop: "password", value: ""}))
+                //     dispatch(
+                //         setUserInfoString({prop: "confirmPassword", value: ""})
+                //     )
+                //     return
+                // }
                 dispatch(setIsNotLoading())
                 dispatch(setDefaultStateBool({prop: "isMetReq", value: true}))
                 navigate("/signup/form")
