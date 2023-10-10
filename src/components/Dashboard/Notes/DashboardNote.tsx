@@ -122,7 +122,7 @@ const DashboardNote = (props: IUserSingleNote & {index: number}) => {
                 {image?.length ? (
                     <img src={image} alt="note image" />
                 ) : (
-                    <div className="janis"></div>
+                    <div className="empty-picture"></div>
                 )}
             </div>
             <div>

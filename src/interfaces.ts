@@ -33,3 +33,12 @@ export interface IUserInfo {
     image: string
     pricing: string
 }
+
+export interface IHodData {
+    time: string
+    stock: string
+    price: number
+    float: number
+    volume: number
+    relVolume: number
+}

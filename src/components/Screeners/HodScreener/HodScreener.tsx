@@ -1,14 +1,6 @@
-import {useState} from "react"
 import "./hod.css"
-
-interface IHodData {
-    time: string
-    stock: string
-    price: number
-    float: number
-    volume: number
-    relVolume: number
-}
+import {useAppDispatch, useAppSelector} from "../../../store/storeHooks"
+import {setHodData} from "../../../features/screenerSlice"
 
 interface IProps {
     height?: number
@@ -18,16 +10,18 @@ interface IProps {
 }
 
 const HodScreener = ({height, width, x, y}: IProps) => {
+    const dispatch = useAppDispatch()
+    const {hodData} = useAppSelector((store) => store.screener)
+
     // GET DATA FROM SERVER
     const socket = new WebSocket("ws://localhost:3001")
-    const [data, setData] = useState<IHodData[]>([])
     socket.onopen = () => {
         console.log("Connected to WebSocket server")
     }
     socket.onmessage = (event) => {
         const stockData = event.data
         if (stockData !== "Client connected") {
-            setData([...data, JSON.parse(stockData)])
+            dispatch(setHodData(JSON.parse(stockData)))
         }
         console.log(`Received from server: ${stockData}`)
     }
@@ -78,8 +72,8 @@ const HodScreener = ({height, width, x, y}: IProps) => {
                 </div>
             </div>
             <div className="screener-main">
-                {data.length ? (
-                    data.reverse().map((stockObj, index) => {
+                {hodData.length ? (
+                    hodData.reverse().map((stockObj, index) => {
                         const {stock, time, price, float, volume, relVolume} =
                             stockObj
                         return (

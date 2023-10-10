@@ -15,7 +15,7 @@ const DashboardNotes = () => {
 
     return (
         <section className="dashboard-notes">
-            <h1>Notes</h1>
+            <h3>Notes</h3>
             <div className="dashboard-notes-container">
                 {notes.length ? (
                     notes.map((note, index) => {
@@ -23,8 +23,8 @@ const DashboardNotes = () => {
                     })
                 ) : (
                     <div className="no-notes">
-                        <h1>You don't have any notes</h1>
-                        <p>You can add note at user page</p>
+                        <h2>You don't have any notes</h2>
+                        <h4>You can add note at user page</h4>
                     </div>
                 )}
             </div>
