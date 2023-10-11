@@ -15,6 +15,15 @@ const SiteLayout = () => {
     const {showSmallLinks} = useAppSelector((store) => store.small)
     const {screenWidth} = useAppSelector((store) => store.default)
 
+    const screenerPaths = ["/hod", "/gap", "loading"]
+    const pathsWithoutNavbar = [
+        ...screenerPaths,
+        "/landing",
+        "/login",
+        "/signup",
+        "/signup/form",
+    ]
+
     useEffect(() => {
         window.onresize = () => dispatch(setWidth(window.innerWidth))
     }, [])
@@ -26,7 +35,7 @@ const SiteLayout = () => {
     }, [screenWidth])
 
     useEffect(() => {
-        if (window.location.pathname === "/screeners/hod") {
+        if (screenerPaths.find((s) => s === window.location.pathname)) {
             return
         }
         if (window.location.pathname !== "/loading") {
@@ -54,8 +63,6 @@ const SiteLayout = () => {
             window.removeEventListener("beforeunload", handleBeforeUnload)
         }
     }, [])
-
-    const pathsWithoutNavbar = ["/landing", "/login", "/signup", "/signup/form"]
 
     return (
         <main>

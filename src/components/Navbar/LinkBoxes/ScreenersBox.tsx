@@ -30,7 +30,7 @@ const ScreenersBox = () => {
                         </svg>
                         <h5>Screener Layout</h5>
                     </Link>
-                    <Link to="" className="gap-box">
+                    <Link to="/gap" className="gap-box" target="_blank">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
@@ -46,7 +46,7 @@ const ScreenersBox = () => {
                         </svg>
                         <h5>Gap Screener</h5>
                     </Link>
-                    <Link to="/screeners/hod" className="hod-box">
+                    <Link to="/hod" className="hod-box" target="_blank">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"

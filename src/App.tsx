@@ -31,6 +31,7 @@ import DashboardLayout from "./components/Dashboard/DashboardLayout"
 import Loading from "./Loading"
 import SiteLayout from "./SiteLayout"
 import NewLayout from "./components/Screeners/CustomLayouts/NewLayout/NewLayout"
+import GapBlock from "./components/Screeners/CustomLayouts/ScreenerBlocks/GapBlock"
 
 function App() {
     const dispatch = useDispatch()
@@ -120,7 +121,7 @@ function App() {
                     element: <Contact />,
                 },
                 {
-                    path: "userpage",
+                    path: "user-page",
                     element: <UserPage />,
                     children: [
                         {
@@ -157,11 +158,15 @@ function App() {
                             path: "new-layout",
                             element: <NewLayout />,
                         },
-                        {
-                            path: "hod",
-                            element: <HodScreener />,
-                        },
                     ],
+                },
+                {
+                    path: "hod",
+                    element: <HodScreener />,
+                },
+                {
+                    path: "gap",
+                    element: <GapBlock />,
                 },
             ],
         },

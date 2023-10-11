@@ -44,10 +44,11 @@ const UserPage = () => {
                             alt="user profile picture"
                         />
                     </div>
-                    <h2>
+                    <h3>
                         {info.firstName} {info.lastName}
-                    </h2>
-                    <h4>{info.email}</h4>
+                    </h3>
+                    <h5>{info.email}</h5>
+                    <div></div>
                 </div>
                 {screenWidth < 1200 ? (
                     showUserAside ? (
@@ -63,18 +64,19 @@ const UserPage = () => {
                     <>
                         <aside className="user-page-aside">
                             <div className="user-page-link-container">
-                                <Link to="/userpage">Update info</Link>
-                                <Link to="/userpage/pricing">
+                                <Link to="/user-page">Update info</Link>
+                                <Link to="/user-page/pricing">
                                     Pricing plans
                                 </Link>
-                                <Link to="/userpage/notes">Notes</Link>
-                                <Link to="/userpage/danger">Danger zone</Link>
+                                <Link to="/user-page/notes">Notes</Link>
+                                <Link to="/user-page/danger">Danger zone</Link>
                             </div>
                             <div>
                                 <button type="button" onClick={logoutFunc}>
                                     Logout
                                 </button>
                             </div>
+                            <div></div>
                         </aside>
                         <div className="user-page-content">
                             <Outlet />
