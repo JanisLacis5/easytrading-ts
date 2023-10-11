@@ -19,6 +19,9 @@
     --black-5: rgba(42, 54, 53, 0.05);
     --green: #50a343;
     --red: #da473a;
+
+    /* SHADOWS */
+    --button-shadow: 0 5px 8px var(--black-10);
 }
 
 *,

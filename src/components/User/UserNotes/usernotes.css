@@ -22,9 +22,9 @@
 .user-notes-addnote textarea {
     height: 90%;
     width: 95%;
-    padding: 0.5rem;
-    background-color: var(--color-grey-800);
-    color: var(--color-grey-300);
+    padding: 1rem;
+    background-color: var(--black-10);
+    color: var(--black);
     border: none;
     align-self: center;
     resize: none;
@@ -53,13 +53,13 @@
 .user-notes-addnote button {
     height: 70%;
     width: 35%;
-    border-radius: 1.5rem;
     border: none;
     font-size: 1rem;
-    background-color: var(--color-grey-300);
+    background: var(--gradient);
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: var(--button-shadow);
 }
 
 /* NOTES PAGE */
@@ -89,8 +89,8 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    background-color: var(--color-grey-300);
-    color: var(--color-grey-950);
+    background-color: var(--black);
+    color: var(--black-10);
 }
 
 .user-note p {
@@ -129,10 +129,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--color-grey-800);
-    color: var(--color-grey-300);
-    border-radius: 2rem;
+    background: var(--gradient);
+    color: var(--black);
     border: none;
+    box-shadow: var(--button-shadow);
 }
 
 @media screen and (min-width: 900px) {

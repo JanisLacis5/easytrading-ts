@@ -28,7 +28,7 @@
     height: 33%;
     border: none;
     background: var(--gradient);
-    box-shadow: 0 5px 8px var(--black-10);
+    box-shadow: var(--button-shadow);
 }
 
 .tradelog-filter select {
@@ -40,7 +40,7 @@
     border: none;
     cursor: pointer;
     height: 33%;
-    box-shadow: 0 5px 8px var(--black-10);
+    box-shadow: var(--button-shadow);
 }
 
 .tradelog-filter select:focus {

@@ -13,17 +13,17 @@ const DeleteProfileModal = () => {
                 <AskPasswordForm />
             ) : (
                 <>
-                    <div className="delete-ptofile-modal-content">
+                    <div className="delete-profile-modal-content">
                         <RxCross1 className="delete-cross" />
                     </div>
-                    <h2 className="delete-ptofile-modal-content">
+                    <h2 className="delete-profile-modal-content">
                         Are you sure?
                     </h2>
-                    <p className="delete-ptofile-modal-content">
+                    <h6 className="delete-profile-modal-content">
                         Pressing "Yes" means that you will never be able to get
                         back your profile
-                    </p>
-                    <div className="delete-ptofile-modal-content">
+                    </h6>
+                    <div className="delete-profile-modal-content">
                         <div className="delete-modal-button-container">
                             <button
                                 type="button"

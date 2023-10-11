@@ -6,7 +6,6 @@ import {logout} from "../../../features/userSlice"
 import {useNavigate} from "react-router-dom"
 import {toast} from "react-toastify"
 import {setAskPassword, setIsDelete} from "../../../features/dangerZoneSlice"
-import {setUserInfoString} from "../../../features/userInfoFormSlice"
 
 const AskPasswordForm = () => {
     const dispatch = useAppDispatch()
@@ -43,14 +42,7 @@ const AskPasswordForm = () => {
                     name="password"
                     id="password"
                     value={password}
-                    onChange={(e) =>
-                        dispatch(
-                            setUserInfoString({
-                                prop: "password",
-                                value: e.target.value,
-                            })
-                        )
-                    }
+                    onChange={(e) => setPassword(e.target.value)}
                 />
                 <div className="ask-password-button-container">
                     <div>

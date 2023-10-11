@@ -31,7 +31,7 @@ const UserNotes = () => {
                 )}
             </div>
             <div>
-                <Link to="/userpage/addnote">Add new note</Link>
+                <Link to="/user-page/addnote">Add new note</Link>
             </div>
         </section>
     )

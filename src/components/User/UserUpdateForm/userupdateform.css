@@ -73,10 +73,11 @@
     font-size: 1rem;
     border: none;
     cursor: pointer;
-    border-radius: 1.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
+    background: var(--gradient);
+    box-shadow: var(--button-shadow);
 }
 
 .image-input {
@@ -110,12 +111,12 @@
     cursor: pointer;
     height: 100%;
     width: 100%;
-    background-color: #fff;
-    border-radius: 1.5rem;
+    background-color: var(--black-10);
+
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 1px 1px var(--black);
+    box-shadow: var(--button-shadow);
 }
 
 @media screen and (min-width: 600px) {

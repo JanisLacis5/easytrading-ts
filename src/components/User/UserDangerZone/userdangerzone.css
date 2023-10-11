@@ -11,20 +11,18 @@
 .danger-zone-action {
     overflow: hidden;
     height: 47.5%;
-    border: 1px solid var(--color-trade-red);
+    border: 1px solid var(--red);
     padding: 0.5rem;
     display: flex;
 }
 
-.danger-zone-action h4 {
+.danger-zone-action h3 {
     font-weight: 300;
-    font-size: 1.25rem;
-    color: var(--color-trade-red);
+    color: var(--red);
     padding: 0;
 }
 
 .danger-zone-action p {
-    font-size: 0.7rem;
     height: 100%;
     width: 100%;
 }
@@ -33,7 +31,7 @@
     width: 150%;
 }
 
-.danger-zone-action div:last-child {
+.danger-zone-action > div:last-child {
     height: 100%;
     width: 100%;
     display: flex;
@@ -42,28 +40,24 @@
     padding-top: 1rem;
 }
 
-.danger-zone-action button {
+.danger-zone-action button,
+.danger-zone-action a {
     height: 22%;
     width: 80%;
     border: none;
-    border-radius: 2rem;
-    background-color: var(--color-trade-red);
-    color: var(--color-grey-300);
-    font-size: 0.7rem;
+    background-color: var(--red);
+    color: #fff;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
+    box-shadow: var(--button-shadow);
 }
 
 /* CHANGE PASSWORD FORM */
 
 .change-password-form {
     height: 100%;
-}
-
-.change-password-form h2 {
-    font-size: 1.7rem;
 }
 
 .change-password-form-main {
@@ -100,16 +94,16 @@
     height: 100%;
     background-color: transparent;
     border: none;
-    border-bottom: 1px solid var(--color-grey-300);
+    border-bottom: 1px solid var(--black);
     width: 100%;
-    caret-color: var(--color-grey-300);
-    color: var(--color-grey-300);
+    caret-color: var(--black);
+    color: var(--black);
     font-size: 0.8rem;
 }
 
 .change-password-form-floating input:focus {
     outline: none;
-    border-bottom: 1px solid var(--color-grey-300);
+    border-bottom: 1px solid var(--black);
 }
 
 .change-password-form-floating .label-up,
@@ -135,26 +129,27 @@
     height: 100%;
     width: 30%;
     border: none;
-    border-radius: 1rem;
-    color: var(--color-grey-300);
+    color: var(--black);
     font-size: 0.8rem;
     display: flex;
     justify-content: center;
     align-items: center;
+    box-shadow: var(--button-shadow);
 }
 
 .change-password-form-button-container div button:first-child {
-    background-color: var(--color-grey-700);
+    background-color: var(--black-10);
 }
 
 .change-password-form-button-container div button:last-child {
-    background-color: var(--color-trade-red);
+    background-color: var(--red);
+    color: #fff;
 }
 
 .change-password-form h6 {
     padding-top: 0.3rem;
     font-weight: 100;
-    color: var(--color-trade-red);
+    color: var(--red);
     position: absolute;
     top: 0;
     height: 140%;
@@ -190,8 +185,8 @@ h6.hide {
     position: absolute;
     right: 0;
     top: 0;
-    background-color: var(--color-grey-300);
-    color: var(--color-grey-950);
+    background-color: var(--black);
+    color: var(--black);
     margin-right: -1rem;
 }
 
@@ -201,16 +196,16 @@ h6.hide {
     padding: 2rem;
     height: 60%;
     width: 33%;
-    background-color: var(--color-grey-300);
+    background: var(--gradient);
     position: fixed;
     top: 20%;
     left: 50%;
     margin-left: -16.5%;
-    color: var(--color-grey-900);
+    color: var(--black);
     display: grid;
     grid-template-rows: 3fr 2fr 1fr 2fr;
-    border-radius: 10px;
     place-items: center;
+    z-index: 10;
 }
 
 .delete-profile-modal > * {
@@ -218,12 +213,14 @@ h6.hide {
     width: 100%;
 }
 
-.delete-ptofile-modal-content {
+.delete-profile-modal-content {
     height: 100%;
     padding: 1rem;
+    display: flex;
+    justify-content: center;
 }
 
-.delete-profile-modal .delete-ptofile-modal-content:first-child {
+.delete-profile-modal .delete-profile-modal-content:first-child {
     display: flex;
     justify-content: center;
 }
@@ -231,28 +228,28 @@ h6.hide {
 .delete-cross {
     height: 100%;
     width: auto;
-    color: var(--color-trade-red);
-    border: 3px solid var(--color-trade-red);
-    border-radius: 50%;
+    color: var(--red);
+    border: 3px solid var(--red);
     padding: 1rem;
+    border-radius: 50%;
 }
 
-.delete-profile-modal .delete-ptofile-modal-content:nth-child(2),
-.delete-ptofile-modal-content:nth-child(
+.delete-profile-modal .delete-profile-modal-content:nth-child(2),
+.delete-profile-modal-content:nth-child(
         3
-    ).delete-ptofile-modal-content:last-child {
+    ).delete-profile-modal-content:last-child {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
 }
 
-.delete-profile-modal .delete-ptofile-modal-content:nth-child(2) {
-    color: var(--color-trade-red);
+.delete-profile-modal .delete-profile-modal-content:nth-child(2) {
+    color: var(--red);
     font-size: 3rem;
 }
 
-.delete-profile-modal .delete-ptofile-modal-content:last-child {
+.delete-profile-modal .delete-profile-modal-content:last-child {
     height: 100%;
     display: flex;
     align-items: center;
@@ -268,16 +265,17 @@ h6.hide {
 
 .delete-modal-button-container button {
     height: 100%;
-    width: 40%;
-    color: var(--color-grey-100);
-    font-size: 1rem;
+    width: 45%;
     font-weight: 600;
     border: none;
-    background-color: var(--color-trade-red);
+    background-color: var(--red);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .delete-modal-button-container button:last-child {
-    background-color: var(--color-grey-400);
+    background-color: #fff;
 }
 
 /* ASK PASSWORD FORM */
@@ -308,10 +306,12 @@ h6.hide {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    align-items: center;
 }
 
 .ask-password-button-container {
     height: 33%;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -328,19 +328,23 @@ h6.hide {
     height: 100%;
     width: 33%;
     border: none;
-    border-radius: 0.5rem;
     font-size: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
 }
 
 .ask-password-button-container div button:first-child {
-    background-color: var(--color-trade-red);
-    color: var(--color-grey-100);
+    background-color: var(--red);
+    color: var(--black);
 }
 
 @media screen and (min-width: 900px) {
     /* MAIN PAGE */
 
-    .danger-zone-action button {
+    .danger-zone-action button,
+    .danger-zone-action a {
         height: 20%;
         width: 70%;
     }
@@ -359,9 +363,5 @@ h6.hide {
         width: 70%;
         justify-content: flex-start;
         column-gap: 10%;
-    }
-
-    .change-password-form-button-container > div button {
-        border-radius: 1.25rem;
     }
 }

@@ -32,6 +32,7 @@ import Loading from "./Loading"
 import SiteLayout from "./SiteLayout"
 import NewLayout from "./components/Screeners/CustomLayouts/NewLayout/NewLayout"
 import GapBlock from "./components/Screeners/CustomLayouts/ScreenerBlocks/GapBlock"
+import ChangePasswordForm from "./components/User/UserDangerZone/ChangePasswordForm"
 
 function App() {
     const dispatch = useDispatch()
@@ -143,6 +144,10 @@ function App() {
                         {
                             path: "addnote",
                             element: <AddNote />,
+                        },
+                        {
+                            path: "change-password",
+                            element: <ChangePasswordForm />,
                         },
                     ],
                 },

@@ -67,7 +67,7 @@ const ChangePasswordForm = () => {
     return (
         <form className="change-password-form" onSubmit={handleSubmit}>
             <div className="change-password-form-main">
-                <h2>Change Password</h2>
+                <h3>Change Password</h3>
                 <div className="change-password-input-container">
                     <div className="change-password-form-floating">
                         <input
@@ -138,14 +138,15 @@ const ChangePasswordForm = () => {
                     <div>
                         <button
                             type="button"
-                            onClick={() =>
+                            onClick={() => {
                                 dispatch(
                                     setUserInfoBool({
                                         prop: "changePassword",
                                         value: false,
                                     })
                                 )
-                            }>
+                                navigate("/user-page")
+                            }}>
                             Cancel
                         </button>
                         <button type="submit">Finish</button>

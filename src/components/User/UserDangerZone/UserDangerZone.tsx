@@ -1,21 +1,16 @@
-import {useAppDispatch, useAppSelector} from "../../../store/storeHooks"
-import ChangePasswordForm from "./ChangePasswordForm"
+import {useAppDispatch} from "../../../store/storeHooks"
 import "./userdangerzone.css"
-import {setChangePassword, setIsDelete} from "../../../features/dangerZoneSlice"
+import {setIsDelete} from "../../../features/dangerZoneSlice"
+import {Link} from "react-router-dom"
 
 const UserDangerZone = () => {
     const dispatch = useAppDispatch()
-    const {changePassword} = useAppSelector((store) => store.dangerZone)
-
-    if (changePassword) {
-        return <ChangePasswordForm />
-    }
 
     return (
         <div className="danger-zone">
             <div className="danger-zone-action">
                 <div>
-                    <h4>Change password</h4>
+                    <h3>Change password</h3>
                     <p>
                         Wen you choose to change your passsword, this change is
                         inreverasble and unless there is a problem with your
@@ -23,16 +18,12 @@ const UserDangerZone = () => {
                     </p>
                 </div>
                 <div>
-                    <button
-                        type="button"
-                        onClick={() => dispatch(setChangePassword(true))}>
-                        Change Password
-                    </button>
+                    <Link to="/user-page/change-password">Change Password</Link>
                 </div>
             </div>
             <div className="danger-zone-action">
                 <div>
-                    <h4>Delete profile</h4>
+                    <h3>Delete profile</h3>
                     <p>
                         Profile delete option is inreversable and all data from
                         your profile will be deleted from our databases

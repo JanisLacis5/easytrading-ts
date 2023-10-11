@@ -23,21 +23,23 @@ const UserMenu = () => {
                     onClick={() => dispatch(resetUserAside())}>
                     <RxCross1 size={20} />
                 </button>
-                <Link to="/userpage" onClick={() => dispatch(resetUserAside())}>
+                <Link
+                    to="/user-page"
+                    onClick={() => dispatch(resetUserAside())}>
                     Update info
                 </Link>
                 <Link
-                    to="/userpage/pricing"
+                    to="/user-page/pricing"
                     onClick={() => dispatch(resetUserAside())}>
                     Pricing plans
                 </Link>
                 <Link
-                    to="/userpage/notes"
+                    to="/user-page/notes"
                     onClick={() => dispatch(resetUserAside())}>
                     Notes
                 </Link>
                 <Link
-                    to="/userpage/danger"
+                    to="/user-page/danger"
                     onClick={() => dispatch(resetUserAside())}>
                     Danger zone
                 </Link>
