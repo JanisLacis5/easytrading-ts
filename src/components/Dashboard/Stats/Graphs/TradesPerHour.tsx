@@ -1,21 +1,19 @@
-import {Bar} from "react-chartjs-2"
-import "./graphs.css"
-import {useAppSelector} from "../../../../store/storeHooks"
 import {useEffect, useState} from "react"
-import {tradesPerDay} from "./graphData"
-import {weekDays} from "./constants"
+import {useAppSelector} from "../../../../store/storeHooks"
+import {tradesPerHour} from "./graphData"
+import {Bar} from "react-chartjs-2"
 
-const TradesPerdayGraph = () => {
+const TradesPerHour = () => {
     const [trades, setTrades] = useState({})
 
     const {user} = useAppSelector((store) => store.user)
 
     const data = {
-        labels: weekDays,
+        labels: Object.keys(trades),
         datasets: [
             {
                 data: Object.values(trades),
-                backgroundColor: ["rgba(0, 255, 244, 0.7)"], // var(--primary)
+                backgroundColor: ["rgba(0, 255, 242, 0.7)"], // var(--primary)
                 borderColor: ["transparent"],
                 barThickness: 32,
             },
@@ -31,17 +29,17 @@ const TradesPerdayGraph = () => {
     }
 
     useEffect(() => {
-        const tradesPerDayTemp = tradesPerDay(user.trades)
-        if (tradesPerDayTemp) {
-            setTrades(tradesPerDayTemp)
+        const tempTrades = tradesPerHour(user.trades)
+        if (tempTrades) {
+            setTrades(tempTrades)
         }
     }, [user])
 
     return (
         <div className="stats-graph">
-            <h3>Trades per Day </h3>
-            <Bar data={data} options={options}></Bar>
+            <h3>Trades per Hour</h3>
+            <Bar data={data} options={options} />
         </div>
     )
 }
-export default TradesPerdayGraph
+export default TradesPerHour

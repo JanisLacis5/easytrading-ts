@@ -3,5 +3,11 @@
     place-self: center;
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 4rem;
+}
+
+.stats > div:not(:nth-child(1)) {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
 }

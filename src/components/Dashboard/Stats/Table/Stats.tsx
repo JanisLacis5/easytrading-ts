@@ -68,10 +68,10 @@ const Stats = () => {
                             style={{
                                 color:
                                     countSt?.totalProfit === 0
-                                        ? "var(--color-grey-300)"
+                                        ? "var(--black)"
                                         : countSt.totalProfit > 0
-                                        ? "var(--color-trade-green)"
-                                        : "var(--color-trade-red)",
+                                        ? "var(--green)"
+                                        : "var(--red)",
                             }}>
                             {(
                                 (countSt.totalProfit /
@@ -87,8 +87,8 @@ const Stats = () => {
                             style={{
                                 color:
                                     wonPlState.averageWonDayPl === 0
-                                        ? "var(--color-grey-300)"
-                                        : "var(--color-trade-green)",
+                                        ? "var(--black)"
+                                        : "var(--green)",
                             }}>
                             {wonPlState.averageWonDayPl >= 0
                                 ? `$${wonPlState.averageWonDayPl.toFixed(2)}`
@@ -104,8 +104,8 @@ const Stats = () => {
                             style={{
                                 color:
                                     lostPlState.biggestLoss === 0
-                                        ? "var(--color-grey-300)"
-                                        : "var(--color-trade-red)",
+                                        ? "var(--black)"
+                                        : "var(--red)",
                             }}>
                             {lostPlState.biggestLoss &&
                                 `-$${(lostPlState.biggestLoss * -1).toFixed(
@@ -147,10 +147,10 @@ const Stats = () => {
                             style={{
                                 color:
                                     countSt.totalProfit === 0
-                                        ? "var(--color-grey-300)"
+                                        ? "var(--black)"
                                         : countSt.totalProfit > 0
-                                        ? "var(--color-trade-green)"
-                                        : "var(--color-trade-red)",
+                                        ? "var(--green)"
+                                        : "var(--red)",
                             }}>
                             {countSt.totalProfit >= 0
                                 ? `$${countSt.totalProfit.toFixed(2)}`
@@ -163,8 +163,8 @@ const Stats = () => {
                             style={{
                                 color:
                                     lostPlState.averageLostDayPl === 0
-                                        ? "var(--color-grey-300)"
-                                        : "var(--color-trade-red)",
+                                        ? "var(--black)"
+                                        : "var(--red)",
                             }}>
                             {lostPlState.averageLostDayPl &&
                                 `-$${(
@@ -178,8 +178,8 @@ const Stats = () => {
                             style={{
                                 color:
                                     wonPlState.biggestWin === 0
-                                        ? "var(--color-grey-300)"
-                                        : "var(--color-trade-green)",
+                                        ? "var(--black)"
+                                        : "var(--green)",
                             }}>
                             {`$${wonPlState.biggestWin?.toFixed(2)}`}
                         </span>
