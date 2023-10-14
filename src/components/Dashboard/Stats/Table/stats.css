@@ -18,7 +18,7 @@
 }
 
 .detailed-stats-table > div {
-    width: 48%;
+    width: 50%;
     display: flex;
     flex-direction: column;
 }
@@ -32,7 +32,6 @@
     padding: 1rem 2rem 1rem 1rem;
 }
 
-.detailed-stats-table div:nth-child(4n),
-.detailed-stats-table div:nth-child(4n - 1) {
+.detailed-stats-table > div > div:nth-child(odd) {
     background-color: var(--black-10);
 }

@@ -1,0 +1,7 @@
+.stats {
+    width: 80%;
+    place-self: center;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}

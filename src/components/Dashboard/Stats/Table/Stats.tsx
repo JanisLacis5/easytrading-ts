@@ -1,9 +1,9 @@
-import {useAppSelector} from "../../../store/storeHooks"
-import "../dashboard.css"
+import {useAppSelector} from "../../../../store/storeHooks"
+import "../../dashboard.css"
 import "./stats.css"
 import {useEffect, useState} from "react"
 import {lostPl, wonPl} from "./statsFunc"
-import {countStats} from "../../../functions"
+import {countStats} from "../../../../functions"
 
 interface IWonPl {
     averageWonDayPl: number

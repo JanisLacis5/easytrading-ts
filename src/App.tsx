@@ -8,7 +8,7 @@ import {
     Dashboard,
     TradeLog,
     BrokerLogin,
-    Stats,
+    StatsLayout,
     Calendar,
     SignupInfoForm,
     SignupLayout,
@@ -67,7 +67,7 @@ function App() {
                         },
                         {
                             path: "stats",
-                            element: <Stats />,
+                            element: <StatsLayout />,
                         },
                         {
                             path: "addtrade",

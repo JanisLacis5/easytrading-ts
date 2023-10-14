@@ -1,4 +1,4 @@
-import {IUserSingleTrade} from "../../../interfaces"
+import {IUserSingleTrade} from "../../../../interfaces"
 
 export const maxPl = (trades: IUserSingleTrade[]) => {
     return Math.max(...trades.map((trade: IUserSingleTrade) => trade.pl))

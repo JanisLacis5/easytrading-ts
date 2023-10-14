@@ -32,7 +32,7 @@ const TradingBox = () => {
                             </svg>
                             <h5>New Trade</h5>
                         </Link>
-                        <Link to="/dashboard/brokerlogin">
+                        {/* <Link to="/dashboard/brokerlogin">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
@@ -47,7 +47,7 @@ const TradingBox = () => {
                                 />
                             </svg>
                             <h5>Broker</h5>
-                        </Link>
+                        </Link> */}
                     </div>
                 </div>
                 <div>
