@@ -1,7 +1,7 @@
 import {Bar} from "react-chartjs-2"
 import "./graphs.css"
 import {useEffect, useState} from "react"
-import {plPerDay, splitData} from "./graphData"
+import {plPerDay} from "./graphData"
 import {useAppSelector} from "../../../../store/storeHooks"
 
 const PlPerDay = () => {
@@ -9,20 +9,12 @@ const PlPerDay = () => {
 
     const {user} = useAppSelector((store) => store.user)
 
-    const {positive, negative} = splitData(Object.values(pl))
-
     const data = {
         labels: Object.keys(pl),
         datasets: [
             {
-                data: [...positive],
+                data: Object.values(pl),
                 backgroundColor: ["rgba(80, 163, 67, 0.7)"], // var(--green)
-                borderColor: ["transparent"],
-                barThickness: 32,
-            },
-            {
-                data: [...negative],
-                backgroundColor: ["rgba(218, 71, 58, 0.7)"], // var(--red)
                 borderColor: ["transparent"],
                 barThickness: 32,
             },

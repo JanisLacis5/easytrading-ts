@@ -1,9 +1,9 @@
-import {useEffect, useState} from "react"
+import {useState, useEffect} from "react"
 import {useAppSelector} from "../../../../store/storeHooks"
-import {plPerHour} from "./graphData"
+import {plPerMonth} from "./graphData"
 import {Bar} from "react-chartjs-2"
 
-const PlPerHour = () => {
+const PlPerMonth = () => {
     const [pl, setPl] = useState({})
 
     const {user} = useAppSelector((store) => store.user)
@@ -13,7 +13,7 @@ const PlPerHour = () => {
         datasets: [
             {
                 data: Object.values(pl),
-                backgroundColor: ["rgba(80, 163, 67, 0.7)"], // var(--green)
+                backgroundColor: ["rgba(80, 163, 67, 0.7)"],
                 borderColor: ["transparent"],
                 barThickness: 32,
             },
@@ -38,17 +38,22 @@ const PlPerHour = () => {
     }
 
     useEffect(() => {
-        const tempPl = plPerHour(user.trades)
+        const tempPl = plPerMonth(user.trades)
+
         if (tempPl) {
             setPl(tempPl)
         }
     }, [user])
 
+    useEffect(() => {
+        console.log(pl)
+    }, [pl])
+
     return (
         <div className="stats-graph">
-            <h3>P&L per Hour</h3>
+            <h3>P&L per Month</h3>
             <Bar data={data} options={options} />
         </div>
     )
 }
-export default PlPerHour
+export default PlPerMonth

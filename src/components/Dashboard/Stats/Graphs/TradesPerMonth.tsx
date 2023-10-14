@@ -1,19 +1,19 @@
 import {useEffect, useState} from "react"
+import {tradesPerMonth} from "./graphData"
 import {useAppSelector} from "../../../../store/storeHooks"
-import {plPerHour} from "./graphData"
 import {Bar} from "react-chartjs-2"
 
-const PlPerHour = () => {
-    const [pl, setPl] = useState({})
+const TradesPerMonth = () => {
+    const [trades, setTrades] = useState({})
 
     const {user} = useAppSelector((store) => store.user)
 
     const data = {
-        labels: Object.keys(pl),
+        labels: Object.keys(trades),
         datasets: [
             {
-                data: Object.values(pl),
-                backgroundColor: ["rgba(80, 163, 67, 0.7)"], // var(--green)
+                data: Object.values(trades),
+                backgroundColor: ["rgba(0, 255, 244, 0.7)"], // var(--primary)
                 borderColor: ["transparent"],
                 barThickness: 32,
             },
@@ -26,29 +26,21 @@ const PlPerHour = () => {
                 display: false,
             },
         },
-        scales: {
-            y: {
-                ticks: {
-                    callback: function (value: string) {
-                        return "$ " + value
-                    },
-                },
-            },
-        },
     }
 
     useEffect(() => {
-        const tempPl = plPerHour(user.trades)
-        if (tempPl) {
-            setPl(tempPl)
+        const tempTrades = tradesPerMonth(user.trades)
+
+        if (tempTrades) {
+            setTrades(tempTrades)
         }
     }, [user])
 
     return (
         <div className="stats-graph">
-            <h3>P&L per Hour</h3>
+            <h3>Trades per Month</h3>
             <Bar data={data} options={options} />
         </div>
     )
 }
-export default PlPerHour
+export default TradesPerMonth

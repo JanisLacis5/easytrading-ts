@@ -4,6 +4,36 @@ interface IData {
 
 export const weekDays = ["Mon", "Tue", "Wed", "Thu", "Fri"]
 
+export const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+]
+
+export const constMonths: IData = {
+    Jan: 0,
+    Feb: 0,
+    Mar: 0,
+    Apr: 0,
+    May: 0,
+    Jun: 0,
+    Jul: 0,
+    Aug: 0,
+    Sep: 0,
+    Oct: 0,
+    Nov: 0,
+    Dec: 0,
+}
+
 export const constDays: IData = {
     Mon: 0,
     Tue: 0,

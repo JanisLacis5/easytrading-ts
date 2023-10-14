@@ -1,23 +1,36 @@
 import {IUserSingleTrade} from "../../../../interfaces"
-import {constHours, weekDays} from "./constants"
-import {constDays} from "./constants"
+import {constDays, constMonths, constHours, weekDays, months} from "./constants"
 
-export const splitData = (data: number[]) => {
-    const positive = []
-    const negative = []
+// PER MONTH
 
-    for (let i = 0; i < data.length; i++) {
-        if (data[i] > 0) {
-            positive.push(data[i])
-        } else {
-            negative.push(data[i])
-        }
+export const tradesPerMonth = (trades: IUserSingleTrade[]) => {
+    if (!trades || !trades.length) {
+        return null
     }
 
-    return {
-        positive,
-        negative,
+    const funcMonths = {...constMonths}
+
+    trades.map((trade) => {
+        const month = months[new Date(trade.date).getMonth()]
+        funcMonths[month] = funcMonths[month] += 1
+    })
+
+    return funcMonths
+}
+
+export const plPerMonth = (trades: IUserSingleTrade[]) => {
+    if (!trades || !trades.length) {
+        return null
     }
+
+    const funcMonths = {...constMonths}
+
+    trades.map((trade) => {
+        const month = months[new Date(trade.date).getMonth()]
+        funcMonths[month] = funcMonths[month] += trade.pl
+    })
+
+    return funcMonths
 }
 
 // PER DAY
