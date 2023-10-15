@@ -5,6 +5,7 @@ import {logout} from "../../features/userSlice"
 import {RxHamburgerMenu} from "react-icons/rx"
 import UserMenu from "./UserMenu"
 import {toggleUserAside} from "../../features/smallSlice"
+import "./user.css"
 
 const UserPage = () => {
     const dispatch = useAppDispatch()
@@ -76,7 +77,6 @@ const UserPage = () => {
                                     Logout
                                 </button>
                             </div>
-                            <div></div>
                         </aside>
                         <div className="user-page-content">
                             <Outlet />

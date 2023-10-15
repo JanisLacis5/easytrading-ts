@@ -67,7 +67,7 @@
 }
 
 .user-page-container {
-    width: 70%;
+    width: 90%;
     background: #fff;
     height: 90%;
     display: grid;
@@ -78,21 +78,22 @@
 }
 
 .user-page-main-info,
-.user-page-aside,
-.user-page-content {
+.user-page-aside {
     width: 100%;
     height: 100%;
     color: var(--black);
 }
 
-.user-page-aside {
-    position: relative;
-}
-
 .user-page-content {
+    width: 90%;
     grid-row: 2 / 2;
     grid-column: 2 / 2;
-    padding: 1rem;
+    padding: 1.5rem;
+    padding-bottom: 1rem;
+}
+
+.user-page-aside {
+    position: relative;
 }
 
 .user-page button {
@@ -165,7 +166,7 @@
 .user-page-aside {
     width: 100%;
     height: 100%;
-    padding: 7.5% 2%;
+    padding: 1rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -228,7 +229,7 @@
 
 .user-page-link-container a {
     color: var(--black);
-    width: calc(100% - 5rem);
+    width: 80%;
     border-bottom: 1px solid var(--black-25);
 }
 
@@ -237,31 +238,21 @@
     width: 100%;
 }
 
-.user-page-aside > div:nth-child(2) {
-    height: 12%;
+.user-page-aside > div:last-child {
+    height: 2rem;
     width: 100%;
     display: flex;
     align-items: flex-end;
 }
 
-.user-page-aside > div:last-child {
-    position: absolute;
-    right: 0;
-    height: 80%;
-    background-color: var(--black-25);
-    width: 1px;
-    margin-right: 3rem;
-}
-
 .user-page-aside-s div:last-child button,
 .user-page-aside button {
     font-family: inherit;
-    height: 90%;
+    height: 100%;
     width: 40%;
     border: none;
     color: #fff;
     background-color: var(--red);
-
     font-size: 1rem;
     display: flex;
     justify-content: center;
@@ -277,7 +268,7 @@
     position: relative;
 }
 
-@media screen and (min-width: 900px) {
+@media screen and (min-width: 768px) {
     .user-page-container {
         width: 70%;
         grid-template-rows: 25% 75%;
@@ -293,7 +284,16 @@
     }
 }
 
+@media screen and (min-width: 992px) {
+    .user-page-aside > div:last-child {
+        height: 2.5rem;
+    }
+}
+
 @media screen and (min-width: 1200px) {
+    .user-page-aside > div:last-child {
+        height: 3rem;
+    }
     .user-page-main-info h2,
     .user-page-main-info h4 {
         padding-left: 0;
@@ -305,11 +305,5 @@
     .user-button button p {
         justify-content: flex-start;
         gap: 10%;
-    }
-}
-
-@media screen and (min-width: 1500px) {
-    .user-page-main-info {
-        grid-template-columns: 20% 80%;
     }
 }

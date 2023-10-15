@@ -10,6 +10,7 @@ const UserPricingPlan = () => {
 
     const {user} = useAppSelector((store) => store.user)
     const {changePlan} = useAppSelector((store) => store.userInfo)
+    const {screenWidth} = useAppSelector((store) => store.default)
 
     useEffect(() => {
         if (changePlan) {
@@ -19,9 +20,17 @@ const UserPricingPlan = () => {
 
     return (
         <div className="pricing-plan">
-            <h2>
-                Your current pricing plan: <span>{user.info.pricing}</span>
-            </h2>
+            {screenWidth < 576 ? (
+                <h4>
+                    Your current pricing plan: <br />{" "}
+                    <span>{user.info.pricing}</span>
+                </h4>
+            ) : (
+                <h3>
+                    Your current pricing plan: <br />{" "}
+                    <span>{user.info.pricing}</span>
+                </h3>
+            )}
             <div>
                 <Link
                     to="/pricing"

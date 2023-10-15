@@ -7,6 +7,8 @@
     justify-content: space-between;
 }
 
+.pricing-plan h4,
+.pricing-plan h3,
 .pricing-plan h2 {
     width: 100%;
     display: flex;
@@ -15,8 +17,9 @@
 }
 
 .pricing-plan span {
-    color: var(--black);
-    text-transform: capitalize;
+    color: rgba(var(--primary));
+    font-weight: bolder;
+    text-transform: uppercase;
 }
 
 .pricing-plan div {
@@ -31,7 +34,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 30%;
+    width: 40%;
     height: 50%;
     border: none;
     background-color: var(--black-10);
@@ -50,11 +53,17 @@
     box-shadow: var(--button-shadow);
 }
 
+@media screen and (min-width: 768px) {
+    .pricing-plan a {
+        width: 35%;
+    }
+}
+
 @media screen and (min-width: 900px) {
     .pricing-plan h2 {
         justify-content: space-around;
     }
     .pricing-plan a {
-        width: 25%;
+        width: 30%;
     }
 }

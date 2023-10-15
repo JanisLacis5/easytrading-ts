@@ -29,6 +29,9 @@
 
 .danger-zone-action > div:first-child {
     width: 150%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
 .danger-zone-action > div:last-child {
@@ -42,7 +45,7 @@
 
 .danger-zone-action button,
 .danger-zone-action a {
-    height: 22%;
+    height: 30%;
     width: 80%;
     border: none;
     background-color: var(--red);
@@ -193,36 +196,33 @@ h6.hide {
 /* DELETE MODAL */
 
 .delete-profile-modal {
-    padding: 2rem;
-    height: 60%;
-    width: 33%;
+    padding: 1rem;
+    height: 70%;
+    width: 80%;
     background: var(--gradient);
     position: fixed;
-    top: 20%;
-    left: 50%;
-    margin-left: -16.5%;
+    top: 15%;
     color: var(--black);
-    display: grid;
-    grid-template-rows: 3fr 2fr 1fr 2fr;
-    place-items: center;
+    display: flex;
+    flex-direction: column;
     z-index: 10;
 }
 
 .delete-profile-modal > * {
     height: 100%;
     width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 .delete-profile-modal-content {
-    height: 100%;
     padding: 1rem;
     display: flex;
     justify-content: center;
 }
 
-.delete-profile-modal .delete-profile-modal-content:first-child {
-    display: flex;
-    justify-content: center;
+.delete-profile-modal > div:first-child {
+    height: 50%;
 }
 
 .delete-cross {
@@ -234,31 +234,24 @@ h6.hide {
     border-radius: 50%;
 }
 
-.delete-profile-modal .delete-profile-modal-content:nth-child(2),
-.delete-profile-modal-content:nth-child(
-        3
-    ).delete-profile-modal-content:last-child {
+.delete-profile-modal h2 {
+    height: 20%;
     display: flex;
-    justify-content: center;
     align-items: center;
-    height: 100%;
-}
-
-.delete-profile-modal .delete-profile-modal-content:nth-child(2) {
     color: var(--red);
-    font-size: 3rem;
 }
 
-.delete-profile-modal .delete-profile-modal-content:last-child {
-    height: 100%;
+.delete-profile-modal h6,
+.delete-profile-modal > div:last-child {
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    height: 20%;
 }
 
 .delete-modal-button-container {
-    width: 60%;
-    height: 40%;
+    width: 70%;
+    height: 90%;
     display: flex;
     justify-content: space-around;
 }
@@ -340,7 +333,20 @@ h6.hide {
     color: var(--black);
 }
 
-@media screen and (min-width: 900px) {
+@media screen and (min-width: 768px) {
+    /* DELETE MODAL */
+
+    .delete-profile-modal {
+        width: 70%;
+        height: 60%;
+        top: 20%;
+    }
+}
+
+@media screen and (min-width: 768px) {
+}
+
+@media screen and (min-width: 992px) {
     /* MAIN PAGE */
 
     .danger-zone-action button,
@@ -363,5 +369,19 @@ h6.hide {
         width: 70%;
         justify-content: flex-start;
         column-gap: 10%;
+    }
+
+    /* DELETE MODAL */
+
+    .delete-profile-modal {
+        width: 55%;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    /* DELETE MODAL */
+
+    .delete-profile-modal {
+        width: 40%;
     }
 }

@@ -15,6 +15,7 @@ const AddNote = () => {
     const [text, setText] = useState("")
 
     const {user} = useAppSelector((store) => store.user)
+    const {screenWidth} = useAppSelector((store) => store.default)
 
     const convertImage = (e: React.ChangeEvent<HTMLInputElement>) => {
         const tgt = e.target
@@ -59,7 +60,13 @@ const AddNote = () => {
             <h2>Add note</h2>
             <form onSubmit={handleSubmit}>
                 <div className="user-notes-addnote-input">
-                    <label htmlFor="image">Add image: </label>
+                    <label htmlFor="image">
+                        {screenWidth < 768 ? (
+                            <h5>Add Image:</h5>
+                        ) : (
+                            <h4>Add Image:</h4>
+                        )}
+                    </label>
                     <input
                         type="file"
                         name="image"
@@ -67,6 +74,9 @@ const AddNote = () => {
                         accept="image/*"
                         onChange={convertImage}
                     />
+                    <label htmlFor="image" id="button">
+                        Choose Image
+                    </label>
                 </div>
                 <div className="user-notes-addnote-input">
                     <textarea

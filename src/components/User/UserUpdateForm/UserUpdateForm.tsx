@@ -150,7 +150,7 @@ const UserUpdateForm = () => {
                 </div>
             </div>
             <div className="image-input">
-                <p>Update Profile Picture: </p>
+                <h6>Update Profile Picture: </h6>
                 <div className="image-input-button">
                     <input
                         type="file"
@@ -161,7 +161,7 @@ const UserUpdateForm = () => {
                     <label htmlFor="profilePic">Choose image</label>
                 </div>
             </div>
-            <div className="user-update-form-submit">
+            <div>
                 <button type="submit">Update</button>
             </div>
         </form>
