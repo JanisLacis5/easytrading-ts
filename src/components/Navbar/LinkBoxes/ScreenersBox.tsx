@@ -11,7 +11,9 @@ const ScreenersBox = () => {
             className="nav-box screener-box"
             onMouseEnter={() => dispatch(setScreener({value: true}))}
             onMouseLeave={() => dispatch(setScreener({value: false}))}>
-            <div className="top"></div>
+            <div className="top">
+                <div className="link-arrow"></div>
+            </div>
             <div className="screener-box-main">
                 <div>
                     <Link to="screeners" className="screener-layout-box">

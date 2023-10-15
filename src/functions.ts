@@ -47,6 +47,7 @@ export const profitableStocks = (trades: IUserSingleTrade[]) => {
     if (!trades.length) {
         return {profits: 0, stocks: 0}
     }
+
     let tempTrades = [...trades]
     const tempTradesSet: Set<string> = new Set()
     let ansArr: number[] = Array(tempTrades.length).fill(0)
@@ -69,7 +70,9 @@ export const profitableStocks = (trades: IUserSingleTrade[]) => {
     let returnObj: {[key: string]: number} = {}
     let stocks = Array(...tempTradesSet)
 
-    for (let i = 0; i < 5; i++) {
+    const loopLength = ansArr.length > 5 ? 5 : ansArr.length
+
+    for (let i = 0; i < loopLength; i++) {
         const maxElement = Math.max(...ansArr)
         const elementIndex = ansArr.indexOf(maxElement)
         const stock = stocks[elementIndex]

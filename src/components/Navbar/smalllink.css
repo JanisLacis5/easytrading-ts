@@ -1,5 +1,4 @@
 .small-links {
-    background-color: var(--color-background);
     padding-left: 0.5rem;
 }
 
@@ -26,6 +25,16 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
+    padding: 0 1rem;
+}
+
+.small-nav > div:first-child {
+    width: 50%;
+    height: 70%;
+}
+
+.small-nav img {
+    height: 100%;
 }
 
 .small-nav button {
@@ -37,10 +46,6 @@
     padding: 0;
 }
 
-.small-nav div:first-child h1 {
-    height: 60%;
-}
-
 .small-nav button svg {
-    color: var(--color-grey-300);
+    color: var(--black);
 }

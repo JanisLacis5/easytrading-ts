@@ -99,7 +99,7 @@ h6 {
 }
 
 p {
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     font-weight: 200;
 }
 
@@ -133,4 +133,10 @@ main {
     display: grid;
     height: 100vh;
     grid-template-rows: 1fr 9fr;
+}
+
+@media screen and (min-width: 1200px) {
+    main {
+        grid-template-rows: 8fr 92fr;
+    }
 }

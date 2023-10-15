@@ -45,7 +45,7 @@ const WinLossGraph = () => {
 
     return (
         <section className="default-dashboard-graph">
-            <h3 className="graph-title">Won / Lost Trades</h3>
+            <h3>Won / Lost Trades</h3>
             <div className="pie-garph-container">
                 <select
                     onChange={(e) => {

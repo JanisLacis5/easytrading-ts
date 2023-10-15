@@ -16,11 +16,11 @@ const ProfitableStocks = () => {
         labels: Object.keys(profits),
         datasets: [
             {
-                label: "$",
                 data: Object.values(profits),
-                backgroundColor: ["rgba(42, 1, 229, 0.981)"],
-                borderColor: ["rgba(47, 0, 255, 0.981)"],
+                backgroundColor: ["rgba(0, 255, 242, 0.7)"],
+                borderColor: ["transparent"],
                 borderWidth: 1,
+                barThickness: 32,
             },
         ],
     }
@@ -44,9 +44,9 @@ const ProfitableStocks = () => {
 
     return (
         <section className="stock-graph">
-            <h3 className="graph-title">Your most profitable stocks</h3>
+            <h3>Your most profitable stocks</h3>
             <div className="profitable-stocks">
-                {profits.length ? (
+                {profits ? (
                     <Bar data={data} options={options} />
                 ) : (
                     <h4>No Data</h4>

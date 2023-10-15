@@ -1,8 +1,9 @@
 .nav-box {
     background-color: rgba(var(--primary), 0.5);
     position: absolute;
-    top: 9.5vh;
     border-radius: 3px;
+    top: 8vh;
+    bottom: -5vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -14,6 +15,19 @@
     width: 100%;
     position: absolute;
     top: -1rem;
+    display: flex;
+    justify-content: center;
+}
+
+.link-arrow {
+    height: 0;
+    width: 0;
+    bottom: 0;
+    border-bottom: 0.5rem solid rgba(var(--primary), 0.5);
+    border-left: 0.5rem solid transparent;
+    border-right: 0.5rem solid transparent;
+    border-top: 0.5rem solid transparent;
+    position: absolute;
 }
 
 .nav-box svg {
@@ -33,27 +47,33 @@
     height: calc(100% - 0.5rem);
     background-color: #fff;
     border-radius: 1px;
-    padding: 2rem;
+    padding: 1.5rem;
 }
 
 .nav-box a {
     display: flex;
+    justify-content: flex-start;
+    align-items: center;
     gap: 1rem;
 }
+
 /* SCREENER BOX */
 
 .screener-box {
-    left: 40%;
-    width: 25%;
-    height: 25%;
+    width: 40vh;
+    height: 35vh;
 }
 
 .screener-box-main > div {
-    height: 90%;
-    width: 70%;
+    height: 100%;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    gap: 1rem;
+}
+
+.screener-box-main > div a {
+    height: fit-content;
 }
 
 .gap-box,
@@ -65,9 +85,8 @@
 /* TRADING BOX */
 
 .trading-box {
-    left: 31%;
-    width: 40%;
-    height: 35%;
+    width: 60vh;
+    height: 35vh;
 }
 
 .trading-box-main {
@@ -80,7 +99,7 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1rem;
 }
 
 .trading-box-main h4 {
@@ -90,5 +109,27 @@
 .trading-box-main > div div {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    justify-content: space-between;
+    gap: 1rem;
+    height: fit-content;
+}
+
+@media screen and (min-width: 1200px) {
+    .nav-box {
+        top: 6.5vh;
+    }
+
+    .screener-box-main,
+    .trading-box-main {
+        padding: 2rem;
+    }
+
+    .screener-box {
+        height: 22vh;
+    }
+
+    .top {
+        height: 2rem;
+        top: -2rem;
+    }
 }

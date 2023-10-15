@@ -1,15 +1,17 @@
+.default-dashboard-graph h3,
+.stock-graph h3,
+.top-screener h3 {
+    color: var(--black);
+    width: 100%;
+    text-align: center;
+}
+
 /* W/L TRADES */
 
 .default-dashboard-graph {
     display: flex;
     flex-direction: column;
-    padding: 0 1rem;
-}
-
-.graph-title {
-    color: var(--black);
-    width: 100%;
-    text-align: center;
+    gap: 1rem;
 }
 
 .pie-garph-container {
@@ -20,9 +22,11 @@
 
 .pie-garph-container div {
     position: relative;
-    width: 80%;
+    width: 70%;
+    height: 60vh;
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .pie-garph-container h4 {
@@ -44,18 +48,21 @@
     border-bottom: 1px solid var(--black);
 }
 
+.pie-garph-container select:focus {
+    outline: none;
+}
+
 .pie-garph-container option {
     color: var(--black);
     background-color: #fff;
     border: none;
 }
 
-.pie-garph-container select:focus {
-    outline: none;
-}
-
 .overall-stats {
     color: var(--black);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
 .overall-stats p {
@@ -66,25 +73,23 @@
 /* PROFITABLE STOCKS */
 
 .stock-graph {
-    padding: 0 1rem;
+    height: 55vh;
+    width: 100%;
 }
 
 .profitable-stocks {
-    padding: 1rem 0;
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 90%;
 }
 
 .profitable-stocks h4 {
-    height: fit-content;
-    margin-bottom: 3rem;
     color: var(--black-50);
 }
 
-@media screen and (min-width: 600px) {
-    /* W/L TRADES */
-
+@media screen and (min-width: 576px) {
+    /* W/L TRADES  */
     .pie-garph-container div {
         width: 50%;
     }
@@ -92,8 +97,7 @@
         margin-left: 7.5%;
     }
 
-    /* PROFITABLE STOCKS */
-
+    /* PROFITABLE STOCKS  */
     .profitable-stocks {
         width: 75%;
         display: flex;
@@ -103,8 +107,7 @@
 }
 
 @media screen and (min-width: 900px) {
-    /* W/L TRADES */
-
+    /* W/L TRADES  */
     .default-dashboard-graph {
         display: grid;
         grid-template-columns: 3fr 2fr;
@@ -112,7 +115,7 @@
         width: 100%;
     }
 
-    .default-dashboard-graph h2 {
+    .default-dashboard-graph h3 {
         grid-column: span 2;
     }
 
@@ -168,11 +171,11 @@
     /* PROFITABLE STOCKS */
 
     .profitable-stocks {
-        width: 100%;
-        height: 100%;
+        width: 80%;
     }
 
     .stock-graph {
         padding: 0;
+        height: 45vh;
     }
 }

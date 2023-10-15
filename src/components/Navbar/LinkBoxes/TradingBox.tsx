@@ -11,7 +11,9 @@ const TradingBox = () => {
             className="nav-box trading-box"
             onMouseEnter={() => dispatch(setTrading({value: true}))}
             onMouseLeave={() => dispatch(setTrading({value: false}))}>
-            <div className="top"></div>
+            <div className="top">
+                <div className="link-arrow"></div>
+            </div>
             <div className="trading-box-main">
                 <div>
                     <h4>Add</h4>

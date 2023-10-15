@@ -1,7 +1,8 @@
 .dashboard-landing {
     overflow: scroll;
-    padding: 1rem 2rem;
-    height: 100%;
+    padding: 1rem;
+    gap: 3rem;
+    display: grid;
 }
 
 .no-show {
@@ -27,8 +28,9 @@
 
 @media screen and (min-width: 1200px) {
     .dashboard-landing {
-        display: grid;
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: repeat(2, 1fr);
+        padding: 1rem 2rem;
+        gap: 1rem;
     }
 }
