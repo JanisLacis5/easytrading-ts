@@ -1,5 +1,5 @@
 .stats {
-    width: 80%;
+    width: 95%;
     place-self: center;
     display: flex;
     flex-direction: column;
@@ -9,5 +9,24 @@
 .stats > div:not(:nth-child(1)) {
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+@media screen and (min-width: 768px) {
+    .stats > div:not(:nth-child(1)) {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .detailed-stats-table {
+        flex-direction: row;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .stats {
+        width: 80%;
+    }
 }
