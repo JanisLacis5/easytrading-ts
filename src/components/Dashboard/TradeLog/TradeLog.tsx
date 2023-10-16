@@ -23,7 +23,7 @@ const TradeLog = () => {
     const {sortedTrades, option, value} = useAppSelector((store) => store.sort)
     const {isFilters} = useAppSelector((store) => store.filter)
     const {user} = useAppSelector((store) => store.user)
-    const {showModal} = useAppSelector((store) => store.default)
+    const {showModal, screenWidth} = useAppSelector((store) => store.default)
 
     useEffect(() => {
         dispatch(setSortedTrades({trades: user.trades}))
@@ -75,7 +75,11 @@ const TradeLog = () => {
                             })
                         )
                     }}>
-                    <h5>Remove all trades</h5>
+                    {screenWidth < 768 ? (
+                        <h5>Remove all</h5>
+                    ) : (
+                        <h5>Remove all trades</h5>
+                    )}
                 </button>
                 <button type="button" onClick={() => dispatch(toggleFilters())}>
                     <h5>Filters</h5>
@@ -119,7 +123,11 @@ const TradeLog = () => {
                 </button>
                 <button type="button" name="accBefore" onClick={handleChange}>
                     <span>
-                        <h5>Before $</h5>
+                        {screenWidth < 768 ? (
+                            <h5>Before</h5>
+                        ) : (
+                            <h5>Before $</h5>
+                        )}
                     </span>
                     <span>
                         {option === "accBefore" ? (
@@ -135,7 +143,7 @@ const TradeLog = () => {
                 </button>
                 <button type="button" name="accAfter" onClick={handleChange}>
                     <span>
-                        <h5>After $</h5>
+                        {screenWidth < 768 ? <h5>After</h5> : <h5>After $</h5>}
                     </span>
                     <span>
                         {option === "accAfter" ? (

@@ -11,7 +11,7 @@ const Modal = () => {
             <div>
                 <RxCross1 className="remove-modal-cross" />
             </div>
-            <h1>Remove all trades?</h1>
+            <h2>Remove all trades?</h2>
             <h5>When you click "YES", this change is permanent</h5>
             <div className="remove-modal-btn-container">
                 <button
