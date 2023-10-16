@@ -1,12 +1,12 @@
-import {Link, Outlet, useNavigate} from "react-router-dom"
+import {Outlet, useNavigate} from "react-router-dom"
 import Navbar from "./components/Navbar/Navbar"
 import {useEffect} from "react"
 import {useAppDispatch} from "./store/storeHooks"
 import {resetLinks} from "./features/smallSlice"
 import "./components/Navbar/smalllink.css"
-import UserButton from "./components/User/UserButton"
 import {useAppSelector} from "./store/storeHooks"
 import {setWidth} from "./features/defaultSlice"
+import SmallLinks from "./components/Navbar/SmallLinks"
 
 const SiteLayout = () => {
     const navigate = useNavigate()
@@ -69,52 +69,7 @@ const SiteLayout = () => {
             {!pathsWithoutNavbar.find(
                 (s) => s === window.location.pathname
             ) && <Navbar />}
-            {showSmallLinks ? (
-                <div className="small-links">
-                    <div className="links">
-                        <Link
-                            className="link"
-                            to={isLogged ? "/dashboard" : "/landing"}
-                            onClick={() => dispatch(resetLinks())}>
-                            {isLogged ? "Dashboard" : "Landing"}
-                        </Link>
-                        <Link
-                            className="link"
-                            to="/about"
-                            onClick={() => dispatch(resetLinks())}>
-                            About
-                        </Link>
-                        <Link
-                            className="link"
-                            to="/pricing"
-                            onClick={() => dispatch(resetLinks())}>
-                            Pricing
-                        </Link>
-                        <Link
-                            className="link"
-                            to="/contact"
-                            onClick={() => dispatch(resetLinks())}>
-                            Contact
-                        </Link>
-                    </div>
-                    <div className="login">
-                        {!isLogged && (
-                            <Link className="signup-btn" to="/signup">
-                                Sign up
-                            </Link>
-                        )}
-                        {isLogged ? (
-                            <UserButton />
-                        ) : (
-                            <Link className="login-btn" to="/login">
-                                Login
-                            </Link>
-                        )}
-                    </div>
-                </div>
-            ) : (
-                <Outlet />
-            )}
+            {showSmallLinks ? <SmallLinks /> : <Outlet />}
         </main>
     )
 }
