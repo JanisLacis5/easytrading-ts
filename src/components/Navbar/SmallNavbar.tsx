@@ -1,7 +1,7 @@
 import {useAppDispatch, useAppSelector} from "../../store/storeHooks"
 import "./smalllink.css"
 import {RxHamburgerMenu, RxCross1} from "react-icons/rx"
-import {toggleSmallLinks} from "../../features/smallSlice"
+import {reset, toggleSmallLinks} from "../../features/smallSlice"
 import logo from "../../assets/logo.png"
 
 const SmallNavbar = () => {
@@ -15,13 +15,17 @@ const SmallNavbar = () => {
             <div>
                 <img src={logo} alt="logo" />
             </div>
-            <button type="button" onClick={() => dispatch(toggleSmallLinks())}>
-                {showSmallLinks ? (
+            {showSmallLinks ? (
+                <button type="button" onClick={() => dispatch(reset())}>
                     <RxCross1 size={20} />
-                ) : (
+                </button>
+            ) : (
+                <button
+                    type="button"
+                    onClick={() => dispatch(toggleSmallLinks())}>
                     <RxHamburgerMenu size={20} />
-                )}
-            </button>
+                </button>
+            )}
         </nav>
     )
 }

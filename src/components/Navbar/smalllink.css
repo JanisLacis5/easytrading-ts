@@ -25,13 +25,22 @@
 }
 
 .links a {
-    height: 15%;
+    height: 20%;
     display: flex;
     align-items: center;
 }
 
+.links > a:first-child {
+    height: 10%;
+}
+
 .links > a svg {
     height: 60%;
+}
+
+.links > a > div {
+    width: 60%;
+    padding-left: 0.5rem;
 }
 
 .show-trading,

@@ -193,7 +193,7 @@
     justify-content: space-between;
 }
 
-.user-page-aside-s,
+.user-page-aside-s a,
 .user-page-aside a {
     display: block;
     padding: 0;
