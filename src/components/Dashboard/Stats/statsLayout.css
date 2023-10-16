@@ -1,9 +1,11 @@
 .stats {
     width: 95%;
+    height: 100%;
     place-self: center;
     display: flex;
     flex-direction: column;
     gap: 4rem;
+    overflow: scroll;
 }
 
 .stats > div:not(:nth-child(1)) {

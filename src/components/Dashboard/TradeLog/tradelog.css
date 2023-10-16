@@ -2,7 +2,7 @@
 
 .tradelog {
     width: 100%;
-    height: calc(100vh - 6.5rem);
+    height: 100%;
     place-self: center;
     overflow: hidden;
     display: flex;
@@ -296,7 +296,7 @@ button#tradelog-filters-clear {
 
     .tradelog-filter button,
     .tradelog-filter select {
-        height: 2rem;
+        height: 1.5rem;
         width: 25%;
     }
 
@@ -325,7 +325,7 @@ button#tradelog-filters-clear {
     .tradelog-filter button,
     .tradelog-filter select {
         width: 20%;
-        height: 2.5rem;
+        height: 2rem;
     }
 
     .remove-modal {
