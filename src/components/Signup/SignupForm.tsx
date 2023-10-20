@@ -4,10 +4,10 @@ import customFetch from "../../utils"
 import {toast} from "react-toastify"
 import {useNavigate} from "react-router-dom"
 import {useAppSelector, useAppDispatch} from "../../store/storeHooks"
-import {setIsLoading, setIsNotLoading} from "../../features/userSlice"
+import {setIsNotLoading} from "../../features/userSlice"
 import {setDefaultStateBool} from "../../features/defaultSlice"
 import {setUserInfoString} from "../../features/userInfoFormSlice"
-// import {passwordRequirements} from "../../functions"
+import {passwordRequirements} from "../../functions"
 
 const SignupForm = () => {
     const navigate = useNavigate()
@@ -16,34 +16,28 @@ const SignupForm = () => {
     const {email, password, confirmPassword} = useAppSelector(
         (store) => store.userInfo
     )
-
     const {isMetReq} = useAppSelector((store) => store.default)
     const {isLoading} = useAppSelector((store) => store.user)
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         if (password === confirmPassword) {
-            dispatch(setIsLoading())
             const {data} = await customFetch.post("/checkuser", {email: email})
             if (data.message === "success") {
-                // if (!passwordRequirements(password)) {
-                //     dispatch(setIsNotLoading())
-                //     dispatch(
-                //         setDefaultStateBool({prop: "isMetReq", value: false})
-                //     )
-                //     dispatch(setUserInfoString({prop: "password", value: ""}))
-                //     dispatch(
-                //         setUserInfoString({prop: "confirmPassword", value: ""})
-                //     )
-                //     return
-                // }
-                dispatch(setIsNotLoading())
+                if (!passwordRequirements(password)) {
+                    dispatch(
+                        setDefaultStateBool({prop: "isMetReq", value: false})
+                    )
+                    dispatch(setUserInfoString({prop: "password", value: ""}))
+                    dispatch(
+                        setUserInfoString({prop: "confirmPassword", value: ""})
+                    )
+                    return
+                }
                 dispatch(setDefaultStateBool({prop: "isMetReq", value: true}))
                 navigate("/signup/form")
             } else {
-                dispatch(setIsNotLoading())
                 toast.error(data.message)
-
                 dispatch(setUserInfoString({prop: "email", value: ""}))
                 dispatch(setUserInfoString({prop: "password", value: ""}))
                 dispatch(
@@ -80,14 +74,17 @@ const SignupForm = () => {
                     name="email"
                     id="email"
                     value={email}
-                    onChange={(e) =>
+                    onChange={(e) => {
                         dispatch(
                             setUserInfoString({
                                 prop: "email",
                                 value: e.target.value,
                             })
                         )
-                    }
+                        dispatch(
+                            setDefaultStateBool({prop: "isMetReq", value: true})
+                        )
+                    }}
                     required
                 />
                 <label htmlFor="email" className={email ? "label-up" : ""}>
@@ -100,14 +97,17 @@ const SignupForm = () => {
                     name="password"
                     id="password"
                     value={password}
-                    onChange={(e) =>
+                    onChange={(e) => {
                         dispatch(
                             setUserInfoString({
                                 prop: "password",
                                 value: e.target.value,
                             })
                         )
-                    }
+                        dispatch(
+                            setDefaultStateBool({prop: "isMetReq", value: true})
+                        )
+                    }}
                     required
                 />
                 <label
@@ -140,14 +140,17 @@ const SignupForm = () => {
                     name="confirmPassword"
                     id="confirmPassword"
                     value={confirmPassword}
-                    onChange={(e) =>
+                    onChange={(e) => {
                         dispatch(
                             setUserInfoString({
                                 prop: "confirmPassword",
                                 value: e.target.value,
                             })
                         )
-                    }
+                        dispatch(
+                            setDefaultStateBool({prop: "isMetReq", value: true})
+                        )
+                    }}
                     required
                 />
                 <label

@@ -1,7 +1,7 @@
 .signup-container {
     height: 100vh;
     width: 100%;
-    background: var(--gradient);
+    background: var(--gradient-light);
     color: var(--black);
     display: flex;
     justify-content: center;
@@ -9,15 +9,15 @@
 
 .signup-box {
     width: 90%;
-    height: calc(100vh - 6rem);
     margin-top: 3rem;
     background-color: #fff;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     -moz-box-shadow: 0 0 1rem var(--black);
     -webkit-box-shadow: 0 0 1rem var(--black);
     box-shadow: 0 0 1rem var(--black);
     position: relative;
+    overflow: scroll;
 }
 
 .signup-middle-line {
@@ -28,14 +28,26 @@
     margin: 5% 50%;
 }
 
-/* SIGN UP LEFT SIDE */
+.signup-box > p:nth-child(2) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.signup-box > p:nth-child(2) div {
+    height: 1px;
+    width: 47.5%;
+    margin: 0 2.5%;
+    background-color: var(--black-25);
+}
+
+/* SIGN UP RIGHT SIDE */
 
 .signup-social,
 .signup-form-container {
-    width: calc(50% - 2rem);
+    width: 100%;
     height: 100%;
     padding: 3rem;
-    overflow: hidden;
 }
 
 .signup-form-container {
@@ -47,6 +59,7 @@
 .signup-social {
     display: flex;
     flex-direction: column;
+    gap: 2rem;
     height: 90%;
     justify-content: space-between;
 }
@@ -72,27 +85,34 @@
     width: 2rem;
 }
 
-.signup-social-buttons button h5 {
+.signup-social-buttons button h5,
+.signup-social-buttons button h6 {
     width: 100%;
 }
 
 .signup-requirements {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1.5rem;
+    padding: 1rem;
 }
 
 .signup-requirements ul {
-    padding-left: 4rem;
+    padding-left: 3rem;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1.25rem;
+}
+
+.signup-requirements ul li {
+    list-style: disc;
 }
 
 /* SIGN UP FORM */
 
 .signup-form {
     width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -183,4 +203,40 @@
     color: var(--black);
     align-self: center;
     /* margin-top: 2rem; */
+}
+
+@media screen and (min-width: 768px) {
+    .signup-box {
+        width: 80%;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .signup-box {
+        width: 90%;
+        height: calc(100vh - 6rem);
+        justify-content: space-between;
+        flex-direction: row;
+        overflow: hidden;
+    }
+
+    /* LEFT SIDE */
+    .signup-social,
+    .signup-form-container {
+        width: 50%;
+    }
+
+    /* FORM */
+
+    .signup-form {
+        height: 70%;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    /* LEFT SIDE */
+    .signup-social,
+    .signup-form-container {
+        width: calc(50% - 2rem);
+    }
 }
