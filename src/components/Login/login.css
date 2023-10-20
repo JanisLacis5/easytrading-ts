@@ -10,7 +10,7 @@
     height: calc(100vh - 8rem);
     margin-top: 3rem;
     padding: 3rem 1.5rem;
-    width: 30%;
+    width: 90%;
     background: #fff;
     -moz-box-shadow: 0 0 1rem var(--black);
     -webkit-box-shadow: 0 0 1rem var(--black);
@@ -103,6 +103,7 @@
     background: var(--gradient);
     color: var(--black);
     margin-top: 2rem;
+    box-shadow: var(--button-shadow);
 }
 
 .social-login {
@@ -150,4 +151,28 @@
     background-color: var(--black-50);
     width: 45%;
     height: 1px;
+}
+
+@media screen and (min-width: 576px) {
+    .login-box {
+        width: 75%;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .login-box {
+        width: 60%;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .login-box {
+        width: 45%;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .login-box {
+        width: 30%;
+    }
 }
