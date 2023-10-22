@@ -45,9 +45,9 @@ const Navbar = () => {
                         <h6>Screeners</h6>
                         {screener && <ScreenersBox />}
                     </div>
-                    <div>
+                    <Link to="/chatroom">
                         <h6>Chatrooms</h6>
-                    </div>
+                    </Link>
                 </div>
                 <Link to="/user-page" className="user">
                     <svg

@@ -23,6 +23,7 @@ import {
     HodScreener,
     ScreenerDashboard,
     AddTrade,
+    ChatroomLayout,
 } from "./components"
 import {useDispatch} from "react-redux"
 import {useEffect} from "react"
@@ -172,6 +173,10 @@ function App() {
                 {
                     path: "gap",
                     element: <GapBlock />,
+                },
+                {
+                    path: "chatroom",
+                    element: <ChatroomLayout />,
                 },
             ],
         },
