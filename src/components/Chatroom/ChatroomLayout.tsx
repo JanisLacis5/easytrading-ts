@@ -1,38 +1,54 @@
-import {useState} from "react"
-import {Outlet} from "react-router-dom"
-import {useAppSelector} from "../../store/storeHooks"
+import { useState } from 'react'
+import { Outlet } from 'react-router-dom'
+import { useAppSelector } from '../../store/storeHooks'
 
 const Chatroomlayout = () => {
-    const [messageText, setMessageText] = useState<string>("")
-    const [email, setEmail] = useState<string>("")
+    const [messageText, setMessageText] = useState<string>('')
+    const [email, setEmail] = useState<string>('')
+    const [recieverFriendReqEmail, setRecieverFriendReqEmail] =
+        useState<string>('')
 
-    const {user} = useAppSelector((store) => store.user)
+    const { user } = useAppSelector((store) => store.user)
 
     // MESSAGE SOCKET
-    const messageWs = new WebSocket("ws://localhost:3002")
+    const messageWs = new WebSocket('ws://localhost:3002')
     messageWs.onopen = () => {
-        messageWs.send(JSON.stringify({id: user.id}))
+        messageWs.send(JSON.stringify({ id: user.id }))
         // console.log("Connected to the message server")
     }
-    messageWs.onmessage = ({data}) => {
-        console.log("received: ", data)
+    messageWs.onmessage = ({ data }) => {
+        console.log('received: ', data)
     }
     messageWs.onerror = (e) => {
-        console.log("Error:")
+        console.log('Error:')
         console.log(e)
     }
     ////////////////////////////////////////////////////////
 
-    // ADD FRIEND SOCKET
-    const friendWs = new WebSocket("ws://localhost:3003")
+    // ACCEPT FRIEND SOCKET
+    const friendWs = new WebSocket('ws://localhost:3003')
     friendWs.onopen = () => {
         // console.log("Connected to the friend server")
     }
-    friendWs.onmessage = ({data}) => {
-        console.log("received: ", data)
+    friendWs.onmessage = ({ data }) => {
+        console.log('received: ', data)
     }
     friendWs.onerror = (e) => {
-        console.log("Error:")
+        console.log('Error:')
+        console.log(e)
+    }
+    ////////////////////////////////////////////////////////
+
+    // SEND FRIEND SOCKET
+    const sendFriendWs = new WebSocket('ws://localhost:3004')
+    sendFriendWs.onopen = () => {
+        // console.log("Connected to the send friend request server")
+    }
+    sendFriendWs.onmessage = ({ data }) => {
+        console.log('received: ', data)
+    }
+    sendFriendWs.onerror = (e) => {
+        console.log('Error:')
         console.log(e)
     }
     ////////////////////////////////////////////////////////
@@ -48,16 +64,26 @@ const Chatroomlayout = () => {
         }
 
         messageWs.send(
-            JSON.stringify({senderId: user.id, recieverId: "", message})
+            JSON.stringify({ senderId: user.id, recieverId: '', message })
+        )
+    }
+
+    const acceptFriendRequest = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        friendWs.send(
+            JSON.stringify({
+                senderEmail: user.info.email,
+                friendEmail: email,
+            })
         )
     }
 
     const sendFriendRequest = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        friendWs.send(
+        sendFriendWs.send(
             JSON.stringify({
-                sender: user.info.email,
-                friend: email,
+                senderEmail: user.info.email,
+                recieverEmail: recieverFriendReqEmail,
             })
         )
     }
@@ -82,8 +108,8 @@ const Chatroomlayout = () => {
                     type="email"
                     name="email"
                     id="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    value={recieverFriendReqEmail}
+                    onChange={(e) => setRecieverFriendReqEmail(e.target.value)}
                 />
                 <button type="submit">Add friend</button>
             </form>
