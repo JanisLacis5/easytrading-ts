@@ -24,16 +24,16 @@ const SignupForm = () => {
         if (password === confirmPassword) {
             const {data} = await customFetch.post("/checkuser", {email: email})
             if (data.message === "success") {
-                if (!passwordRequirements(password)) {
-                    dispatch(
-                        setDefaultStateBool({prop: "isMetReq", value: false})
-                    )
-                    dispatch(setUserInfoString({prop: "password", value: ""}))
-                    dispatch(
-                        setUserInfoString({prop: "confirmPassword", value: ""})
-                    )
-                    return
-                }
+                // if (!passwordRequirements(password)) {
+                //     dispatch(
+                //         setDefaultStateBool({prop: "isMetReq", value: false})
+                //     )
+                //     dispatch(setUserInfoString({prop: "password", value: ""}))
+                //     dispatch(
+                //         setUserInfoString({prop: "confirmPassword", value: ""})
+                //     )
+                //     return
+                // }
                 dispatch(setDefaultStateBool({prop: "isMetReq", value: true}))
                 navigate("/signup/form")
             } else {
