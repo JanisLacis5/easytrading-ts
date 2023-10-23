@@ -1,12 +1,20 @@
+import { useEffect } from 'react'
 import backgroundImage from '../../../photos/candlestick-chart.jpg'
+import { useAppSelector } from '../../../store/storeHooks'
 import './chatroomLanding.css'
 
 const ChatroomLanding = () => {
+    const { user } = useAppSelector((store) => store.user)
+
+    useEffect(() => {
+        console.log(user)
+    }, [user])
+
     return (
         <div className="chatroom-landing">
             <div className="chatroom-friends">
                 <div className="chatroom-self">
-                    <img src={backgroundImage} alt="self-image" />
+                    <img src={user.info.image} alt="self-image" />
                     <div>
                         <button type="button">
                             <svg

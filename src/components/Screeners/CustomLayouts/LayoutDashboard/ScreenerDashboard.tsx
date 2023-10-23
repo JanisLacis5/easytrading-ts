@@ -1,19 +1,19 @@
-import {AiOutlinePlus} from "react-icons/ai"
-import {useAppDispatch, useAppSelector} from "../../../../store/storeHooks"
-import "../../screeners.css"
-import {useEffect, useState} from "react"
-import {IUserSingleLayout} from "../../../../interfaces"
-import {useNavigate} from "react-router-dom"
-import ReturnObject from "./ReturnObject"
+import { AiOutlinePlus } from 'react-icons/ai'
+import { useAppDispatch, useAppSelector } from '../../../../store/storeHooks'
+import '../../screeners.css'
+import { useEffect, useState } from 'react'
+import { IUserSingleLayout } from '../../../../interfaces'
+import { useNavigate } from 'react-router-dom'
+import ReturnObject from './ReturnObject'
 import {
     editExistingLayout,
     resetLayoutParams,
     setEdit,
-} from "../../../../features/layoutSlice"
-import findEditableIndex from "./findEditableLayoutIndex"
-import customFetch from "../../../../utils"
-import {login} from "../../../../features/userSlice"
-import {toast} from "react-toastify"
+} from '../../../../features/layoutSlice'
+import findEditableIndex from './findEditableLayoutIndex'
+import customFetch from '../../../../utils'
+import { login } from '../../../../features/userSlice'
+import { toast } from 'react-toastify'
 
 const ScreenerDashboard = () => {
     const navigate = useNavigate()
@@ -23,33 +23,55 @@ const ScreenerDashboard = () => {
     const [layouts, setLayouts] = useState<IUserSingleLayout[][]>()
     const [mapLayout, setMapLayout] = useState<IUserSingleLayout[]>()
 
-    const {user} = useAppSelector((store) => store.user)
+    const { user } = useAppSelector((store) => store.user)
 
     const editLayout = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()
         if (!mapLayout) {
             throw new Error(
-                "editLayout function in ScreenerDashboard didnt find layout to edit"
+                'editLayout function in ScreenerDashboard didnt find layout to edit'
             )
         }
         dispatch(editExistingLayout(mapLayout))
         dispatch(setEdit(findEditableIndex(layouts, mapLayout)))
-        navigate("/screeners/new-layout")
+        navigate('/screeners/new-layout')
     }
 
     const deleteLayout = async (index: number) => {
-        const {data} = await customFetch.put("/delete-layout", {
+        const { data } = await customFetch.put('/delete-layout', {
             index: index,
             id: user.id,
         })
-        const {id, trades, notes, info} = user
-        dispatch(login({id, trades, notes, info, layouts: data.layouts}))
+        const {
+            id,
+            trades,
+            notes,
+            info,
+            messages,
+            friends,
+            recievedFriendRequests,
+            sentFriendRequests,
+        } = user
+
+        dispatch(
+            login({
+                id,
+                trades,
+                notes,
+                info,
+                layouts: data.layouts,
+                messages,
+                friends,
+                recievedFriendRequests,
+                sentFriendRequests,
+            })
+        )
         setLayouts(data.layouts)
         dispatch(resetLayoutParams())
         dispatch(setEdit(null))
         setActiveLayout(0)
         setMapLayout([])
-        toast.success("successfully deleted layout")
+        toast.success('successfully deleted layout')
     }
 
     useEffect(() => {
@@ -77,21 +99,23 @@ const ScreenerDashboard = () => {
                                             activeLayout === index
                                                 ? {
                                                       backgroundColor:
-                                                          "var(--green)",
-                                                      color: "#fff",
-                                                      pointerEvents: "none",
+                                                          'var(--green)',
+                                                      color: '#fff',
+                                                      pointerEvents: 'none',
                                                   }
                                                 : {}
                                         }
                                         type="button"
-                                        onClick={() => setActiveLayout(index)}>
+                                        onClick={() => setActiveLayout(index)}
+                                    >
                                         {index + 1}
                                     </button>
                                 )
                             })}
                         <button
                             type="button"
-                            onClick={() => navigate("/screeners/new-layout")}>
+                            onClick={() => navigate('/screeners/new-layout')}
+                        >
                             <AiOutlinePlus />
                         </button>
                     </div>
@@ -102,7 +126,8 @@ const ScreenerDashboard = () => {
                         <button
                             type="button"
                             id="delete-layout-button"
-                            onClick={() => deleteLayout(activeLayout)}>
+                            onClick={() => deleteLayout(activeLayout)}
+                        >
                             Delete layout Nr. {activeLayout + 1}
                         </button>
                     </div>

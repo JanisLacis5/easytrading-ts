@@ -1,21 +1,21 @@
-import {useState} from "react"
-import "./dashboardnotes.css"
-import {useAppDispatch, useAppSelector} from "../../../store/storeHooks"
-import {login} from "../../../features/userSlice"
-import {CiMenuKebab} from "react-icons/ci"
-import customFetch from "../../../utils"
-import {toast} from "react-toastify"
-import {countPinnedNotes} from "../../../functions"
-import {IUserSingleNote} from "../../../interfaces"
+import { useState } from 'react'
+import './dashboardnotes.css'
+import { useAppDispatch, useAppSelector } from '../../../store/storeHooks'
+import { login } from '../../../features/userSlice'
+import { CiMenuKebab } from 'react-icons/ci'
+import customFetch from '../../../utils'
+import { toast } from 'react-toastify'
+import { countPinnedNotes } from '../../../functions'
+import { IUserSingleNote } from '../../../interfaces'
 
-const DashboardNote = (props: IUserSingleNote & {index: number}) => {
-    const {image, text, pinned, index} = props
+const DashboardNote = (props: IUserSingleNote & { index: number }) => {
+    const { image, text, pinned, index } = props
     const dispatch = useAppDispatch()
 
     const [edit, setEdit] = useState(false)
     const [isHovered, setIsHovered] = useState(false)
 
-    const {user} = useAppSelector((store) => store.user)
+    const { user } = useAppSelector((store) => store.user)
 
     const pinNote = async (
         e: React.MouseEvent<HTMLButtonElement, MouseEvent>
@@ -26,10 +26,10 @@ const DashboardNote = (props: IUserSingleNote & {index: number}) => {
             toast.error("You can't pin more than 3 notes")
             return
         }
-        const {data} = await customFetch.patch("/noteupdate", {
+        const { data } = await customFetch.patch('/noteupdate', {
             id: user.id,
             index: (e.target as HTMLButtonElement).name,
-            func: "pin",
+            func: 'pin',
         })
         dispatch(
             login({
@@ -38,6 +38,10 @@ const DashboardNote = (props: IUserSingleNote & {index: number}) => {
                 info: user.info,
                 notes: data.notes,
                 layouts: user.layouts,
+                friends: user.friends,
+                messages: user.messages,
+                sentFriendRequests: user.sentFriendRequests,
+                recievedFriendRequests: user.recievedFriendRequests,
             })
         )
     }
@@ -46,10 +50,10 @@ const DashboardNote = (props: IUserSingleNote & {index: number}) => {
         e: React.MouseEvent<HTMLButtonElement, MouseEvent>
     ) => {
         e.preventDefault()
-        const {data} = await customFetch.patch("/noteupdate", {
+        const { data } = await customFetch.patch('/noteupdate', {
             id: user.id,
             index: (e.target as HTMLButtonElement).name,
-            func: "unpin",
+            func: 'unpin',
         })
         dispatch(
             login({
@@ -65,10 +69,10 @@ const DashboardNote = (props: IUserSingleNote & {index: number}) => {
         e: React.MouseEvent<HTMLButtonElement, MouseEvent>
     ) => {
         e.preventDefault()
-        const {data} = await customFetch.patch("/noteupdate", {
+        const { data } = await customFetch.patch('/noteupdate', {
             id: user.id,
             index: (e.target as HTMLButtonElement).name,
-            func: "delete",
+            func: 'delete',
         })
 
         dispatch(
@@ -85,7 +89,7 @@ const DashboardNote = (props: IUserSingleNote & {index: number}) => {
         <div
             key={index}
             className={`dashboard-note
-            ${isHovered ? "note-hovered" : "note-not-hovered"}`}
+            ${isHovered ? 'note-hovered' : 'note-not-hovered'}`}
             onMouseEnter={() => {
                 setIsHovered(true)
                 setEdit(false)
@@ -93,24 +97,28 @@ const DashboardNote = (props: IUserSingleNote & {index: number}) => {
             onMouseLeave={() => {
                 setIsHovered(false)
                 setEdit(false)
-            }}>
+            }}
+        >
             <div
                 className={
                     edit && isHovered
-                        ? "dashboard-note-menu-show"
-                        : "dashboard-note-menu-hide"
-                }>
+                        ? 'dashboard-note-menu-show'
+                        : 'dashboard-note-menu-hide'
+                }
+            >
                 <div>
                     <button
                         name={String(index)}
                         type="button"
-                        onClick={pinned ? unpinNote : pinNote}>
-                        {pinned ? "Unpin" : "Pin"}
+                        onClick={pinned ? unpinNote : pinNote}
+                    >
+                        {pinned ? 'Unpin' : 'Pin'}
                     </button>
                     <button
                         name={String(index)}
                         type="button"
-                        onClick={deleteNote}>
+                        onClick={deleteNote}
+                    >
                         Delete
                     </button>
                 </div>

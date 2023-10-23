@@ -1,19 +1,19 @@
-import "../dashboard.css"
-import "./addtrade.css"
-import customFetch from "../../../utils"
-import {useNavigate} from "react-router-dom"
-import {useAppDispatch, useAppSelector} from "../../../store/storeHooks"
-import {login} from "../../../features/userSlice"
-import {toast} from "react-toastify"
-import {setAcc, setState} from "../../../features/addTradeFormSlice"
-import {setPl} from "../../../features/addTradeFormSlice"
+import '../dashboard.css'
+import './addtrade.css'
+import customFetch from '../../../utils'
+import { useNavigate } from 'react-router-dom'
+import { useAppDispatch, useAppSelector } from '../../../store/storeHooks'
+import { login } from '../../../features/userSlice'
+import { toast } from 'react-toastify'
+import { setAcc, setState } from '../../../features/addTradeFormSlice'
+import { setPl } from '../../../features/addTradeFormSlice'
 
 const AddTrade = () => {
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
-    const {user} = useAppSelector((store) => store.user)
+    const { user } = useAppSelector((store) => store.user)
 
-    const {stock, pl, date, time, action} = useAppSelector(
+    const { stock, pl, date, time, action } = useAppSelector(
         (store) => store.addTrade
     )
 
@@ -28,10 +28,10 @@ const AddTrade = () => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
-        const {accBefore, accAfter} = calcAcc(pl)
-        dispatch(setAcc({accAfter: accAfter, accBefore: accBefore}))
+        const { accBefore, accAfter } = calcAcc(pl)
+        dispatch(setAcc({ accAfter: accAfter, accBefore: accBefore }))
 
-        const {data} = await customFetch.post("/newtrade", {
+        const { data } = await customFetch.post('/newtrade', {
             id: user.id,
             stock: stock.toUpperCase(),
             accAfter: accAfter,
@@ -41,10 +41,10 @@ const AddTrade = () => {
             time: time,
             action: action,
         })
-        const infoUpdate = await customFetch.patch("/updateaccbalance", {
+        const infoUpdate = await customFetch.patch('/updateaccbalance', {
             id: user.id,
         })
-        if (infoUpdate.data.message === "success") {
+        if (infoUpdate.data.message === 'success') {
             dispatch(
                 login({
                     id: data.id,
@@ -52,18 +52,21 @@ const AddTrade = () => {
                     info: infoUpdate.data.info,
                     notes: user.notes,
                     layouts: user.layouts,
+                    friends: user.friends,
+                    recievedFriendRequests: data.recievedFriendRequests,
+                    sentFriendRequests: data.sentFriendRequests,
                 })
             )
-            navigate("/dashboard")
+            navigate('/dashboard')
         } else {
-            toast.error("There was an error")
+            toast.error('There was an error')
         }
-        dispatch(setState({prop: "accAfter", value: ""}))
-        dispatch(setState({prop: "accBefore", value: ""}))
-        dispatch(setState({prop: "action", value: ""}))
-        dispatch(setState({prop: "date", value: ""}))
-        dispatch(setState({prop: "stock", value: ""}))
-        dispatch(setState({prop: "time", value: ""}))
+        dispatch(setState({ prop: 'accAfter', value: '' }))
+        dispatch(setState({ prop: 'accBefore', value: '' }))
+        dispatch(setState({ prop: 'action', value: '' }))
+        dispatch(setState({ prop: 'date', value: '' }))
+        dispatch(setState({ prop: 'stock', value: '' }))
+        dispatch(setState({ prop: 'time', value: '' }))
     }
 
     return (
@@ -78,14 +81,17 @@ const AddTrade = () => {
                     onChange={(e) =>
                         dispatch(
                             dispatch(
-                                setState({prop: "stock", value: e.target.value})
+                                setState({
+                                    prop: 'stock',
+                                    value: e.target.value,
+                                })
                             )
                         )
                     }
                     required
                 />
-                <label htmlFor="stock" className={stock ? "label-up" : ""}>
-                    Stock :{" "}
+                <label htmlFor="stock" className={stock ? 'label-up' : ''}>
+                    Stock :{' '}
                 </label>
             </div>
             <div className="add-trade-input">
@@ -93,17 +99,18 @@ const AddTrade = () => {
                     name="action"
                     onChange={(e) =>
                         dispatch(
-                            setState({prop: "action", value: e.target.value})
+                            setState({ prop: 'action', value: e.target.value })
                         )
                     }
                     value={action}
-                    required>
+                    required
+                >
                     <option value=""></option>
                     <option value="long">Long</option>
                     <option value="short">Short</option>
                 </select>
-                <label htmlFor="action" className={action ? "label-up" : ""}>
-                    Action:{" "}
+                <label htmlFor="action" className={action ? 'label-up' : ''}>
+                    Action:{' '}
                 </label>
             </div>
             <div className="add-trade-input">
@@ -118,8 +125,9 @@ const AddTrade = () => {
                 <label
                     htmlFor="pl"
                     id="pl-label"
-                    className={pl ? "label-up" : ""}>
-                    Trade +/- $ :{" "}
+                    className={pl ? 'label-up' : ''}
+                >
+                    Trade +/- $ :{' '}
                 </label>
             </div>
             <div className="add-trade-input">
@@ -131,7 +139,7 @@ const AddTrade = () => {
                     onChange={(e) =>
                         dispatch(
                             setState({
-                                prop: "date",
+                                prop: 'date',
                                 value: e.target.value,
                             })
                         )
@@ -148,7 +156,7 @@ const AddTrade = () => {
                     onChange={(e) =>
                         dispatch(
                             setState({
-                                prop: "time",
+                                prop: 'time',
                                 value: e.target.value,
                             })
                         )

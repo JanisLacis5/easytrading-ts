@@ -42,3 +42,10 @@ export interface IHodData {
     volume: number
     relVolume: number
 }
+
+export interface IMessage {
+    sender: boolean
+    time: string
+    date: Date
+    test: string
+}

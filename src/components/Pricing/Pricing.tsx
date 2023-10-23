@@ -1,22 +1,22 @@
-import {useNavigate} from "react-router-dom"
-import "./pricing.css"
-import {toast} from "react-toastify"
-import customFetch from "../../utils"
-import {login, setIsLoading, setIsNotLoading} from "../../features/userSlice"
-import {useAppDispatch, useAppSelector} from "../../store/storeHooks"
-import md5 from "md5"
-import userIcon from "../../assets/user-icon.svg"
-import {useEffect} from "react"
+import { useNavigate } from 'react-router-dom'
+import './pricing.css'
+import { toast } from 'react-toastify'
+import customFetch from '../../utils'
+import { login, setIsLoading, setIsNotLoading } from '../../features/userSlice'
+import { useAppDispatch, useAppSelector } from '../../store/storeHooks'
+import md5 from 'md5'
+import userIcon from '../../assets/user-icon.svg'
+import { useEffect } from 'react'
 import {
     setUserInfoBool,
     setUserInfoString,
-} from "../../features/userInfoFormSlice"
+} from '../../features/userInfoFormSlice'
 
 const Pricing = () => {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
 
-    const {user} = useAppSelector((store) => store.user)
+    const { user } = useAppSelector((store) => store.user)
 
     const {
         choosePricing,
@@ -33,8 +33,8 @@ const Pricing = () => {
 
     const handleSubmit = async () => {
         if (!choosePricing) {
-            setUserInfoBool({prop: "choosePricing", value: true})
-            navigate("/signup")
+            setUserInfoBool({ prop: 'choosePricing', value: true })
+            navigate('/signup')
             return
         }
 
@@ -42,15 +42,17 @@ const Pricing = () => {
 
         if (changePlan) {
             if (pricingPlan === user.info.pricing) {
-                toast.success("This is your current plan")
+                toast.success('This is your current plan')
                 dispatch(setIsNotLoading())
-                dispatch(setUserInfoBool({prop: "changePlan", value: false}))
-                dispatch(setUserInfoBool({prop: "choosePricing", value: false}))
-                dispatch(setUserInfoString({prop: "pricingPlan", value: ""}))
-                navigate("/dashboard")
+                dispatch(setUserInfoBool({ prop: 'changePlan', value: false }))
+                dispatch(
+                    setUserInfoBool({ prop: 'choosePricing', value: false })
+                )
+                dispatch(setUserInfoString({ prop: 'pricingPlan', value: '' }))
+                navigate('/dashboard')
                 return
             }
-            const {data} = await customFetch.post("/changeplan", {
+            const { data } = await customFetch.post('/changeplan', {
                 plan: pricingPlan,
                 id: user.id,
             })
@@ -61,20 +63,24 @@ const Pricing = () => {
                     trades: user.trades,
                     layouts: user.layouts,
                     notes: user.notes,
+                    messages: data.messages,
+                    friends: data.friends,
+                    recievedFriendRequests: data.recievedFriendRequests,
+                    sentFriendRequests: data.sentFriendRequests,
                 })
             )
             dispatch(setIsNotLoading())
             toast.success(
                 `Plan succesfully updated to "${`${data.info.pricing.toUpperCase()}`}"`
             )
-            dispatch(setUserInfoBool({prop: "changePlan", value: false}))
-            dispatch(setUserInfoBool({prop: "choosePricing", value: false}))
-            dispatch(setUserInfoString({prop: "pricingPlan", value: ""}))
-            navigate("/dashboard")
+            dispatch(setUserInfoBool({ prop: 'changePlan', value: false }))
+            dispatch(setUserInfoBool({ prop: 'choosePricing', value: false }))
+            dispatch(setUserInfoString({ prop: 'pricingPlan', value: '' }))
+            navigate('/dashboard')
             return
         }
 
-        const {data} = await customFetch.post("/signup", {
+        const { data } = await customFetch.post('/signup', {
             email: email,
             userData: {
                 email: email,
@@ -88,31 +94,31 @@ const Pricing = () => {
             },
             password: md5(password),
         })
-        if (data.message !== "success") {
+        if (data.message !== 'success') {
             dispatch(setIsNotLoading())
-            setUserInfoString({prop: "email", value: ""})
-            setUserInfoString({prop: "password", value: ""})
-            setUserInfoString({prop: "confirmPassword", value: ""})
+            setUserInfoString({ prop: 'email', value: '' })
+            setUserInfoString({ prop: 'password', value: '' })
+            setUserInfoString({ prop: 'confirmPassword', value: '' })
             toast.error(data.message)
             return
         }
-        localStorage.setItem("token", data.token)
+        localStorage.setItem('token', data.token)
 
-        dispatch(setUserInfoString({prop: "email", value: ""}))
-        dispatch(setUserInfoString({prop: "password", value: ""}))
-        dispatch(setUserInfoString({prop: "confirmPassword", value: ""}))
-        dispatch(setUserInfoString({prop: "firstName", value: ""}))
-        dispatch(setUserInfoString({prop: "lastName", value: ""}))
-        dispatch(setUserInfoString({prop: "username", value: ""}))
-        dispatch(setUserInfoString({prop: "account", value: ""}))
-        dispatch(setUserInfoString({prop: "image", value: userIcon}))
-        dispatch(setUserInfoBool({prop: "choosePricing", value: false}))
-        dispatch(setUserInfoString({prop: "pricingPlan", value: ""}))
+        dispatch(setUserInfoString({ prop: 'email', value: '' }))
+        dispatch(setUserInfoString({ prop: 'password', value: '' }))
+        dispatch(setUserInfoString({ prop: 'confirmPassword', value: '' }))
+        dispatch(setUserInfoString({ prop: 'firstName', value: '' }))
+        dispatch(setUserInfoString({ prop: 'lastName', value: '' }))
+        dispatch(setUserInfoString({ prop: 'username', value: '' }))
+        dispatch(setUserInfoString({ prop: 'account', value: '' }))
+        dispatch(setUserInfoString({ prop: 'image', value: userIcon }))
+        dispatch(setUserInfoBool({ prop: 'choosePricing', value: false }))
+        dispatch(setUserInfoString({ prop: 'pricingPlan', value: '' }))
 
-        dispatch(login({id: data.id, info: data.info}))
-        toast.success("success")
+        dispatch(login({ id: data.id, info: data.info }))
+        toast.success('success')
         dispatch(setIsNotLoading())
-        navigate("/dashboard")
+        navigate('/dashboard')
     }
 
     useEffect(() => {
@@ -130,7 +136,7 @@ const Pricing = () => {
                         <h3 className="feature">Access to trading tracker</h3>
                         <h3 className="feature">Add up to 20 trades per day</h3>
                         <h3 className="feature">24/7 support</h3>
-                    </div>{" "}
+                    </div>{' '}
                     <div className="price">
                         <button
                             type="button"
@@ -139,12 +145,13 @@ const Pricing = () => {
                             onClick={(e) =>
                                 dispatch(
                                     setUserInfoString({
-                                        prop: "pricingPlan",
+                                        prop: 'pricingPlan',
                                         value: (e.target as HTMLButtonElement)
                                             .value,
                                     })
                                 )
-                            }>
+                            }
+                        >
                             Start free
                         </button>
                     </div>
@@ -164,12 +171,13 @@ const Pricing = () => {
                             onClick={(e) =>
                                 dispatch(
                                     setUserInfoString({
-                                        prop: "pricingPlan",
+                                        prop: 'pricingPlan',
                                         value: (e.target as HTMLButtonElement)
                                             .value,
                                     })
                                 )
-                            }>
+                            }
+                        >
                             10.00 $/month
                         </button>
                     </div>
@@ -191,12 +199,13 @@ const Pricing = () => {
                             onClick={(e) =>
                                 dispatch(
                                     setUserInfoString({
-                                        prop: "pricingPlan",
+                                        prop: 'pricingPlan',
                                         value: (e.target as HTMLButtonElement)
                                             .value,
                                     })
                                 )
-                            }>
+                            }
+                        >
                             35.00 $/month
                         </button>
                     </div>

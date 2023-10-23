@@ -1,29 +1,31 @@
-import "./signup.css"
-import "../Login/login.css"
-import customFetch from "../../utils"
-import {toast} from "react-toastify"
-import {useNavigate} from "react-router-dom"
-import {useAppSelector, useAppDispatch} from "../../store/storeHooks"
-import {setIsNotLoading} from "../../features/userSlice"
-import {setDefaultStateBool} from "../../features/defaultSlice"
-import {setUserInfoString} from "../../features/userInfoFormSlice"
-import {passwordRequirements} from "../../functions"
+import './signup.css'
+import '../Login/login.css'
+import customFetch from '../../utils'
+import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
+import { useAppSelector, useAppDispatch } from '../../store/storeHooks'
+import { setIsNotLoading } from '../../features/userSlice'
+import { setDefaultStateBool } from '../../features/defaultSlice'
+import { setUserInfoString } from '../../features/userInfoFormSlice'
+import { passwordRequirements } from '../../functions'
 
 const SignupForm = () => {
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
 
-    const {email, password, confirmPassword} = useAppSelector(
+    const { email, password, confirmPassword } = useAppSelector(
         (store) => store.userInfo
     )
-    const {isMetReq} = useAppSelector((store) => store.default)
-    const {isLoading} = useAppSelector((store) => store.user)
+    const { isMetReq } = useAppSelector((store) => store.default)
+    const { isLoading } = useAppSelector((store) => store.user)
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         if (password === confirmPassword) {
-            const {data} = await customFetch.post("/checkuser", {email: email})
-            if (data.message === "success") {
+            const { data } = await customFetch.post('/checkuser', {
+                email: email,
+            })
+            if (data.message === 'success') {
                 // if (!passwordRequirements(password)) {
                 //     dispatch(
                 //         setDefaultStateBool({prop: "isMetReq", value: false})
@@ -34,29 +36,28 @@ const SignupForm = () => {
                 //     )
                 //     return
                 // }
-                dispatch(setDefaultStateBool({prop: "isMetReq", value: true}))
-                navigate("/signup/form")
+                dispatch(setDefaultStateBool({ prop: 'isMetReq', value: true }))
+                navigate('/signup/form')
             } else {
                 toast.error(data.message)
-                dispatch(setUserInfoString({prop: "email", value: ""}))
-                dispatch(setUserInfoString({prop: "password", value: ""}))
+                dispatch(setUserInfoString({ prop: 'email', value: '' }))
+                dispatch(setUserInfoString({ prop: 'password', value: '' }))
                 dispatch(
                     setUserInfoString({
-                        prop: "confirmPassword",
-                        value: "",
+                        prop: 'confirmPassword',
+                        value: '',
                     })
                 )
             }
         } else {
             dispatch(setIsNotLoading())
-            toast.error("Passwords do not match")
-
-            dispatch(setUserInfoString({prop: "email", value: ""}))
-            dispatch(setUserInfoString({prop: "password", value: ""}))
+            toast.error('Passwords do not match')
+            dispatch(setUserInfoString({ prop: 'email', value: '' }))
+            dispatch(setUserInfoString({ prop: 'password', value: '' }))
             dispatch(
                 setUserInfoString({
-                    prop: "confirmPassword",
-                    value: "",
+                    prop: 'confirmPassword',
+                    value: '',
                 })
             )
         }
@@ -77,17 +78,20 @@ const SignupForm = () => {
                     onChange={(e) => {
                         dispatch(
                             setUserInfoString({
-                                prop: "email",
+                                prop: 'email',
                                 value: e.target.value,
                             })
                         )
                         dispatch(
-                            setDefaultStateBool({prop: "isMetReq", value: true})
+                            setDefaultStateBool({
+                                prop: 'isMetReq',
+                                value: true,
+                            })
                         )
                     }}
                     required
                 />
-                <label htmlFor="email" className={email ? "label-up" : ""}>
+                <label htmlFor="email" className={email ? 'label-up' : ''}>
                     Email
                 </label>
             </div>
@@ -100,19 +104,23 @@ const SignupForm = () => {
                     onChange={(e) => {
                         dispatch(
                             setUserInfoString({
-                                prop: "password",
+                                prop: 'password',
                                 value: e.target.value,
                             })
                         )
                         dispatch(
-                            setDefaultStateBool({prop: "isMetReq", value: true})
+                            setDefaultStateBool({
+                                prop: 'isMetReq',
+                                value: true,
+                            })
                         )
                     }}
                     required
                 />
                 <label
                     htmlFor="password"
-                    className={password ? "label-up" : ""}>
+                    className={password ? 'label-up' : ''}
+                >
                     Password
                 </label>
                 {!isMetReq && (
@@ -123,7 +131,8 @@ const SignupForm = () => {
                             viewBox="0 0 24 24"
                             strokeWidth={1.5}
                             stroke="currentColor"
-                            className="w-6 h-6">
+                            className="w-6 h-6"
+                        >
                             <path
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
@@ -143,19 +152,23 @@ const SignupForm = () => {
                     onChange={(e) => {
                         dispatch(
                             setUserInfoString({
-                                prop: "confirmPassword",
+                                prop: 'confirmPassword',
                                 value: e.target.value,
                             })
                         )
                         dispatch(
-                            setDefaultStateBool({prop: "isMetReq", value: true})
+                            setDefaultStateBool({
+                                prop: 'isMetReq',
+                                value: true,
+                            })
                         )
                     }}
                     required
                 />
                 <label
                     htmlFor="confirmPassword"
-                    className={confirmPassword ? "label-up" : ""}>
+                    className={confirmPassword ? 'label-up' : ''}
+                >
                     Confirm Password
                 </label>
             </div>

@@ -1,34 +1,34 @@
-import "./login.css"
-import customFetch from "../../utils"
-import {useState} from "react"
-import md5 from "md5"
-import {useAppDispatch, useAppSelector} from "../../store/storeHooks"
-import {toast} from "react-toastify"
-import {login, setIsLoading, setIsNotLoading} from "../../features/userSlice"
-import {useNavigate} from "react-router-dom"
+import './login.css'
+import customFetch from '../../utils'
+import { useState } from 'react'
+import md5 from 'md5'
+import { useAppDispatch, useAppSelector } from '../../store/storeHooks'
+import { toast } from 'react-toastify'
+import { login, setIsLoading, setIsNotLoading } from '../../features/userSlice'
+import { useNavigate } from 'react-router-dom'
 
 const LoginForm = () => {
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
 
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
 
-    const {isLoading} = useAppSelector((store) => store.user)
+    const { isLoading } = useAppSelector((store) => store.user)
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         dispatch(setIsLoading())
         try {
-            const {data} = await customFetch.post("/login", {
+            const { data } = await customFetch.post('/login', {
                 email: email,
                 password: md5(password),
             })
-            localStorage.setItem("token", data.token)
-            if (data.message === "incorrect password") {
-                toast.error("Incorret password")
+            localStorage.setItem('token', data.token)
+            if (data.message === 'incorrect password') {
+                toast.error('Incorret password')
                 dispatch(setIsNotLoading())
-                setPassword("")
+                setPassword('')
                 return
             }
             if (data.message) {
@@ -43,9 +43,12 @@ const LoginForm = () => {
                     info: data.info,
                     notes: data.notes,
                     layouts: data.layouts,
+                    messages: data.messages,
+                    recievedFriendRequests: data.recievedFriendRequests,
+                    sentFriendRequests: data.sentFriendRequests,
                 })
             )
-            navigate("/dashboard")
+            navigate('/dashboard')
         } catch (error) {
             dispatch(setIsNotLoading())
             console.log(error)
@@ -67,7 +70,7 @@ const LoginForm = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
-                <label htmlFor="email" className={email ? "label-up" : ""}>
+                <label htmlFor="email" className={email ? 'label-up' : ''}>
                     Email
                 </label>
             </div>
@@ -82,7 +85,8 @@ const LoginForm = () => {
                 />
                 <label
                     htmlFor="password"
-                    className={password ? "label-up" : ""}>
+                    className={password ? 'label-up' : ''}
+                >
                     Password
                 </label>
             </div>
