@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import { useAppSelector } from '../../store/storeHooks'
+import { toast } from 'react-toastify'
+import './chatroom.css'
 
 const Chatroomlayout = () => {
     const [messageText, setMessageText] = useState<string>('')
@@ -45,7 +47,12 @@ const Chatroomlayout = () => {
         // console.log("Connected to the send friend request server")
     }
     sendFriendWs.onmessage = ({ data }) => {
-        console.log('received: ', data)
+        const serverData = JSON.parse(data)
+        console.log('received: ', serverData)
+        if (serverData.status === 'error') {
+            toast.error(serverData.message)
+            setRecieverFriendReqEmail('')
+        }
     }
     sendFriendWs.onerror = (e) => {
         console.log('Error:')
@@ -80,6 +87,11 @@ const Chatroomlayout = () => {
 
     const sendFriendRequest = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
+        if (recieverFriendReqEmail === user.info.email) {
+            toast.error("You can't send friend request to yourself")
+            setRecieverFriendReqEmail('')
+            return
+        }
         sendFriendWs.send(
             JSON.stringify({
                 senderEmail: user.info.email,
@@ -89,9 +101,9 @@ const Chatroomlayout = () => {
     }
 
     return (
-        <section>
-            {/* <Outlet/> */}
-            <form onSubmit={sendMessage}>
+        <section className="chatroom-layout">
+            <Outlet />
+            {/* <form onSubmit={sendMessage}>
                 <label htmlFor="message">Message: </label>
                 <input
                     type="text"
@@ -112,7 +124,7 @@ const Chatroomlayout = () => {
                     onChange={(e) => setRecieverFriendReqEmail(e.target.value)}
                 />
                 <button type="submit">Add friend</button>
-            </form>
+            </form> */}
         </section>
     )
 }

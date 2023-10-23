@@ -1,4 +1,4 @@
-import {createBrowserRouter, RouterProvider} from "react-router-dom"
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import {
     LandingPage,
     Pricing,
@@ -24,23 +24,24 @@ import {
     ScreenerDashboard,
     AddTrade,
     ChatroomLayout,
-} from "./components"
-import {useDispatch} from "react-redux"
-import {useEffect} from "react"
-import {login} from "./features/userSlice"
-import DashboardLayout from "./components/Dashboard/DashboardLayout"
-import Loading from "./Loading"
-import SiteLayout from "./SiteLayout"
-import NewLayout from "./components/Screeners/CustomLayouts/NewLayout/NewLayout"
-import GapBlock from "./components/Screeners/CustomLayouts/ScreenerBlocks/GapBlock"
-import ChangePasswordForm from "./components/User/UserDangerZone/ChangePasswordForm"
+    ChatroomLanding,
+} from './components'
+import { useDispatch } from 'react-redux'
+import { useEffect } from 'react'
+import { login } from './features/userSlice'
+import DashboardLayout from './components/Dashboard/DashboardLayout'
+import Loading from './Loading'
+import SiteLayout from './SiteLayout'
+import NewLayout from './components/Screeners/CustomLayouts/NewLayout/NewLayout'
+import GapBlock from './components/Screeners/CustomLayouts/ScreenerBlocks/GapBlock'
+import ChangePasswordForm from './components/User/UserDangerZone/ChangePasswordForm'
 
 function App() {
     const dispatch = useDispatch()
 
     useEffect(() => {
         try {
-            const user = localStorage.getItem("user")
+            const user = localStorage.getItem('user')
             if (user) {
                 dispatch(login(JSON.parse(user)))
             }
@@ -51,15 +52,15 @@ function App() {
 
     const router = createBrowserRouter([
         {
-            path: "/",
+            path: '/',
             element: <SiteLayout />,
             children: [
                 {
-                    path: "loading",
+                    path: 'loading',
                     element: <Loading />,
                 },
                 {
-                    path: "dashboard",
+                    path: 'dashboard',
                     element: <DashboardLayout />,
                     children: [
                         {
@@ -67,41 +68,41 @@ function App() {
                             element: <Dashboard />,
                         },
                         {
-                            path: "stats",
+                            path: 'stats',
                             element: <StatsLayout />,
                         },
                         {
-                            path: "addtrade",
+                            path: 'addtrade',
                             element: <AddTrade />,
                         },
                         {
-                            path: "calendar",
+                            path: 'calendar',
                             element: <Calendar />,
                         },
                         {
-                            path: "log",
+                            path: 'log',
                             element: <TradeLog />,
                         },
                         {
-                            path: "brokerlogin",
+                            path: 'brokerlogin',
                             element: <BrokerLogin />,
                         },
                         {
-                            path: "notes",
+                            path: 'notes',
                             element: <DashboardNotes />,
                         },
                     ],
                 },
                 {
-                    path: "landing",
+                    path: 'landing',
                     element: <LandingPage />,
                 },
                 {
-                    path: "login",
+                    path: 'login',
                     element: <Login />,
                 },
                 {
-                    path: "signup",
+                    path: 'signup',
                     element: <SignupLayout />,
                     children: [
                         {
@@ -109,21 +110,21 @@ function App() {
                             element: <Signup />,
                         },
                         {
-                            path: "form",
+                            path: 'form',
                             element: <SignupInfoForm />,
                         },
                     ],
                 },
                 {
-                    path: "pricing",
+                    path: 'pricing',
                     element: <Pricing />,
                 },
                 {
-                    path: "contact",
+                    path: 'contact',
                     element: <Contact />,
                 },
                 {
-                    path: "user-page",
+                    path: 'user-page',
                     element: <UserPage />,
                     children: [
                         {
@@ -131,29 +132,29 @@ function App() {
                             element: <UserUpdateForm />,
                         },
                         {
-                            path: "pricing",
+                            path: 'pricing',
                             element: <UserPricingPlan />,
                         },
                         {
-                            path: "notes",
+                            path: 'notes',
                             element: <UserNotes />,
                         },
                         {
-                            path: "danger",
+                            path: 'danger',
                             element: <UserDangerZone />,
                         },
                         {
-                            path: "addnote",
+                            path: 'addnote',
                             element: <AddNote />,
                         },
                         {
-                            path: "change-password",
+                            path: 'change-password',
                             element: <ChangePasswordForm />,
                         },
                     ],
                 },
                 {
-                    path: "screeners",
+                    path: 'screeners',
                     element: <ScreenerLayout />,
                     children: [
                         {
@@ -161,22 +162,28 @@ function App() {
                             element: <ScreenerDashboard />,
                         },
                         {
-                            path: "new-layout",
+                            path: 'new-layout',
                             element: <NewLayout />,
                         },
                     ],
                 },
                 {
-                    path: "hod",
+                    path: 'hod',
                     element: <HodScreener />,
                 },
                 {
-                    path: "gap",
+                    path: 'gap',
                     element: <GapBlock />,
                 },
                 {
-                    path: "chatroom",
+                    path: 'chatroom',
                     element: <ChatroomLayout />,
+                    children: [
+                        {
+                            index: true,
+                            element: <ChatroomLanding />,
+                        },
+                    ],
                 },
             ],
         },
