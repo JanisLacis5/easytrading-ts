@@ -2,7 +2,7 @@
     position: absolute;
     height: 100%;
     width: 33%;
-    box-shadow: 1px 0 10px black;
+    box-shadow: -2px 0 5px var(--black-10);
     background-color: #fff;
     top: 0;
     right: 0;
@@ -30,7 +30,6 @@
 }
 
 .chatroom-functions > div:last-child {
-    width: calc(100% - 3rem);
     padding: 1rem;
     padding-left: 0;
 }

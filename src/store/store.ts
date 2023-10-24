@@ -12,6 +12,7 @@ import defaultReducer from "../features/defaultSlice"
 import userInfoFormReducer from "../features/userInfoFormSlice"
 import navbarReducer from "../features/navbarSlice"
 import screenerReducer from "../features/screenerSlice"
+import chatroomRightSideReducer from "../features/chatroomRightSideSlice"
 
 export const store = configureStore({
     reducer: {
@@ -28,6 +29,7 @@ export const store = configureStore({
         userInfo: userInfoFormReducer,
         navbar: navbarReducer,
         screener: screenerReducer,
+        chatroomRightSide: chatroomRightSideReducer,
     },
 })
 

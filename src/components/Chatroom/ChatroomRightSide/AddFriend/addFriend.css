@@ -1,5 +1,6 @@
 .add-friend {
-    height: 50%;
+    width: 80%;
+    height: 45%;
     display: flex;
     flex-direction: column;
 }
@@ -8,4 +9,78 @@
     width: 100%;
     display: flex;
     justify-content: center;
+}
+
+.add-friend form {
+    height: 100%;
+}
+
+/* INPUT */
+
+.add-friend form > div:first-child {
+    height: 80%;
+    width: 100%;
+    border: none;
+    font-size: 1rem;
+    background-color: transparent;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.add-friend label {
+    height: 1.5rem;
+    position: absolute;
+    top: calc(50% - 0.5rem);
+    left: 0;
+    pointer-events: none;
+    transition: 0.4s ease all;
+    color: var(--black-50);
+}
+
+.add-friend input:empty {
+    background-color: transparent;
+    height: 3rem;
+    border: none;
+    border-bottom: 1px solid var(--black);
+    width: 100%;
+    caret-color: var(--black-50);
+    color: var(--black);
+    font-size: 1rem;
+}
+
+.add-friend input:focus {
+    outline: none;
+    border-bottom: 1px solid var(--black);
+}
+
+.add-friend input:focus ~ label {
+    top: calc(50% - 2rem);
+    font-size: 0.75rem;
+}
+
+.add-friend .label-up {
+    top: calc(50% - 2rem);
+    font-size: 0.75rem;
+}
+
+.add-friend-field:focus {
+    outline: none;
+}
+
+/* BUTTON */
+
+.add-friend form div:last-child {
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.add-friend form button {
+    box-shadow: var(--button-shadow);
+    height: 3rem;
+    width: 36%;
+    background: var(--gradient);
+    border: none;
 }

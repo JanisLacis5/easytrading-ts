@@ -9,7 +9,7 @@
 .chatroom-friends {
     width: 20%;
     height: 100%;
-    box-shadow: 1px 0 10px black;
+    box-shadow: 2px 0 5px var(--black-10);
 }
 
 .chatroom-self {
