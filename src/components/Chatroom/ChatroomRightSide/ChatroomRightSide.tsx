@@ -3,11 +3,12 @@ import AddFriendForm from "./AddFriend/AddFriendForm"
 import "./chatroomRightSide.css"
 import {useAppDispatch, useAppSelector} from "../../../store/storeHooks"
 import {closeRightSide} from "../../../features/chatroomRightSideSlice"
+import ChatroomMenu from "./Menu/ChatroomMenu"
 
 const ChatroomRightSide = () => {
     const dispatch = useAppDispatch()
 
-    const {addFriend} = useAppSelector((store) => store.chatroomRightSide)
+    const {main} = useAppSelector((store) => store.chatroomRightSide)
 
     return (
         <div className="chatroom-functions">
@@ -18,7 +19,8 @@ const ChatroomRightSide = () => {
                     <RxCross2 />
                 </button>
             </div>
-            {addFriend && <AddFriendForm />}
+            {main.addFriend && <AddFriendForm />}
+            {main.menu && <ChatroomMenu />}
         </div>
     )
 }

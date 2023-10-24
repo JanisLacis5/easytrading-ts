@@ -1,7 +1,6 @@
 import {useState} from "react"
 import {Outlet} from "react-router-dom"
 import {useAppSelector} from "../../store/storeHooks"
-import {toast} from "react-toastify"
 import "./chatroom.css"
 import ChatroomRightSide from "./ChatroomRightSide/ChatroomRightSide"
 
@@ -10,7 +9,7 @@ const Chatroomlayout = () => {
     const [email, setEmail] = useState<string>("")
 
     const {user} = useAppSelector((store) => store.user)
-    const {showRightSide} = useAppSelector((store) => store.chatroomRightSide)
+    const {main} = useAppSelector((store) => store.chatroomRightSide)
 
     // MESSAGE SOCKET
     const messageWs = new WebSocket("ws://localhost:3002")
@@ -69,7 +68,7 @@ const Chatroomlayout = () => {
     return (
         <section className="chatroom-layout">
             <Outlet />
-            {showRightSide && <ChatroomRightSide />}
+            {main.showRightSide && <ChatroomRightSide />}
         </section>
     )
 }
