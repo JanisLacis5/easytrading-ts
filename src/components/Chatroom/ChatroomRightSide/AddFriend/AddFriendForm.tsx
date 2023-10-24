@@ -1,9 +1,12 @@
 import {useState} from "react"
 import "./addFriend.css"
 import {toast} from "react-toastify"
-import {useAppSelector} from "../../../../store/storeHooks"
+import {useAppDispatch, useAppSelector} from "../../../../store/storeHooks"
+import {login} from "../../../../features/userSlice"
 
 const AddFriendForm = () => {
+    const dispatch = useAppDispatch()
+
     const [recieverFriendReqEmail, setRecieverFriendReqEmail] =
         useState<string>("")
 
@@ -12,6 +15,7 @@ const AddFriendForm = () => {
     // SEND FRIEND SOCKET
     const sendFriendWs = new WebSocket("ws://localhost:3004")
     sendFriendWs.onopen = () => {
+        sendFriendWs.send(JSON.stringify({id: user.id}))
         console.log("Connected to the send friend request server")
     }
     sendFriendWs.onmessage = ({data}) => {
@@ -22,7 +26,31 @@ const AddFriendForm = () => {
         }
         if (serverData.status === "success") {
             toast.success("Sent")
+            const {
+                id,
+                trades,
+                notes,
+                info,
+                layouts,
+                messages,
+                friends,
+                recievedFriendRequests,
+            } = user
+            dispatch(
+                login({
+                    id,
+                    trades,
+                    notes,
+                    info,
+                    layouts,
+                    messages,
+                    friends,
+                    recievedFriendRequests,
+                    sentFriendRequests: serverData.sentFriendReq,
+                })
+            )
         }
+
         setRecieverFriendReqEmail("")
     }
     sendFriendWs.onerror = (e) => {

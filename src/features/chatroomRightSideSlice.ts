@@ -54,6 +54,9 @@ const chatroomRightSideSlice = createSlice({
             Object.keys(state.menuPages).map(
                 (key) => (state.menuPages[key] = false)
             )
+            Object.keys(state.friendReqPages).map(
+                (key) => (state.friendReqPages[key] = false)
+            )
         },
         setMenuPage: (
             state,
@@ -74,10 +77,12 @@ const chatroomRightSideSlice = createSlice({
                 page: "recievedFriendReq" | "sentFriendReq"
             }>
         ) => {
+            Object.keys(state.main).map((key) => (state.main[key] = false))
             Object.keys(state.friendReqPages).map(
                 (key) => (state.friendReqPages[key] = false)
             )
 
+            state.main.showRightSide = true
             state.friendReqPages[action.payload.page] = true
         },
     },

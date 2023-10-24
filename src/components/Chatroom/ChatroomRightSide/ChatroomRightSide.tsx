@@ -4,11 +4,14 @@ import "./chatroomRightSide.css"
 import {useAppDispatch, useAppSelector} from "../../../store/storeHooks"
 import {closeRightSide} from "../../../features/chatroomRightSideSlice"
 import ChatroomMenu from "./Menu/ChatroomMenu"
+import SentFriendReq from "./Menu/SentFriendReq"
 
 const ChatroomRightSide = () => {
     const dispatch = useAppDispatch()
 
-    const {main} = useAppSelector((store) => store.chatroomRightSide)
+    const {main, friendReqPages} = useAppSelector(
+        (store) => store.chatroomRightSide
+    )
 
     return (
         <div className="chatroom-functions">
@@ -21,6 +24,7 @@ const ChatroomRightSide = () => {
             </div>
             {main.addFriend && <AddFriendForm />}
             {main.menu && <ChatroomMenu />}
+            {friendReqPages.sentFriendReq && <SentFriendReq />}
         </div>
     )
 }
