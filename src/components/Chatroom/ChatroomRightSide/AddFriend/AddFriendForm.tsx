@@ -1,3 +1,5 @@
+import './addFriend.css'
+
 const AddFriendForm = () => {
     return (
         <div className="add-friend">

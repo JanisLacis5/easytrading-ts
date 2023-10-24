@@ -6,5 +6,31 @@
     background-color: #fff;
     top: 0;
     right: 0;
-    padding: 0.5rem 1rem;
+    display: flex;
+}
+
+.chatroom-functions > div:first-child {
+    height: 100%;
+    width: 3rem;
+    display: flex;
+    justify-content: center;
+    padding-top: 0.5rem;
+}
+
+.chatroom-functions > div:first-child button {
+    height: 1.5rem;
+    width: 1.5rem;
+    background-color: transparent;
+    border: none;
+}
+
+.chatroom-functions > div:first-child svg {
+    width: 75%;
+    height: 75%;
+}
+
+.chatroom-functions > div:last-child {
+    width: calc(100% - 3rem);
+    padding: 1rem;
+    padding-left: 0;
 }
