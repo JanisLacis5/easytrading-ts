@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom'
 import { useAppSelector } from '../../store/storeHooks'
 import { toast } from 'react-toastify'
 import './chatroom.css'
+import ChatroomRightSide from './ChatroomRightSide/ChatroomRightSide'
 
 const Chatroomlayout = () => {
     const [messageText, setMessageText] = useState<string>('')
@@ -103,28 +104,7 @@ const Chatroomlayout = () => {
     return (
         <section className="chatroom-layout">
             <Outlet />
-            {/* <form onSubmit={sendMessage}>
-                <label htmlFor="message">Message: </label>
-                <input
-                    type="text"
-                    name="message"
-                    id="message"
-                    value={messageText}
-                    onChange={(e) => setMessageText(e.target.value)}
-                />
-                <button type="submit">Send</button>
-            </form>
-            <form onSubmit={sendFriendRequest}>
-                <label htmlFor="email">User email</label>
-                <input
-                    type="email"
-                    name="email"
-                    id="email"
-                    value={recieverFriendReqEmail}
-                    onChange={(e) => setRecieverFriendReqEmail(e.target.value)}
-                />
-                <button type="submit">Add friend</button>
-            </form> */}
+            <ChatroomRightSide />
         </section>
     )
 }

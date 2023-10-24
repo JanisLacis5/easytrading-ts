@@ -1,0 +1,10 @@
+.chatroom-functions {
+    position: absolute;
+    height: 100%;
+    width: 33%;
+    box-shadow: 1px 0 10px black;
+    background-color: #fff;
+    top: 0;
+    right: 0;
+    padding: 0.5rem 1rem;
+}
