@@ -9,6 +9,7 @@ const ChatroomMenu = () => {
     const dispatch = useAppDispatch()
 
     const {menuPages} = useAppSelector((store) => store.chatroomRightSide)
+    const {user} = useAppSelector((store) => store.user)
 
     return (
         <div className="chatroom-menu">
@@ -55,7 +56,14 @@ const ChatroomMenu = () => {
                                 })
                             )
                         }>
-                        <h6>Recieved Friend Requests</h6>
+                        <div>
+                            <h6>Recieved Friend Requests</h6>
+                            {user?.recievedFriendRequests.length ? (
+                                <div className="noti"></div>
+                            ) : (
+                                <div></div>
+                            )}
+                        </div>
                     </button>
                     <button
                         type="button"

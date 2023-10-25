@@ -45,6 +45,9 @@ const chatroomRightSideSlice = createSlice({
             Object.keys(state.menuPages).map(
                 (key) => (state.menuPages[key] = false)
             )
+            Object.keys(state.friendReqPages).map(
+                (key) => (state.friendReqPages[key] = false)
+            )
 
             state.main.showRightSide = true
             state.main[action.payload.page] = true

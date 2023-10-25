@@ -11,6 +11,7 @@ const SentFriendReq = () => {
                 return (
                     <div>
                         <h6>{req}</h6>
+                        <button type="button">Remove</button>
                     </div>
                 )
             })}
