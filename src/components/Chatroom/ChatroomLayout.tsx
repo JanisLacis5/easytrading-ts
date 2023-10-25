@@ -1,4 +1,3 @@
-import {useState} from "react"
 import {Outlet} from "react-router-dom"
 import {useAppDispatch, useAppSelector} from "../../store/storeHooks"
 import "./chatroom.css"
@@ -9,40 +8,8 @@ import {login} from "../../features/userSlice"
 const Chatroomlayout = () => {
     const dispatch = useAppDispatch()
 
-    const [messageText, setMessageText] = useState<string>("")
-    const [email, setEmail] = useState<string>("")
-
     const {user} = useAppSelector((store) => store.user)
     const {main} = useAppSelector((store) => store.chatroomRightSide)
-
-    // // MESSAGE SOCKET
-    // const messageWs = new WebSocket("ws://localhost:3002")
-    // messageWs.onopen = () => {
-    //     messageWs.send(JSON.stringify({id: user.id}))
-    //     // console.log("Connected to the message server")
-    // }
-    // messageWs.onmessage = ({data}) => {
-    //     console.log("received: ", data)
-    // }
-    // messageWs.onerror = (e) => {
-    //     console.log("Error:")
-    //     console.log(e)
-    // }
-    // ////////////////////////////////////////////////////////
-
-    // // ACCEPT FRIEND SOCKET
-    // const friendWs = new WebSocket("ws://localhost:3003")
-    // friendWs.onopen = () => {
-    //     // console.log("Connected to the friend server")
-    // }
-    // friendWs.onmessage = ({data}) => {
-    //     console.log("received: ", data)
-    // }
-    // friendWs.onerror = (e) => {
-    //     console.log("Error:")
-    //     console.log(e)
-    // }
-    // ////////////////////////////////////////////////////////
 
     // NOTIFICATION SOCKET
     const notiWs = new WebSocket("ws://localhost:5000")
@@ -85,6 +52,34 @@ const Chatroomlayout = () => {
                 })
             )
         }
+        if (recData.status === "new friend") {
+            toast.warn(recData.status)
+        }
+        if (recData.friends) {
+            const {
+                id,
+                trades,
+                notes,
+                info,
+                layouts,
+                messages,
+                sentFriendRequests,
+                recievedFriendRequests,
+            } = user
+            dispatch(
+                login({
+                    id,
+                    trades,
+                    notes,
+                    info,
+                    layouts,
+                    messages,
+                    friends: recData.friends,
+                    sentFriendRequests,
+                    recievedFriendRequests,
+                })
+            )
+        }
     }
     notiWs.onerror = (e) => {
         console.log("Error:")
@@ -105,16 +100,6 @@ const Chatroomlayout = () => {
 
     //     messageWs.send(
     //         JSON.stringify({senderId: user.id, recieverId: "", message})
-    //     )
-    // }
-
-    // const acceptFriendRequest = (e: React.FormEvent<HTMLFormElement>) => {
-    //     e.preventDefault()
-    //     friendWs.send(
-    //         JSON.stringify({
-    //             senderEmail: user.info.email,
-    //             friendEmail: email,
-    //         })
     //     )
     // }
 
