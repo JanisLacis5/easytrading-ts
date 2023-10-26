@@ -86,23 +86,6 @@ const Chatroomlayout = () => {
         console.log(e)
     }
 
-    ////////////////////////////////////////////////////////
-
-    // const sendMessage = (e: React.FormEvent<HTMLFormElement>) => {
-    //     e.preventDefault()
-
-    //     const date = new Date()
-    //     const message = {
-    //         time: `${date.getHours()}:${date.getMinutes()}`,
-    //         date: `${date.getDate()}-${date.getMonth()}-${date.getFullYear()}`,
-    //         text: messageText,
-    //     }
-
-    //     messageWs.send(
-    //         JSON.stringify({senderId: user.id, recieverId: "", message})
-    //     )
-    // }
-
     return (
         <section className="chatroom-layout">
             <Outlet />
