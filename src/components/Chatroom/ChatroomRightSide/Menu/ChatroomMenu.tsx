@@ -1,6 +1,7 @@
 import {
     setFriendReqPage,
-    setMenuPage,
+    toggleFriendReqPage,
+    setNewPage,
 } from "../../../../features/chatroomRightSideSlice"
 import {useAppDispatch, useAppSelector} from "../../../../store/storeHooks"
 import "./chatroomMenu.css"
@@ -19,7 +20,21 @@ const ChatroomMenu = () => {
                 type="button"
                 onClick={() =>
                     dispatch(
-                        setMenuPage({
+                        setNewPage({
+                            page: "friends",
+                        })
+                    )
+                }>
+                <div>
+                    <h5>Friends</h5>
+                </div>
+            </button>
+            <button
+                className="friend-req-button"
+                type="button"
+                onClick={() =>
+                    dispatch(
+                        toggleFriendReqPage({
                             page: "friendRequests",
                         })
                     )
@@ -82,7 +97,7 @@ const ChatroomMenu = () => {
                 type="button"
                 onClick={() =>
                     dispatch(
-                        setMenuPage({
+                        setNewPage({
                             page: "blocked",
                         })
                     )
@@ -93,7 +108,7 @@ const ChatroomMenu = () => {
                 type="button"
                 onClick={() =>
                     dispatch(
-                        setMenuPage({
+                        setNewPage({
                             page: "hidden",
                         })
                     )

@@ -1,0 +1,11 @@
+.friends-list {
+    height: 100%;
+    width: 100%;
+}
+
+.friends-list h4 {
+    width: 100%;
+    height: calc(10% - 0.75rem);
+    display: flex;
+    justify-content: center;
+}

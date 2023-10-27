@@ -21,6 +21,7 @@ const initialState: IInitialState = {
         menu: false,
     },
     menuPages: {
+        friends: false,
         friendRequests: false,
         blocked: false,
         hidden: false,
@@ -61,10 +62,10 @@ const chatroomRightSideSlice = createSlice({
                 (key) => (state.friendReqPages[key] = false)
             )
         },
-        setMenuPage: (
+        toggleFriendReqPage: (
             state,
             action: PayloadAction<{
-                page: "friendRequests" | "blocked" | "hidden"
+                page: "friendRequests"
             }>
         ) => {
             const temp = state.menuPages[action.payload.page]
@@ -73,6 +74,18 @@ const chatroomRightSideSlice = createSlice({
             )
 
             state.menuPages[action.payload.page] = !temp
+        },
+        setNewPage: (
+            state,
+            action: PayloadAction<{page: "friends" | "hidden" | "blocked"}>
+        ) => {
+            Object.keys(state.menuPages).map(
+                (key) => (state.menuPages[key] = false)
+            )
+            Object.keys(state.main).map((key) => (state.main[key] = false))
+
+            state.main.showRightSide = true
+            state.menuPages[action.payload.page] = true
         },
         setFriendReqPage: (
             state,
@@ -91,6 +104,11 @@ const chatroomRightSideSlice = createSlice({
     },
 })
 
-export const {setPage, closeRightSide, setMenuPage, setFriendReqPage} =
-    chatroomRightSideSlice.actions
+export const {
+    setPage,
+    closeRightSide,
+    setNewPage,
+    setFriendReqPage,
+    toggleFriendReqPage,
+} = chatroomRightSideSlice.actions
 export default chatroomRightSideSlice.reducer

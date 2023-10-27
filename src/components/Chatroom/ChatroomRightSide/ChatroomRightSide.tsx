@@ -7,15 +7,15 @@ import ChatroomMenu from "./Menu/ChatroomMenu"
 import SentFriendReq from "./Menu/SentFriendReq"
 import {useEffect, useState} from "react"
 import RecievedFriendReq from "./Menu/RecievedFriendReq"
+import FriendsList from "./FriendsList/FriendsList"
 
 const ChatroomRightSide = () => {
     const dispatch = useAppDispatch()
 
-    const [showCross, setShowCross] = useState<boolean>(true)
-
-    const {main, friendReqPages} = useAppSelector(
+    const {main, friendReqPages, menuPages} = useAppSelector(
         (store) => store.chatroomRightSide
     )
+    const [showCross, setShowCross] = useState<boolean>(true)
 
     useEffect(() => {
         setShowCross(true)
@@ -25,6 +25,17 @@ const ChatroomRightSide = () => {
             }
         })
     }, [friendReqPages])
+
+    useEffect(() => {
+        setShowCross(true)
+        if (menuPages.friends) {
+            setShowCross(false)
+        }
+    }, [menuPages])
+
+    useEffect(() => {
+        console.log(menuPages.friends)
+    }, [menuPages])
 
     return (
         <div className="chatroom-functions">
@@ -57,6 +68,7 @@ const ChatroomRightSide = () => {
             </div>
             {main.addFriend && <AddFriendForm />}
             {main.menu && <ChatroomMenu />}
+            {menuPages.friends && <FriendsList />}
             {friendReqPages.sentFriendReq && <SentFriendReq />}
             {friendReqPages.recievedFriendReq && <RecievedFriendReq />}
         </div>

@@ -19,7 +19,7 @@ const Chatroomlayout = () => {
                 id: user.id,
             })
         )
-        console.log("Connected to the noti server")
+        // console.log("Connected to the noti server")
     }
     notiWs.onmessage = ({data}) => {
         const recData = JSON.parse(data)
