@@ -23,7 +23,6 @@ const Chatroomlayout = () => {
     }
     notiWs.onmessage = ({data}) => {
         const recData = JSON.parse(data)
-        console.log("received: ", recData)
         if (recData.status === "new friend request") {
             toast.warn(recData.status)
         }
@@ -53,6 +52,7 @@ const Chatroomlayout = () => {
             )
         }
         if (recData.status === "new friend") {
+            console.log(recData)
             toast.warn(recData.status)
         }
         if (recData.friends) {
@@ -63,7 +63,6 @@ const Chatroomlayout = () => {
                 info,
                 layouts,
                 messages,
-                sentFriendRequests,
                 recievedFriendRequests,
             } = user
             dispatch(
@@ -75,7 +74,7 @@ const Chatroomlayout = () => {
                     layouts,
                     messages,
                     friends: recData.friends,
-                    sentFriendRequests,
+                    sentFriendRequests: recData.sentFriendReq,
                     recievedFriendRequests,
                 })
             )

@@ -69,8 +69,9 @@ const Reviews = () => {
                     <div className="stars">
                         {Array(5)
                             .fill(0)
-                            .map(() => (
+                            .map((_, index) => (
                                 <svg
+                                    key={index}
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none"
                                     viewBox="0 0 24 24"
@@ -102,8 +103,9 @@ const Reviews = () => {
                     <div className="stars">
                         {Array(5)
                             .fill(0)
-                            .map(() => (
+                            .map((_, index) => (
                                 <svg
+                                    key={index}
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none"
                                     viewBox="0 0 24 24"

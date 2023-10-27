@@ -61,7 +61,7 @@
 }
 
 .landing-page a {
-    padding: 1rem 2.5rem;
+    padding: 0.75rem 2rem;
     border-radius: 6.25rem;
     background: var(--gradient);
     width: 14rem;

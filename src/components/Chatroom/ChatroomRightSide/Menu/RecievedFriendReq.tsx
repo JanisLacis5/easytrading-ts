@@ -1,3 +1,4 @@
+import {toast} from "react-toastify"
 import {login} from "../../../../features/userSlice"
 import {useAppDispatch, useAppSelector} from "../../../../store/storeHooks"
 import "./chatroomMenu.css"
@@ -14,7 +15,7 @@ const RecievedFriendReq = () => {
         // console.log("Connected to the friend server")
     }
     friendWs.onmessage = ({data}) => {
-        console.log("received: ", data)
+        console.log("received: ", JSON.parse(data))
     }
     friendWs.onerror = (e) => {
         console.log("Error:")
@@ -34,16 +35,12 @@ const RecievedFriendReq = () => {
                 recieverEmail: user.info.email,
             })
         )
-        const {
-            id,
-            trades,
-            info,
-            layouts,
-            messages,
-            recievedFriendRequests,
-            sentFriendRequests,
-        } = user
+        const {id, trades, info, layouts, messages, sentFriendRequests} = user
         const updatedFriends = [...user.friends, email]
+        const updatedRecievedFriendReq = user.friends.filter(
+            (req) => req !== email
+        )
+        toast.success("New friend added")
         dispatch(
             login({
                 id,
@@ -52,7 +49,7 @@ const RecievedFriendReq = () => {
                 layouts,
                 messages,
                 friends: updatedFriends,
-                recievedFriendRequests,
+                recievedFriendRequests: updatedRecievedFriendReq,
                 sentFriendRequests,
             })
         )
@@ -70,6 +67,7 @@ const RecievedFriendReq = () => {
                 recieverEmail: user.info.email,
             })
         )
+        toast.error("Friend request declined")
         const updatedRecievedFriendReq = user.recievedFriendRequests.filter(
             (req) => req !== email
         )
@@ -100,9 +98,9 @@ const RecievedFriendReq = () => {
     return (
         <div className="recieved-friend-req">
             <h4>Recieved Friend Requests</h4>
-            {user?.recievedFriendRequests.map((req: string) => {
+            {user?.recievedFriendRequests.map((req: string, index) => {
                 return (
-                    <div>
+                    <div key={index}>
                         <h6>{req}</h6>
                         <div>
                             <button
