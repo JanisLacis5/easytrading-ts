@@ -56,12 +56,15 @@
 .chatroom-texts {
     height: 90%;
     width: 100%;
+    position: relative;
 }
 
 .chatroom-texts img {
     width: 100%;
     height: 100%;
-    opacity: 25%;
+    opacity: 15%;
+    z-index: -1;
+    position: absolute;
     -webkit-user-drag: none;
     -moz-user-select: none;
     -webkit-user-select: none;
