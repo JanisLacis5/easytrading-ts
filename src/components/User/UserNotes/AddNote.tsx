@@ -52,7 +52,7 @@ const AddNote = () => {
         setImage("")
         setText("")
         toast.success("Note Added")
-        navigate("/userpage/notes")
+        navigate("/user-page/notes")
     }
 
     return (

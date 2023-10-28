@@ -33,10 +33,6 @@ const ChatroomRightSide = () => {
         }
     }, [menuPages])
 
-    useEffect(() => {
-        console.log(menuPages.friends)
-    }, [menuPages])
-
     return (
         <div className="chatroom-functions">
             <div>

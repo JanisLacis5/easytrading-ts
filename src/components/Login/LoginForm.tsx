@@ -43,6 +43,7 @@ const LoginForm = () => {
                     info: data.info,
                     notes: data.notes,
                     layouts: data.layouts,
+                    friends: data.friends,
                     messages: data.messages,
                     recievedFriendRequests: data.recievedFriendRequests,
                     sentFriendRequests: data.sentFriendRequests,

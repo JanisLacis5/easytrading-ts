@@ -12,7 +12,13 @@ const ChatroomLanding = () => {
         <div className="chatroom-landing">
             <div className="chatroom-friends">
                 <div className="chatroom-self">
-                    <img src={user.info.image} alt="self-image" />
+                    <img
+                        src={user.info.image}
+                        alt="self-image"
+                        draggable="false"
+                        onDragStart={() => false}
+                        onDoubleClick={() => false}
+                    />
                     <div>
                         <button
                             type="button"

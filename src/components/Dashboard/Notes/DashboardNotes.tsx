@@ -19,7 +19,13 @@ const DashboardNotes = () => {
             <div className="dashboard-notes-container">
                 {notes.length ? (
                     notes.map((note, index) => {
-                        return <DashboardNote index={index} {...note} />
+                        return (
+                            <DashboardNote
+                                key={index}
+                                index={index}
+                                {...note}
+                            />
+                        )
                     })
                 ) : (
                     <div className="no-notes">

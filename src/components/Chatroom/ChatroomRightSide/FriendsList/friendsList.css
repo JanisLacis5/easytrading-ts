@@ -79,6 +79,15 @@
     border: 1px solid var(--black);
 }
 
+.friend-menu button:hover {
+    opacity: 1;
+    border-color: var(--black-50);
+}
+
+.friend-menu button:hover p {
+    opacity: 0.5;
+}
+
 .friend-menu button:last-child {
     border-top: none;
     color: var(--red);
