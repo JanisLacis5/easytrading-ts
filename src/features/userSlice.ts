@@ -6,6 +6,7 @@ import {
     IUserSingleTrade,
     IUserSingleLayout,
     IMessage,
+    IFriend,
 } from "../interfaces"
 
 interface IUser {
@@ -15,7 +16,7 @@ interface IUser {
     info: IUserInfo
     layouts: Array<IUserSingleLayout[]>
     messages: IMessage[]
-    friends: Array<string>
+    friends: IFriend[]
     recievedFriendRequests: Array<string>
     sentFriendRequests: Array<string>
 }
@@ -33,7 +34,7 @@ interface ILogin {
     info?: IUserInfo
     layouts?: Array<IUserSingleLayout[]>
     messages?: IMessage[]
-    friends?: Array<string>
+    friends?: IFriend[]
     recievedFriendRequests?: Array<string>
     sentFriendRequests?: Array<string>
 }

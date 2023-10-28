@@ -49,3 +49,8 @@ export interface IMessage {
     date: Date
     test: string
 }
+
+export interface IFriend {
+    email: string
+    username: string
+}

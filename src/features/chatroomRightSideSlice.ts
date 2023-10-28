@@ -12,6 +12,7 @@ interface IInitialState extends IInitialStateKeys {
     main: IInitialStatePages
     menuPages: IInitialStatePages
     friendReqPages: IInitialStatePages
+    friendsPage: IInitialStatePages
 }
 
 const initialState: IInitialState = {
@@ -29,6 +30,9 @@ const initialState: IInitialState = {
     friendReqPages: {
         recievedFriendReq: false,
         sentFriendReq: false,
+    },
+    friendsPage: {
+        friendMenu: false,
     },
 }
 
@@ -101,6 +105,13 @@ const chatroomRightSideSlice = createSlice({
             state.main.showRightSide = true
             state.friendReqPages[action.payload.page] = true
         },
+        toggleFriendMenu: (
+            state,
+            action: PayloadAction<{page: "friendMenu"}>
+        ) => {
+            const {page} = action.payload
+            state.friendsPage[page] = !state.friendsPage[page]
+        },
     },
 })
 
@@ -110,5 +121,6 @@ export const {
     setNewPage,
     setFriendReqPage,
     toggleFriendReqPage,
+    toggleFriendMenu,
 } = chatroomRightSideSlice.actions
 export default chatroomRightSideSlice.reducer
