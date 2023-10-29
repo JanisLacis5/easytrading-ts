@@ -1,7 +1,7 @@
-import '../layouts.css'
-import { useEffect, useState } from 'react'
-import ScreenerBlock from './ScreenerBlock'
-import customFetch from '../../../../utils'
+import "../layouts.css"
+import {useEffect, useState} from "react"
+import ScreenerBlock from "./ScreenerBlock"
+import customFetch from "../../../../utils"
 import {
     newLayoutScreener,
     resetLayoutParams,
@@ -10,11 +10,11 @@ import {
     setLayoutMainPosition,
     setLayoutsMainParams,
     setActiveBlock,
-} from '../../../../features/layoutSlice'
-import { login } from '../../../../features/userSlice'
-import { toast } from 'react-toastify'
-import { useAppSelector, useAppDispatch } from '../../../../store/storeHooks'
-import { useNavigate } from 'react-router-dom'
+} from "../../../../features/layoutSlice"
+import {login} from "../../../../features/userSlice"
+import {toast} from "react-toastify"
+import {useAppSelector, useAppDispatch} from "../../../../store/storeHooks"
+import {useNavigate} from "react-router-dom"
 
 const NewLayout = () => {
     const dispatch = useAppDispatch()
@@ -22,17 +22,17 @@ const NewLayout = () => {
     const [notAllowedHover, setNotAllowedHover] = useState(false)
     const [layoutsMain, setLayoutsMain] = useState<Element | null>()
 
-    const { isAddingScreener, layoutParams, edit } = useAppSelector(
+    const {isAddingScreener, layoutParams, edit} = useAppSelector(
         (store) => store.layout
     )
-    const { user } = useAppSelector((store) => store.user)
+    const {user} = useAppSelector((store) => store.user)
 
     const newLayout = async () => {
         if (!layoutParams.length) {
-            toast.error('you must add at least 1 screener')
+            toast.error("you must add at least 1 screener")
             return
         }
-        const { data } = await customFetch.post('/new-layout', {
+        const {data} = await customFetch.post("/new-layout", {
             layout: layoutParams,
             id: user.id,
         })
@@ -60,12 +60,12 @@ const NewLayout = () => {
             })
         )
         dispatch(resetLayoutParams())
-        toast.success('success')
-        navigate('/screeners')
+        toast.success("success")
+        navigate("/screeners")
     }
 
     const editLayout = async () => {
-        const { data } = await customFetch.post('/edit-layout', {
+        const {data} = await customFetch.post("/edit-layout", {
             layoutIndex: edit,
             layout: layoutParams,
             id: user.id,
@@ -96,8 +96,8 @@ const NewLayout = () => {
         )
         dispatch(resetLayoutParams())
         dispatch(setEdit(null))
-        toast.success('success')
-        navigate('/screeners')
+        toast.success("success")
+        navigate("/screeners")
     }
 
     const handleSubmit = (
@@ -112,12 +112,12 @@ const NewLayout = () => {
     }
 
     useEffect(() => {
-        setLayoutsMain(document.querySelector('.new-layout-main'))
+        setLayoutsMain(document.querySelector(".new-layout-main"))
     }, [])
 
     useEffect(() => {
         if (layoutsMain) {
-            const { x, y } = layoutsMain.getBoundingClientRect()
+            const {x, y} = layoutsMain.getBoundingClientRect()
             dispatch(
                 setLayoutsMainParams({
                     height: (layoutsMain as HTMLElement).clientHeight,
@@ -135,6 +135,7 @@ const NewLayout = () => {
 
     return (
         <section className="screener-layout">
+            <h3>New Layout</h3>
             <div className="layouts-header">
                 {isAddingScreener && notAllowedHover && (
                     <p>Press "Done" to add next screener</p>
@@ -143,21 +144,19 @@ const NewLayout = () => {
                     <div
                         className="screener-select-container"
                         onMouseEnter={() => setNotAllowedHover(true)}
-                        onMouseLeave={() => setNotAllowedHover(false)}
-                    >
+                        onMouseLeave={() => setNotAllowedHover(false)}>
                         <select
-                            value={''}
+                            value={""}
                             name="addScreener"
                             onChange={(e) => {
                                 dispatch(
                                     newLayoutScreener(
-                                        e.target.value as 'gap' | 'hod'
+                                        e.target.value as "gap" | "hod"
                                     )
                                 )
                                 dispatch(setIsAddingScreener(true))
                             }}
-                            disabled={isAddingScreener ? true : false}
-                        >
+                            disabled={isAddingScreener ? true : false}>
                             <option value="">Add Screener</option>
                             <option value="gap">Gap Screener</option>
                             <option value="hod">HOD Screener</option>
@@ -167,18 +166,17 @@ const NewLayout = () => {
                         type="button"
                         style={
                             isAddingScreener
-                                ? { backgroundColor: 'green' }
+                                ? {backgroundColor: "green"}
                                 : {
-                                      backgroundColor: 'green',
-                                      opacity: '0.5',
-                                      pointerEvents: 'none',
+                                      backgroundColor: "green",
+                                      opacity: "0.5",
+                                      pointerEvents: "none",
                                   }
                         }
                         onClick={() => {
                             dispatch(setIsAddingScreener(false))
                             dispatch(setActiveBlock(null))
-                        }}
-                    >
+                        }}>
                         Done
                     </button>
                     <button
@@ -187,15 +185,14 @@ const NewLayout = () => {
                         style={
                             !isAddingScreener
                                 ? {}
-                                : { pointerEvents: 'none', opacity: '0.5' }
-                        }
-                    >
+                                : {pointerEvents: "none", opacity: "0.5"}
+                        }>
                         Save
                     </button>
                 </div>
             </div>
             <div className="new-layout-main">
-                <div id="lines" style={{ position: 'relative' }}>
+                <div id="lines" style={{position: "relative"}}>
                     {layoutParams.map((layout, index) => {
                         return (
                             <ScreenerBlock

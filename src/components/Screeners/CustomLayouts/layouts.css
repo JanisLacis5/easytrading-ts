@@ -3,6 +3,11 @@
     width: 100%;
 }
 
+.screener-layout h3 {
+    height: 10%;
+    text-align: center;
+}
+
 .layouts-header {
     height: 5%;
     width: 100%;
@@ -31,7 +36,7 @@
 
 .layout-buttons > * {
     height: 100%;
-    width: 25%;
+    width: 47.5%; /* 25 */
 }
 
 .layout-buttons > div:last-child {
@@ -87,16 +92,17 @@
 
 .layouts-header p {
     height: 100%;
-    width: 25%;
-    color: pink;
+    width: fit-content;
+    padding: 0 1rem;
+    color: #fff;
     position: absolute;
-    bottom: -170%;
+    transform: translate(0, 100%);
     background-color: var(--black-10);
     z-index: 1;
-    color: var(--black);
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: var(--red);
 }
 
 .new-layout-main {
@@ -121,14 +127,17 @@
     background-color: var(--black-10);
     border: 1px solid var(--black);
     height: 100%;
-    width: 25%;
+    width: 33%;
     color: white;
+    border: none;
 }
 
 .new-layout-buttons > button:last-child {
     display: flex;
     justify-content: center;
     align-items: center;
+    border: none;
+    background-color: var(--black);
 }
 
 .screener-select-container select {
@@ -137,6 +146,12 @@
     background-color: transparent;
     text-align-last: center;
     border: none;
+    color: #fff;
+    background-color: var(--black);
+}
+
+.screener-select-container select:focus {
+    outline: none;
 }
 
 .new-layout-buttons select:disabled {
@@ -163,4 +178,38 @@
 
 .gap-block {
     background-color: blue;
+}
+
+@media screen and (min-width: 576px) {
+    .layout-buttons > * {
+        width: 45%;
+    }
+
+    .new-layout-buttons button,
+    .screener-select-container {
+        width: 30%;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .layout-buttons > * {
+        width: 40%;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .layout-buttons > * {
+        width: 35%;
+    }
+
+    .new-layout-buttons button,
+    .screener-select-container {
+        width: 25%;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .layout-buttons > * {
+        width: 25%;
+    }
 }
