@@ -2,6 +2,7 @@ import {setPage} from "../../../features/chatroomRightSideSlice"
 import backgroundImage from "../../../photos/candlestick-chart.jpg"
 import {useAppDispatch, useAppSelector} from "../../../store/storeHooks"
 import ChatroomTexts from "../ChatroomTexts/ChatroomTexts"
+import ChatInput from "./ChatInput"
 import "./chatroomLanding.css"
 
 const ChatroomLanding = () => {
@@ -71,6 +72,7 @@ const ChatroomLanding = () => {
                 <div className="chatroom-texts">
                     <img src={backgroundImage} alt="candlestick-chart" />
                     <ChatroomTexts />
+                    <ChatInput />
                 </div>
             </div>
         </div>

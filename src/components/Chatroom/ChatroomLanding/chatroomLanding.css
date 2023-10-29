@@ -72,3 +72,48 @@
     user-select: none;
     pointer-events: none;
 }
+
+/* CHAT INPUT */
+
+.chat-input {
+    height: 5%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+.chat-input > div {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+}
+
+.chat-input > div:first-child {
+    width: 70%;
+}
+
+.chat-input > div:last-child {
+    width: 30%;
+    justify-content: center;
+}
+
+.chat-input input {
+    height: 100%;
+    width: 100%;
+    border: none;
+    padding: 0 1rem;
+}
+
+.chat-input input {
+    outline: none;
+}
+
+.chat-input button {
+    height: 50%;
+    aspect-ratio: 1;
+    border: none;
+    background-color: transparent;
+}
