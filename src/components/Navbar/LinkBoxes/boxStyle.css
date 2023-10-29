@@ -1,13 +1,13 @@
 .nav-box {
     background-color: rgba(var(--primary), 0.5);
     position: absolute;
-    border-radius: 3px;
+    border-radius: 4px;
     top: 8vh;
-    bottom: -5vh;
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 5;
+    height: fit-content;
 }
 
 .top {
@@ -39,15 +39,20 @@
 .nav-box h5 {
     display: flex;
     align-items: center;
+    width: 7.5rem;
 }
 
 .screener-box-main,
 .trading-box-main {
-    width: calc(100% - 0.5rem);
-    height: calc(100% - 0.5rem);
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    gap: 3rem;
     background-color: #fff;
     border-radius: 1px;
-    padding: 1.5rem;
+    padding: 1rem 25%;
+    border: 0.25rem solid rgba(var(--primary), 0.5);
+    border-radius: 4px;
 }
 
 .nav-box a {
@@ -58,11 +63,6 @@
 }
 
 /* SCREENER BOX */
-
-.screener-box {
-    width: 40vh;
-    height: 35vh;
-}
 
 .screener-box-main > div {
     height: 100%;
@@ -83,11 +83,6 @@
 }
 
 /* TRADING BOX */
-
-.trading-box {
-    width: 60vh;
-    height: 35vh;
-}
 
 .trading-box-main {
     display: flex;
@@ -124,12 +119,8 @@
         padding: 2rem;
     }
 
-    .screener-box {
-        height: 22vh;
-    }
-
     .top {
-        height: 2rem;
-        top: -2rem;
+        height: 1rem;
+        top: -1rem;
     }
 }
