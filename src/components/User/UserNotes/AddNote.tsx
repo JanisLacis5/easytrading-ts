@@ -4,7 +4,7 @@ import customFetch from "../../../utils"
 import {toast} from "react-toastify"
 import blankWhite from "../../../photos/blank-white-image.jpg"
 import {useAppDispatch, useAppSelector} from "../../../store/storeHooks"
-import {login} from "../../../features/userSlice"
+import {updateUserField} from "../../../features/userSlice"
 import {useNavigate} from "react-router-dom"
 
 const AddNote = () => {
@@ -41,14 +41,7 @@ const AddNote = () => {
             text,
             id: user.id,
         })
-        dispatch(
-            login({
-                id: user.id,
-                info: user.info,
-                trades: user.trades,
-                notes: data.notes,
-            })
-        )
+        dispatch(updateUserField({field: "notes", value: data.notes}))
         setImage("")
         setText("")
         toast.success("Note Added")

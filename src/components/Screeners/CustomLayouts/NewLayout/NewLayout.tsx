@@ -11,7 +11,7 @@ import {
     setLayoutsMainParams,
     setActiveBlock,
 } from "../../../../features/layoutSlice"
-import {login} from "../../../../features/userSlice"
+import {login, updateUserField} from "../../../../features/userSlice"
 import {toast} from "react-toastify"
 import {useAppSelector, useAppDispatch} from "../../../../store/storeHooks"
 import {useNavigate} from "react-router-dom"
@@ -36,29 +36,7 @@ const NewLayout = () => {
             layout: layoutParams,
             id: user.id,
         })
-        const {
-            id,
-            trades,
-            notes,
-            info,
-            messages,
-            friends,
-            sentFriendRequests,
-            recievedFriendRequests,
-        } = user
-        dispatch(
-            login({
-                id,
-                trades,
-                notes,
-                info,
-                layouts: data.layouts,
-                messages,
-                friends,
-                sentFriendRequests,
-                recievedFriendRequests,
-            })
-        )
+        dispatch(updateUserField({field: "layouts", value: data.layouts}))
         dispatch(resetLayoutParams())
         toast.success("success")
         navigate("/screeners")

@@ -12,7 +12,7 @@ import {
 } from "../../../../features/layoutSlice"
 import findEditableIndex from "./findEditableLayoutIndex"
 import customFetch from "../../../../utils"
-import {login} from "../../../../features/userSlice"
+import {updateUserField} from "../../../../features/userSlice"
 import {toast} from "react-toastify"
 
 const ScreenerDashboard = () => {
@@ -42,30 +42,7 @@ const ScreenerDashboard = () => {
             index: index,
             id: user.id,
         })
-        const {
-            id,
-            trades,
-            notes,
-            info,
-            messages,
-            friends,
-            recievedFriendRequests,
-            sentFriendRequests,
-        } = user
-
-        dispatch(
-            login({
-                id,
-                trades,
-                notes,
-                info,
-                layouts: data.layouts,
-                messages,
-                friends,
-                recievedFriendRequests,
-                sentFriendRequests,
-            })
-        )
+        dispatch(updateUserField({field: "layouts", value: data.layouts}))
         setLayouts(data.layouts)
         dispatch(resetLayoutParams())
         dispatch(setEdit(null))

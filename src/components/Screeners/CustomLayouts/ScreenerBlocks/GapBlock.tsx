@@ -4,7 +4,6 @@ export interface IScreenerBlockProps {
     x?: number
     y?: number
 }
-import {useEffect} from "react"
 const GapBlock = ({width, height, x, y}: IScreenerBlockProps) => {
     // useEffect(() => {
     //     console.log(
