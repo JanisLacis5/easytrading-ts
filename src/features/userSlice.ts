@@ -9,7 +9,19 @@ import {
     IFriend,
 } from "../interfaces"
 
-interface IUser {
+interface temp {
+    [key: string]:
+        | string
+        | IUserSingleTrade[]
+        | IUserInfo
+        | IUserSingleNote[]
+        | Array<IUserSingleLayout[]>
+        | IMessage[]
+        | IFriend[]
+        | string[]
+}
+
+interface IUser extends temp {
     id: string
     trades: IUserSingleTrade[]
     notes: IUserSingleNote[]
@@ -152,6 +164,57 @@ const userSlice = createSlice({
                 },
             }
         },
+        updateUserField: (
+            state,
+            action: PayloadAction<{
+                field:
+                    | "trades"
+                    | "info"
+                    | "notes"
+                    | "layouts"
+                    | "messages"
+                    | "friends"
+                    | "recievedFriendRequests"
+                    | "sentFriendRequests"
+                value:
+                    | IUserSingleTrade[]
+                    | IUserInfo
+                    | IUserSingleNote[]
+                    | Array<IUserSingleLayout[]>
+                    | IMessage[]
+                    | IFriend[]
+                    | string[]
+            }>
+        ) => {
+            const {field, value} = action.payload
+
+            localStorage.setItem(`${field}`, JSON.stringify(value))
+
+            if (field === "trades") {
+                state.user[field] = value as IUserSingleTrade[]
+            }
+            if (field === "info") {
+                state.user[field] = value as IUserInfo
+            }
+            if (field === "notes") {
+                state.user[field] = value as IUserSingleNote[]
+            }
+            if (field === "layouts") {
+                state.user[field] = value as Array<IUserSingleLayout[]>
+            }
+            if (field === "messages") {
+                state.user[field] = value as IMessage[]
+            }
+            if (field === "friends") {
+                state.user[field] = value as IFriend[]
+            }
+            if (
+                field === "recievedFriendRequests" ||
+                field === "sentFriendRequests"
+            ) {
+                state.user[field] = value as string[]
+            }
+        },
         logout: (state): IInitialState => {
             localStorage.clear()
             return {
@@ -197,5 +260,6 @@ const userSlice = createSlice({
     },
 })
 
-export const {login, logout, setIsLoading, setIsNotLoading} = userSlice.actions
+export const {login, logout, setIsLoading, setIsNotLoading, updateUserField} =
+    userSlice.actions
 export default userSlice.reducer

@@ -2,6 +2,7 @@ import {useState} from "react"
 import {useAppDispatch, useAppSelector} from "../../../store/storeHooks"
 import "./chatroomLanding.css"
 import {toast} from "react-toastify"
+import {updateUserField} from "../../../features/userSlice"
 
 const ChatInput = () => {
     const dispatch = useAppDispatch()
@@ -21,6 +22,9 @@ const ChatInput = () => {
     }
     messageWs.onmessage = ({data}) => {
         console.log(JSON.parse(data))
+        const {updatedMessages, status} = JSON.parse(data)
+        toast.success(status)
+        dispatch(updateUserField({field: "messages", value: updatedMessages}))
     }
     messageWs.onerror = (e) => {
         console.log("Error:")
