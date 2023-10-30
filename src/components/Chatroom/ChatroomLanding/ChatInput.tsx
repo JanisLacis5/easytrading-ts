@@ -1,13 +1,67 @@
+import {useState} from "react"
+import {useAppDispatch, useAppSelector} from "../../../store/storeHooks"
 import "./chatroomLanding.css"
+import {toast} from "react-toastify"
 
 const ChatInput = () => {
+    const dispatch = useAppDispatch()
+
+    const {user} = useAppSelector((store) => store.user)
+
+    const [message, setMessage] = useState<string>("")
+
+    const messageWs = new WebSocket("ws://localhost:3002")
+    messageWs.onopen = () => {
+        messageWs.send(
+            JSON.stringify({
+                id: user.id,
+            })
+        )
+        // console.log("Connected to the message server")
+    }
+    messageWs.onmessage = ({data}) => {
+        console.log(JSON.parse(data))
+    }
+    messageWs.onerror = (e) => {
+        console.log("Error:")
+        console.log(e)
+    }
+
+    const sendMessage = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        if (message === "") {
+            toast.error("Can't send empty message")
+            return
+        }
+
+        const dateObj = new Date()
+        const date = `${dateObj.getDay()}-${dateObj.getMonth()}-${dateObj.getFullYear()}`
+        const time = `${dateObj.getHours()}:${dateObj.getMinutes()}`
+
+        messageWs.send(
+            JSON.stringify({
+                date: date,
+                time: time,
+                message: message,
+                senderEmail: user.info.email,
+                recieverEmail: "test@test.com",
+            })
+        )
+        setMessage("")
+    }
+
     return (
-        <form className="chat-input">
+        <form className="chat-input" onSubmit={sendMessage}>
             <div>
-                <input type="text" placeholder="Enter a message" />
+                <input
+                    type="text"
+                    placeholder="Enter a message"
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                />
             </div>
             <div>
-                <button type="button">
+                <button type="submit">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
