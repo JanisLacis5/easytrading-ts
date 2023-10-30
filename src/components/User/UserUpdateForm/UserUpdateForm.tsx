@@ -1,13 +1,13 @@
-import { toast } from 'react-toastify'
-import './userupdateform.css'
-import customFetch from '../../../utils'
-import { useAppDispatch, useAppSelector } from '../../../store/storeHooks'
+import {toast} from "react-toastify"
+import "./userupdateform.css"
+import customFetch from "../../../utils"
+import {useAppDispatch, useAppSelector} from "../../../store/storeHooks"
 import {
-    login,
     setIsLoading,
     setIsNotLoading,
-} from '../../../features/userSlice'
-import { setAccountUpdateState } from '../../../features/accuntUpdateSlice'
+    updateUserField,
+} from "../../../features/userSlice"
+import {setAccountUpdateState} from "../../../features/accuntUpdateSlice"
 
 const UserUpdateForm = () => {
     const dispatch = useAppDispatch()
@@ -19,7 +19,7 @@ const UserUpdateForm = () => {
         updatedProfilePicture,
     } = useAppSelector((store) => store.accountUpdate)
 
-    const { user } = useAppSelector((store) => store.user)
+    const {user} = useAppSelector((store) => store.user)
 
     const getImage = (e: React.ChangeEvent<HTMLInputElement>) => {
         const tgt = e.target
@@ -30,7 +30,7 @@ const UserUpdateForm = () => {
             fr.onload = function () {
                 dispatch(
                     setAccountUpdateState({
-                        prop: 'updatedProfilePicture',
+                        prop: "updatedProfilePicture",
                         value: fr.result as string,
                     })
                 )
@@ -41,20 +41,18 @@ const UserUpdateForm = () => {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        console.log(updatedUsername)
-
         if (
             !updatedUsername &&
             !updatedEmail &&
             !updatedAccountBalance &&
             !updatedProfilePicture
         ) {
-            toast.error('At least one field should be filled')
+            toast.error("At least one field should be filled")
             return
         }
         dispatch(setIsLoading())
 
-        const { data } = await customFetch.post('/updateuser', {
+        const {data} = await customFetch.post("/updateuser", {
             id: user.id,
             username: updatedUsername,
             email: updatedEmail,
@@ -62,33 +60,15 @@ const UserUpdateForm = () => {
             image: updatedProfilePicture,
         })
 
-        dispatch(setAccountUpdateState({ prop: 'updatedUsername', value: '' }))
-        dispatch(setAccountUpdateState({ prop: 'updatedEmail', value: '' }))
+        dispatch(setAccountUpdateState({prop: "updatedUsername", value: ""}))
+        dispatch(setAccountUpdateState({prop: "updatedEmail", value: ""}))
         dispatch(
-            setAccountUpdateState({ prop: 'updatedAccountBalance', value: '' })
+            setAccountUpdateState({prop: "updatedAccountBalance", value: ""})
         )
         dispatch(
-            setAccountUpdateState({ prop: 'updatedProfilePicture', value: '' })
+            setAccountUpdateState({prop: "updatedProfilePicture", value: ""})
         )
-        const {
-            id,
-            trades,
-            messages,
-            friends,
-            sentFriendRequests,
-            recievedFriendRequests,
-        } = user
-        dispatch(
-            login({
-                id,
-                trades: [...trades].reverse(),
-                info: data.info,
-                messages,
-                friends,
-                sentFriendRequests,
-                recievedFriendRequests,
-            })
-        )
+        dispatch(updateUserField({field: "info", value: data.info}))
         dispatch(setIsNotLoading())
     }
 
@@ -104,7 +84,7 @@ const UserUpdateForm = () => {
                         onChange={(e) =>
                             dispatch(
                                 setAccountUpdateState({
-                                    prop: 'updatedUsername',
+                                    prop: "updatedUsername",
                                     value: e.target.value,
                                 })
                             )
@@ -112,8 +92,7 @@ const UserUpdateForm = () => {
                     />
                     <label
                         htmlFor="username"
-                        className={updatedUsername.length ? 'label-up' : ''}
-                    >
+                        className={updatedUsername.length ? "label-up" : ""}>
                         Change Username:
                     </label>
                 </div>
@@ -128,7 +107,7 @@ const UserUpdateForm = () => {
                         onChange={(e) =>
                             dispatch(
                                 setAccountUpdateState({
-                                    prop: 'updatedEmail',
+                                    prop: "updatedEmail",
                                     value: e.target.value,
                                 })
                             )
@@ -136,8 +115,7 @@ const UserUpdateForm = () => {
                     />
                     <label
                         htmlFor="email"
-                        className={updatedEmail.length ? 'label-up' : ''}
-                    >
+                        className={updatedEmail.length ? "label-up" : ""}>
                         Change Email:
                     </label>
                 </div>
@@ -152,7 +130,7 @@ const UserUpdateForm = () => {
                         onChange={(e) =>
                             dispatch(
                                 setAccountUpdateState({
-                                    prop: 'updatedAccountBalance',
+                                    prop: "updatedAccountBalance",
                                     value: e.target.value,
                                 })
                             )
@@ -161,9 +139,8 @@ const UserUpdateForm = () => {
                     <label
                         htmlFor="account"
                         className={
-                            updatedAccountBalance.length ? 'label-up' : ''
-                        }
-                    >
+                            updatedAccountBalance.length ? "label-up" : ""
+                        }>
                         Update Account Balance:
                     </label>
                 </div>
