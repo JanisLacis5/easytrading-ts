@@ -16,7 +16,7 @@ interface temp {
         | IUserInfo
         | IUserSingleNote[]
         | Array<IUserSingleLayout[]>
-        | IMessage[]
+        | {[key: string]: IMessage[]}
         | IFriend[]
         | string[]
 }
@@ -27,7 +27,7 @@ interface IUser extends temp {
     notes: IUserSingleNote[]
     info: IUserInfo
     layouts: Array<IUserSingleLayout[]>
-    messages: IMessage[]
+    messages: {[key: string]: IMessage[]}
     friends: IFriend[]
     recievedFriendRequests: Array<string>
     sentFriendRequests: Array<string>
@@ -119,7 +119,7 @@ const userSlice = createSlice({
             const notes = action.payload.notes || []
             const layouts = action.payload.layouts || []
             const info = action.payload.info || state.user.info
-            const messages = action.payload.messages || []
+            const messages = action.payload.messages || {}
             const friends = action.payload.friends || []
             const recievedFriendRequests =
                 action.payload.recievedFriendRequests || []
@@ -176,7 +176,7 @@ const userSlice = createSlice({
                     | IUserInfo
                     | IUserSingleNote[]
                     | Array<IUserSingleLayout[]>
-                    | IMessage[]
+                    | {[key: string]: IMessage[]}
                     | IFriend[]
                     | string[]
             }>
@@ -198,7 +198,7 @@ const userSlice = createSlice({
                 state.user[field] = value as Array<IUserSingleLayout[]>
             }
             if (field === "messages") {
-                state.user[field] = value as IMessage[]
+                state.user[field] = value as {[key: string]: IMessage[]}
             }
             if (field === "friends") {
                 state.user[field] = value as IFriend[]
@@ -231,7 +231,7 @@ const userSlice = createSlice({
                     },
                     notes: [],
                     layouts: [],
-                    messages: [],
+                    messages: {},
                     friends: [],
                     recievedFriendRequests: [],
                     sentFriendRequests: [],

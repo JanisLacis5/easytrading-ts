@@ -2,6 +2,7 @@ import {setPage} from "../../../features/chatroomRightSideSlice"
 import backgroundImage from "../../../photos/candlestick-chart.jpg"
 import {useAppDispatch, useAppSelector} from "../../../store/storeHooks"
 import ChatroomTexts from "../ChatroomTexts/ChatroomTexts"
+import ChatContainer from "./ChatContainer"
 import ChatInput from "./ChatInput"
 import "./chatroomLanding.css"
 
@@ -66,6 +67,8 @@ const ChatroomLanding = () => {
                         </button>
                     </div>
                 </div>
+                <ChatContainer />
+                <ChatContainer />
             </div>
             <div>
                 <div className="chatroom-header"></div>

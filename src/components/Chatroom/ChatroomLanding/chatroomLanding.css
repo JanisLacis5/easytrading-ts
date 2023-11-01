@@ -117,3 +117,41 @@
     border: none;
     background-color: transparent;
 }
+
+/* CHAT FRIEND CONTAINER */
+
+.chat-container {
+    background-color: transparent;
+    border: none;
+    height: 10%;
+    width: 100%;
+    border-bottom: 1px solid var(--black);
+    border-width: 80%;
+    display: flex;
+    align-items: center;
+    padding-left: 1rem;
+    justify-content: space-between;
+}
+
+.chat-container img {
+    height: 70%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+}
+
+.chat-container > div {
+    width: 70%;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.chat-container p {
+    color: var(--black-50);
+}
+
+.chat-container h5,
+.chat-container p {
+    text-align: start;
+}
