@@ -141,11 +141,6 @@ const userSlice = createSlice({
                 JSON.stringify(sentFriendRequests)
             )
 
-            let reverseTrades = [...trades]
-            if (trades && trades.length) {
-                reverseTrades = reverseTrades.reverse()
-            }
-
             return {
                 ...state,
                 isLogged: true,
@@ -153,7 +148,7 @@ const userSlice = createSlice({
                 user: {
                     ...state.user,
                     id: action.payload.id,
-                    trades: reverseTrades,
+                    trades: trades,
                     info: info,
                     notes: notes,
                     layouts: layouts,
