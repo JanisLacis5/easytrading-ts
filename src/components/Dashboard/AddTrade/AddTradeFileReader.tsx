@@ -33,7 +33,7 @@ const AddTradeFileReader = () => {
                 data: tradeData,
                 id: user.id,
             })
-            dispatch(updateUserField({field: "trades", value: data.trades}))
+            dispatch(updateUserField({field: "userTrades", value: data.trades}))
         } catch (e) {
             console.log(e)
         }
@@ -60,7 +60,7 @@ const AddTradeFileReader = () => {
                     const accBefore = parseFloat(LINE[1].replace(/\s/g, ""))
                     const accAfter = parseFloat(LINE[2].replace(/\s/g, ""))
                     const pl = parseFloat(LINE[3])
-                    const date = LINE[0].slice(1, 11)
+                    const date = LINE[0].slice(1, 9)
                     const time = LINE[0].slice(11, 17)
                     const action = LINE[4].slice(8, 13)
                     tempArr.push({

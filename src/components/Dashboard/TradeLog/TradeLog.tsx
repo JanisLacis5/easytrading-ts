@@ -8,7 +8,7 @@ import {
     setSortedTrades,
 } from "../../../features/sortSlice"
 import {toggleFilters} from "../../../features/filterSlice"
-import {filterChart, profitsPerDate} from "../../../functions"
+import {filterChart} from "../../../functions"
 import {useEffect, useState} from "react"
 import {BiSolidDownArrow, BiSolidUpArrow} from "react-icons/bi"
 import Modal from "./Modal"
@@ -27,8 +27,7 @@ const TradeLog = () => {
 
     useEffect(() => {
         dispatch(setSortedTrades({trades: user.trades}))
-        profitsPerDate(user.trades)
-    }, [user.trades])
+    }, [user])
 
     const handleChange = (
         e: React.MouseEvent<HTMLButtonElement, MouseEvent>

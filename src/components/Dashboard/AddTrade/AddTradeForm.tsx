@@ -45,7 +45,7 @@ const AddTrade = () => {
             id: user.id,
         })
         if (infoUpdate.data.message === "success") {
-            dispatch(updateUserField({field: "trades", value: data.trades}))
+            dispatch(updateUserField({field: "userTrades", value: data.trades}))
             dispatch(
                 updateUserField({
                     field: "info",

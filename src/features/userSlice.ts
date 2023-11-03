@@ -88,7 +88,7 @@ export const clearTrades = createAsyncThunk("user/clearTrades", async () => {
     if (id) {
         try {
             const {data} = await customFetch.delete(
-                `/deleteTrades/${JSON.parse(id)}`,
+                `/deleteTrades/${JSON.stringify(id)}`,
                 {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem(
@@ -163,7 +163,7 @@ const userSlice = createSlice({
             state,
             action: PayloadAction<{
                 field:
-                    | "trades"
+                    | "userTrades"
                     | "info"
                     | "notes"
                     | "layouts"
@@ -185,8 +185,8 @@ const userSlice = createSlice({
 
             localStorage.setItem(`${field}`, JSON.stringify(value))
 
-            if (field === "trades") {
-                state.user[field] = value as IUserSingleTrade[]
+            if (field === "userTrades") {
+                state.user.trades = value as IUserSingleTrade[]
             }
             if (field === "info") {
                 state.user[field] = value as IUserInfo
