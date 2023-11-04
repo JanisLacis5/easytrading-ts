@@ -3,7 +3,7 @@ import {useAppDispatch, useAppSelector} from "../../store/storeHooks"
 import "./chatroom.css"
 import ChatroomRightSide from "./ChatroomRightSide/ChatroomRightSide"
 import {toast} from "react-toastify"
-import {login} from "../../features/userSlice"
+import {updateUserField} from "../../features/userSlice"
 
 const Chatroomlayout = () => {
     const dispatch = useAppDispatch()
@@ -27,27 +27,10 @@ const Chatroomlayout = () => {
             toast.warn(recData.status)
         }
         if (recData.recievedFriendReq) {
-            const {
-                id,
-                trades,
-                notes,
-                info,
-                layouts,
-                messages,
-                friends,
-                sentFriendRequests,
-            } = user
             dispatch(
-                login({
-                    id,
-                    trades,
-                    notes,
-                    info,
-                    layouts,
-                    messages,
-                    friends,
-                    sentFriendRequests,
-                    recievedFriendRequests: recData.recievedFriendReq,
+                updateUserField({
+                    field: "recievedFriendRequests",
+                    value: recData.recievedFriendReq,
                 })
             )
         }
@@ -56,26 +39,16 @@ const Chatroomlayout = () => {
             toast.warn(recData.status)
         }
         if (recData.friends) {
-            const {
-                id,
-                trades,
-                notes,
-                info,
-                layouts,
-                messages,
-                recievedFriendRequests,
-            } = user
             dispatch(
-                login({
-                    id,
-                    trades,
-                    notes,
-                    info,
-                    layouts,
-                    messages,
-                    friends: recData.friends,
-                    sentFriendRequests: recData.sentFriendReq,
-                    recievedFriendRequests,
+                updateUserField({
+                    field: "sentFriendRequests",
+                    value: recData.sentFriendReq,
+                })
+            )
+            dispatch(
+                updateUserField({
+                    field: "friends",
+                    value: recData.friends,
                 })
             )
         }

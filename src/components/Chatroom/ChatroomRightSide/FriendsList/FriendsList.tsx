@@ -3,17 +3,12 @@ import {toggleFriendMenu} from "../../../../features/chatroomRightSideSlice"
 import {useAppDispatch, useAppSelector} from "../../../../store/storeHooks"
 import FriendMenu from "./FriendMenu"
 import "./friendsList.css"
-import {useEffect} from "react"
 
 const FriendsList = () => {
     const dispatch = useAppDispatch()
 
     const {user} = useAppSelector((store) => store.user)
     const {friendsPage} = useAppSelector((store) => store.chatroomRightSide)
-
-    useEffect(() => {
-        console.log(user.friends)
-    }, [user])
 
     return (
         <div className="friends-list">
@@ -40,7 +35,7 @@ const FriendsList = () => {
                                         }>
                                         <RxCross2 />
                                     </button>
-                                    <FriendMenu />
+                                    <FriendMenu friendEmail={email} />
                                 </>
                             ) : (
                                 <button

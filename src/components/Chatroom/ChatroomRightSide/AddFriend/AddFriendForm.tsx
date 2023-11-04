@@ -2,7 +2,7 @@ import {useState} from "react"
 import "./addFriend.css"
 import {toast} from "react-toastify"
 import {useAppDispatch, useAppSelector} from "../../../../store/storeHooks"
-import {login} from "../../../../features/userSlice"
+import {updateUserField} from "../../../../features/userSlice"
 
 const AddFriendForm = () => {
     const dispatch = useAppDispatch()
@@ -26,27 +26,10 @@ const AddFriendForm = () => {
         }
         if (serverData.status === "success") {
             toast.success("Sent")
-            const {
-                id,
-                trades,
-                notes,
-                info,
-                layouts,
-                messages,
-                friends,
-                recievedFriendRequests,
-            } = user
             dispatch(
-                login({
-                    id,
-                    trades,
-                    notes,
-                    info,
-                    layouts,
-                    messages,
-                    friends,
-                    recievedFriendRequests,
-                    sentFriendRequests: serverData.sentFriendReq,
+                updateUserField({
+                    field: "sentFriendRequests",
+                    value: serverData.sentFriendReq,
                 })
             )
         }
