@@ -1,16 +1,24 @@
-import {FC} from "react"
-import customFetch from "../../../../utils"
-import "./friendsList.css"
+import { FC } from 'react'
+import customFetch from '../../../../utils'
+import './friendsList.css'
+import { useAppDispatch, useAppSelector } from '../../../../store/storeHooks'
+import { updateUserField } from '../../../../features/userSlice'
 
-const FriendMenu: FC<{friendEmail: string}> = ({friendEmail}) => {
+const FriendMenu: FC<{ friendEmail: string }> = ({ friendEmail }) => {
+    const dispatch = useAppDispatch()
+
+    const { user } = useAppSelector((store) => store.user)
+
     const removeFriend = async (
         e: React.MouseEvent<HTMLButtonElement, MouseEvent>
     ) => {
         e.preventDefault()
-        const {data} = await customFetch.put("/remove-friend", {
+        const { data } = await customFetch.put('/remove-friend', {
             friendEmail: friendEmail,
+            userId: user.id,
         })
-        console.log(data)
+        dispatch(updateUserField({ field: 'friends', value: data.friends }))
+        dispatch(updateUserField({ field: 'messages', value: data.messages }))
     }
 
     return (
