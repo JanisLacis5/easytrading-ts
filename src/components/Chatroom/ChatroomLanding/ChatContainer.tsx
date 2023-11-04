@@ -1,15 +1,18 @@
-import {IMessage} from "../../../interfaces"
-import {useAppSelector} from "../../../store/storeHooks"
-import "./chatroomLanding.css"
-import {useState, useEffect} from "react"
+import { setActiveChat } from '../../../features/chatroomChatsSlice'
+import { IFriend, IMessage } from '../../../interfaces'
+import { useAppDispatch, useAppSelector } from '../../../store/storeHooks'
+import './chatroomLanding.css'
+import { useState, useEffect, FC } from 'react'
+import userIcon from '../../../assets/user-icon.svg'
 
-const ChatContainer = () => {
+const ChatContainer: FC<{ friend: IFriend }> = ({ friend }) => {
+    const dispatch = useAppDispatch()
     const [lastUserChat, setLastUserChat] = useState<IMessage>()
 
-    const {user} = useAppSelector((store) => store.user)
+    const { user } = useAppSelector((store) => store.user)
 
     useEffect(() => {
-        const userChats = user?.messages["test1@test.com"]
+        const userChats = user?.messages[friend.email]
         if (userChats) {
             let lastChat = userChats[0]
             userChats.map((chat) => {
@@ -27,11 +30,15 @@ const ChatContainer = () => {
     }, [user])
 
     return (
-        <button type="button" className="chat-container">
-            <img src={user.info.image} alt="profile picture" />
+        <button
+            type="button"
+            className="chat-container"
+            onClick={() => dispatch(setActiveChat({ value: friend.email }))}
+        >
+            <img src={userIcon} alt="profile picture" />
             <div>
-                <h5>{user.info.username}</h5>
-                <p>{lastUserChat?.text}</p>
+                <h5>{friend.username}</h5>
+                <p>{lastUserChat?.message}</p>
             </div>
         </button>
     )

@@ -47,7 +47,7 @@ export interface IMessage {
     sender: boolean
     time: string
     date: Date
-    text: string
+    message: string
 }
 
 export interface IFriend {

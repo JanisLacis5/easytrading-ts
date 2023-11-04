@@ -1,54 +1,21 @@
-import GreenBubble from "./GreenBubble"
-import WhiteBubble from "./WhiteBubble"
-import "./chatroomTexts.css"
+import { useAppSelector } from '../../../store/storeHooks'
+import GreenBubble from './GreenBubble'
+import WhiteBubble from './WhiteBubble'
+import './chatroomTexts.css'
 
 const ChatroomTexts = () => {
-    const messages = [
-        "dadsadada",
-        "ddadaddadas",
-        "ddadadadad",
-        "dadsadada",
-        "ddadaddadas",
-        "ddadadadad",
-        "dadsadada",
-        "ddadaddadas",
-        "ddadadadad",
-        "dadsadada",
-        "ddadaddadas",
-        "ddadadadad",
-        "dadsadada",
-        "ddadaddadas",
-        "ddadadadad",
-        "dadsadada",
-        "ddadaddadas",
-        "ddadadadad",
-        "dadsadada",
-        "ddadaddadas",
-        "ddadadadad",
-        "dadsadada",
-        "ddadaddadas",
-        "ddadadadad",
-        "dadsadada",
-        "ddadaddadas",
-        "ddadadadad",
-        "dadsadada",
-        "ddadaddadas",
-        "ddadadadad",
-        "dadsadada",
-        "ddadaddadas",
-        "ddadadadad",
-        "dadsadada",
-        "ddadaddadas",
-        "ddadadadad",
-    ]
+    const { user } = useAppSelector((store) => store.user)
+    const { activeChat } = useAppSelector((store) => store.chatroomChats)
+
+    const messages = user.messages[activeChat]
 
     return (
         <div className="chatroom-texts-container">
-            {messages.map((_, index) => {
-                if (index % 2 === 0) {
-                    return <GreenBubble key={index} />
+            {messages?.map((message, index) => {
+                if (message.sender) {
+                    return <GreenBubble key={index} message={{ ...message }} />
                 } else {
-                    return <WhiteBubble key={index} />
+                    return <WhiteBubble key={index} message={{ ...message }} />
                 }
             })}
         </div>

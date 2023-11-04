@@ -1,13 +1,12 @@
-import "./chatroomTexts.css"
+import { IMessage } from '../../../interfaces'
+import './chatroomTexts.css'
+import { FC } from 'react'
 
-const WhiteBubble = () => {
+const WhiteBubble: FC<{ message: IMessage }> = ({ message }) => {
     return (
         <div className="text-bubble white-text-bubble">
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Blanditiis, placeat sunt. Consequatur vero possimus optio
-            </p>
-            <p>11:11</p>
+            <p>{message.message}</p>
+            <p>{message.time}</p>
         </div>
     )
 }
