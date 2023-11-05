@@ -1,39 +1,37 @@
-import {useState} from "react"
-import {useAppDispatch, useAppSelector} from "../../../store/storeHooks"
-import "./chatroomLanding.css"
-import {toast} from "react-toastify"
-import {updateUserField} from "../../../features/userSlice"
+import { useState } from 'react'
+import { useAppDispatch, useAppSelector } from '../../../store/storeHooks'
+import './chatroomLanding.css'
+import { toast } from 'react-toastify'
+import { updateUserField } from '../../../features/userSlice'
 
 const ChatInput = () => {
     const dispatch = useAppDispatch()
 
-    const {user} = useAppSelector((store) => store.user)
+    const { user } = useAppSelector((store) => store.user)
+    const { activeChat } = useAppSelector((store) => store.chatroomChats)
 
-    const [message, setMessage] = useState<string>("")
+    const [message, setMessage] = useState<string>('')
 
-    const messageWs = new WebSocket("ws://localhost:3002")
+    const messageWs = new WebSocket('ws://localhost:3002')
     messageWs.onopen = () => {
         messageWs.send(
             JSON.stringify({
                 id: user.id,
             })
         )
-        // console.log("Connected to the message server")
     }
-    messageWs.onmessage = ({data}) => {
-        console.log(JSON.parse(data))
-        const {updatedMessages, status} = JSON.parse(data)
-        toast.success(status)
-        dispatch(updateUserField({field: "messages", value: updatedMessages}))
+    messageWs.onmessage = ({ data }) => {
+        const { updatedMessages } = JSON.parse(data)
+        dispatch(updateUserField({ field: 'messages', value: updatedMessages }))
     }
     messageWs.onerror = (e) => {
-        console.log("Error:")
+        console.log('Error:')
         console.log(e)
     }
 
     const sendMessage = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        if (message === "") {
+        if (message === '') {
             toast.error("Can't send empty message")
             return
         }
@@ -48,10 +46,10 @@ const ChatInput = () => {
                 time: time,
                 message: message,
                 senderEmail: user.info.email,
-                recieverEmail: "test@test.com",
+                recieverEmail: activeChat,
             })
         )
-        setMessage("")
+        setMessage('')
     }
 
     return (
@@ -72,7 +70,8 @@ const ChatInput = () => {
                         viewBox="0 0 24 24"
                         strokeWidth={1.5}
                         stroke="currentColor"
-                        className="w-6 h-6">
+                        className="w-6 h-6"
+                    >
                         <path
                             strokeLinecap="round"
                             strokeLinejoin="round"

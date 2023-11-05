@@ -78,11 +78,12 @@ const ChatroomLanding = () => {
                         </button>
                     </div>
                 </div>
-                {Object.keys(user.messages)?.map((email) => {
+                {Object.keys(user.messages)?.map((email, index) => {
                     const friend = findFriendUsername(email)
                     if (friend) {
-                        console.log(friend)
-                        return <ChatContainer friend={{ ...friend }} />
+                        return (
+                            <ChatContainer key={index} friend={{ ...friend }} />
+                        )
                     }
                 })}
             </div>

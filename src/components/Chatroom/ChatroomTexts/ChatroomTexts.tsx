@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { useAppSelector } from '../../../store/storeHooks'
 import GreenBubble from './GreenBubble'
 import WhiteBubble from './WhiteBubble'
@@ -7,7 +8,17 @@ const ChatroomTexts = () => {
     const { user } = useAppSelector((store) => store.user)
     const { activeChat } = useAppSelector((store) => store.chatroomChats)
 
+    const [chatWindow, setChatWindow] = useState<Element | null>()
+
     const messages = user.messages[activeChat]
+
+    useEffect(() => {
+        setChatWindow(document.querySelector('.chatroom-texts-container'))
+    }, [])
+
+    useEffect(() => {
+        chatWindow?.scrollTo(0, chatWindow.scrollHeight)
+    }, [chatWindow, messages])
 
     return (
         <div className="chatroom-texts-container">

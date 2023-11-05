@@ -69,7 +69,7 @@ const initialState: IInitialState = {
             localStorage.getItem('layouts') || JSON.stringify([])
         ),
         messages: JSON.parse(
-            localStorage.getItem('messages') || JSON.stringify([])
+            localStorage.getItem('messages') || JSON.stringify({})
         ),
         friends: JSON.parse(
             localStorage.getItem('friends') || JSON.stringify([])
@@ -198,6 +198,8 @@ const userSlice = createSlice({
             }>
         ) => {
             const { field, value } = action.payload
+
+            console.log(action.payload)
 
             localStorage.setItem(`${field}`, JSON.stringify(value))
 

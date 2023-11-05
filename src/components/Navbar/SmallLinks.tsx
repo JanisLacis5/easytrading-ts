@@ -1,13 +1,15 @@
-import {Link} from "react-router-dom"
-import {useAppDispatch, useAppSelector} from "../../store/storeHooks"
-import {reset, smallNav} from "../../features/smallSlice"
-import "./smalllink.css"
+import { Link } from 'react-router-dom'
+import { useAppDispatch, useAppSelector } from '../../store/storeHooks'
+import { reset, smallNav } from '../../features/smallSlice'
+import './smalllink.css'
 
 const SmallLinks = () => {
     const dispatch = useAppDispatch()
 
-    const {showTrading, showScreeners} = useAppSelector((store) => store.small)
-    const {user} = useAppSelector((store) => store.user)
+    const { showTrading, showScreeners } = useAppSelector(
+        (store) => store.small
+    )
+    const { user } = useAppSelector((store) => store.user)
 
     return (
         <div className="small-links">
@@ -15,41 +17,48 @@ const SmallLinks = () => {
                 <Link
                     to="/dashboard"
                     className="link"
-                    onClick={() => dispatch(reset())}>
+                    onClick={() => dispatch(reset())}
+                >
                     <h4>Main</h4>
                 </Link>
                 <div
                     className="link"
                     onClick={() => {
-                        dispatch(smallNav({prop: "showTrading", value: true}))
-                    }}>
+                        dispatch(smallNav({ prop: 'showTrading', value: true }))
+                    }}
+                >
                     <h4>Trading</h4>
                 </div>
                 {showTrading && (
                     <div className="show-trading">
                         <Link
                             to="/dashboard/addtrade"
-                            onClick={() => dispatch(reset())}>
+                            onClick={() => dispatch(reset())}
+                        >
                             New Trade
                         </Link>
                         <Link
                             to="/dashboard/log"
-                            onClick={() => dispatch(reset())}>
+                            onClick={() => dispatch(reset())}
+                        >
                             Trade History
                         </Link>
                         <Link
                             to="/dasboard/notes"
-                            onClick={() => dispatch(reset())}>
+                            onClick={() => dispatch(reset())}
+                        >
                             Notes
                         </Link>
                         <Link
                             to="/dashboard/stats"
-                            onClick={() => dispatch(reset())}>
+                            onClick={() => dispatch(reset())}
+                        >
                             Detailed Stats
                         </Link>
                         <Link
                             to="/dashboard/calendar"
-                            onClick={() => dispatch(reset())}>
+                            onClick={() => dispatch(reset())}
+                        >
                             Calendar
                         </Link>
                     </div>
@@ -57,8 +66,11 @@ const SmallLinks = () => {
                 <div
                     className="link"
                     onClick={() => {
-                        dispatch(smallNav({prop: "showScreeners", value: true}))
-                    }}>
+                        dispatch(
+                            smallNav({ prop: 'showScreeners', value: true })
+                        )
+                    }}
+                >
                     <h4>Screeners</h4>
                 </div>
                 {showScreeners && (
@@ -69,20 +81,26 @@ const SmallLinks = () => {
                         <Link
                             to="/gap"
                             target="_blank"
-                            onClick={() => dispatch(reset())}>
+                            onClick={() => dispatch(reset())}
+                        >
                             <h5>Gap Screener</h5>
                         </Link>
                         <Link
                             to="/hod"
                             target="_blank"
-                            onClick={() => dispatch(reset())}>
+                            onClick={() => dispatch(reset())}
+                        >
                             <h5>High of Day Screener</h5>
                         </Link>
                     </div>
                 )}
-                <div className="link" onClick={() => dispatch(reset())}>
+                <Link
+                    to="/chatroom"
+                    className="link"
+                    onClick={() => dispatch(reset())}
+                >
                     <h4>Chatroooms</h4>
-                </div>
+                </Link>
                 <Link to="/user-page" onClick={() => dispatch(reset())}>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -90,7 +108,8 @@ const SmallLinks = () => {
                         viewBox="0 0 24 24"
                         strokeWidth={0.75}
                         stroke="currentColor"
-                        className="w-6 h-6">
+                        className="w-6 h-6"
+                    >
                         <path
                             strokeLinecap="round"
                             strokeLinejoin="round"
