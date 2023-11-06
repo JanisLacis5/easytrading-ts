@@ -2,6 +2,7 @@
     height: 95%;
     width: 100%;
     padding: 1rem 3rem;
+    gap: 0.25rem;
     background-color: transparent;
     display: flex;
     flex-direction: column;
@@ -38,4 +39,5 @@
 
 .white-text-bubble {
     background-color: #f6f5f5;
+    align-self: flex-start;
 }
