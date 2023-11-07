@@ -1,22 +1,16 @@
-import { setPage } from '../../../features/chatroomRightSideSlice'
-import backgroundImage from '../../../photos/candlestick-chart.jpg'
-import { useAppDispatch, useAppSelector } from '../../../store/storeHooks'
-import ChatroomTexts from '../ChatroomTexts/ChatroomTexts'
-import ChatContainer from './ChatContainer'
-import ChatInput from './ChatInput'
-import './chatroomLanding.css'
+import {setPage} from "../../../features/chatroomRightSideSlice"
+import backgroundImage from "../../../photos/candlestick-chart.jpg"
+import {useAppDispatch, useAppSelector} from "../../../store/storeHooks"
+import ChatroomTexts from "../ChatroomTexts/ChatroomTexts"
+import ChatContainer from "./ChatContainer"
+import ChatInput from "./ChatInput"
+import "./chatroomLanding.css"
+import {findFriendUsername} from "../functions"
 
 const ChatroomLanding = () => {
     const dispatch = useAppDispatch()
 
-    const { user } = useAppSelector((store) => store.user)
-
-    const findFriendUsername = (email: string) => {
-        const fullFriendUser = user.friends.find(
-            (friend) => friend.email === email
-        )
-        return fullFriendUser
-    }
+    const {user} = useAppSelector((store) => store.user)
 
     return (
         <div className="chatroom-landing">
@@ -33,17 +27,15 @@ const ChatroomLanding = () => {
                         <button
                             type="button"
                             onClick={() =>
-                                dispatch(setPage({ page: 'addFriend' }))
-                            }
-                        >
+                                dispatch(setPage({page: "addFriend"}))
+                            }>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
                                 viewBox="0 0 24 24"
                                 strokeWidth={1.5}
                                 stroke="currentColor"
-                                className="w-6 h-6"
-                            >
+                                className="w-6 h-6">
                                 <path
                                     strokeLinecap="round"
                                     strokeLinejoin="round"
@@ -56,19 +48,17 @@ const ChatroomLanding = () => {
                             onClick={() =>
                                 dispatch(
                                     setPage({
-                                        page: 'menu',
+                                        page: "menu",
                                     })
                                 )
-                            }
-                        >
+                            }>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
                                 viewBox="0 0 24 24"
                                 strokeWidth={1.5}
                                 stroke="currentColor"
-                                className="w-6 h-6"
-                            >
+                                className="w-6 h-6">
                                 <path
                                     strokeLinecap="round"
                                     strokeLinejoin="round"
@@ -79,10 +69,12 @@ const ChatroomLanding = () => {
                     </div>
                 </div>
                 {Object.keys(user.messages)?.map((email, index) => {
-                    const friend = findFriendUsername(email)
+                    console.log(user.friends)
+                    const friend = findFriendUsername(email, user.friends)
                     if (friend) {
+                        console.log(friend)
                         return (
-                            <ChatContainer key={index} friend={{ ...friend }} />
+                            <ChatContainer key={index} friend={{...friend}} />
                         )
                     }
                 })}

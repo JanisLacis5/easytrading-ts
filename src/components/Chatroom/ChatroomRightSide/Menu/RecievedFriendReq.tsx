@@ -1,5 +1,5 @@
 import {toast} from "react-toastify"
-import {login} from "../../../../features/userSlice"
+import {updateUserField} from "../../../../features/userSlice"
 import {useAppDispatch, useAppSelector} from "../../../../store/storeHooks"
 import "./chatroomMenu.css"
 
@@ -12,10 +12,20 @@ const RecievedFriendReq = () => {
     const friendWs = new WebSocket("ws://localhost:3003")
     friendWs.onopen = () => {
         friendWs.send(JSON.stringify({id: user.id}))
-        // console.log("Connected to the friend server")
     }
     friendWs.onmessage = ({data}) => {
         console.log("received: ", JSON.parse(data))
+        const parsedData = JSON.parse(data)
+
+        if (parsedData.message === "friend request acccepted") {
+            const {friends} = parsedData
+            dispatch(
+                updateUserField({
+                    field: "friends",
+                    value: friends,
+                })
+            )
+        }
     }
     friendWs.onerror = (e) => {
         console.log("Error:")
@@ -35,24 +45,16 @@ const RecievedFriendReq = () => {
                 recieverEmail: user.info.email,
             })
         )
-        const {id, trades, info, layouts, messages, sentFriendRequests} = user
-        const updatedFriends = [...user.friends, email]
         const updatedRecievedFriendReq = user.friends.filter(
-            (req) => req !== email
+            (req) => req.email !== email
         )
-        toast.success("New friend added")
         dispatch(
-            login({
-                id,
-                trades,
-                info,
-                layouts,
-                messages,
-                friends: updatedFriends,
-                recievedFriendRequests: updatedRecievedFriendReq,
-                sentFriendRequests,
+            updateUserField({
+                field: "recievedFriendRequests",
+                value: updatedRecievedFriendReq,
             })
         )
+        toast.success("New friend added")
     }
 
     const declineFriendRequest = (
@@ -71,26 +73,10 @@ const RecievedFriendReq = () => {
         const updatedRecievedFriendReq = user.recievedFriendRequests.filter(
             (req) => req !== email
         )
-        const {
-            id,
-            trades,
-            info,
-            layouts,
-            messages,
-            friends,
-            sentFriendRequests,
-        } = user
-
         dispatch(
-            login({
-                id,
-                trades,
-                info,
-                layouts,
-                messages,
-                friends,
-                recievedFriendRequests: updatedRecievedFriendReq,
-                sentFriendRequests,
+            updateUserField({
+                field: "recievedFriendRequests",
+                value: updatedRecievedFriendReq,
             })
         )
     }
