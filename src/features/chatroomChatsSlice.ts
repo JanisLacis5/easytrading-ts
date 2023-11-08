@@ -1,22 +1,30 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+import {PayloadAction, createSlice} from "@reduxjs/toolkit"
+import {IFriend} from "../interfaces"
 
 interface IInitialState {
-    activeChat: string
+    activeChat: IFriend
 }
 
 const initialState: IInitialState = {
-    activeChat: '',
+    activeChat: JSON.parse(
+        localStorage.getItem("lastActiveChat") || JSON.stringify({})
+    ),
 }
 
 const chatroomChatSlice = createSlice({
-    name: 'chatroomChats',
+    name: "chatroomChats",
     initialState,
     reducers: {
-        setActiveChat: (state, action: PayloadAction<{ value: string }>) => {
+        setActiveChat: (state, action: PayloadAction<{value: IFriend}>) => {
+            console.log(action.payload.value)
+            localStorage.setItem(
+                "lastActiveChat",
+                JSON.stringify(action.payload.value)
+            )
             state.activeChat = action.payload.value
         },
     },
 })
 
-export const { setActiveChat } = chatroomChatSlice.actions
+export const {setActiveChat} = chatroomChatSlice.actions
 export default chatroomChatSlice.reducer

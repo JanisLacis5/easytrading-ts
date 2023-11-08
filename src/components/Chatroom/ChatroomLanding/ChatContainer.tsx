@@ -1,15 +1,15 @@
-import { setActiveChat } from '../../../features/chatroomChatsSlice'
-import { IFriend, IMessage } from '../../../interfaces'
-import { useAppDispatch, useAppSelector } from '../../../store/storeHooks'
-import './chatroomLanding.css'
-import { useState, useEffect, FC } from 'react'
-import userIcon from '../../../assets/user-icon.svg'
+import {setActiveChat} from "../../../features/chatroomChatsSlice"
+import {IFriend, IMessage} from "../../../interfaces"
+import {useAppDispatch, useAppSelector} from "../../../store/storeHooks"
+import "./chatroomLanding.css"
+import {useState, useEffect, FC} from "react"
+import userIcon from "../../../assets/user-icon.svg"
 
-const ChatContainer: FC<{ friend: IFriend }> = ({ friend }) => {
+const ChatContainer: FC<{friend: IFriend}> = ({friend}) => {
     const dispatch = useAppDispatch()
     const [lastUserChat, setLastUserChat] = useState<IMessage>()
 
-    const { user } = useAppSelector((store) => store.user)
+    const {user} = useAppSelector((store) => store.user)
 
     useEffect(() => {
         const userChats = user?.messages[friend.email]
@@ -29,12 +29,18 @@ const ChatContainer: FC<{ friend: IFriend }> = ({ friend }) => {
         }
     }, [user])
 
+    const onUserChatClick = (
+        e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    ) => {
+        e.preventDefault()
+        dispatch(setActiveChat({value: friend}))
+    }
+
     return (
         <button
             type="button"
             className="chat-container"
-            onClick={() => dispatch(setActiveChat({ value: friend.email }))}
-        >
+            onClick={onUserChatClick}>
             <img src={userIcon} alt="profile picture" />
             <div>
                 <h5>{friend.username}</h5>

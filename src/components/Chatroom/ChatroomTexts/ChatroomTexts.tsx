@@ -10,7 +10,7 @@ const ChatroomTexts = () => {
 
     const [chatWindow, setChatWindow] = useState<Element | null>()
 
-    const messages = user.messages[activeChat]
+    const messages = user.messages[activeChat.email]
 
     useEffect(() => {
         setChatWindow(document.querySelector(".chatroom-texts-container"))
