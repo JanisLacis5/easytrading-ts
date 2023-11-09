@@ -29,6 +29,33 @@ const FriendMenu: FC<{friendEmail: string}> = ({friendEmail}) => {
         }
     }
 
+    const hideChats = async (
+        e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    ) => {
+        e.preventDefault()
+        try {
+            const {data} = await customFetch.post("/hide-chats", {
+                userId: user.id,
+                friendEmail: friendEmail,
+            })
+
+            dispatch(
+                updateUserField({
+                    field: "hiddenMessages",
+                    value: data.hiddenMessages,
+                })
+            )
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const blockFriend = async (
+        e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    ) => {
+        e.preventDefault()
+    }
+
     const newMessage = async (
         e: React.MouseEvent<HTMLButtonElement, MouseEvent>
     ) => {
@@ -61,6 +88,12 @@ const FriendMenu: FC<{friendEmail: string}> = ({friendEmail}) => {
         <div className="friend-menu">
             <button type="button" onClick={newMessage}>
                 <p>Send Message</p>
+            </button>
+            <button type="button" onClick={hideChats}>
+                <p>Hide chats</p>
+            </button>
+            <button type="button" onClick={blockFriend}>
+                <p>Block Friend</p>
             </button>
             <button type="button" onClick={removeFriend}>
                 <p>Remove Friend</p>

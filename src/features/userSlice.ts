@@ -5,8 +5,8 @@ import {
     IUserInfo,
     IUserSingleTrade,
     IUserSingleLayout,
-    IMessage,
     IFriend,
+    IUserMessages,
 } from "../interfaces"
 
 interface temp {
@@ -16,7 +16,7 @@ interface temp {
         | IUserInfo
         | IUserSingleNote[]
         | Array<IUserSingleLayout[]>
-        | {[key: string]: IMessage[]}
+        | IUserMessages
         | IFriend[]
         | string[]
 }
@@ -27,10 +27,11 @@ interface IUser extends temp {
     notes: IUserSingleNote[]
     info: IUserInfo
     layouts: Array<IUserSingleLayout[]>
-    messages: {[key: string]: IMessage[]}
+    messages: IUserMessages
     friends: IFriend[]
     recievedFriendRequests: Array<string>
     sentFriendRequests: Array<string>
+    hiddenMessages: IFriend[]
 }
 
 interface IInitialState {
@@ -41,14 +42,15 @@ interface IInitialState {
 
 interface ILogin {
     id: string
-    trades?: IUserSingleTrade[]
-    notes?: IUserSingleNote[]
-    info?: IUserInfo
-    layouts?: Array<IUserSingleLayout[]>
-    messages?: IMessage[]
-    friends?: IFriend[]
-    recievedFriendRequests?: Array<string>
-    sentFriendRequests?: Array<string>
+    trades: IUserSingleTrade[]
+    notes: IUserSingleNote[]
+    info: IUserInfo
+    layouts: Array<IUserSingleLayout[]>
+    messages: IUserMessages
+    friends: IFriend[]
+    recievedFriendRequests: Array<string>
+    sentFriendRequests: Array<string>
+    hiddenMessages: IFriend[]
 }
 
 const initialState: IInitialState = {
@@ -79,6 +81,9 @@ const initialState: IInitialState = {
         ),
         sentFriendRequests: JSON.parse(
             localStorage.getItem("sentFriendRequests") || JSON.stringify([])
+        ),
+        hiddenMessages: JSON.parse(
+            localStorage.getItem("hiddenMessages") || JSON.stringify([])
         ),
     },
 }
@@ -131,15 +136,15 @@ const userSlice = createSlice({
             state.isLoading = false
         },
         login: (state, action: PayloadAction<ILogin>) => {
-            const trades = action.payload.trades || []
-            const notes = action.payload.notes || []
-            const layouts = action.payload.layouts || []
-            const info = action.payload.info || state.user.info
-            const messages = action.payload.messages || {}
-            const friends = action.payload.friends || []
-            const recievedFriendRequests =
-                action.payload.recievedFriendRequests || []
-            const sentFriendRequests = action.payload.sentFriendRequests || []
+            const trades = action.payload.trades
+            const notes = action.payload.notes
+            const layouts = action.payload.layouts
+            const info = action.payload.info
+            const messages = action.payload.messages
+            const friends = action.payload.friends
+            const recievedFriendRequests = action.payload.recievedFriendRequests
+            const sentFriendRequests = action.payload.sentFriendRequests
+            const hiddenMessages = action.payload.hiddenMessages
 
             localStorage.setItem("userId", JSON.stringify(action.payload.id))
             localStorage.setItem("userTrades", JSON.stringify(trades))
@@ -156,6 +161,10 @@ const userSlice = createSlice({
                 "sentFriendRequests",
                 JSON.stringify(sentFriendRequests)
             )
+            localStorage.setItem(
+                "hiddenMessages",
+                JSON.stringify(hiddenMessages)
+            )
 
             return {
                 ...state,
@@ -168,10 +177,11 @@ const userSlice = createSlice({
                     info: info,
                     notes: notes,
                     layouts: layouts,
-                    messages: messages,
                     friends: friends,
                     recievedFriendRequests: recievedFriendRequests,
                     sentFriendRequests: sentFriendRequests,
+                    hiddenMessages: hiddenMessages,
+                    messages: messages,
                 },
             }
         },
@@ -187,12 +197,13 @@ const userSlice = createSlice({
                     | "friends"
                     | "recievedFriendRequests"
                     | "sentFriendRequests"
+                    | "hiddenMessages"
                 value:
                     | IUserSingleTrade[]
                     | IUserInfo
                     | IUserSingleNote[]
                     | Array<IUserSingleLayout[]>
-                    | {[key: string]: IMessage[]}
+                    | IUserMessages
                     | IFriend[]
                     | string[]
             }>
@@ -214,7 +225,10 @@ const userSlice = createSlice({
                 state.user[field] = value as Array<IUserSingleLayout[]>
             }
             if (field === "messages") {
-                state.user[field] = value as {[key: string]: IMessage[]}
+                state.user[field] = value as IUserMessages
+            }
+            if (field === "hiddenMessages") {
+                state.user[field] = value as IFriend[]
             }
             if (field === "friends") {
                 state.user[field] = value as IFriend[]
@@ -269,6 +283,7 @@ const userSlice = createSlice({
                         friends: [],
                         recievedFriendRequests: [],
                         sentFriendRequests: [],
+                        hiddenMessages: [],
                     },
                 }
             })

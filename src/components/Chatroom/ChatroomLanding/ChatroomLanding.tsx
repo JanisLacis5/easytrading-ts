@@ -7,12 +7,31 @@ import ChatInput from "./ChatInput"
 import "./chatroomLanding.css"
 import {findFriendUsername} from "../functions"
 import {AddFriendIcon, MenuIcon} from "./ChLandingIcons"
+import {useEffect, useState} from "react"
+import {IUserMessages} from "../../../interfaces"
 
 const ChatroomLanding = () => {
     const dispatch = useAppDispatch()
 
+    const [messages, setMessages] = useState<IUserMessages>()
+
     const {user} = useAppSelector((store) => store.user)
     const {activeChat} = useAppSelector((store) => store.chatroomChats)
+    const {main} = useAppSelector((store) => store.chatroomRightSide)
+    const {screenWidth} = useAppSelector((store) => store.default)
+
+    useEffect(() => {
+        let filteredMessages: IUserMessages = {}
+
+        Object.keys(user.messages)?.map((m) => {
+            const isHidden = user.hiddenMessages.find((fr) => fr.email === m)
+            if (!isHidden) {
+                filteredMessages[m] = user.messages[m]
+            }
+        })
+
+        setMessages({...filteredMessages})
+    }, [user])
 
     return (
         <div className="chatroom-landing">
@@ -46,16 +65,20 @@ const ChatroomLanding = () => {
                         </button>
                     </div>
                 </div>
-                {Object.keys(user.messages)?.map((email, index) => {
-                    const friend = findFriendUsername(email, user.friends)
-                    if (friend) {
-                        return (
-                            <ChatContainer key={index} friend={{...friend}} />
-                        )
-                    }
-                })}
+                {messages &&
+                    Object.keys(messages)?.map((email, index) => {
+                        const friend = findFriendUsername(email, user.friends)
+                        if (friend) {
+                            return (
+                                <ChatContainer
+                                    key={index}
+                                    friend={{...friend}}
+                                />
+                            )
+                        }
+                    })}
             </div>
-            <div>
+            <div style={main.showRightSide ? {width: 0.47 * screenWidth} : {}}>
                 <div className="chatroom-header">
                     <h3>{activeChat.username}</h3>
                 </div>

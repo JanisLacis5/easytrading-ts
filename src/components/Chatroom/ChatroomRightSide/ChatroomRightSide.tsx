@@ -8,6 +8,7 @@ import SentFriendReq from "./Menu/SentFriendReq"
 import {useEffect, useState} from "react"
 import RecievedFriendReq from "./Menu/RecievedFriendReq"
 import FriendsList from "./FriendsList/FriendsList"
+import HiddenChats from "./HiddenChats/HiddenChats"
 
 const ChatroomRightSide = () => {
     const dispatch = useAppDispatch()
@@ -28,9 +29,11 @@ const ChatroomRightSide = () => {
 
     useEffect(() => {
         setShowCross(true)
-        if (menuPages.friends) {
-            setShowCross(false)
-        }
+        Object.keys(menuPages).map((key) => {
+            if (menuPages[key] && key !== "friendRequests") {
+                setShowCross(false)
+            }
+        })
     }, [menuPages])
 
     return (
@@ -65,6 +68,7 @@ const ChatroomRightSide = () => {
             {main.addFriend && <AddFriendForm />}
             {main.menu && <ChatroomMenu />}
             {menuPages.friends && <FriendsList />}
+            {menuPages.hidden && <HiddenChats />}
             {friendReqPages.sentFriendReq && <SentFriendReq />}
             {friendReqPages.recievedFriendReq && <RecievedFriendReq />}
         </div>

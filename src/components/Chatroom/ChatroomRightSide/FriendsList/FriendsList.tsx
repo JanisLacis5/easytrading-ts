@@ -9,7 +9,9 @@ const FriendsList = () => {
         <div className="friends-list">
             <h4>Friends</h4>
             {user?.friends.map((friend, index) => {
-                return <Friend key={index} friend={{...friend}} />
+                return (
+                    <Friend key={index} friend={{...friend}} hidden={false} />
+                )
             })}
         </div>
     )

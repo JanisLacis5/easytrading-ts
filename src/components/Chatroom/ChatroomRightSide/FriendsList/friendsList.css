@@ -62,13 +62,14 @@
 /* FRIEND MENU */
 
 .friend-menu {
-    height: 100%;
+    height: 200%;
     width: 100%;
     position: absolute;
-    bottom: -80%;
+    bottom: -180%;
     display: flex;
     flex-direction: column;
     z-index: 10;
+    border: 1px solid var(--black);
 }
 
 .friend-menu button {
@@ -78,7 +79,8 @@
     justify-content: center;
     align-items: center;
     background-color: #fff;
-    border: 1px solid var(--black);
+    border: none;
+    border-bottom: 1px solid var(--black);
 }
 
 .friend-menu button:hover {
@@ -91,7 +93,7 @@
 }
 
 .friend-menu button:last-child {
-    border-top: none;
+    border-bottom: none;
     color: var(--red);
 }
 

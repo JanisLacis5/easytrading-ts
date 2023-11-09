@@ -36,6 +36,7 @@ const LoginForm = () => {
                 toast.error(data.message)
                 return
             }
+
             dispatch(
                 login({
                     id: data.id,
@@ -47,6 +48,7 @@ const LoginForm = () => {
                     messages: data.messages,
                     recievedFriendRequests: data.recievedFriendRequests,
                     sentFriendRequests: data.sentFriendRequests,
+                    hiddenMessages: data.hiddenMessages,
                 })
             )
             navigate("/dashboard")

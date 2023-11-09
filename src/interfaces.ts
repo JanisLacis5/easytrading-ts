@@ -54,3 +54,7 @@ export interface IFriend {
     email: string
     username: string
 }
+
+export interface IUserMessages {
+    [key: string]: IMessage[]
+}

@@ -5,8 +5,9 @@ import {FC, useState} from "react"
 import FriendMenu from "./FriendMenu"
 import {FriendmenuIcon} from "./FriendsListIcons"
 
-const Friend: FC<{friend: IFriend}> = ({friend}) => {
+const Friend: FC<{friend: IFriend; hidden: boolean}> = ({friend, hidden}) => {
     const [showFriendMenu, setShowFriendMenu] = useState<boolean>(false)
+    const [showHiddenChatMenu, setShowHiddenChatMenu] = useState<boolean>(false)
 
     const {username, email} = friend
 
@@ -21,7 +22,14 @@ const Friend: FC<{friend: IFriend}> = ({friend}) => {
                     <>
                         <button
                             type="button"
-                            onClick={() => setShowFriendMenu(!showFriendMenu)}>
+                            onClick={
+                                !hidden
+                                    ? () => setShowFriendMenu(!showFriendMenu)
+                                    : () =>
+                                          setShowHiddenChatMenu(
+                                              !showHiddenChatMenu
+                                          )
+                            }>
                             <RxCross2 />
                         </button>
                         <FriendMenu friendEmail={email} />
@@ -29,7 +37,12 @@ const Friend: FC<{friend: IFriend}> = ({friend}) => {
                 ) : (
                     <button
                         type="button"
-                        onClick={() => setShowFriendMenu(!showFriendMenu)}>
+                        onClick={
+                            !hidden
+                                ? () => setShowFriendMenu(!showFriendMenu)
+                                : () =>
+                                      setShowHiddenChatMenu(!showHiddenChatMenu)
+                        }>
                         <FriendmenuIcon />
                     </button>
                 )}
