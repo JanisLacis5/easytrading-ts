@@ -1,29 +1,31 @@
-import {FC} from "react"
-import customFetch from "../../../../utils"
-import "./friendsList.css"
-import {useAppDispatch, useAppSelector} from "../../../../store/storeHooks"
-import {updateUserField} from "../../../../features/userSlice"
-import {closeRightSide} from "../../../../features/chatroomRightSideSlice"
-import {setActiveChat} from "../../../../features/chatroomChatsSlice"
-import {findFriendUsername} from "../../functions"
-import {IFriend} from "../../../../interfaces"
+import { FC } from 'react'
+import customFetch from '../../../../utils'
+import './friendsList.css'
+import { useAppDispatch, useAppSelector } from '../../../../store/storeHooks'
+import { updateUserField } from '../../../../features/userSlice'
+import { closeRightSide } from '../../../../features/chatroomRightSideSlice'
+import { setActiveChat } from '../../../../features/chatroomChatsSlice'
+import { findFriendUsername } from '../../functions'
+import { IFriend } from '../../../../interfaces'
 
-const FriendMenu: FC<{friendEmail: string}> = ({friendEmail}) => {
+const FriendMenu: FC<{ friendEmail: string }> = ({ friendEmail }) => {
     const dispatch = useAppDispatch()
 
-    const {user} = useAppSelector((store) => store.user)
+    const { user } = useAppSelector((store) => store.user)
 
     const removeFriend = async (
         e: React.MouseEvent<HTMLButtonElement, MouseEvent>
     ) => {
         e.preventDefault()
         try {
-            const {data} = await customFetch.put("/remove-friend", {
+            const { data } = await customFetch.put('/remove-friend', {
                 friendEmail: friendEmail,
                 userId: user.id,
             })
-            dispatch(updateUserField({field: "friends", value: data.friends}))
-            dispatch(updateUserField({field: "messages", value: data.messages}))
+            dispatch(updateUserField({ field: 'friends', value: data.friends }))
+            dispatch(
+                updateUserField({ field: 'messages', value: data.messages })
+            )
         } catch (e) {
             console.log(e)
         }
@@ -34,14 +36,14 @@ const FriendMenu: FC<{friendEmail: string}> = ({friendEmail}) => {
     ) => {
         e.preventDefault()
         try {
-            const {data} = await customFetch.post("/hide-chats", {
+            const { data } = await customFetch.post('/hide-chats', {
                 userId: user.id,
                 friendEmail: friendEmail,
             })
 
             dispatch(
                 updateUserField({
-                    field: "hiddenMessages",
+                    field: 'hiddenMessages',
                     value: data.hiddenMessages,
                 })
             )
@@ -54,6 +56,21 @@ const FriendMenu: FC<{friendEmail: string}> = ({friendEmail}) => {
         e: React.MouseEvent<HTMLButtonElement, MouseEvent>
     ) => {
         e.preventDefault()
+        try {
+            const { data } = await customFetch.post('/block-user', {
+                userId: user.id,
+                friendEmail: friendEmail,
+            })
+
+            dispatch(
+                updateUserField({
+                    field: 'hiddenMessages',
+                    value: data.blockedUsers,
+                })
+            )
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     const newMessage = async (
@@ -61,7 +78,7 @@ const FriendMenu: FC<{friendEmail: string}> = ({friendEmail}) => {
     ) => {
         e.preventDefault()
         try {
-            await customFetch.post("new-message", {
+            await customFetch.post('new-message', {
                 friendEmail: friendEmail,
                 userId: user.id,
             })
@@ -71,14 +88,14 @@ const FriendMenu: FC<{friendEmail: string}> = ({friendEmail}) => {
             if (!isMessages) {
                 dispatch(
                     updateUserField({
-                        field: "messages",
-                        value: {...user.messages, [friendEmail]: []},
+                        field: 'messages',
+                        value: { ...user.messages, [friendEmail]: [] },
                     })
                 )
             }
             dispatch(closeRightSide())
             const friend = findFriendUsername(friendEmail, user.friends)
-            dispatch(setActiveChat({value: friend as IFriend}))
+            dispatch(setActiveChat({ value: friend as IFriend }))
         } catch (e) {
             console.log(e)
         }
