@@ -44,7 +44,7 @@ export const passwordRequirements = (password: string) => {
 }
 
 export const profitableStocks = (trades: IUserSingleTrade[]) => {
-    if (!trades.length) {
+    if (!trades || !trades.length) {
         return {profits: 0, stocks: 0}
     }
 
