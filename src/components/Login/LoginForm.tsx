@@ -49,6 +49,7 @@ const LoginForm = () => {
                     recievedFriendRequests: data.recievedFriendRequests,
                     sentFriendRequests: data.sentFriendRequests,
                     hiddenMessages: data.hiddenMessages,
+                    blockedUsers: data.blockedUsers,
                 })
             )
             navigate("/dashboard")

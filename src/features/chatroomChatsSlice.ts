@@ -16,7 +16,6 @@ const chatroomChatSlice = createSlice({
     initialState,
     reducers: {
         setActiveChat: (state, action: PayloadAction<{value: IFriend}>) => {
-            console.log(action.payload.value)
             localStorage.setItem(
                 "lastActiveChat",
                 JSON.stringify(action.payload.value)

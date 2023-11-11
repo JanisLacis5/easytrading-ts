@@ -152,9 +152,14 @@
 
 .chat-container p {
     color: var(--black-50);
+    overflow: hidden;
 }
 
 .chat-container h5,
 .chat-container p {
     text-align: start;
+}
+
+.chat-container svg {
+    height: 100%;
 }
