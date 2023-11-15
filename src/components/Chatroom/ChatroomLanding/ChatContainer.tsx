@@ -71,7 +71,10 @@ const ChatContainer: FC<{ email: string }> = ({ email }) => {
 								: ""
 						}`
 					) : (
-						<ChatIcon />
+						<span>
+							<ChatIcon />
+							send a message
+						</span>
 					)}
 				</p>
 			</div>
