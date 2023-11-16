@@ -1,35 +1,84 @@
 .chatroom-functions {
-    position: absolute;
-    height: 100%;
-    width: 33%;
-    box-shadow: -2px 0 5px var(--black-10);
-    background-color: #fff;
-    top: 0;
-    right: 0;
-    display: flex;
+	position: absolute;
+	height: 100%;
+	width: 33%;
+	box-shadow: -2px 0 5px var(--black-10);
+	background-color: #fff;
+	top: 0;
+	right: 0;
+	display: flex;
 }
 
 .chatroom-functions > div:first-child {
-    height: 100%;
-    width: 3rem;
-    display: flex;
-    justify-content: center;
-    padding-top: 0.5rem;
+	height: 100%;
+	width: 3rem;
+	display: flex;
+	justify-content: center;
+	padding-top: 0.5rem;
 }
 
 .chatroom-functions > div:first-child button {
-    height: 1.5rem;
-    width: 1.5rem;
-    background-color: transparent;
-    border: none;
+	height: 1.5rem;
+	width: 1.5rem;
+	background-color: transparent;
+	border: none;
 }
 
 .chatroom-functions > div:first-child svg {
-    width: 75%;
-    height: 75%;
+	width: 75%;
+	height: 75%;
 }
 
 .chatroom-functions > div:last-child {
-    padding: 1rem;
-    padding-left: 0;
+	padding: 1rem;
+	padding-left: 0;
+}
+
+/* USER CONTAINER */
+
+.user-container-main {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	height: 100%;
+	width: 70%;
+}
+
+.user-container-main p {
+	color: var(--black-75);
+	padding-left: 2rem;
+}
+
+.user-container {
+	height: 10%;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0.25rem 0;
+	border-bottom: 1px solid var(--black);
+}
+
+.user-container > div:last-child {
+	width: 30%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+}
+
+.user-container > div:last-child > button {
+	width: 50%;
+	height: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: transparent;
+	border: none;
+}
+
+.user-container > div:last-child > button svg {
+	height: 100%;
+	z-index: 1;
 }

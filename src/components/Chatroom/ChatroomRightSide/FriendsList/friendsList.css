@@ -1,106 +1,45 @@
-/* FRIENDS LIST */
-
-.friends-list {
-    height: 100%;
-    width: 100%;
-}
-
-.friends-list h4 {
-    width: 100%;
-    height: calc(10% - 0.75rem);
-    display: flex;
-    justify-content: center;
-}
-
-.friends-list-friend {
-    height: 10%;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.25rem 0;
-    border-bottom: 1px solid var(--black);
-}
-
-.friends-list-friend > div:first-child {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    height: 100%;
-    width: 70%;
-}
-
-.friends-list-friend > div:first-child p {
-    color: var(--black-75);
-    padding-left: 2rem;
-}
-
-.friends-list-friend > div:last-child {
-    width: 30%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-}
-
-.friends-list-friend > div:last-child > button {
-    width: 50%;
-    height: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: transparent;
-    border: none;
-}
-
-.friends-list-friend > div:last-child > button svg {
-    height: 100%;
-    z-index: 1;
-}
-
 /* FRIEND MENU */
 
 .friend-menu {
-    height: 200%;
-    width: 100%;
-    position: absolute;
-    bottom: -180%;
-    display: flex;
-    flex-direction: column;
-    z-index: 10;
-    border: 1px solid var(--black);
+	height: 200%;
+	width: 100%;
+	position: absolute;
+	bottom: -180%;
+	display: flex;
+	flex-direction: column;
+	z-index: 10;
+	border: 1px solid var(--black);
 }
 
 .friend-menu button {
-    width: 100%;
-    height: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #fff;
-    border: none;
-    border-bottom: 1px solid var(--black);
+	width: 100%;
+	height: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #fff;
+	border: none;
+	border-bottom: 1px solid var(--black);
 }
 
 .friend-menu button:hover {
-    opacity: 1;
-    border-color: var(--black-50);
+	opacity: 1;
+	border-color: var(--black-50);
 }
 
 .friend-menu button:hover p {
-    opacity: 0.5;
+	opacity: 0.5;
 }
 
 .friend-menu button:last-child {
-    border-bottom: none;
-    color: var(--red);
+	border-bottom: none;
+	color: var(--red);
 }
 
 .friend-menu button p {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	height: 100%;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
