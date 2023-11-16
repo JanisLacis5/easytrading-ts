@@ -1,4 +1,7 @@
-import { setActiveChat } from "../../../features/chatroomChatsSlice"
+import {
+	setActiveChat,
+	setIsBlocked,
+} from "../../../features/chatroomChatsSlice"
 import { IFriend, IMessage } from "../../../interfaces"
 import { useAppDispatch, useAppSelector } from "../../../store/storeHooks"
 import "./chatroomLanding.css"
@@ -40,6 +43,19 @@ const ChatContainer: FC<{ email: string }> = ({ email }) => {
 			})
 		}
 	}, [user])
+
+	useEffect(() => {
+		if (friend) {
+			const foundBlocked = user.blockedUsers.find(
+				(u) => u.email === friend.email
+			)
+			if (foundBlocked) {
+				dispatch(setIsBlocked({ value: true }))
+			} else {
+				dispatch(setIsBlocked({ value: false }))
+			}
+		}
+	}, [friend])
 
 	const onUserChatClick = async (
 		e: React.MouseEvent<HTMLButtonElement, MouseEvent>

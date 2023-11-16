@@ -1,45 +1,59 @@
 .chatroom-texts-container {
-    height: 95%;
-    width: 100%;
-    padding: 1rem 3rem;
-    gap: 0.25rem;
-    background-color: transparent;
-    display: flex;
-    flex-direction: column;
-    overflow: scroll;
+	height: 95%;
+	width: 100%;
+	padding: 1rem 3rem;
+	gap: 0.25rem;
+	background-color: transparent;
+	display: flex;
+	flex-direction: column;
+	overflow: scroll;
 }
 
 /* BUBBLE */
 
 .text-bubble {
-    max-width: 30%;
-    height: fit-content;
-    padding: 0.5rem;
-    border-radius: 0.5rem;
-    display: flex;
-    flex-direction: column;
-    word-wrap: break-word;
-    gap: 0.25rem;
+	max-width: 30%;
+	height: fit-content;
+	padding: 0.5rem;
+	border-radius: 0.5rem;
+	display: flex;
+	flex-direction: column;
+	word-wrap: break-word;
+	gap: 0.25rem;
 }
 
 .text-bubble p:last-child {
-    font-size: 0.6rem;
-    color: var(--black-75);
-    width: 100%;
-    padding-right: 0.5rem;
-    text-align: end;
-    display: flex;
-    word-wrap: break-word;
+	font-size: 0.6rem;
+	color: var(--black-75);
+	width: 100%;
+	padding-right: 0.5rem;
+	text-align: end;
+	display: flex;
+	word-wrap: break-word;
 }
 
 /* BUBBLE COLORS  */
 
 .green-text-bubble {
-    background-color: #e0ffd6;
-    align-self: flex-end;
+	background-color: #e0ffd6;
+	align-self: flex-end;
 }
 
 .white-text-bubble {
-    background-color: #f6f5f5;
-    align-self: flex-start;
+	background-color: #f6f5f5;
+	align-self: flex-start;
+}
+
+/* SERVER MESSAGE */
+
+.server-message-bubble {
+	display: flex;
+	justify-content: center;
+}
+
+.server-message-bubble p {
+	width: fit-content;
+	padding: 0.25rem;
+	border-radius: 0.25rem;
+	background-color: #f1ffd6;
 }
