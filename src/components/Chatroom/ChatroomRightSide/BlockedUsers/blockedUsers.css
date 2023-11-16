@@ -1,52 +1,44 @@
-/* FRIEND MENU */
+.blocked-users {
+	height: 100%;
+	width: 100%;
+}
 
-.friend-menu {
-	height: 200%;
+/* USER MENU */
+
+.blocked-menu {
+	height: 50%;
 	width: 100%;
 	position: absolute;
-	bottom: -180%;
+	bottom: -45%;
 	display: flex;
 	flex-direction: column;
 	z-index: 10;
 	border: 1px solid var(--black);
 }
 
-.friend-menu button {
+.blocked-menu button {
 	width: 100%;
-	height: 50%;
+	height: 100%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	background-color: #fff;
 	border: none;
-	border-bottom: 1px solid var(--black);
 }
 
-.friend-menu button:hover {
+.blocked-menu button:hover {
 	opacity: 1;
 	border-color: var(--black-50);
 }
 
-.friend-menu button:hover p {
+.blocked-menu button:hover p {
 	opacity: 0.5;
 }
 
-.friend-menu button:last-child {
-	border-bottom: none;
-	color: var(--red);
-}
-
-.friend-menu button p {
+.blocked-menu button p {
 	height: 100%;
 	width: 100%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-}
-
-/* FRIENDS LIST */
-
-.friends-list {
-	height: 100%;
-	width: 100%;
 }

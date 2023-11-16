@@ -7,12 +7,8 @@ import FriendMenu from "./FriendMenu"
 import { FriendmenuIcon } from "./FriendsListIcons"
 import UserContainer from "../UserContainer"
 
-const Friend: FC<{ friend: IFriend; hidden: boolean }> = ({
-	friend,
-	hidden,
-}) => {
+const Friend: FC<{ friend: IFriend }> = ({ friend }) => {
 	const [showFriendMenu, setShowFriendMenu] = useState<boolean>(false)
-	const [showHiddenChatMenu, setShowHiddenChatMenu] = useState<boolean>(false)
 
 	const { username, email } = friend
 
@@ -24,14 +20,7 @@ const Friend: FC<{ friend: IFriend; hidden: boolean }> = ({
 					<>
 						<button
 							type="button"
-							onClick={
-								!hidden
-									? () => setShowFriendMenu(!showFriendMenu)
-									: () =>
-											setShowHiddenChatMenu(
-												!showHiddenChatMenu
-											)
-							}
+							onClick={() => setShowFriendMenu(!showFriendMenu)}
 						>
 							<RxCross2 />
 						</button>
@@ -40,14 +29,7 @@ const Friend: FC<{ friend: IFriend; hidden: boolean }> = ({
 				) : (
 					<button
 						type="button"
-						onClick={
-							!hidden
-								? () => setShowFriendMenu(!showFriendMenu)
-								: () =>
-										setShowHiddenChatMenu(
-											!showHiddenChatMenu
-										)
-						}
+						onClick={() => setShowFriendMenu(!showFriendMenu)}
 					>
 						<FriendmenuIcon />
 					</button>
