@@ -39,7 +39,6 @@ const FriendMenu: FC<{ friendEmail: string }> = ({ friendEmail }) => {
 				userId: user.id,
 				friendEmail: friendEmail,
 			})
-
 			dispatch(
 				updateUserField({
 					field: "hiddenMessages",
@@ -60,6 +59,7 @@ const FriendMenu: FC<{ friendEmail: string }> = ({ friendEmail }) => {
 				userId: user.id,
 				friendEmail: friendEmail,
 			})
+			// filter blocked users out of friends
 			const newFriends = user.friends.filter(
 				(fr) => fr.email !== friendEmail
 			)
@@ -89,6 +89,7 @@ const FriendMenu: FC<{ friendEmail: string }> = ({ friendEmail }) => {
 				friendEmail: friendEmail,
 				userId: user.id,
 			})
+			// check if users have messages together
 			const isMessages = Object.keys(user.messages).find(
 				(email) => email === friendEmail
 			)
@@ -101,6 +102,7 @@ const FriendMenu: FC<{ friendEmail: string }> = ({ friendEmail }) => {
 				)
 			}
 			dispatch(closeRightSide())
+			// get full friend object
 			const friend = await findFriendUsername(friendEmail)
 			dispatch(setActiveChat({ value: friend }))
 		} catch (e) {

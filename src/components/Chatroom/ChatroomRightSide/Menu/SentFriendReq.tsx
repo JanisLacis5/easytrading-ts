@@ -7,6 +7,7 @@ const SentFriendReq = () => {
 	return (
 		<div className="sent-friend-req">
 			<h4 className="menu-page-heading">Sent Friend Requests</h4>
+			{/* map over sent friend requests and display them */}
 			{user?.sentFriendRequests.map((req) => {
 				return (
 					<div>

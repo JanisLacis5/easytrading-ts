@@ -10,13 +10,14 @@ const RecievedFriendReq = () => {
 
 	// ACCEPT / DECLINE FRIEND SOCKET
 	const friendWs = new WebSocket("ws://localhost:3003")
+	// send socket on open
 	friendWs.onopen = () => {
 		friendWs.send(JSON.stringify({ id: user.id }))
 	}
 	friendWs.onmessage = ({ data }) => {
 		console.log("received: ", JSON.parse(data))
 		const parsedData = JSON.parse(data)
-
+		// update friends on friend request accept
 		if (parsedData.message === "friend request acccepted") {
 			const { friends } = parsedData
 			dispatch(
@@ -38,6 +39,7 @@ const RecievedFriendReq = () => {
 		email: string
 	) => {
 		e.preventDefault()
+		// accept friend request
 		friendWs.send(
 			JSON.stringify({
 				action: "accept",
@@ -45,6 +47,7 @@ const RecievedFriendReq = () => {
 				recieverEmail: user.info.email,
 			})
 		)
+		// remove friend request thet was accepted and updateaccepted friend requests
 		const updatedRecievedFriendReq = user.friends.filter(
 			(req) => req.email !== email
 		)
@@ -62,6 +65,7 @@ const RecievedFriendReq = () => {
 		email: string
 	) => {
 		e.preventDefault()
+		// decline friend request
 		friendWs.send(
 			JSON.stringify({
 				action: "decline",
@@ -70,6 +74,7 @@ const RecievedFriendReq = () => {
 			})
 		)
 		toast.error("Friend request declined")
+		// remove friend request that was declined and update recieved  friend requests
 		const updatedRecievedFriendReq = user.recievedFriendRequests.filter(
 			(req) => req !== email
 		)
@@ -84,6 +89,7 @@ const RecievedFriendReq = () => {
 	return (
 		<div className="recieved-friend-req">
 			<h4 className="menu-page-heading">Recieved Friend Requests</h4>
+			{/* map over recieved friend requests and display them */}
 			{user?.recievedFriendRequests.map((req: string, index) => {
 				return (
 					<div key={index}>

@@ -9,8 +9,9 @@ const HiddenChats = () => {
 	return (
 		<div className="friends-list">
 			<h4 className="menu-page-heading">Hidden Chats</h4>
+			{/* map over hidden messages and display them */}
 			{user.hiddenMessages?.map((m, index) => {
-				return <Friend key={index} friend={{ ...m }} hidden={true} />
+				return <Friend key={index} friend={{ ...m }} />
 			})}
 		</div>
 	)

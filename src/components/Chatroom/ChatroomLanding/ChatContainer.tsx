@@ -13,11 +13,13 @@ import { findFriendUsername } from "../functions"
 
 const ChatContainer: FC<{ email: string }> = ({ email }) => {
 	const dispatch = useAppDispatch()
+
 	const [lastUserChat, setLastUserChat] = useState<IMessage>()
 	const [friend, setFriend] = useState<IFriend>()
 
 	const { user } = useAppSelector((store) => store.user)
 
+	// get full friend object
 	useEffect(() => {
 		const asyncWrapper = async () => {
 			const friend = await findFriendUsername(email)
@@ -26,6 +28,7 @@ const ChatContainer: FC<{ email: string }> = ({ email }) => {
 		asyncWrapper()
 	}, [])
 
+	// get last chat for container
 	useEffect(() => {
 		const userChats = user?.messages[email]
 		if (userChats) {
@@ -44,6 +47,7 @@ const ChatContainer: FC<{ email: string }> = ({ email }) => {
 		}
 	}, [user])
 
+	// find out wheter "friend" is blocked
 	useEffect(() => {
 		if (friend) {
 			const foundBlocked = user.blockedUsers.find(
@@ -57,6 +61,7 @@ const ChatContainer: FC<{ email: string }> = ({ email }) => {
 		}
 	}, [friend])
 
+	// set as last chat after open
 	const onUserChatClick = async (
 		e: React.MouseEvent<HTMLButtonElement, MouseEvent>
 	) => {

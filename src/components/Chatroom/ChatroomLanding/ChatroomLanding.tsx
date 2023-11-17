@@ -19,6 +19,7 @@ const ChatroomLanding = () => {
 	const { main } = useAppSelector((store) => store.chatroomRightSide)
 	const { screenWidth } = useAppSelector((store) => store.default)
 
+	// filter out hidden messages (do not show them on left on landing page)
 	useEffect(() => {
 		let filteredMessages: IUserMessages = {}
 
@@ -36,7 +37,7 @@ const ChatroomLanding = () => {
 		<div className="chatroom-landing">
 			<div className="chatroom-friends">
 				<div className="chatroom-self">
-					<img
+					<img // users profile picture
 						src={user.info.image}
 						alt="self-image"
 						draggable="false"
@@ -44,7 +45,7 @@ const ChatroomLanding = () => {
 						onDoubleClick={() => false}
 					/>
 					<div>
-						<button
+						<button // add friend icon
 							type="button"
 							onClick={() =>
 								dispatch(setPage({ page: "addFriend" }))
@@ -52,7 +53,7 @@ const ChatroomLanding = () => {
 						>
 							<AddFriendIcon />
 						</button>
-						<button
+						<button // menu icon
 							type="button"
 							onClick={() =>
 								dispatch(
@@ -66,6 +67,8 @@ const ChatroomLanding = () => {
 						</button>
 					</div>
 				</div>
+				{/* map over messages and display on left side on landing page */}
+				{/* TODO: map over friends instead of messages */}
 				{messages &&
 					Object.keys(messages)?.map((email, index) => {
 						return <ChatContainer key={index} email={email} />

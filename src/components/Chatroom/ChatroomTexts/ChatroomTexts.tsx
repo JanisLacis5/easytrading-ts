@@ -12,19 +12,21 @@ const ChatroomTexts = () => {
 	)
 
 	const [chatWindow, setChatWindow] = useState<Element | null>()
-
 	const messages = user.messages[activeChat.email]
 
+	// get chats containers div
 	useEffect(() => {
 		setChatWindow(document.querySelector(".chatroom-texts-container"))
 	}, [])
 
+	// scroll down on new message
 	useEffect(() => {
 		chatWindow?.scrollTo(0, chatWindow.scrollHeight)
 	}, [chatWindow, messages])
 
 	return (
 		<div className="chatroom-texts-container">
+			{/* map over messages and display them */}
 			{messages?.map((message, index) => {
 				if (message.sender) {
 					return <GreenBubble key={index} message={{ ...message }} />

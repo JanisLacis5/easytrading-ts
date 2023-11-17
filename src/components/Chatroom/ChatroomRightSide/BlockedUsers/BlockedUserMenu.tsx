@@ -34,6 +34,7 @@ const BlockedUserMenu: FC<{ email: string }> = ({ email }) => {
 				`You have unblokced ${unblockedUser.username}, but ${unblockedUser.username} has removed you from friends. To add ${unblockedUser.username} as friends, sebd friend request`
 			)
 		} else {
+			// update friends, blockedUsers and messages on unblock
 			const { blockedUsers, friends, messages } = data
 			dispatch(
 				updateUserField({ field: "blockedUsers", value: blockedUsers })

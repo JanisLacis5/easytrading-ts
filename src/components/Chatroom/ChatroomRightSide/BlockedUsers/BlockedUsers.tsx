@@ -9,6 +9,7 @@ const BlockedUsers = () => {
 	return (
 		<div className="blocked-users">
 			<h4 className="menu-page-heading">Blocked Users</h4>
+			{/* map over blocked users and display them */}
 			{user.blockedUsers.map((u) => {
 				return <BlockedUserContainer friend={{ ...u }} />
 			})}

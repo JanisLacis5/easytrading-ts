@@ -16,6 +16,8 @@ const ChatInput = () => {
 	const [message, setMessage] = useState<string>("")
 
 	const messageWs = new WebSocket("ws://localhost:3002")
+
+	// send socket to server on open
 	messageWs.onopen = () => {
 		messageWs.send(
 			JSON.stringify({
@@ -24,6 +26,7 @@ const ChatInput = () => {
 		)
 	}
 	messageWs.onmessage = ({ data }) => {
+		// update messages after other user sends one
 		const { updatedMessages } = JSON.parse(data)
 		dispatch(updateUserField({ field: "messages", value: updatedMessages }))
 	}
@@ -34,15 +37,19 @@ const ChatInput = () => {
 
 	const sendMessage = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
+
+		// check if message content is not empty
 		if (message === "") {
 			toast.error("Can't send empty message")
 			return
 		}
 
+		// get date and time
 		const dateObj = new Date()
 		const date = `${dateObj.getDay()}-${dateObj.getMonth()}-${dateObj.getFullYear()}`
 		const time = `${dateObj.getHours()}:${dateObj.getMinutes()}`
 
+		// send message
 		messageWs.send(
 			JSON.stringify({
 				date: date,

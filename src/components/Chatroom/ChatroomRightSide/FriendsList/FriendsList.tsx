@@ -9,6 +9,7 @@ const FriendsList = () => {
 	return (
 		<div className="friends-list">
 			<h4 className="menu-page-heading">Friends</h4>
+			{/* map over friends and display them */}
 			{user?.friends.map((friend, index) => {
 				return <Friend key={index} friend={{ ...friend }} />
 			})}
