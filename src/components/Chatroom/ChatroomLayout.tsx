@@ -4,6 +4,9 @@ import "./chatroom.css"
 import ChatroomRightSide from "./ChatroomRightSide/ChatroomRightSide"
 import { toast } from "react-toastify"
 import { updateUserField } from "../../features/userSlice"
+import { useEffect } from "react"
+import { setActiveChat } from "../../features/chatroomChatsSlice"
+import customFetch from "../../utils"
 
 const Chatroomlayout = () => {
 	const dispatch = useAppDispatch()
@@ -67,6 +70,16 @@ const Chatroomlayout = () => {
 		console.log("Error:")
 		console.log(e)
 	}
+
+	useEffect(() => {
+		const asyncWrapper = async () => {
+			const { data } = await customFetch.post("/get-last-chat", {
+				userId: user.id,
+			})
+			dispatch(setActiveChat({ value: data.lastChat }))
+		}
+		user && asyncWrapper()
+	}, [user])
 
 	return (
 		<section className="chatroom-layout">

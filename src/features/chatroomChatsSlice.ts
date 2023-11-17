@@ -7,9 +7,7 @@ interface IInitialState {
 }
 
 const initialState: IInitialState = {
-	activeChat: JSON.parse(
-		localStorage.getItem("lastActiveChat") || JSON.stringify({})
-	),
+	activeChat: {} as IFriend,
 	isBlocked: false,
 }
 
@@ -18,10 +16,6 @@ const chatroomChatSlice = createSlice({
 	initialState,
 	reducers: {
 		setActiveChat: (state, action: PayloadAction<{ value: IFriend }>) => {
-			localStorage.setItem(
-				"lastActiveChat",
-				JSON.stringify(action.payload.value)
-			)
 			state.activeChat = action.payload.value
 		},
 		setIsBlocked: (state, action: PayloadAction<{ value: boolean }>) => {
