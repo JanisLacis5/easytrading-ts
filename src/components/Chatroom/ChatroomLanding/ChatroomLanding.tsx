@@ -5,33 +5,33 @@ import ChatroomTexts from "../ChatroomTexts/ChatroomTexts"
 import ChatContainer from "./ChatContainer"
 import ChatInput from "./ChatInput"
 import { AddFriendIcon, MenuIcon } from "./ChLandingIcons"
-// import { useEffect, useState } from "react"
-// import { IUserMessages } from "../../../interfaces"
+import { useEffect, useState } from "react"
+import { IUserMessages } from "../../../interfaces"
 import "./chatroomLanding.css"
 
 const ChatroomLanding = () => {
 	const dispatch = useAppDispatch()
 
-	// const [messages, setMessages] = useState<IUserMessages>()
+	const [messages, setMessages] = useState<IUserMessages>()
 
 	const { user } = useAppSelector((store) => store.user)
 	const { activeChat } = useAppSelector((store) => store.chatroomChats)
 	const { main } = useAppSelector((store) => store.chatroomRightSide)
 	const { screenWidth } = useAppSelector((store) => store.default)
 
-	// // filter out hidden messages (do not show them on left on landing page)
-	// useEffect(() => {
-	// 	let filteredMessages: IUserMessages = {}
+	// filter out hidden messages (do not show them on left on landing page)
+	useEffect(() => {
+		let filteredMessages: IUserMessages = {}
 
-	// 	Object.keys(user.messages)?.map((m) => {
-	// 		const isHidden = user.hiddenMessages.find((fr) => fr.email === m)
-	// 		if (!isHidden) {
-	// 			filteredMessages[m] = user.messages[m]
-	// 		}
-	// 	})
+		Object.keys(user.messages)?.map((m) => {
+			const isHidden = user.hiddenMessages.find((fr) => fr.email === m)
+			if (!isHidden) {
+				filteredMessages[m] = user.messages[m]
+			}
+		})
 
-	// 	setMessages({ ...filteredMessages })
-	// }, [user])
+		setMessages({ ...filteredMessages })
+	}, [user])
 
 	return (
 		<div className="chatroom-landing">
@@ -67,17 +67,11 @@ const ChatroomLanding = () => {
 						</button>
 					</div>
 				</div>
-				{/* map over friends and display on left side on landing page if they have messages */}
-				{user.friends.map((friend, index) => {
-					const doUsersHaveMessages = Object.keys(user.messages).find(
-						(m) => m === friend.email
-					)
-					if (doUsersHaveMessages) {
-						return (
-							<ChatContainer key={index} email={friend.email} />
-						)
-					}
-				})}
+				{/* map over messages and display on left side of landing page */}
+				{messages &&
+					Object.keys(messages)?.map((friend, index) => {
+						return <ChatContainer key={index} email={friend} />
+					})}
 			</div>
 			<div
 				style={main.showRightSide ? { width: 0.47 * screenWidth } : {}}

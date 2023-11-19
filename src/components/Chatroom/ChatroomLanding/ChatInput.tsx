@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useAppDispatch, useAppSelector } from "../../../store/storeHooks"
 import "./chatroomLanding.css"
 import { toast } from "react-toastify"
@@ -14,6 +14,7 @@ const ChatInput = () => {
 	)
 
 	const [message, setMessage] = useState<string>("")
+	const [isFriend, setIsFriend] = useState<boolean>(true)
 
 	const messageWs = new WebSocket("ws://localhost:3002")
 
@@ -62,6 +63,16 @@ const ChatInput = () => {
 		setMessage("")
 	}
 
+	// check if users are still friends
+	useEffect(() => {
+		const areFriends = user.friends.find(
+			(fr) => fr.email === activeChat.email
+		)
+		if (!areFriends) {
+			setIsFriend(false)
+		}
+	}, [user])
+
 	return (
 		<form className="chat-input" onSubmit={sendMessage}>
 			<div>
@@ -70,7 +81,7 @@ const ChatInput = () => {
 					placeholder="Enter a message"
 					value={message}
 					onChange={(e) => setMessage(e.target.value)}
-					disabled={isBlocked ? true : false}
+					disabled={isBlocked || !isFriend ? true : false}
 				/>
 			</div>
 			<div>

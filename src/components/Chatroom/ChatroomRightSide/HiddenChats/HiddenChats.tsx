@@ -1,7 +1,7 @@
 import "../FriendsList/friendsList.css"
 import { useAppSelector } from "../../../../store/storeHooks"
-import Friend from "../FriendsList/Friend"
 import "../chatroomRightSide.css"
+import HiddenChatContainer from "./HiddenChatContainer"
 
 const HiddenChats = () => {
 	const { user } = useAppSelector((store) => store.user)
@@ -11,7 +11,13 @@ const HiddenChats = () => {
 			<h4 className="menu-page-heading">Hidden Chats</h4>
 			{/* map over hidden messages and display them */}
 			{user.hiddenMessages?.map((m, index) => {
-				return <Friend key={index} friend={{ ...m }} />
+				return (
+					<HiddenChatContainer
+						key={index}
+						email={m.email}
+						username={m.username}
+					/>
+				)
 			})}
 		</div>
 	)
