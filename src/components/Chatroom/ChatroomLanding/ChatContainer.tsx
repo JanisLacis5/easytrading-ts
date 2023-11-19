@@ -70,7 +70,7 @@ const ChatContainer: FC<{ email: string }> = ({ email }) => {
 		e: React.MouseEvent<HTMLButtonElement, MouseEvent>
 	) => {
 		e.preventDefault()
-		const { data } = await customFetch.post("/set-last-chat", {
+		const { data } = await customFetch.post("/update-active-chats-order", {
 			username: friend?.username,
 			email: friend?.email,
 			userId: user.id,

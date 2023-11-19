@@ -3,6 +3,7 @@ import "./addFriend.css"
 import { toast } from "react-toastify"
 import { useAppDispatch, useAppSelector } from "../../../../store/storeHooks"
 import { updateUserField } from "../../../../features/userSlice"
+import { findFriendUsername } from "../../functions"
 
 const AddFriendForm = () => {
 	const dispatch = useAppDispatch()
@@ -41,11 +42,21 @@ const AddFriendForm = () => {
 	}
 	////////////////////////////////////////////////////////
 
-	const sendFriendRequest = (e: React.FormEvent<HTMLFormElement>) => {
+	const sendFriendRequest = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 		// check if request isnt being sent to sender himself
 		if (recieverFriendReqEmail === user.info.email) {
 			toast.error("You can't send friend request to yourself")
+			setRecieverFriendReqEmail("")
+			return
+		}
+		// check if recuever is not in friends already
+		const isUserInFriends = user.friends.find(
+			(fr) => fr.email === recieverFriendReqEmail
+		)
+		if (isUserInFriends) {
+			const reciever = await findFriendUsername(recieverFriendReqEmail)
+			toast.error(`You already have ${reciever.username} as a friend`)
 			setRecieverFriendReqEmail("")
 			return
 		}

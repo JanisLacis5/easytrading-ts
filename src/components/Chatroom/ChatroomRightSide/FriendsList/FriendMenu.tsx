@@ -104,11 +104,14 @@ const FriendMenu: FC<{ friendEmail: string }> = ({ friendEmail }) => {
 			dispatch(closeRightSide())
 			// get full friend object and set active chat
 			const friend = await findFriendUsername(friendEmail)
-			const { data } = await customFetch.post("/set-last-chat", {
-				username: friend.username,
-				email: friend.email,
-				userId: user.id,
-			})
+			const { data } = await customFetch.post(
+				"/update-active-chats-order",
+				{
+					username: friend.username,
+					email: friend.email,
+					userId: user.id,
+				}
+			)
 			dispatch(setActiveChat({ value: data.lastActiveChat }))
 		} catch (e) {
 			console.log(e)

@@ -65,11 +65,12 @@ const ChatInput = () => {
 
 	// check if users are still friends
 	useEffect(() => {
+		if (!activeChat) {
+			return
+		}
 		const areFriends = user.friends.find(
 			(fr) => fr.email === activeChat.email
 		)
-		console.log(activeChat)
-		console.log(user.friends)
 		if (typeof areFriends == "undefined") {
 			setIsFriend(false)
 		} else {

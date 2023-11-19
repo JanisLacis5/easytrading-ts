@@ -73,10 +73,10 @@ const Chatroomlayout = () => {
 
 	useEffect(() => {
 		const asyncWrapper = async () => {
-			const { data } = await customFetch.post("/get-last-chat", {
+			const { data } = await customFetch.post("/get-last-active-chat", {
 				userId: user.id,
 			})
-			dispatch(setActiveChat({ value: data.lastChat }))
+			dispatch(setActiveChat({ value: data.lastActiveChat }))
 		}
 		user && asyncWrapper()
 	}, [user])
