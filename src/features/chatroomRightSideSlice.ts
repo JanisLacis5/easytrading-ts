@@ -113,6 +113,30 @@ const chatroomRightSideSlice = createSlice({
 			const { page } = action.payload
 			state.submenus[page] = !state.submenus[page]
 		},
+		resetChatroomRightState: (state) => {
+			return {
+				...state,
+				main: {
+					showRightSide: false,
+					addFriend: false,
+					menu: false,
+				},
+				menuPages: {
+					friends: false,
+					friendRequests: false,
+					blocked: false,
+					hidden: false,
+				},
+				friendReqPages: {
+					recievedFriendReq: false,
+					sentFriendReq: false,
+				},
+				submenus: {
+					friendMenu: false,
+					blockedMenu: false,
+				},
+			}
+		},
 	},
 })
 
@@ -123,5 +147,6 @@ export const {
 	setFriendReqPage,
 	toggleFriendReqPage,
 	toggleSubmenu,
+	resetChatroomRightState,
 } = chatroomRightSideSlice.actions
 export default chatroomRightSideSlice.reducer
