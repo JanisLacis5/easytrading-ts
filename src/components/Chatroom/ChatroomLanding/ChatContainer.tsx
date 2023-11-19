@@ -10,12 +10,16 @@ import userIcon from "../../../assets/user-icon.svg"
 import { ChatIcon } from "./ChLandingIcons"
 import customFetch from "../../../utils"
 import { findFriendUsername } from "../functions"
+import ChatContainerMenu from "./ChatContainerMenu"
+import { FriendmenuIcon } from "../ChatroomRightSide/FriendsList/FriendsListIcons"
+import { RxCross2 } from "react-icons/rx"
 
 const ChatContainer: FC<{ email: string }> = ({ email }) => {
 	const dispatch = useAppDispatch()
 
 	const [lastUserChat, setLastUserChat] = useState<IMessage>()
 	const [friend, setFriend] = useState<IFriend>()
+	const [showChatMenu, setShowChatMenu] = useState<boolean>(false)
 
 	const { user } = useAppSelector((store) => store.user)
 
@@ -99,6 +103,13 @@ const ChatContainer: FC<{ email: string }> = ({ email }) => {
 					)}
 				</p>
 			</div>
+			<button
+				type="button"
+				onClick={() => setShowChatMenu(!showChatMenu)}
+			>
+				{showChatMenu ? <RxCross2 /> : <FriendmenuIcon />}
+			</button>
+			{showChatMenu && <ChatContainerMenu email={email} />}
 		</button>
 	)
 }

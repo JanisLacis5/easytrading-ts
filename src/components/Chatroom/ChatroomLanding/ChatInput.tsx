@@ -68,10 +68,14 @@ const ChatInput = () => {
 		const areFriends = user.friends.find(
 			(fr) => fr.email === activeChat.email
 		)
-		if (!areFriends) {
+		console.log(activeChat)
+		console.log(user.friends)
+		if (typeof areFriends == "undefined") {
 			setIsFriend(false)
+		} else {
+			setIsFriend(true)
 		}
-	}, [user])
+	}, [user, activeChat])
 
 	return (
 		<form className="chat-input" onSubmit={sendMessage}>
