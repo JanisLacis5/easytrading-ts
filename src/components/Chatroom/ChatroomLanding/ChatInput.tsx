@@ -63,6 +63,18 @@ const ChatInput = () => {
 		setMessage("")
 	}
 
+	// on disabled inputs click
+	const onDisabledClick = () => {
+		if (isBlocked) {
+			toast.error("You have blocked this user. Unblock to text")
+			return
+		}
+		if (!isFriend) {
+			toast.error("You dont have this user as a friend. Add to text")
+			return
+		}
+	}
+
 	// check if users are still friends
 	useEffect(() => {
 		if (!activeChat) {
@@ -82,15 +94,25 @@ const ChatInput = () => {
 		<form className="chat-input" onSubmit={sendMessage}>
 			<div>
 				<input
+					id="chatInput"
 					type="text"
 					placeholder="Enter a message"
 					value={message}
 					onChange={(e) => setMessage(e.target.value)}
 					disabled={isBlocked || !isFriend ? true : false}
 				/>
+				{(isBlocked || !isFriend) && (
+					<div
+						className="on-disabled-click"
+						onClick={onDisabledClick}
+					></div>
+				)}
 			</div>
 			<div>
-				<button type="submit">
+				<button
+					type="submit"
+					disabled={isBlocked || !isFriend ? true : false}
+				>
 					<SendMessageIcon />
 				</button>
 			</div>

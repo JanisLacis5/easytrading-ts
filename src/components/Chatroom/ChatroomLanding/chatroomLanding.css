@@ -85,6 +85,7 @@
 	align-items: center;
 	display: flex;
 	justify-content: space-between;
+	position: relative;
 }
 
 .chat-input > div {
@@ -119,6 +120,13 @@
 	aspect-ratio: 1;
 	border: none;
 	background-color: transparent;
+}
+
+.on-disabled-click {
+	position: absolute;
+	background-color: transparent;
+	height: 100%;
+	width: 100%;
 }
 
 /* CHAT FRIEND CONTAINER */
