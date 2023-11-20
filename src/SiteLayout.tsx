@@ -70,7 +70,6 @@ const SiteLayout = () => {
 		const url = window.location.pathname
 		const urlIncludesChatroom = url.includes("chatroom")
 		if (!urlIncludesChatroom) {
-			console.log("change doesnt work")
 			dispatch(resetChatroomRightState())
 		}
 	}, [window.location.pathname])

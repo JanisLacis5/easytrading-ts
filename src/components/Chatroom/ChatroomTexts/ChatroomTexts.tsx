@@ -8,12 +8,11 @@ import { IMessage } from "../../../interfaces"
 
 const ChatroomTexts = () => {
 	const { user } = useAppSelector((store) => store.user)
-	const { activeChat, isBlocked } = useAppSelector(
-		(store) => store.chatroomChats
-	)
+	const { activeChat } = useAppSelector((store) => store.chatroomChats)
 
 	const [chatWindow, setChatWindow] = useState<Element | null>()
 	const [messages, setMessages] = useState<IMessage[]>([])
+	const [isBlocked, setIsBlocked] = useState(false)
 
 	// get chats containers div
 	useEffect(() => {
@@ -25,9 +24,17 @@ const ChatroomTexts = () => {
 		chatWindow?.scrollTo(0, chatWindow.scrollHeight)
 	}, [chatWindow, messages])
 
-	// get last active chat
+	// get last active chat and check if it is not blocked
 	useEffect(() => {
 		setMessages(user.messages[activeChat?.email])
+		const isUserBlocked = user.blockedUsers.find(
+			(u) => u.email === activeChat?.email
+		)
+		if (isUserBlocked) {
+			setIsBlocked(true)
+		} else {
+			setIsBlocked(false)
+		}
 	}, [activeChat])
 
 	return (

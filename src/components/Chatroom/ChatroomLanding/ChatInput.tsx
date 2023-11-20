@@ -100,6 +100,7 @@ const ChatInput = () => {
 					value={message}
 					onChange={(e) => setMessage(e.target.value)}
 					disabled={isBlocked || !isFriend ? true : false}
+					autoComplete="true"
 				/>
 				{(isBlocked || !isFriend) && (
 					<div

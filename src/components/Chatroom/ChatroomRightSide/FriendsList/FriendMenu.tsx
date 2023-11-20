@@ -6,6 +6,7 @@ import { updateUserField } from "../../../../features/userSlice"
 import { closeRightSide } from "../../../../features/chatroomRightSideSlice"
 import { setActiveChat } from "../../../../features/chatroomChatsSlice"
 import { findFriendUsername } from "../../functions"
+import { toast } from "react-toastify"
 
 const FriendMenu: FC<{ friendEmail: string }> = ({ friendEmail }) => {
 	const dispatch = useAppDispatch()
@@ -35,6 +36,13 @@ const FriendMenu: FC<{ friendEmail: string }> = ({ friendEmail }) => {
 	) => {
 		e.preventDefault()
 		try {
+			const isChatHidden = user.hiddenMessages.find(
+				(m) => m.email === friendEmail
+			)
+			if (isChatHidden) {
+				toast.error("Chat is already hidden")
+				return
+			}
 			const { data } = await customFetch.post("/hide-chats", {
 				userId: user.id,
 				friendEmail: friendEmail,
