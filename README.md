@@ -1,27 +1,18 @@
-# React + TypeScript + Vite
+# This is the main repository form EasyTrading website.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## To run this website you have to:
+1. clone easytrading-server repository
+2. on easytrading-ts and eastytrading-server run "npm i"
+3. on easytrading-server run "npm start"
+4. on easytrading-ts ruhn "npm run dev"
+5. clone screener-api repository
+6. run "pip install -r requirements.txt" on screener-api repository
+7. start main-script.py 
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## For this to work, computer has to have:
+- nodejs
+- express.js
+- python version 3.8 or higher
+- MongoDB
+- Microsoft SQL
+- have to make google and facebook apps and get the keys (for social login)
