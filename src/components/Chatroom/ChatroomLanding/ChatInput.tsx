@@ -29,6 +29,7 @@ const ChatInput = () => {
 	messageWs.onmessage = ({ data }) => {
 		// update messages after other user sends one
 		const { updatedMessages } = JSON.parse(data)
+		console.log(updatedMessages)
 		dispatch(updateUserField({ field: "messages", value: updatedMessages }))
 	}
 	messageWs.onerror = (e) => {
