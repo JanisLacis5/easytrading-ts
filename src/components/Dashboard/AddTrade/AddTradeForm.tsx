@@ -12,8 +12,8 @@ import { calcAcc } from "../TradeLog/tradeLogFunctions"
 const AddTrade = () => {
 	const navigate = useNavigate()
 	const dispatch = useAppDispatch()
-	const { user } = useAppSelector((store) => store.user)
 
+	const { user } = useAppSelector((store) => store.user)
 	const { stock, pl, date, time, action } = useAppSelector(
 		(store) => store.addTrade
 	)

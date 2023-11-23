@@ -14,7 +14,6 @@ import { BiSolidDownArrow, BiSolidUpArrow } from "react-icons/bi"
 import Modal from "./Modal"
 import { setDefaultStateBool } from "../../../features/defaultSlice"
 import { OpUnitType } from "dayjs"
-import { getTrades } from "./tradeLogFunctions"
 
 const TradeLog = () => {
 	const dispatch = useAppDispatch()
@@ -28,15 +27,8 @@ const TradeLog = () => {
 	const { user } = useAppSelector((store) => store.user)
 	const { showModal, screenWidth } = useAppSelector((store) => store.default)
 
-	// get trades from db
 	useEffect(() => {
-		if (user) {
-			getTrades(user.id)
-				.then((trades) => {
-					dispatch(setSortedTrades({ trades: trades }))
-				})
-				.catch((error) => console.log(error))
-		}
+		dispatch(setSortedTrades({ trades: user.trades }))
 	}, [user])
 
 	const handleChange = (

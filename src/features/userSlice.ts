@@ -61,9 +61,7 @@ const initialState: IInitialState = {
 	isLoading: false,
 	user: {
 		id: JSON.parse(localStorage.getItem("userId") || JSON.stringify("")),
-		trades: JSON.parse(
-			localStorage.getItem("userTrades") || JSON.stringify([])
-		),
+		trades: [],
 		info: JSON.parse(
 			localStorage.getItem("userInfo") || JSON.stringify({})
 		),
@@ -154,7 +152,6 @@ const userSlice = createSlice({
 			const blockedUsers = action.payload.blockedUsers
 
 			localStorage.setItem("userId", JSON.stringify(action.payload.id))
-			localStorage.setItem("userTrades", JSON.stringify(trades))
 			localStorage.setItem("userInfo", JSON.stringify(info))
 			localStorage.setItem("userNotes", JSON.stringify(notes))
 			localStorage.setItem("layouts", JSON.stringify(layouts))
@@ -261,7 +258,6 @@ const userSlice = createSlice({
 			})
 			.addCase(clearTrades.fulfilled, (state) => {
 				state.user.trades = []
-				localStorage.setItem("userTrades", JSON.stringify([]))
 				state.isLoading = false
 			})
 			.addCase(clearTrades.rejected, (state) => {

@@ -7,7 +7,6 @@ import {
 	closeFilters,
 } from "../../../features/filterSlice"
 import { RxCross1 } from "react-icons/rx"
-import { getTrades } from "./tradeLogFunctions"
 
 const Filters = () => {
 	const dispatch = useAppDispatch()
@@ -28,13 +27,11 @@ const Filters = () => {
 		dispatch(updateFilters({ name: name, value: value }))
 	}
 
-	const setFilteredProducts = async () => {
-		const trades = await getTrades(user.id)
-		dispatch(filterProducts({ trades: trades }))
-	}
-
 	return (
-		<form className="tradelog-filters" onChange={setFilteredProducts}>
+		<form
+			className="tradelog-filters"
+			onChange={() => dispatch(filterProducts({ trades: user.trades }))}
+		>
 			<div>
 				<label htmlFor="stock">Stock: </label>
 				<input
