@@ -67,7 +67,7 @@ const ChatContainer: FC<{ email: string }> = ({ email }) => {
 
 	// set as last chat after open
 	const onUserChatClick = async (
-		e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+		e: React.MouseEvent<HTMLDivElement, MouseEvent>
 	) => {
 		e.preventDefault()
 		const { data } = await customFetch.post("/update-active-chats-order", {
@@ -79,11 +79,7 @@ const ChatContainer: FC<{ email: string }> = ({ email }) => {
 	}
 
 	return (
-		<button
-			type="button"
-			className="chat-container"
-			onClick={onUserChatClick}
-		>
+		<div className="chat-container" onClick={onUserChatClick}>
 			<img src={userIcon} alt="profile picture" />
 			<div>
 				<h5>{friend?.username}</h5>
@@ -110,7 +106,7 @@ const ChatContainer: FC<{ email: string }> = ({ email }) => {
 				{showChatMenu ? <RxCross2 /> : <FriendmenuIcon />}
 			</button>
 			{showChatMenu && <ChatContainerMenu email={email} />}
-		</button>
+		</div>
 	)
 }
 export default ChatContainer
