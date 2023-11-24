@@ -1,20 +1,20 @@
-import {useState} from "react"
-import {useAppSelector} from "../../store/storeHooks"
+import { useState } from "react"
+import { useAppSelector } from "../../store/storeHooks"
 import customFetch from "../../utils"
-import {toast} from "react-toastify"
+import { toast } from "react-toastify"
 
 const ContactForm = () => {
     const [question, setQuestion] = useState("")
     const [message, setMessage] = useState("")
 
-    const {user} = useAppSelector((store) => store.user)
+    const { user } = useAppSelector((store) => store.user)
 
     // SENDING MESSAGE TO DB ON SUBMIT
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        const {data} = await customFetch.post("/message", {
+        const { data } = await customFetch.post("/message", {
             id: user.id,
-            email: user.info.email,
+            email: user.data.email,
             question,
             message,
         })

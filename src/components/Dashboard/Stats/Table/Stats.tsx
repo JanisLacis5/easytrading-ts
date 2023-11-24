@@ -1,9 +1,9 @@
-import {useAppSelector} from "../../../../store/storeHooks"
+import { useAppSelector } from "../../../../store/storeHooks"
 import "../../dashboard.css"
 import "./stats.css"
-import {useEffect, useState} from "react"
-import {lostPl, wonPl} from "./statsFunc"
-import {countStats} from "../../../../functions"
+import { useEffect, useState } from "react"
+import { lostPl, wonPl } from "./statsFunc"
+import { countStats } from "../../../../functions"
 
 interface IWonPl {
     averageWonDayPl: number
@@ -43,7 +43,7 @@ const Stats = () => {
         lostTrades: 0,
         totalProfit: 0,
     })
-    const {user} = useAppSelector((store) => store.user)
+    const { user } = useAppSelector((store) => store.user)
 
     useEffect(() => {
         if (user.trades) {
@@ -60,7 +60,7 @@ const Stats = () => {
                 <div>
                     <div>
                         <span>Your starting account balance: </span>
-                        <span>${user.info.startingAccount}</span>
+                        <span>${user.data.startingAccount}</span>
                     </div>
                     <div>
                         <span>Account P/L (%):</span>
@@ -75,7 +75,7 @@ const Stats = () => {
                             }}>
                             {(
                                 (countSt.totalProfit /
-                                    Number(user.info.startingAccount)) *
+                                    Number(user.data.startingAccount)) *
                                 100
                             ).toFixed(0)}
                             %
@@ -139,7 +139,7 @@ const Stats = () => {
                 <div>
                     <div>
                         <span>Your account balance now: </span>
-                        <span>${user.info.account}</span>
+                        <span>${user.data.account}</span>
                     </div>
                     <div>
                         <span>Account P/L </span>

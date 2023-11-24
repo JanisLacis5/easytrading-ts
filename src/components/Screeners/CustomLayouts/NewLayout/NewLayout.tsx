@@ -1,5 +1,5 @@
 import "../layouts.css"
-import {useEffect, useState} from "react"
+import { useEffect, useState } from "react"
 import ScreenerBlock from "./ScreenerBlock"
 import customFetch from "../../../../utils"
 import {
@@ -11,10 +11,10 @@ import {
     setLayoutsMainParams,
     setActiveBlock,
 } from "../../../../features/layoutSlice"
-import {login, updateUserField} from "../../../../features/userSlice"
-import {toast} from "react-toastify"
-import {useAppSelector, useAppDispatch} from "../../../../store/storeHooks"
-import {useNavigate} from "react-router-dom"
+import { updateUserField } from "../../../../features/userSlice"
+import { toast } from "react-toastify"
+import { useAppSelector, useAppDispatch } from "../../../../store/storeHooks"
+import { useNavigate } from "react-router-dom"
 
 const NewLayout = () => {
     const dispatch = useAppDispatch()
@@ -22,56 +22,34 @@ const NewLayout = () => {
     const [notAllowedHover, setNotAllowedHover] = useState(false)
     const [layoutsMain, setLayoutsMain] = useState<Element | null>()
 
-    const {isAddingScreener, layoutParams, edit} = useAppSelector(
+    const { isAddingScreener, layoutParams, edit } = useAppSelector(
         (store) => store.layout
     )
-    const {user} = useAppSelector((store) => store.user)
+    const { user } = useAppSelector((store) => store.user)
 
     const newLayout = async () => {
         if (!layoutParams.length) {
             toast.error("you must add at least 1 screener")
             return
         }
-        const {data} = await customFetch.post("/new-layout", {
+        const { data } = await customFetch.post("/new-layout", {
             layout: layoutParams,
             id: user.id,
         })
-        dispatch(updateUserField({field: "layouts", value: data.layouts}))
+        dispatch(updateUserField({ field: "layouts", value: data.layouts }))
         dispatch(resetLayoutParams())
         toast.success("success")
         navigate("/screeners")
     }
 
     const editLayout = async () => {
-        const {data} = await customFetch.post("/edit-layout", {
+        const { data } = await customFetch.post("/edit-layout", {
             layoutIndex: edit,
             layout: layoutParams,
             id: user.id,
         })
-        const {
-            id,
-            trades,
-            notes,
-            info,
-            messages,
-            friends,
-            sentFriendRequests,
-            recievedFriendRequests,
-        } = user
+        dispatch(updateUserField({ field: "layouts", value: data.layouts }))
 
-        dispatch(
-            login({
-                id,
-                trades,
-                notes,
-                info,
-                layouts: data.layouts,
-                messages,
-                friends,
-                sentFriendRequests,
-                recievedFriendRequests,
-            })
-        )
         dispatch(resetLayoutParams())
         dispatch(setEdit(null))
         toast.success("success")
@@ -95,7 +73,7 @@ const NewLayout = () => {
 
     useEffect(() => {
         if (layoutsMain) {
-            const {x, y} = layoutsMain.getBoundingClientRect()
+            const { x, y } = layoutsMain.getBoundingClientRect()
             dispatch(
                 setLayoutsMainParams({
                     height: (layoutsMain as HTMLElement).clientHeight,
@@ -144,7 +122,7 @@ const NewLayout = () => {
                         type="button"
                         style={
                             isAddingScreener
-                                ? {backgroundColor: "green"}
+                                ? { backgroundColor: "green" }
                                 : {
                                       backgroundColor: "green",
                                       opacity: "0.5",
@@ -163,14 +141,14 @@ const NewLayout = () => {
                         style={
                             !isAddingScreener
                                 ? {}
-                                : {pointerEvents: "none", opacity: "0.5"}
+                                : { pointerEvents: "none", opacity: "0.5" }
                         }>
                         Save
                     </button>
                 </div>
             </div>
             <div className="new-layout-main">
-                <div id="lines" style={{position: "relative"}}>
+                <div id="lines" style={{ position: "relative" }}>
                     {layoutParams.map((layout, index) => {
                         return (
                             <ScreenerBlock

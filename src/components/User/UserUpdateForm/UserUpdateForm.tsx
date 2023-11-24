@@ -1,13 +1,13 @@
-import {toast} from "react-toastify"
+import { toast } from "react-toastify"
 import "./userupdateform.css"
 import customFetch from "../../../utils"
-import {useAppDispatch, useAppSelector} from "../../../store/storeHooks"
+import { useAppDispatch, useAppSelector } from "../../../store/storeHooks"
 import {
     setIsLoading,
     setIsNotLoading,
     updateUserField,
 } from "../../../features/userSlice"
-import {setAccountUpdateState} from "../../../features/accuntUpdateSlice"
+import { setAccountUpdateState } from "../../../features/accuntUpdateSlice"
 
 const UserUpdateForm = () => {
     const dispatch = useAppDispatch()
@@ -19,7 +19,7 @@ const UserUpdateForm = () => {
         updatedProfilePicture,
     } = useAppSelector((store) => store.accountUpdate)
 
-    const {user} = useAppSelector((store) => store.user)
+    const { user } = useAppSelector((store) => store.user)
 
     const getImage = (e: React.ChangeEvent<HTMLInputElement>) => {
         const tgt = e.target
@@ -52,7 +52,7 @@ const UserUpdateForm = () => {
         }
         dispatch(setIsLoading())
 
-        const {data} = await customFetch.post("/updateuser", {
+        const { data } = await customFetch.post("/updateuser", {
             id: user.id,
             username: updatedUsername,
             email: updatedEmail,
@@ -60,15 +60,15 @@ const UserUpdateForm = () => {
             image: updatedProfilePicture,
         })
 
-        dispatch(setAccountUpdateState({prop: "updatedUsername", value: ""}))
-        dispatch(setAccountUpdateState({prop: "updatedEmail", value: ""}))
+        dispatch(setAccountUpdateState({ prop: "updatedUsername", value: "" }))
+        dispatch(setAccountUpdateState({ prop: "updatedEmail", value: "" }))
         dispatch(
-            setAccountUpdateState({prop: "updatedAccountBalance", value: ""})
+            setAccountUpdateState({ prop: "updatedAccountBalance", value: "" })
         )
         dispatch(
-            setAccountUpdateState({prop: "updatedProfilePicture", value: ""})
+            setAccountUpdateState({ prop: "updatedProfilePicture", value: "" })
         )
-        dispatch(updateUserField({field: "info", value: data.info}))
+        dispatch(updateUserField({ field: "data", value: data.info }))
         dispatch(setIsNotLoading())
     }
 

@@ -1,8 +1,8 @@
-import {useAppSelector} from "../../store/storeHooks"
+import { useAppSelector } from "../../store/storeHooks"
 import "./user.css"
-import {useNavigate} from "react-router-dom"
-import {useEffect, useState} from "react"
-import {IUserInfo} from "../../interfaces"
+import { useNavigate } from "react-router-dom"
+import { useEffect, useState } from "react"
+import { IUserInfo } from "../../interfaces"
 
 const defaultInfo = {
     email: "",
@@ -20,10 +20,10 @@ const UserButton = () => {
 
     const [info, setInfo] = useState<IUserInfo>(defaultInfo)
 
-    const {user} = useAppSelector((store) => store.user)
+    const { user } = useAppSelector((store) => store.user)
 
     useEffect(() => {
-        setInfo(user.info)
+        setInfo(user.data)
     }, [user.info])
 
     return (

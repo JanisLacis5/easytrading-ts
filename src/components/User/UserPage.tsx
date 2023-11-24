@@ -1,22 +1,22 @@
-import {useAppDispatch, useAppSelector} from "../../store/storeHooks"
-import {Link, Outlet, useNavigate} from "react-router-dom"
+import { useAppDispatch, useAppSelector } from "../../store/storeHooks"
+import { Link, Outlet, useNavigate } from "react-router-dom"
 import DeleteProfileModal from "../../components/User/UserDangerZone/DeleteProfileModal"
-import {logout} from "../../features/userSlice"
-import {RxHamburgerMenu} from "react-icons/rx"
+import { logout } from "../../features/userSlice"
+import { RxHamburgerMenu } from "react-icons/rx"
 import UserMenu from "./UserMenu"
-import {toggleUserAside} from "../../features/smallSlice"
+import { toggleUserAside } from "../../features/smallSlice"
 import "./user.css"
 
 const UserPage = () => {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
 
-    const {user} = useAppSelector((store) => store.user)
-    const {showUserAside} = useAppSelector((store) => store.small)
-    const {isDelete} = useAppSelector((store) => store.dangerZone)
-    const {screenWidth} = useAppSelector((store) => store.default)
+    const { user } = useAppSelector((store) => store.user)
+    const { showUserAside } = useAppSelector((store) => store.small)
+    const { isDelete } = useAppSelector((store) => store.dangerZone)
+    const { screenWidth } = useAppSelector((store) => store.default)
 
-    const info = user.info
+    const info = user.data
 
     const logoutFunc = () => {
         dispatch(logout())
