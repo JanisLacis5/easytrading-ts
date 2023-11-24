@@ -26,16 +26,14 @@ const SiteLayout = () => {
 	]
 
 	useEffect(() => {
-		window.onresize = () => dispatch(setWidth(window.innerWidth))
-	}, [])
-
-	useEffect(() => {
 		if (screenWidth > 900) {
 			dispatch(resetLinks())
 		}
 	}, [screenWidth])
 
 	useEffect(() => {
+		window.onresize = () => dispatch(setWidth(window.innerWidth))
+
 		if (screenerPaths.find((s) => s === window.location.pathname)) {
 			return
 		}

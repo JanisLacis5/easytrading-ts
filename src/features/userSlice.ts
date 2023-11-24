@@ -42,8 +42,8 @@ interface IInitialState {
 	user: IUser
 }
 
-interface ILogin {
-	id: string
+export interface ILogin {
+	_id: string
 	trades: IUserSingleTrade[]
 	notes: IUserSingleNote[]
 	info: IUserInfo
@@ -62,33 +62,15 @@ const initialState: IInitialState = {
 	user: {
 		id: JSON.parse(localStorage.getItem("userId") || JSON.stringify("")),
 		trades: [],
-		info: JSON.parse(
-			localStorage.getItem("userInfo") || JSON.stringify({})
-		),
-		notes: JSON.parse(
-			localStorage.getItem("userNotes") || JSON.stringify([])
-		),
-		layouts: JSON.parse(
-			localStorage.getItem("layouts") || JSON.stringify([])
-		),
-		messages: JSON.parse(
-			localStorage.getItem("messages") || JSON.stringify({})
-		),
-		friends: JSON.parse(
-			localStorage.getItem("friends") || JSON.stringify([])
-		),
-		recievedFriendRequests: JSON.parse(
-			localStorage.getItem("recievedFriendRequests") || JSON.stringify([])
-		),
-		sentFriendRequests: JSON.parse(
-			localStorage.getItem("sentFriendRequests") || JSON.stringify([])
-		),
-		hiddenMessages: JSON.parse(
-			localStorage.getItem("hiddenMessages") || JSON.stringify([])
-		),
-		blockedUsers: JSON.parse(
-			localStorage.getItem("blockedUsers") || JSON.stringify([])
-		),
+		info: {} as IUserInfo,
+		notes: [],
+		layouts: [],
+		messages: {},
+		friends: [],
+		recievedFriendRequests: [],
+		sentFriendRequests: [],
+		hiddenMessages: [],
+		blockedUsers: [],
 	},
 }
 
@@ -139,37 +121,22 @@ const userSlice = createSlice({
 		setIsNotLoading: (state) => {
 			state.isLoading = false
 		},
-		login: (state, action: PayloadAction<ILogin>) => {
-			const trades = action.payload.trades
-			const notes = action.payload.notes
-			const layouts = action.payload.layouts
-			const info = action.payload.info
-			const messages = action.payload.messages || {}
-			const friends = action.payload.friends
-			const recievedFriendRequests = action.payload.recievedFriendRequests
-			const sentFriendRequests = action.payload.sentFriendRequests
-			const hiddenMessages = action.payload.hiddenMessages
-			const blockedUsers = action.payload.blockedUsers
+		login: (state, action: PayloadAction<{ data: ILogin }>) => {
+			const {
+				_id: id,
+				trades,
+				notes,
+				layouts,
+				info,
+				messages,
+				friends,
+				recievedFriendRequests,
+				sentFriendRequests,
+				hiddenMessages,
+				blockedUsers,
+			} = action.payload.data
 
-			localStorage.setItem("userId", JSON.stringify(action.payload.id))
-			localStorage.setItem("userInfo", JSON.stringify(info))
-			localStorage.setItem("userNotes", JSON.stringify(notes))
-			localStorage.setItem("layouts", JSON.stringify(layouts))
-			localStorage.setItem("messages", JSON.stringify(messages))
-			localStorage.setItem("friends", JSON.stringify(friends))
-			localStorage.setItem(
-				"recievedFriendRequests",
-				JSON.stringify(recievedFriendRequests)
-			)
-			localStorage.setItem(
-				"sentFriendRequests",
-				JSON.stringify(sentFriendRequests)
-			)
-			localStorage.setItem(
-				"hiddenMessages",
-				JSON.stringify(hiddenMessages)
-			)
-			localStorage.setItem("blockedUsers", JSON.stringify(blockedUsers))
+			localStorage.setItem("userId", JSON.stringify(id))
 
 			return {
 				...state,
@@ -177,7 +144,7 @@ const userSlice = createSlice({
 				isLoading: false,
 				user: {
 					...state.user,
-					id: action.payload.id,
+					id: id,
 					trades: trades,
 					info: info,
 					notes: notes,
@@ -216,8 +183,6 @@ const userSlice = createSlice({
 			}>
 		) => {
 			const { field, value } = action.payload
-
-			localStorage.setItem(`${field}`, JSON.stringify(value))
 
 			if (field === "userTrades") {
 				state.user.trades = value as IUserSingleTrade[]
