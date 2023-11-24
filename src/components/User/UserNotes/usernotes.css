@@ -1,213 +1,249 @@
 /* ADD NOTE */
 .user-notes-addnote {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+	height: 100%;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 }
 
 .user-notes-addnote form {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
 }
 
 .user-notes-addnote form > * {
-    height: 100%;
-    width: 100%;
-    display: flex;
+	height: 100%;
+	width: 100%;
+	display: flex;
 }
 
 .user-notes-addnote textarea {
-    height: 90%;
-    width: 100%;
-    padding: 0.75rem;
-    background-color: var(--black-10);
-    color: var(--black);
-    border: none;
-    align-self: center;
-    resize: none;
+	height: 90%;
+	width: 100%;
+	padding: 0.75rem;
+	background-color: var(--black-10);
+	color: var(--black);
+	border: none;
+	align-self: center;
+	resize: none;
 }
 
 .user-notes-addnote input:focus,
 .user-notes-addnote textarea:focus {
-    outline: none;
+	outline: none;
 }
 
 .user-notes-addnote form > div:first-child {
-    align-items: center;
-    width: 100%;
-    justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	justify-content: space-between;
 }
 
 .user-notes-addnote form > div:first-child label {
-    width: 60%;
+	width: 60%;
 }
 
 .user-notes-addnote form > div:first-child {
-    position: relative;
-    width: 100%;
+	position: relative;
+	width: 100%;
 }
 
 .user-notes-addnote form input {
-    width: 100%;
-    display: none;
+	width: 100%;
+	display: none;
 }
 
 label#button {
-    position: absolute;
-    right: 0;
-    width: 50%;
-    height: 2rem;
-    cursor: pointer;
-    background: rgb(var(--primary));
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	position: absolute;
+	right: 0;
+	width: 50%;
+	height: 2rem;
+	cursor: pointer;
+	background: rgb(var(--primary));
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .user-notes-addnote form > div:last-child {
-    align-items: flex-end;
-    justify-content: center;
+	align-items: flex-end;
+	justify-content: center;
 }
 
 .user-notes-addnote button {
-    height: 60%;
-    width: 2rem;
-    border: none;
-    font-size: 1rem;
-    background: var(--gradient);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: var(--button-shadow);
+	height: 50%;
+	width: 50%;
+	border: none;
+	font-size: 1rem;
+	background: var(--gradient);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: var(--button-shadow);
 }
 
 /* NOTES PAGE */
 .user-notes {
-    display: grid;
-    grid-template-rows: 1fr 4fr 1fr;
-    height: 100%;
+	display: grid;
+	grid-template-rows: 1fr 4fr 1fr;
+	height: 100%;
 }
 
 .user-notes-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+	overflow: scroll;
 }
 
 .user-notes-container h2,
 .user-notes-container h3,
 .user-notes-container h4 {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .user-note {
-    height: 100%;
-    padding: 1%;
-    width: 30%;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    background-color: var(--black);
-    color: var(--black-10);
+	height: 100%;
+	padding: 0.25rem;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	background-color: var(--black-25);
+	color: var(--black);
+	margin-bottom: 0.25rem;
 }
 
 .user-note p {
-    margin-top: 5%;
-    width: 100%;
-    font-size: 0.75rem;
+	margin-top: 5%;
+	width: 100%;
+	font-size: 0.75rem;
 }
 
 .user-note div {
-    height: 50%;
-    aspect-ratio: 3/2;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	height: 50%;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .user-note div img {
-    max-width: 100%;
-    height: auto;
+	max-width: 100%;
+	height: auto;
 }
 
 .user-notes > div:last-child {
-    display: flex;
-    align-items: flex-end;
+	display: flex;
+	align-items: flex-end;
 }
 
 .user-note > div:first-child div {
-    background-color: #fff;
-    height: 100%;
-    width: 100%;
+	background-color: #fff;
+	height: 100%;
+	width: 100%;
 }
 
 .user-notes > div:last-child a {
-    height: 2rem;
-    width: 40%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: var(--gradient);
-    color: var(--black);
-    border: none;
-    box-shadow: var(--button-shadow);
+	height: 2rem;
+	width: 40%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: var(--gradient);
+	color: var(--black);
+	border: none;
+	box-shadow: var(--button-shadow);
+}
+
+@media screen and (min-width: 576px) {
+	.user-note {
+		margin: 0;
+	}
+
+	.user-notes-container {
+		display: grid;
+		grid-template-rows: repeat(2, 100%);
+		grid-template-columns: repeat(2, 49%);
+		gap: 0.25rem;
+	}
+
+	.user-notes-container > .user-note:last-child {
+		grid-column: span 2;
+		width: 50%;
+		place-self: center;
+	}
 }
 
 @media screen and (min-width: 768px) {
-    label#button {
-        width: 33%;
-    }
+	label#button {
+		width: 33%;
+	}
+
+	.user-notes-addnote button {
+		width: 33%;
+	}
 }
 
 @media screen and (min-width: 992px) {
-    .user-notes > div:last-child a {
-        width: 25%;
-        height: 2.5rem;
-    }
+	.user-notes > div:last-child a {
+		width: 25%;
+		height: 2.5rem;
+	}
 
-    .user-notes-addnote form > div:first-child {
-        width: 60%;
-    }
+	.user-notes-addnote form > div:first-child {
+		width: 60%;
+	}
 
-    .user-notes-addnote textarea {
-        width: 90%;
-    }
+	.user-notes-addnote textarea {
+		width: 90%;
+	}
 
-    label#button {
-        width: 50%;
-        height: 2.5rem;
-    }
+	label#button {
+		width: 50%;
+		height: 2.5rem;
+	}
 
-    .user-notes-addnote button {
-        width: 30%;
-        height: 2.5rem;
-    }
+	.user-notes-addnote button {
+		width: 30%;
+		height: 2.5rem;
+	}
+
+	.user-notes-container {
+		display: flex;
+		overflow: auto;
+		justify-content: space-between;
+	}
+
+	.user-note {
+		width: 33%;
+	}
+
+	.user-notes-container > .user-note:last-child {
+		width: 33%;
+	}
 }
 
 @media screen and (min-width: 1200px) {
-    .user-notes > div:last-child a {
-        width: 20%;
-        height: 3rem;
-    }
-    .user-notes-addnote form > div:first-child {
-        width: 50%;
-    }
-    .user-notes-addnote button {
-        width: 25%;
-        height: 3rem;
-    }
+	.user-notes > div:last-child a {
+		width: 20%;
+		height: 3rem;
+	}
+	.user-notes-addnote form > div:first-child {
+		width: 50%;
+	}
+	.user-notes-addnote button {
+		width: 25%;
+		height: 3rem;
+	}
 
-    label#button {
-        height: 3rem;
-    }
+	label#button {
+		height: 3rem;
+	}
 
-    .user-notes-addnote textarea {
-        width: 85%;
-    }
+	.user-notes-addnote textarea {
+		width: 85%;
+	}
 }
