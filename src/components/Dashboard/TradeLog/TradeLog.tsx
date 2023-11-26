@@ -124,42 +124,6 @@ const TradeLog = () => {
 						)}
 					</span>
 				</button>
-				<button type="button" name="accBefore" onClick={handleChange}>
-					<span>
-						{screenWidth < 768 ? (
-							<h5>Before</h5>
-						) : (
-							<h5>Before $</h5>
-						)}
-					</span>
-					<span>
-						{option === "accBefore" ? (
-							!value ? (
-								<BiSolidDownArrow className="tradelog-trades-header-icon" />
-							) : (
-								<BiSolidUpArrow className="tradelog-trades-header-icon" />
-							)
-						) : (
-							""
-						)}
-					</span>
-				</button>
-				<button type="button" name="accAfter" onClick={handleChange}>
-					<span>
-						{screenWidth < 768 ? <h5>After</h5> : <h5>After $</h5>}
-					</span>
-					<span>
-						{option === "accAfter" ? (
-							!value ? (
-								<BiSolidDownArrow className="tradelog-trades-header-icon" />
-							) : (
-								<BiSolidUpArrow className="tradelog-trades-header-icon" />
-							)
-						) : (
-							""
-						)}
-					</span>
-				</button>
 				<button type="button" name="pl" onClick={handleChange}>
 					<span>
 						<h5>P/L $</h5>

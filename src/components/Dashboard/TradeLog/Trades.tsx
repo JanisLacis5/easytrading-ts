@@ -43,8 +43,7 @@ const Trades = ({ trades }: { trades: IUserSingleTrade[] }) => {
 			{trades && trades.length ? (
 				trades.map((trade, index) => {
 					const pl = trade.pl < 0 ? trade.pl * -1 : trade.pl
-					const { date, time, stock, accBefore, accAfter, action } =
-						trade
+					const { date, time, stock, action } = trade
 					return (
 						<div key={index} className="tradelog-trade-container">
 							<div className="tradelog-trade-time">
@@ -54,13 +53,6 @@ const Trades = ({ trades }: { trades: IUserSingleTrade[] }) => {
 								<h6>{time}</h6>
 							</div>
 							<h6>{stock.toUpperCase()}</h6>
-							<h6>${accBefore}</h6>
-							<h6>
-								$
-								{Number(accAfter) % 1 === 0
-									? Number(accAfter)
-									: Number(accAfter).toFixed(2)}
-							</h6>
 							<h6
 								style={
 									trade.pl > 0

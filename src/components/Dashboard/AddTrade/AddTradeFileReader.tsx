@@ -1,19 +1,9 @@
-import { useEffect, useState } from "react"
-import customFetch from "../../../utils"
+import { useState } from "react"
 import "./addtrade.css"
 import { useAppDispatch, useAppSelector } from "../../../store/storeHooks"
 import { updateUserField } from "../../../features/userSlice"
 import { useNavigate } from "react-router-dom"
-
-interface ITradeData {
-	stock: string
-	accAfter: number
-	accBefore: number
-	pl: number
-	date: string
-	time: string
-	action: string
-}
+import customFetch from "../../../utils"
 
 const AddTradeFileReader = () => {
 	const dispatch = useAppDispatch()
@@ -21,32 +11,11 @@ const AddTradeFileReader = () => {
 
 	const [file, setFile] = useState<File>()
 	const [platform, setPlatform] = useState("")
-	const [tradeData, setTradeData] = useState<ITradeData[]>([])
 
 	const { user } = useAppSelector((store) => store.user)
 
 	// SEND DATA TO DB ON SUBMIT
-	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault()
-		try {
-			const { data } = await customFetch.post("/tradesfile", {
-				data: tradeData,
-				id: user.id,
-			})
-			dispatch(
-				updateUserField({ field: "userTrades", value: data.trades })
-			)
-		} catch (e) {
-			console.log(e)
-		}
-		setFile(undefined)
-		setPlatform("")
-		setTradeData([])
-		navigate("/dashboard")
-	}
-
-	// READ AND PREPARE FILE FOR SENDING TO DB
-	const prepareFile = async (e: React.FormEvent<HTMLFormElement>) => {
+	const handleSubmitIbkr = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 		if (file) {
 			const reader = new FileReader()
@@ -55,60 +24,34 @@ const AddTradeFileReader = () => {
 					const fileContent = e.target?.result
 					const { data } = await customFetch.post("ibkr-file", {
 						file: fileContent,
+						userId: user.id,
 					})
-					console.log(data)
+					dispatch(
+						updateUserField({
+							field: "userTrades",
+							value: data.trades as any,
+						})
+					)
+					setFile(undefined)
+					setPlatform("")
+					navigate("/dashboard")
 				} catch (error) {
 					console.log(error)
 				}
 			}
 			reader.readAsBinaryString(file)
-
-			// const reader = new FileReader()
-
-			// reader.onload = (e) => {
-			// 	if (!e.target) return
-			// 	const content: string = String(e.target.result)
-			// 	const lines = content.split("\n")
-			// 	let tempArr: ITradeData[] = []
-
-			// 	for (let i = 1; i < lines.length - 1; i++) {
-			// 		const LINE = lines[i].split(",")
-			// 		const stock = LINE[4].split(" ")[5].split(":")[1]
-			// 		const accBefore = parseFloat(LINE[1].replace(/\s/g, ""))
-			// 		const accAfter = parseFloat(LINE[2].replace(/\s/g, ""))
-			// 		const pl = parseFloat(LINE[3])
-			// 		const date = LINE[0].slice(1, 9)
-			// 		const time = LINE[0].slice(11, 17)
-			// 		const action = LINE[4].slice(8, 13)
-			// 		tempArr.push({
-			// 			stock,
-			// 			accAfter,
-			// 			accBefore,
-			// 			pl,
-			// 			date,
-			// 			time,
-			// 			action,
-			// 		})
-			// 	}
-			// 	setTradeData([...tempArr])
-			// }
-			// reader.readAsText(file)
 		}
 	}
 
-	// WHEN USER ADDS FILE DO prepareFile() FUNCTION
-	// useEffect(() => {
-	// 	// prepareFile()
-	// 	const func = () => {
-	// 		if (file) {
-	// 			setTemp(file)
-	// 		}
-	// 	}
-	// 	func()
-	// }, [file])
+	const handleSubmitTrW = async (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault()
+	}
 
 	return (
-		<form onSubmit={prepareFile} className="addtrade-filereader">
+		<form
+			onSubmit={platform === "ibkr" ? handleSubmitIbkr : handleSubmitTrW}
+			className="addtrade-filereader"
+		>
 			<h3>File info</h3>
 			<div>
 				<label htmlFor="platform">
@@ -124,9 +67,11 @@ const AddTradeFileReader = () => {
 							? { color: "var(--black-50)" }
 							: { color: "var(--black)" }
 					}
+					required
 				>
 					<option value="">Choose platform</option>
 					<option value="tradingview">Tradingview</option>
+					<option value="ibkr">Interactive Borkers</option>
 				</select>
 			</div>
 			<div>
