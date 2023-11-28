@@ -55,13 +55,19 @@ const Trades = ({ trades }: { trades: IUserSingleTrade[] }) => {
 							<h6>{stock.toUpperCase()}</h6>
 							<h6
 								style={
-									trade.pl > 0
-										? { color: "var(--green)" }
-										: { color: "var(--red)" }
+									trade.pl !== 0
+										? trade.pl > 0
+											? { color: "var(--green)" }
+											: { color: "var(--red)" }
+										: { color: "var(--black-50)" }
 								}
 							>
-								{trade.pl > 0 ? "+" : "-"}$
-								{pl % 1 === 0 ? pl : pl.toFixed(2)}
+								{trade.pl !== 0
+									? trade.pl > 0
+										? "+"
+										: "-"
+									: ""}
+								${pl % 1 === 0 ? pl : pl.toFixed(2)}
 							</h6>
 							<h6>{action}</h6>
 						</div>
