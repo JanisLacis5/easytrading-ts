@@ -15,21 +15,32 @@ const AddTradeFileReader = () => {
 	const { user } = useAppSelector((store) => store.user)
 
 	// SEND DATA TO DB ON SUBMIT
-	const handleSubmitIbkr = async (e: React.FormEvent<HTMLFormElement>) => {
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 		if (file) {
+			let reqData
 			const reader = new FileReader()
 			reader.onload = async (e) => {
 				try {
-					const fileContent = e.target?.result
-					const { data } = await customFetch.post("ibkr-file", {
-						file: fileContent,
-						userId: user.id,
-					})
+					if (platform === "ibkr") {
+						const fileContent = e.target?.result
+						const { data } = await customFetch.post("ibkr-file", {
+							file: fileContent,
+							userId: user.id,
+						})
+						reqData = data
+					} else {
+						const fileContent = e.target?.result
+						const { data } = await customFetch.post("trw-file", {
+							file: fileContent,
+							userId: user.id,
+						})
+						reqData = data
+					}
 					dispatch(
 						updateUserField({
 							field: "userTrades",
-							value: data.trades as any,
+							value: reqData.trades,
 						})
 					)
 					setFile(undefined)
@@ -43,15 +54,8 @@ const AddTradeFileReader = () => {
 		}
 	}
 
-	const handleSubmitTrW = async (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault()
-	}
-
 	return (
-		<form
-			onSubmit={platform === "ibkr" ? handleSubmitIbkr : handleSubmitTrW}
-			className="addtrade-filereader"
-		>
+		<form onSubmit={handleSubmit} className="addtrade-filereader">
 			<h3>File info</h3>
 			<div>
 				<label htmlFor="platform">
