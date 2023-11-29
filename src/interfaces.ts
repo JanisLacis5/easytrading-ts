@@ -1,7 +1,5 @@
 export interface IUserSingleTrade {
-	stock: string
-	accBefore: number
-	accAfter: number
+	symbol: string
 	pl: number
 	date: string
 	time: string
@@ -55,14 +53,4 @@ export interface IFriend {
 
 export interface IUserMessages {
 	[key: string]: IMessage[]
-}
-
-export interface ITradeData {
-	stock: string
-	accAfter: number
-	accBefore: number
-	pl: number
-	date: string
-	time: string
-	action: string
 }
