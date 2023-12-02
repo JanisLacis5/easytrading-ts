@@ -75,7 +75,10 @@ const Stats = () => {
 								  ).toFixed(2)}`}
 						</span>
 					</div>
-
+					<div>
+						<span>PLACEHOLDER</span>
+						<span></span>
+					</div>
 					<div>
 						<span>Biggest loss: </span>
 						<span
