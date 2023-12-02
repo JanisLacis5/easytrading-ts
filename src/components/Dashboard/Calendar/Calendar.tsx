@@ -29,11 +29,10 @@ const MyCalendar = () => {
 
 	// DAYS COLOR BASED ON PL OF DAY
 	const eventStyleGetter = (event: IAnsArr) => {
-		const backgroundColor =
-			event.profit > 0
-				? "var(--color-trade-green)"
-				: "var(--color-trade-red)"
-		return { style: { backgroundColor } }
+		const backgroundColor = event.profit > 0 ? "var(--green)" : "var(--red)"
+		return {
+			style: { backgroundColor },
+		}
 	}
 
 	return (
